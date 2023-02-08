@@ -200,7 +200,7 @@ body
     color: #fff;
     border: none;
 }
-.email_box button
+.email_box a
 {
     border: navajowhite;
     background-color: #fec6ca;
