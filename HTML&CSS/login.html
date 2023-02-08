@@ -16,6 +16,12 @@
                 show.style.display = 'none';
             }
         }
+
+        function popup_open()
+        {
+            window.open('pw_search.html','_blank','width=350,height=200');
+        }
+
     </script>
     <title>login</title>
 </head>
@@ -60,7 +66,7 @@
                     <input type="submit" class="email_login_box" value="로그인">                    
                 </form>
                 <br>
-                <button onclick="pw_popup()">비밀번호 찾기</button>
+                <button onclick="popup_open()">비밀번호 찾기</button>
             </div>
             <div class="sign">
                 <a href="#">회원가입</a>
