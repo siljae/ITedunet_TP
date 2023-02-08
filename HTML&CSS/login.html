@@ -17,11 +17,6 @@
             }
         }
 
-        function popup_open()
-        {
-            window.open('pw_search.html','_blank','width=350,height=200');
-        }
-
     </script>
     <title>login</title>
 </head>
@@ -66,10 +61,10 @@
                     <input type="submit" class="email_login_box" value="로그인">                    
                 </form>
                 <br>
-                <button onclick="popup_open()">비밀번호 찾기</button>
+                <a href="pw_search.html" onclick="window.open('this.href','_blank','width=350,height=200')">비밀번호 찾기</a>
             </div>
             <div class="sign">
-                <a href="#">회원가입</a>
+                <a href="./signup.html">회원가입</a>
             </div>
         </div>
     </section>

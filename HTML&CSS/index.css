@@ -14,7 +14,7 @@ body
 }
 .container
 {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
 }
 
@@ -24,7 +24,7 @@ nav
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 60%;
     height: 100px;
     background: #fec6ca;
     font-weight: bold;
