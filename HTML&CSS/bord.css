@@ -25,6 +25,7 @@
     position: fixed;
     z-index: 10;
     top: 0;
+    
 
 
 }
@@ -32,6 +33,7 @@
     margin-left: 20px;
     width: 230px;
     height: 130px;
+
 }
 .nav_logo img{
     width: 100%;
@@ -66,7 +68,7 @@
 }
 .midbox{
     width: 100%;
-
+    
     
 
 }
@@ -174,8 +176,6 @@
 .listtext{
     margin: 15px 0;
     height: 48px;
-    margin: 10px 0;
-    height: 38px;
     text-overflow: ellipsis;
     word-break: break-word;
     font-weight: 400;
@@ -341,12 +341,10 @@
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     width: 70%;
-
 }
 .coltext:hover{
     cursor: pointer;
 }
-
 .coreply{
     display: flex;
     align-items: center;
@@ -408,3 +406,4 @@ ul.pagebutton li a{
     color: black;
     border: none;
 }
+

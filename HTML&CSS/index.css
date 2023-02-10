@@ -14,7 +14,7 @@ body
 }
 .container
 {
-    width: 80%;
+    width: 60%;
     margin: 0 auto;
 }
 
@@ -24,7 +24,7 @@ nav
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 80%;
+    width: 60%;
     height: 100px;
     background: #fec6ca;
     font-weight: bold;
@@ -34,6 +34,11 @@ nav
 .nav_logo
 {
     margin-left: 20px;
+    width: 200px;
+}
+.nav_logo img
+{
+    width: 100%;
 }
 .nav_ul
 {
@@ -43,42 +48,6 @@ nav
     width: 50%;
     white-space: nowrap;
 }
-.nav_commu
-{
-    position: relative;    
-}
-.nav_commu ul
-{
-    position: absolute;
-    display: none;
-}
-.nav_notice
-{
-    position: relative;        
-}
-.nav_notice ul
-{
-    position: absolute;
-    display: none;
-}
-.nav_hospital
-{
-    position: relative;
-}
-.nav_hospital ul
-{
-    position: absolute;
-    display: none;
-}
-.nav_shop
-{
-    position: relative;        
-}
-.nav_shop ul
-{
-    position: absolute;
-    display: none;
-}
 .nav_login
 {
     margin-right: 20px;
@@ -86,7 +55,7 @@ nav
     background-color: #ff8fa4;
     padding: 5px 10px;
 }
-.nav_commu:hover ul, .nav_notice:hover ul, .nav_hospital:hover ul, .nav_shop:hover ul
+.nav_commu:hover .commu_div, .nav_notice:hover ul, .nav_hospital:hover ul, .nav_shop:hover ul
 {
     display: block;
 }
@@ -99,27 +68,40 @@ nav
 .slide_banner
 {
     padding-top: 100px;
+    position: relative;
+    width: 100%;
 }
 .slide_banner input
 {
     display: none;
 }
+.slide_control
+{
+    position: absolute;
+    z-index: 2;
+    bottom: 5%;
+    margin-left: 20px;
+}
+.slide_control label
+{
+    color: white;
+}
 .slide_content
 {
-    width: 100%;
     height: 300px;
     display: flex;
     font-size: 0;
     white-space: nowrap;
     overflow: hidden;
-    position: relative;
 }
-.slide_control
+.slide_cont
 {
-    position: absolute;
-    z-index: 10;
-    top: 30%;
-    margin-left: 20px;
+    width: 100%;
+}
+.slide_cont img
+{
+    width: 100%;   
+    height: 300px;
 }
 #slide01:checked ~ .slide_content .slide_cont
 {
@@ -156,7 +138,6 @@ nav
 {
     width: 50%;
     margin: 0 20px;
-    padding-left: 20px;
 }
 .post_box ul
 {
@@ -190,7 +171,12 @@ nav
 
 /* footer */
 .footer_box
+{   margin-top: 50px;
+    background-color: #ff8fa4;    
+}
+.footer_box img
 {
-    margin-top: 50px;
-    background-color: #ff8fa4;
+    width: 100px;
+    margin-top: 5px;
+    margin-left: 5px;
 }
