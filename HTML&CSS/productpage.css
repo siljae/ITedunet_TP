@@ -252,7 +252,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-.cartbt a{
+.cartbt a span{
     background-color: #FFC7C2;
     width: 120px;
     height: 34px;
@@ -264,18 +264,12 @@
     font-size: 15px;
     font-weight: bold;
     transition-duration: 400ms;
-}
-.cartbt a:hover{
-    background-color: #f65371;
-    color: #FFFEF0;
-
-}
-.cartbt span{
     font-size: 20px;
     margin-right: 2px;
     font-weight: 700;
 }
 .cartbt span:hover{
+    background-color: #f65371;
     color: #FFFEF0;
     transition-duration: 400ms;
 }
