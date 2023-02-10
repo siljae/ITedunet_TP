@@ -31,7 +31,7 @@
 .nav_logo{
     margin-left: 20px;
     width: 230px;
-    width: 130px;
+    height: 130px;
 }
 .nav_logo img{
     width: 100%;
@@ -132,7 +132,6 @@
     margin: 10px 15.5px 10px 15.5px;
     border-radius: 18px;
     padding: 16px 20px;
-    background: #fcf0cb;
     background: #fff8e2;
     box-shadow: 0 2px 4px lightgray;
 
