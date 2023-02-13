@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mysql.cj.Session;
+
 import mvc.model.memberDAO;
 import mvc.model.memberDTO;
 
@@ -38,7 +40,7 @@ public class controller extends HttpServlet{
 		}
 		else if(command.equals("/loginaction.do")) {//로그인 기능 실행
 			loginaction(request);
-			RequestDispatcher rd = request.getRequestDispatcher("./index.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("./login.jsp");
 			rd.forward(request, response);			
 		}
 		else if(command.equals("/signup.do")) {//회원가입 페이지로 이동
@@ -54,7 +56,21 @@ public class controller extends HttpServlet{
 	
 	//로그인 기능 
 	public void loginaction(HttpServletRequest request) {
+		String email = request.getParameter("email");
+		String pw = request.getParameter("pw");
 		
+		if(email != null && pw != null) {
+			memberDAO dao = memberDAO.getinstance();
+			int result = dao.checklogin(email,pw);
+			
+			request.setAttribute("email", email);
+			request.setAttribute("result", result);
+		}
+		else {
+			request.setAttribute("email", null);
+			request.setAttribute("result", null);
+		}
+			
 	}
 	
 	//회원가입 기능

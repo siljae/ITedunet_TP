@@ -2,6 +2,9 @@ package mvc.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import com.mysql.cj.protocol.Resultset;
 
 import mvc.database.DBConnection;
 
@@ -12,6 +15,8 @@ public class memberDAO {
 		return instance;
 	}
 	
+
+	//회원 가입 기능
 	public void insertmember(memberDTO dto) {
 		System.out.println("memberDAO:회원추가하러옴");
 		
@@ -33,7 +38,7 @@ public class memberDAO {
 			pstmt.executeUpdate();
 		}
 		catch (Exception e) {
-			System.out.println("insertmember() 예외발생 : "+e);
+			System.out.println("회원가입 예외발생 : "+e);
 		}
 		finally {
 			try {
@@ -42,8 +47,52 @@ public class memberDAO {
 				if(conn != null)
 					conn.close();
 			} catch (Exception e2) {
-				System.out.println("insermember() close 예외발생 : "+e2);
+				System.out.println("회원가입 close 예외발생 : "+e2);
 			}
 		}
+	}
+	
+	//로그인 기능
+	public int checklogin(String email, String pw) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql;
+		
+		try {
+			conn = DBConnection.getConnection();
+			sql = "select m_pw from member where m_email=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				if(rs.getString(1).equals(pw)) {
+					return 1;
+				}
+				else
+					return 0;
+			}
+			return -1;
+		}
+		catch (Exception e) {
+			System.out.println("로그인프로세스 오류 : "+e);
+		}
+		finally {
+			try {
+					if(rs != null)
+						rs.close();
+					if(pstmt != null)
+						pstmt.close();
+					if(conn != null)
+						conn.close();
+			} catch (Exception e2) {
+				System.out.println("로그인 프로세스 close() 예외발생 : "+e2);
+			}
+		}
+		
+		
+		return -2;
+		
 	}
 }
