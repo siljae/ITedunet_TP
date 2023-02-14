@@ -159,7 +159,7 @@
                 %>
                     <div class="loginbox">
                         <div class="member">
-                            <a href="#">캣맘님</a>
+                            <a href="#"><%=username %>님</a>
                             <ul class="m_ddb">
                                 <li>
                                     <a href="#">MyPage</a>
@@ -183,7 +183,7 @@
                  %>
                     <div class="loginbox">
                         <div class="admin">
-                            <a href="#">관리자님</a>
+                            <a href="#"><%=username %>님</a>
                             <ul class="a_ddb">
                                 <li>
                                     <a href="#">커뮤니티 관리</a>
