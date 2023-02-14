@@ -53,27 +53,31 @@ public class memberDAO {
 	}
 	
 	//로그인 기능
-	public int checklogin(String email, String pw) {
+	public String[] checklogin(String email, String pw) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
+		String[] result = new String[2];
 		
 		try {
 			conn = DBConnection.getConnection();
-			sql = "select m_pw from member where m_email=?";
+			sql = "select m_pw, m_name from member where m_email=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
-			
 			if(rs.next()) {
 				if(rs.getString(1).equals(pw)) {
-					return 1;
+					result[0] = "1";
+					result[1] = rs.getString("m_name");
+					return result; // 로그인성공
 				}
 				else
-					return 0;
+					result[0] = "0";
+					return result; //비밀번호 불일치
 			}
-			return -1;
+			result[0] = "-1";
+			return result; //DB접속 실패
 		}
 		catch (Exception e) {
 			System.out.println("로그인프로세스 오류 : "+e);
@@ -92,7 +96,7 @@ public class memberDAO {
 		}
 		
 		
-		return -2;
+		return result; //로그인 프로세스 오류
 		
 	}
 }

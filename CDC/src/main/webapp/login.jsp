@@ -1,6 +1,13 @@
+<%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@ page import="mvc.model.memberDAO" %>
+
+<%
+	
+	
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -24,6 +31,18 @@
 </head>
 <body>
     <section>
+   			<%
+   				
+				String error = request.getParameter("error");
+				if (error != null) {
+					PrintWriter script = response.getWriter();
+					script.println("<script>");
+					script.println("alert('이메일과 비밀번호가 일치하지 않습니다')");
+					script.println("history.back()");
+					script.println("</script>");
+					
+				}
+			%>
         <div class="container">
             <div class="login_box">
                 <div class="login_logo">

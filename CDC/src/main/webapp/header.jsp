@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+	String username = (String) request.getAttribute("name");
+	session.setAttribute("username", username);
+	int level = 1;
+%>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -142,9 +147,16 @@
                     </li>
                 </ul>
                 <div class="nav_login">
+                <%
+                	if(username == null){
+                %>
                     <div class="loginbox">        
                         <a href="./login.do">로그인</a>
                     </div>
+                <%
+                	}
+                	else if(username != null && level == 1){
+                %>
                     <div class="loginbox">
                         <div class="member">
                             <a href="#">캣맘님</a>
@@ -164,7 +176,12 @@
                             </ul>
                         </div>
                     </div>
-                    <div>
+                 <%
+                	}
+                	else if(username != null && level == 2){
+                	
+                 %>
+                    <div class="loginbox">
                         <div class="admin">
                             <a href="#">관리자님</a>
                             <ul class="a_ddb">
@@ -185,7 +202,10 @@
                                 </li>
                             </ul>
                         </div>
-                    </div>                        
+                    </div>
+                 <%
+                	}
+                 %>                       
                 </div>
             </nav>
         </div>

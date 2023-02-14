@@ -9,8 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mysql.cj.Session;
-
 import mvc.model.memberDAO;
 import mvc.model.memberDTO;
 
@@ -40,8 +38,25 @@ public class controller extends HttpServlet{
 		}
 		else if(command.equals("/loginaction.do")) {//로그인 기능 실행
 			loginaction(request);
-			RequestDispatcher rd = request.getRequestDispatcher("./login.jsp");
-			rd.forward(request, response);			
+			int msg = (Integer) request.getAttribute("msg");
+			if(msg == -2){
+				System.out.println("로그인프로세스 오류!");
+				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp?msg=-2");
+				rd.forward(request, response);
+			}
+			else if(msg == -1){
+				System.out.println("로그인 DB접속 실패!");
+				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp?msg=-1");
+				rd.forward(request, response);
+			}
+			else if(msg == 0){
+				RequestDispatcher rd = request.getRequestDispatcher("/login.jsp?error=1");
+				rd.forward(request, response);
+			}
+			else if(msg == 1){
+				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?msg=1");
+				rd.forward(request, response);			
+			}
 		}
 		else if(command.equals("/signup.do")) {//회원가입 페이지로 이동
 			RequestDispatcher rd = request.getRequestDispatcher("./signup.jsp");
@@ -58,13 +73,20 @@ public class controller extends HttpServlet{
 	public void loginaction(HttpServletRequest request) {
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
+		String name=null;
+		int msg;
 		
 		if(email != null && pw != null) {
 			memberDAO dao = memberDAO.getinstance();
-			int result = dao.checklogin(email,pw);
+			String[] result = dao.checklogin(email,pw);
 			
+			msg = Integer.parseInt(result[0]);
+			name = result[1];
+			
+			request.setAttribute("msg", msg);
 			request.setAttribute("email", email);
-			request.setAttribute("result", result);
+			request.setAttribute("name", name);
+			
 		}
 		else {
 			request.setAttribute("email", null);
@@ -77,7 +99,6 @@ public class controller extends HttpServlet{
 	public void signupaction(HttpServletRequest request) {
 		memberDAO dao = memberDAO.getinstance();
 		System.out.println(dao);
-		System.out.println("dao주소 받아옴");
 		memberDTO dto = new memberDTO();
 		dto.setEmail(request.getParameter("email"));
 		dto.setName(request.getParameter("name"));
