@@ -1,6 +1,7 @@
 drop database if exists cdcdb;
 create database cdcdb;
 use cdcdb;
+drop table if exists member;
 create table member
 (
 	m_num int not null auto_increment,
@@ -11,12 +12,16 @@ create table member
     m_post varchar(5) not null,
     m_addr1 varchar(100) not null,
     m_addr2 varchar(100) not null,
-    m_level int,
+    m_level int default 1,
     primary key(m_num),
     unique key(m_name)
-);
+)default charset=UTF8;
 
 select*from member;
+alter table member modify m_level int default'1';
+update member set m_level=1 where m_name='abc';
+insert into member(m_email, m_name, m_pw, m_phone, m_post, m_addr1, m_addr2) values ('admin@gmail.com', 'admin', '1234', '010-1234-1234', '12345', '양덕동', '경민인터빌');
+update member set m_level=2 where m_name='admin';
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
 create table admin
 (
