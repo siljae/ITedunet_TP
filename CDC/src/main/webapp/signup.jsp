@@ -33,13 +33,13 @@
         }
     	
     	function chkemail(){
-    		var v = document.getElementByname('email').value;
+    		var v = document.getElementById('email').value;
     		window.open("check_email.jsp?email="+v,'_blank','width=500,height=300,top=200,left=200');
     	}
-    	/* function chkname(){
-    		var v = document.getElementByname('name').value;
+    	function chkname(){
+    		var v = document.getElementById('name').value;
     		window.open("check_name.jsp?name="+v,'_blank','width=500,height=300,top=200,left=200');
-    	} */
+    	}
     </script>
     <title>회원가입</title>
 </head>
@@ -54,7 +54,7 @@
                 <div class="input_box">
                     <p>
                         이메일
-                        <input type="email" name="email" class="email"  required>
+                        <input type="email" name="email" id="email" class="email"  required>
                         <input type="button" onclick="chkemail()" class="email_check" value="중복확인">
                     </p>
                     <br>
@@ -70,8 +70,8 @@
                     <br>
                     <p>
                         닉네임
-                        <input type="text" name="name" class="name" required>                    
-                        <!-- <input type="button" onclick="chkname()" class="name_check" value="중복확인"> -->
+                        <input type="text" name="name" id="name" class="name" required>                    
+                        <input type="button" onclick="chkname()" class="name_check" value="중복확인">
                     </p>
                     <br>
                     <p>
