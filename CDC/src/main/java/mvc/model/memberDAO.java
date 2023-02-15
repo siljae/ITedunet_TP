@@ -144,7 +144,6 @@ public class memberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
-		
 		try {
 			conn = DBConnection.getConnection();
 			sql = "select m_name from member where m_name=?";

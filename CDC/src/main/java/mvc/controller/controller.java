@@ -80,7 +80,7 @@ public class controller extends HttpServlet{
 			}
 		}
 		else if(command.equals("/checkname.do")) {//회원가입할 때 닉네임 중복 체크
-			checkname(request);			
+			checkname(request);
 			boolean chk = (Boolean) request.getAttribute("Bname");
 			if(chk == true) {
 				RequestDispatcher rd = request.getRequestDispatcher("./check_name.jsp?chk=1");
@@ -147,8 +147,8 @@ public class controller extends HttpServlet{
 	public void checkname(HttpServletRequest request) {
 		memberDAO dao = memberDAO.getinstance();
 		String name = request.getParameter("name");
-		boolean Bname = dao.checkemail(name);
-		request.setAttribute("Bemail", Bname);
+		boolean Bname = dao.checkname(name);		
+		request.setAttribute("Bname", Bname);
 		
 	}
 }
