@@ -67,6 +67,30 @@ public class controller extends HttpServlet{
 			RequestDispatcher rd = request.getRequestDispatcher("./login.jsp");
 			rd.forward(request, response);
 		}
+		else if(command.equals("/checkemail.do")) {//회원가입할 때 이메일 중복 체크
+			checkemail(request);			
+			boolean chk = (Boolean) request.getAttribute("Bemail");
+			if(chk == true) {
+				RequestDispatcher rd = request.getRequestDispatcher("./check_email.jsp?chk=1");
+				rd.forward(request, response);
+			}
+			else {
+				RequestDispatcher rd = request.getRequestDispatcher("./check_email.jsp?chk=2");
+				rd.forward(request, response);
+			}
+		}
+		else if(command.equals("/checkname.do")) {//회원가입할 때 닉네임 중복 체크
+			checkname(request);			
+			boolean chk = (Boolean) request.getAttribute("Bname");
+			if(chk == true) {
+				RequestDispatcher rd = request.getRequestDispatcher("./check_name.jsp?chk=1");
+				rd.forward(request, response);
+			}
+			else {
+				RequestDispatcher rd = request.getRequestDispatcher("./check_name.jsp?chk=2");
+				rd.forward(request, response);
+			}
+		}
 	}
 	
 	//로그인 기능 
@@ -109,7 +133,22 @@ public class controller extends HttpServlet{
 		dto.setPost(request.getParameter("post"));
 		dto.setAddr1(request.getParameter("addr1"));
 		dto.setAddr2(request.getParameter("addr2"));
-		System.out.println("이제 dto 다 저장했고");
 		dao.insertmember(dto);
+	}
+	//회원가입시 이메일 중복체크 기능
+	public void checkemail(HttpServletRequest request) {
+		memberDAO dao = memberDAO.getinstance();
+		String email = request.getParameter("email");
+		boolean Bemail = dao.checkemail(email);
+		request.setAttribute("Bemail", Bemail);
+		
+	}
+	//회원가입시 닉네임 중복체크 기능
+	public void checkname(HttpServletRequest request) {
+		memberDAO dao = memberDAO.getinstance();
+		String name = request.getParameter("name");
+		boolean Bname = dao.checkemail(name);
+		request.setAttribute("Bemail", Bname);
+		
 	}
 }

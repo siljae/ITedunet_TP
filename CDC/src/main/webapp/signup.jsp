@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/signup.css">
     <script>
+    	//전체 동의 눌리면 하위체크박스 같이 눌러지게 하기
         function selectAll(selectAll){
             const checkboxes = document.getElementsByName('agree');
             checkboxes.forEach((checkbox) =>{checkbox.checked = selectAll.checked;} )
         }
+    	//하위 체크박스 중 하나라도 체크가 취소되면 전체체크박스의 체크 취소되기
         function checkselectAll()  {
             // 전체 체크박스
             const checkboxes 
@@ -29,6 +31,15 @@
                 selectAll.checked = false;
             }
         }
+    	
+    	function chkemail(){
+    		var v = document.getElementByname('email').value;
+    		window.open("check_email.jsp?email="+v,'_blank','width=500,height=300,top=200,left=200');
+    	}
+    	/* function chkname(){
+    		var v = document.getElementByname('name').value;
+    		window.open("check_name.jsp?name="+v,'_blank','width=500,height=300,top=200,left=200');
+    	} */
     </script>
     <title>회원가입</title>
 </head>
@@ -44,7 +55,7 @@
                     <p>
                         이메일
                         <input type="email" name="email" class="email"  required>
-                        <button onclick="email_check()" class="email_check">중복확인</button>
+                        <input type="button" onclick="chkemail()" class="email_check" value="중복확인">
                     </p>
                     <br>
                     <p>
@@ -60,7 +71,7 @@
                     <p>
                         닉네임
                         <input type="text" name="name" class="name" required>                    
-                        <button onclick="name_check()" class="name_check">중복확인</button>
+                        <!-- <input type="button" onclick="chkname()" class="name_check" value="중복확인"> -->
                     </p>
                     <br>
                     <p>
