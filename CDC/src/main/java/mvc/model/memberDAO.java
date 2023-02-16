@@ -21,11 +21,11 @@ public class memberDAO {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		String sql;
-		String[] result = new String[2];
+		String[] result = new String[3];
 		
 		try {
 			conn = DBConnection.getConnection();
-			sql = "select m_pw, m_name from member where m_email=?";
+			sql = "select m_pw, m_name, m_level from member where m_email=?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
@@ -33,6 +33,7 @@ public class memberDAO {
 				if(rs.getString(1).equals(pw)) {
 					result[0] = "1";
 					result[1] = rs.getString("m_name");
+					result[2] = rs.getString("m_level");
 					return result; // 로그인성공
 				}
 				else

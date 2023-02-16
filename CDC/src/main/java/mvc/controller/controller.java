@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import mvc.model.memberDAO;
 import mvc.model.memberDTO;
@@ -38,6 +39,7 @@ public class controller extends HttpServlet{
 		}
 		else if(command.equals("/loginaction.do")) {//로그인 기능 실행
 			loginaction(request);
+			HttpSession session = request.getSession(true);
 			int msg = (Integer) request.getAttribute("msg");
 			if(msg == -2){
 				System.out.println("로그인프로세스 오류!");
@@ -54,6 +56,13 @@ public class controller extends HttpServlet{
 				rd.forward(request, response);
 			}
 			else if(msg == 1){
+				String email = (String)request.getAttribute("email");
+				String username = (String)request.getAttribute("name");
+				String level = (String)request.getAttribute("level");
+				session.setAttribute("email", email);
+				session.setAttribute("username", username);
+				session.setAttribute("level", level);
+				
 				RequestDispatcher rd = request.getRequestDispatcher("/index.jsp?msg=1");
 				rd.forward(request, response);			
 			}
@@ -64,7 +73,7 @@ public class controller extends HttpServlet{
 		}
 		else if(command.equals("/signupaction.do")) {//회원가입 기능 실행
 			signupaction(request);
-			RequestDispatcher rd = request.getRequestDispatcher("./login.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("./login.jsp?msg=1");
 			rd.forward(request, response);
 		}
 		else if(command.equals("/checkemail.do")) {//회원가입할 때 이메일 중복 체크
@@ -98,6 +107,7 @@ public class controller extends HttpServlet{
 		String email = request.getParameter("email");
 		String pw = request.getParameter("pw");
 		String name=null;
+		String level=null;
 		int msg;
 		
 		if(email != null && pw != null) {
@@ -106,10 +116,12 @@ public class controller extends HttpServlet{
 			
 			msg = Integer.parseInt(result[0]);
 			name = result[1];
+			level= result[2];
 			
 			request.setAttribute("msg", msg);
 			request.setAttribute("email", email);
 			request.setAttribute("name", name);
+			request.setAttribute("level", level);
 			
 		}
 		else {

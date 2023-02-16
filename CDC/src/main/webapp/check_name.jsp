@@ -77,7 +77,7 @@
     <div class="container">
         <h2>닉네임 중복 체크</h2>
         <form action="./checkname.do" method="post">
-            닉네임  <input type="text" name="name" class="email" value="<%=request.getParameter("name") %>"  required>        
+            닉네임  <input type="text" name="name" class="name" value="<%=request.getParameter("name")%>"required>        
             <input type="submit" value="중복확인" class="email_check">
             <br>
             <div>
