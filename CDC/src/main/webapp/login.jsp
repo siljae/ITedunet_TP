@@ -4,9 +4,29 @@
 <!DOCTYPE html>
 <%@ page import="mvc.model.memberDAO" %>
 
-<%
-	
-	
+<%	
+	//로그인 실패
+	String error = request.getParameter("error");
+	if (error != null) {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('이메일과 비밀번호가 일치하지 않습니다')");
+		script.println("history.back()");
+		script.println("</script>");
+		
+	}
+	//회원가입 성공
+	String msg = request.getParameter("msg");
+	System.out.println("msg: "+msg);
+	if(msg == null){}
+	else if(msg.equals("1")){
+		System.out.println("여기로 오나");
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('회원가입을 축하드립니다! 로그인해주세요!')");
+		script.println("</script>");
+	}
+
 %>
 <html>
 <head>
@@ -31,18 +51,6 @@
 </head>
 <body>
     <section>
-   			<%
-   				
-				String error = request.getParameter("error");
-				if (error != null) {
-					PrintWriter script = response.getWriter();
-					script.println("<script>");
-					script.println("alert('이메일과 비밀번호가 일치하지 않습니다')");
-					script.println("history.back()");
-					script.println("</script>");
-					
-				}
-			%>
         <div class="container">
             <div class="login_box">
                 <div class="login_logo">

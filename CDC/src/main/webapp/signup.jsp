@@ -7,11 +7,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./resources/css/signup.css">
+    <!-- 카카오 우편번호 API -->
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script>
+	    function execDaumPostcode() {
+	        new daum.Postcode({
+	            oncomplete: function(data) {
+	                document.querySelector("#postcode").value = data.zonecode;
+	                document.querySelector("#address").value = data.address
+	            }
+	        }).open();
+	    }
+	</script>
     <script>
+    	//전체 동의 눌리면 하위체크박스 같이 눌러지게 하기
         function selectAll(selectAll){
             const checkboxes = document.getElementsByName('agree');
             checkboxes.forEach((checkbox) =>{checkbox.checked = selectAll.checked;} )
         }
+    	//하위 체크박스 중 하나라도 체크가 취소되면 전체체크박스의 체크 취소되기
         function checkselectAll()  {
             // 전체 체크박스
             const checkboxes 
@@ -29,6 +43,15 @@
                 selectAll.checked = false;
             }
         }
+    	
+    	function chkemail(){
+    		var v = document.getElementById('email').value;
+    		window.open("check_email.jsp?email="+v,'_blank','width=500,height=300,top=200,left=200');
+    	}
+    	function chkname(){
+    		var v = document.getElementById('name').value;
+    		window.open("check_name.jsp?name="+v,'_blank','width=500,height=300,top=200,left=200');
+    	}
     </script>
     <title>회원가입</title>
 </head>
@@ -39,12 +62,12 @@
                 <h1>회원가입</h1>
                 <div class="hr1"></div>
             </div>
-            <form action="./signupaction.do">
+            <form action="./signupaction.do" method="post">
                 <div class="input_box">
                     <p>
                         이메일
-                        <input type="email" name="email" class="email"  required>
-                        <button onclick="email_check()" class="email_check">중복확인</button>
+                        <input type="email" name="email" id="email" class="email"   required>
+                        <input type="button" onclick="chkemail()" class="email_check" value="중복확인">
                     </p>
                     <br>
                     <p>
@@ -59,8 +82,8 @@
                     <br>
                     <p>
                         닉네임
-                        <input type="text" name="name" class="name" required>                    
-                        <button onclick="name_check()" class="name_check">중복확인</button>
+                        <input type="text" name="name" id="name" class="name"  required>                    
+                        <input type="button" onclick="chkname()" class="name_check" value="중복확인">
                     </p>
                     <br>
                     <p>
@@ -74,14 +97,14 @@
                     <br>
                     <p>
                         주소
-                        <input type="text" id="addr1" name="post" class="addr1">
-                        <button onclick="" class="postbox" name="post">우편번호</button>
+                        <input type="text" id="postcode" name="post" class="addr1" readonly="readonly">
+                        <input type="button" onclick="execDaumPostcode()" class="postbox" name="post" value="우편번호">
                     </p>
                     <p>
-                        <input type="text" id="addr2" name="addr1" class="addr2" size="30">
+                        <input type="text" id="address" name="addr1" class="addr2" size ="30" readonly="readonly">
                     </p>
                     <p>
-                        <input type="text" id="addr3" name="addr2" class="addr3" size="30" placeholder="상세주소">
+                        <input type="text" id="detailadress" name="addr2" class="addr3" size ="30"  placeholder="상세주소">
                     </p>
                 </div>
                 <div class="sub_header">
@@ -90,20 +113,20 @@
                 </div>
                 <div class="agreebox">
                     <div class="allagree_box">
-                        <label for="allagree">회원가입 약관에 모두 동의합니다</label>  
-                        <input type="checkbox" id="allagree" name="allagree" class="allagree_input" onclick="selectAll(this)">              
+                        <label for="allagree" class="s_pointer">회원가입 약관에 모두 동의합니다</label>  
+                        <input type="checkbox" id="allagree" name="allagree" class="allagree_input s_pointer" onclick="selectAll(this)">              
                     </div>
                     <div class="hr3"></div>
                     <div class="a_agree_box">
-                        <label for="a_agree"><a href="#">이용약관 동의<span class="a_as">[필수]</span></a></label>
-                        <input type="checkbox"  id="a_agree" name="agree" class="a_agree_input" onclick="checkselectAll()">                        
+                        <label for="a_agree" class="s_pointer"><a href="#">이용약관 동의<span class="a_as">[필수]</span></a></label>
+                        <input type="checkbox"  id="a_agree" name="agree" class="a_agree_input s_pointer" onclick="checkselectAll()">                        
                     </div>
                     <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly>나중에 이용약관 넣을 것
                     </textarea>
                     <br>
                     <div class="b_agree_box">
-                        <label for="b_agree"><a href="#">개인정보 수집 및 이용 동의<span class="b_as">[필수]</span></a></label>
-                        <input type="checkbox"  id="b_agree" name="agree" class="b_agree_input" onclick="checkselectAll()" >
+                        <label for="b_agree" class="s_pointer"><a href="#">개인정보 수집 및 이용 동의<span class="b_as">[필수]</span></a></label>
+                        <input type="checkbox"  id="b_agree" name="agree" class="b_agree_input s_pointer" onclick="checkselectAll()" >
                     </div>
                     <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly>나중에 개인정보 수집 및 이용 동의 넣을 것
                     </textarea>
