@@ -1,18 +1,14 @@
-*{
-    margin: 0;
-    padding: 0;
-    text-decoration: none;
-    list-style: none;
-    box-sizing: border-box;
-    color: black;
+.com_name{
+    padding-top:100px;
+    margin-bottom: 10px;
+    background-color: #fec6ca;
 }
-.body{
-    background-color: #FFFEF0;
+.com_name h1{
+    text-align: center;
 }
 .container{
     width: 60%;
     margin:0 auto;
-
 }
 .mainnav{
     display: flex;

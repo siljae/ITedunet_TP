@@ -1,15 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="bord.css">
-    <style>
-    </style>
+    <link rel="stylesheet" href="./resources/css/board.css">
+	<title>커뮤니티 게시판</title>
 </head>
 <body>
+	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
         <h1>우리아이자랑</h1>
     </div>

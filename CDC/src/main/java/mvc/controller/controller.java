@@ -100,6 +100,10 @@ public class controller extends HttpServlet{
 				rd.forward(request, response);
 			}
 		}
+		else if(command.equals("/commuboard.do")) {
+			RequestDispatcher rd = request.getRequestDispatcher("./board.jsp");
+			rd.forward(request, response);
+		}
 	}
 	
 	//로그인 기능 
