@@ -1,6 +1,9 @@
 package mvc.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Enumeration;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,6 +13,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
+
+import mvc.model.boardDAO;
+import mvc.model.boardDTO;
 import mvc.model.memberDAO;
 import mvc.model.memberDTO;
 
@@ -100,10 +108,7 @@ public class controller extends HttpServlet{
 				rd.forward(request, response);
 			}
 		}
-		else if(command.equals("/commuboard.do")) {
-			RequestDispatcher rd = request.getRequestDispatcher("./board.jsp");
-			rd.forward(request, response);
-		}
+
 	}
 	
 	//로그인 기능 
@@ -167,4 +172,6 @@ public class controller extends HttpServlet{
 		request.setAttribute("Bname", Bname);
 		
 	}
+
+	
 }

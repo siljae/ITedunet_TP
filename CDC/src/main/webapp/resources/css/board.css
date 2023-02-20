@@ -1,6 +1,7 @@
-.com_name{
-    padding-top:100px;
+.com_name{    
     margin-bottom: 10px;
+    padding-top:100px;
+    padding-bottom:10px;
     background-color: #fec6ca;
 }
 .com_name h1{
@@ -227,6 +228,7 @@
     padding: 0 27px;
 }
 .filterbox{
+    position: relative;
     margin: 20px 0;
     display: flex;
     justify-content: left;
@@ -258,6 +260,30 @@
 .radiobt:hover {
     background-color: #FFFEF0;
     cursor: pointer;
+}
+.writebox{
+    position: absolute;
+    top: -50%;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;    
+    cursor: pointer;
+    background-color: #FFe8A3;
+    border-radius: 17px;
+    margin-right: 20px;
+    padding: 10px 15px;
+    font-size: 12px;    
+}
+.write{
+    text-decoration: none;
+    color: black;
+}
+.writebox:hover{
+    background-color: #fcd11e;
+}
+.writebox:hover .write{
+    color: white;
 }
 .loungelist{
     width: 100%;
