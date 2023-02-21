@@ -23,9 +23,9 @@ public class boardDAO {
 		int x=0;
 		
 		if(items == null && text == null)
-			sql="select count(*) from board";
+			sql="select count(*) from commuboard";
 		else
-			sql="select count(*) from board where"+items+"like ' %" +text+ "%'";
+			sql="select count(*) from commuboard where"+items+"like ' %" +text+ "%'";
 		
 		try {
 			conn = DBConnection.getConnection();
