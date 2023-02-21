@@ -108,7 +108,14 @@ public class controller extends HttpServlet{
 				rd.forward(request, response);
 			}
 		}
+<<<<<<< Updated upstream
 
+=======
+		else if(command.equals("/commuboard.do")){//커뮤니티 게시판 이동
+			RequestDispatcher rd = request.getRequestDispatcher("./board.jsp");
+			rd.forward(request, response);
+		}
+>>>>>>> Stashed changes
 	}
 	
 	//로그인 기능 
