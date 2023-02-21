@@ -102,15 +102,6 @@
         </div>
     </section>
     <!-- 하단 -->
-    <footer>
-        <div class="container">
-            <div class="footer_box">
-                <a href="#"><img src="./img/logo.png" alt="Logo"></a>
-                <a href="#">이용약관</a>
-                <a href="#">개인정보활용</a>                
-            </div>
-        </div>
-    </footer>
+    <jsp:include page="footer.jsp"/>
 </body>
-
 </html>

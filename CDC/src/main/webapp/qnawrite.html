@@ -5,15 +5,22 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./qnawrite.css">
-    <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./resources/css/qnawrite.css">
+    <!-- <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script> -->
+    <script>
+        function printfile(){
+            var name = document.getElementById('file1').value;
+            document.getElementById('result').value = name;
+
+        }
+    </script>
 </head>
 <body>
     <header>
         <div class="container">
             <nav class="mainnav">
                 <div class="nav_logo">
-                    <a href="#"><img src="/HTML&CSS/img/logo1.png" alt="Logo"></a>
+                    <a href="#"><img src="/HTML&CSS/img/logo3.png" alt="Logo"></a>
                 </div>
                 <ul class="nav_ul">
                     <li class="nav_commu">
@@ -144,16 +151,16 @@
                             <hr class="hrline">
                             <div class="filebox">
                                 <p class="filetitle">첨부파일1</p>
-                                <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
-                                <label for="file"> 파일찾기</label>
-                                <input type="file" id="file">
+                                <input class="upload-name" id="result" placeholder="첨부파일"/>
+                                <label for="file1"> 파일찾기</label>
+                                <input type="file" id="file1" onchange="printfile()">
                             </div>
                             <hr class="hrline">
                             <div class="filebox">
                                 <p class="filetitle">첨부파일1</p>
                                 <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
-                                <label for="file"> 파일찾기</label>
-                                <input type="file" id="file">
+                                <label for="file2"> 파일찾기</label>
+                                <input type="file" id="file2">
                             </div>
                             <hr class="hrline">
                             <div class="filebox">
