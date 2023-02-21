@@ -43,7 +43,7 @@ public class boardController extends HttpServlet{
 			
 			if(command.equals("/commuboard.action")) {//게시판 목록 보여주기
 				boardlist(request);
-				RequestDispatcher rd = request.getRequestDispatcher("/board/jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 				rd.forward(request, response);
 			}
 			else if(command.equals("/commuwrite.do")){//커뮤니티 게시판 글쓰기 페이지로 이동
