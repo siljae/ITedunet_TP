@@ -155,6 +155,7 @@ nav {
 								<li><a href="#">주문목록</a></li>
 								<li><a href="#">장바구니</a></li>
 								<li><a href="#">1:1 채팅창</a></li>
+								<li><a href="./commuwrite.action">글쓰기</a></li>
 								<li><a href="./logout.jsp">로그아웃</a></li>
 							</ul>
 						</div>
@@ -171,6 +172,7 @@ nav {
 								<li><a href="#">우리동네병원 관리</a></li>
 								<li><a href="#">회원 관리</a></li>
 								<li><a href="#">SHOP 관리</a></li>
+								<li><a href="./commuwrite.action">글쓰기</a></li>
 								<li><a href="./logout.jsp">로그아웃</a></li>
 							</ul>
 						</div>

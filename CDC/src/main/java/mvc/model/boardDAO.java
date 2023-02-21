@@ -38,7 +38,7 @@ public class boardDAO {
 				x = rs.getInt(1);
 		}
 		catch (Exception e) {
-			System.out.println("게시판 목록 불러오기 에러: "+e);
+			System.out.println("게시판 목록 세기 에러: "+e);
 		}
 		finally {
 			try {
@@ -49,7 +49,7 @@ public class boardDAO {
 				if(conn != null)
 					conn.close();
 			} catch (Exception e2) {
-				System.out.println("게시판 목록 불러오기 close() 에러: "+e2);
+				System.out.println("게시판 목록 세기 close() 에러: "+e2);
 			}
 		}
 		
@@ -72,9 +72,9 @@ public class boardDAO {
 		String sql;
 		
 		if(items == null && text == null)
-			sql = "select*from board order by num desc";
+			sql = "select*from commuboard order by cb_num desc";
 		else
-			sql = "select*from board where"+items+"like '%"+text+ "%' order by num desc";
+			sql = "select*from commuboard where"+items+"like '%"+text+ "%' order by cb_num desc";
 		
 		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
 		
@@ -83,9 +83,38 @@ public class boardDAO {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
+			while(rs.next()) {
+				boardDTO board = new boardDTO();
+				board.setName(rs.getString("m_name"));
+				board.setTitle(rs.getString("cb_title"));
+				board.setContent(rs.getString("cb_content"));
+				board.setRegist_day(rs.getString("cb_regist_day"));
+				board.setFilename(rs.getString("cb_filename"));
+				board.setHit(rs.getInt("cb_hit"));
+				list.add(board);
+				
+				if(index < (start+limit) && index <= total_record)
+					index++;
+				else
+					break;
+			}
+			return list;
 			
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
 			System.out.println("게시판 목록 불러오기 에러: "+e);
+		}
+		finally {
+			try {
+				if(rs != null)
+					rs.close();
+				if(pstmt != null)
+					pstmt.close();
+				if(conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				System.out.println("게시판 목록 불러오기 close() 에러: "+e2);
+			}
 		}
 		return null;
 	}

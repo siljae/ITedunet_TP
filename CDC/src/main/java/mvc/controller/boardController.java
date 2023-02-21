@@ -46,12 +46,13 @@ public class boardController extends HttpServlet{
 				RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 				rd.forward(request, response);
 			}
-			else if(command.equals("/commuwrite.do")){//커뮤니티 게시판 글쓰기 페이지로 이동
+			else if(command.equals("/commuwrite.action")){//커뮤니티 게시판 글쓰기 페이지로 이동
 				RequestDispatcher rd = request.getRequestDispatcher("/commuwrite.jsp");
 				rd.forward(request, response);
 			}
 			else if(command.equals("/writeaction.action")) {//글 등록
 				writeaction(request);
+				boardlist(request);
 				RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 				rd.forward(request, response);
 			}
@@ -74,6 +75,7 @@ public class boardController extends HttpServlet{
 			String text = request.getParameter("text");
 			
 			int total_record = dao.getListCount(items,text);
+			System.out.println("총게시글숫자: "+total_record);
 			boardlist = dao.getBoardList(pageNum, limit, items, text);
 			
 			int total_page;
@@ -86,8 +88,7 @@ public class boardController extends HttpServlet{
 				total_page = total_record/limit;
 				Math.floor(total_page);
 				total_page = total_page+1;
-			}
-			
+			};
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("total_page", total_page);
 			request.setAttribute("total_record", total_record);

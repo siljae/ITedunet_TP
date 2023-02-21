@@ -163,7 +163,7 @@
                     </div>
                 </div>
                 <div class="writebox">
-                    <a href="./commuwrite.do" class="write">글쓰기</a>
+                    <a href="./commuwrite.action" class="write">글쓰기</a>
                 </div>
             </div>
             <div class="loungelist">
