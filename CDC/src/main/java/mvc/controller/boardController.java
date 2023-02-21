@@ -74,6 +74,7 @@ public class boardController extends HttpServlet{
 			String text = request.getParameter("text");
 			
 			int total_record = dao.getListCount(items,text);
+			boardlist = dao.getBoardList(pageNum, limit, items, text);
 			
 			int total_page;
 			
