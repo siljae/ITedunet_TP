@@ -7,6 +7,8 @@ public class boardDTO {
 	private String regist_day;
 	private String filename;
 	private int hit;
+	private String animal_type;
+
 	public String getName() {
 		return name;
 	}
@@ -42,5 +44,11 @@ public class boardDTO {
 	}
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+	public String getAnimal_type() {
+		return animal_type;
+	}
+	public void setAnimal_type(String animal_type) {
+		this.animal_type = animal_type;
 	}
 }

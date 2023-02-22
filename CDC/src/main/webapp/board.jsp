@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <%@ page import="java.util.*" %>
 <%@ page import="mvc.model.boardDTO" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
 	String username = (String) session.getAttribute("username");
 	System.out.println("게시판의닉넴: "+username);
@@ -14,6 +15,10 @@
 	System.out.println("전체페이지: "+total_page);
 	int pageNum = ((Integer) request.getAttribute("pageNum")).intValue();
 	System.out.println("현재페이지넘버: "+pageNum);
+	String tag_src = (String)request.getAttribute("tag_src");
+	System.out.println("동물이미지소스: "+tag_src);
+	String tag_value = (String)request.getAttribute("tag_value");
+	System.out.println("동물태그: "+tag_value);
 %>
 <html>
 <head>
@@ -168,20 +173,18 @@
             </div>
             <div class="loungelist">
                 <div class="conlist">
-                <%
-                	for(int i = 0; i<boardlist.size();i++){
-                		boardDTO board = (boardDTO) boardlist.get(i);
-                	
-                %>
+                	<c:forEach items="${boardlist }" var="board">
                     <div class="content">
                         <div class="colist">
                             <div>
                                 <div class="colbt">
-                                    <img src="./resources/img/catface.png" alt="">
-                                    <div class="cattext1">고양이</div>
+                                	<img  src="./resources/img/catface.png" alt="">
+                                    <img src="<%=tag_src %>" alt="">
+                                    <img src="./resources/img/borad/catface.png" alt="">
+                                    <div class="cattext1"><%=tag_value %></div>
                                 </div>
-                                <div class="coltitle"><%=board.getTitle() %></div>
-                                <div class="coltext"><%=board.getContent() %></div>
+                                <div class="coltitle">${board.title }</div>
+                                <div class="coltext">${board.content }</div>
                             </div>
                         </div>
                         <div class="coreply">
@@ -189,19 +192,17 @@
                                 답변 :
                                 0
                             </div>
-                            <div class="renickname"><%=board.getName() %></div>
+                            <div class="renickname">${board.name }</div>
                             <div class="retime">59분 전</div>
                         </div>
                         <hr class="listgard">
                     </div>
-				<%
-					}
-				%>
+					</c:forEach>
                     <div class="content">
                         <div class="colist">
                             <div>
                                 <div class="colbt">
-                                    <img src="./resources/img/dogface.png" alt="">
+                                    <img src="./resources/img/board/dogface.png" alt="">
                                     <div class="cattext1">강아지</div>
                                 </div>
                                 <div class="listbox">

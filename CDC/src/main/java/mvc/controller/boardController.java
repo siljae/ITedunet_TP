@@ -78,6 +78,28 @@ public class boardController extends HttpServlet{
 			System.out.println("총게시글숫자: "+total_record);
 			boardlist = dao.getBoardList(pageNum, limit, items, text);
 			
+			String animal_type;
+			String tag_src;
+			String tag_value;
+			
+			for (boardDTO dto : boardlist) {
+				animal_type = dto.getAnimal_type();
+				System.out.println("db에서 가져온 동물타입"+animal_type);
+				
+				if(animal_type != null && animal_type.equals("cat")) {
+					tag_src = "./resources/img/board/catface.png";
+					tag_value = "고양이";
+					request.setAttribute("tag_src", tag_src);
+					request.setAttribute("tag_value",tag_value);
+				}
+				else if(animal_type != null && animal_type.equals("dog")) {
+					tag_src = "/resources/img/board/dogface.png";
+					tag_value = "강아지";
+					request.setAttribute("tag_src", tag_src);
+					request.setAttribute("tag_value",tag_value);
+				}
+			}
+			
 			int total_page;
 			
 			if(total_record % limit ==0) {
@@ -116,6 +138,8 @@ public class boardController extends HttpServlet{
 				Enumeration files = multi.getFileNames();
 				String fname = (String)files.nextElement();
 				filename =multi.getFilesystemName(fname);
+				String animal_type = multi.getParameter("animal_type");
+				System.out.println("동물타입머임??"+animal_type);
 				
 				dto.setName(name);
 				dto.setTitle(title);
@@ -124,6 +148,7 @@ public class boardController extends HttpServlet{
 				dto.setFilename(filename);
 				System.out.println(filename);
 				dto.setHit(0);
+				dto.setAnimal_type(animal_type);
 				
 				dao.writeacion(dto);
 				

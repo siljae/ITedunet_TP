@@ -91,6 +91,7 @@ public class boardDAO {
 				board.setRegist_day(rs.getString("cb_regist_day"));
 				board.setFilename(rs.getString("cb_filename"));
 				board.setHit(rs.getInt("cb_hit"));
+				board.setAnimal_type(rs.getString("cb_animal_type"));
 				list.add(board);
 				
 				if(index < (start+limit) && index <= total_record)
@@ -127,14 +128,15 @@ public class boardDAO {
 		
 		try {
 			conn = DBConnection.getConnection();
-			sql = "insert into commuboard(m_name, cb_title, cb_content, cb_regist_day,cb_filename,cb_hit) values (?,?,?,?,?,?)";
+			sql = "insert into commuboard(m_name,cb_animal_type ,cb_title, cb_content, cb_regist_day,cb_filename,cb_hit) values (?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getName());
-			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3,dto.getContent());
-			pstmt.setString(4,dto.getRegist_day());
-			pstmt.setString(5, dto.getFilename());
-			pstmt.setInt(6,dto.getHit());
+			pstmt.setString(2, dto.getAnimal_type());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4,dto.getContent());
+			pstmt.setString(5,dto.getRegist_day());
+			pstmt.setString(6, dto.getFilename());
+			pstmt.setInt(7,dto.getHit());
 			pstmt.executeUpdate();
 		}
 		catch (Exception e) {

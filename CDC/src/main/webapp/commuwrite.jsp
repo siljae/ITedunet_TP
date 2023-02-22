@@ -46,6 +46,12 @@
                         	<input type="hidden" name="name" value="<%=name%>">
                             <div id="in_title">
                                 <p class="titletxt">제목</p>
+                                <select name="animal_type" id="conoption">  
+                                      <!-- 나중에 선택은 유효성 검사 통해서 잘못선택했다고 경고창 띄워줌 -->
+                                    <option id="opdefult"value="none">반려동물태그</option>                             
+                                    <option value="cat">[고양이]</option>
+                                    <option value="dog">[강아지]</option>
+                                </select>
                                 <textarea name="title" id="utitle" rows="1" cols="55" maxlength="100" required></textarea>
                             </div>
                             <hr class="hrline">
