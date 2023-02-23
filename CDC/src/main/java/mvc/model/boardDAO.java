@@ -1,8 +1,12 @@
 package mvc.model;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+
 
 import mvc.database.DBConnection;
 
@@ -13,7 +17,7 @@ public class boardDAO {
 		return instance;
 	}
 	
-	//게시판 목록 불러오기
+	//게시판에 작성된 전체 글이 몇개인지 알아오는 기능, 특정 글자를 입력해서 그 글자에 맞는 게시글 숫자 가져오기
 	public int getListCount(String items, String text) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -23,9 +27,9 @@ public class boardDAO {
 		int x=0;
 		
 		if(items == null && text == null)
-			sql="select count(*) from board";
+			sql="select count(*) from commuboard";
 		else
-			sql="select count(*) from board where"+items+"like ' %" +text+ "%'";
+			sql="select count(*) from commuboard where"+items+"like ' %" +text+ "%'";
 		
 		try {
 			conn = DBConnection.getConnection();
@@ -35,6 +39,71 @@ public class boardDAO {
 			if(rs.next())
 				x = rs.getInt(1);
 		}
+		catch (Exception e) {
+			System.out.println("게시판 목록 세기 에러: "+e);
+		}
+		finally {
+			try {
+				if(rs != null)
+					rs.close();
+				if(pstmt != null)
+					pstmt.close();
+				if(conn != null)
+					conn.close();
+			} catch (Exception e2) {
+				System.out.println("게시판 목록 세기 close() 에러: "+e2);
+			}
+		}
+		
+		return x;
+	}
+	
+	//글 목록 내용 가져오기
+	public ArrayList<boardDTO> getBoardList(int page, int limit, String items, String text){
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		//전체 게시글 숫자
+		int total_record = getListCount(items, text);
+		//현재 페이지
+		int start = (page -1 )* limit;
+		//다음 페이지
+		int index = start +1;
+		
+		String sql;
+		
+		if(items == null && text == null)
+			sql = "select*from commuboard order by cb_num desc";
+		else
+			sql = "select*from commuboard where"+items+"like '%"+text+ "%' order by cb_num desc";
+		
+		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
+		
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				boardDTO board = new boardDTO();
+				board.setName(rs.getString("m_name"));
+				board.setTitle(rs.getString("cb_title"));
+				board.setContent(rs.getString("cb_content"));
+				board.setRegist_day(rs.getString("cb_regist_day"));
+				board.setFilename(rs.getString("cb_filename"));
+				board.setHit(rs.getInt("cb_hit"));
+				board.setAnimal_type(rs.getString("cb_animal_type"));
+				list.add(board);
+				
+				if(index < (start+limit) && index <= total_record)
+					index++;
+				else
+					break;
+			}
+			return list;
+			
+		} 
 		catch (Exception e) {
 			System.out.println("게시판 목록 불러오기 에러: "+e);
 		}
@@ -50,8 +119,44 @@ public class boardDAO {
 				System.out.println("게시판 목록 불러오기 close() 에러: "+e2);
 			}
 		}
-		
+		return null;
+	}
+	
+	//게시글 접속시간-작성시간 비교하는 기능
+	public String caltime(String time) {
+		System.out.println(time);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd(HH:mm:ss");
+		String x="";
+		try {
+			Date date = sdf.parse(time);
+			System.out.println(date);
+			long curTime = System.currentTimeMillis();
+			long regTime = date.getTime();
+			long calTime = (curTime-regTime)/1000;
+			if(calTime<60) {
+				x="방금전";			
+			}
+			else if(calTime<3600) {
+				x=(calTime/60)+"분전";
+				return x;
+			}
+			else if(calTime<86400) {
+				x=(calTime/3600)+"시간전";
+				return x;
+			}
+			else if(calTime<(86400*30)) {
+				x=(calTime/86400)+"일전";
+				return x;
+			}
+			else {				
+				x=sdf.format(date);
+				return x;
+			}		
+		} catch (Exception e) {
+			System.out.println("접속시간 에러: "+e);
+		}
 		return x;
+		
 	}
 	
 	//글쓰기 기능
@@ -62,14 +167,15 @@ public class boardDAO {
 		
 		try {
 			conn = DBConnection.getConnection();
-			sql = "insert into commuboard(m_name, cb_title, cb_content, cb_regist_day,cb_filename,cb_hit) values (?,?,?,?,?,?)";
+			sql = "insert into commuboard(m_name,cb_animal_type ,cb_title, cb_content, cb_regist_day,cb_filename,cb_hit) values (?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, dto.getName());
-			pstmt.setString(2, dto.getTitle());
-			pstmt.setString(3,dto.getContent());
-			pstmt.setString(4,dto.getRegist_day());
-			pstmt.setString(5, dto.getFilename());
-			pstmt.setInt(6,dto.getHit());
+			pstmt.setString(2, dto.getAnimal_type());
+			pstmt.setString(3, dto.getTitle());
+			pstmt.setString(4,dto.getContent());
+			pstmt.setString(5,dto.getRegist_day());
+			pstmt.setString(6, dto.getFilename());
+			pstmt.setInt(7,dto.getHit());
 			pstmt.executeUpdate();
 		}
 		catch (Exception e) {

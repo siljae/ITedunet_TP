@@ -32,11 +32,8 @@ public class controller extends HttpServlet{
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//.do 경로 자르기
 		String RequestURI = request.getRequestURI();
-		System.out.println(RequestURI);
 		String contextPath = request.getContextPath();
-		System.out.println(contextPath);
 		String command = RequestURI.substring(contextPath.length());
-		System.out.println(command);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		request.setCharacterEncoding("UTF-8");
@@ -146,7 +143,6 @@ public class controller extends HttpServlet{
 	//회원가입 기능
 	public void signupaction(HttpServletRequest request) {
 		memberDAO dao = memberDAO.getinstance();
-		System.out.println(dao);
 		memberDTO dto = new memberDTO();
 		dto.setEmail(request.getParameter("email"));
 		dto.setName(request.getParameter("name"));

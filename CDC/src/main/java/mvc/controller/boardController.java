@@ -32,27 +32,25 @@ public class boardController extends HttpServlet{
 		public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			//.do 경로 자르기
 			String RequestURI = request.getRequestURI();
-			System.out.println(RequestURI);
 			String contextPath = request.getContextPath();
-			System.out.println(contextPath);
 			String command = RequestURI.substring(contextPath.length());
-			System.out.println(command);
 			
 			response.setContentType("text/html; charset=UTF-8");
 			request.setCharacterEncoding("UTF-8");
 			
 			if(command.equals("/commuboard.action")) {//게시판 목록 보여주기
 				boardlist(request);
-				RequestDispatcher rd = request.getRequestDispatcher("./board/jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 				rd.forward(request, response);
 			}
-			else if(command.equals("/commuwrite.do")){//커뮤니티 게시판 글쓰기 페이지로 이동
-				RequestDispatcher rd = request.getRequestDispatcher("./commuwrite.jsp");
+			else if(command.equals("/commuwrite.action")){//커뮤니티 게시판 글쓰기 페이지로 이동
+				RequestDispatcher rd = request.getRequestDispatcher("/commuwrite.jsp");
 				rd.forward(request, response);
 			}
 			else if(command.equals("/writeaction.action")) {//글 등록
 				writeaction(request);
-				RequestDispatcher rd = request.getRequestDispatcher("./board.jsp");
+				boardlist(request);
+				RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 				rd.forward(request, response);
 			}
 		}
@@ -60,7 +58,7 @@ public class boardController extends HttpServlet{
 
 		
 		//게시판 목록
-		public void boardlist(HttpServletRequest request) {
+		public void boardlist(HttpServletRequest request) {			
 			boardDAO dao = boardDAO.getinstance();
 			List<boardDTO> boardlist = new ArrayList<boardDTO>();
 			
@@ -74,6 +72,30 @@ public class boardController extends HttpServlet{
 			String text = request.getParameter("text");
 			
 			int total_record = dao.getListCount(items,text);
+			boardlist = dao.getBoardList(pageNum, limit, items, text);
+			
+			String animal_type;
+			String tag_src;
+			String tag_value;
+			
+			for (boardDTO dto : boardlist) {
+				animal_type = dto.getAnimal_type();
+				String regist_day = dao.caltime(dto.getRegist_day());
+				
+				request.setAttribute("regist_day", regist_day);
+				if(animal_type != null && animal_type.equals("cat")) {
+					tag_src = "./resources/img/board/catface.png";
+					tag_value = "고양이";
+					request.setAttribute("tag_src", tag_src);
+					request.setAttribute("tag_value",tag_value);
+				}
+				else if(animal_type != null && animal_type.equals("dog")) {
+					tag_src = "/resources/img/board/dogface.png";
+					tag_value = "강아지";
+					request.setAttribute("tag_src", tag_src);
+					request.setAttribute("tag_value",tag_value);
+				}
+			}
 			
 			int total_page;
 			
@@ -85,8 +107,7 @@ public class boardController extends HttpServlet{
 				total_page = total_record/limit;
 				Math.floor(total_page);
 				total_page = total_page+1;
-			}
-			
+			};
 			request.setAttribute("pageNum", pageNum);
 			request.setAttribute("total_page", total_page);
 			request.setAttribute("total_record", total_record);
@@ -96,7 +117,6 @@ public class boardController extends HttpServlet{
 		
 		//글쓰기 등록 기능
 		public void writeaction(HttpServletRequest request) {
-			System.out.println("글등록함수로 왔어요");
 			try {
 				boardDAO dao = boardDAO.getinstance();
 				boardDTO dto = new boardDTO();
@@ -105,6 +125,7 @@ public class boardController extends HttpServlet{
 				
 				String filename = "";
 				String realfolder = request.getServletContext().getRealPath("/resources/img");
+				System.out.println("폴더경로: "+realfolder);
 				int maxsize = 5*1024*1024;
 				String enctype ="UTF-8";
 				MultipartRequest multi = new MultipartRequest(request, realfolder,maxsize, enctype, new DefaultFileRenamePolicy());
@@ -114,14 +135,16 @@ public class boardController extends HttpServlet{
 				Enumeration files = multi.getFileNames();
 				String fname = (String)files.nextElement();
 				filename =multi.getFilesystemName(fname);
+				System.out.println("파일이름:"+filename);
+				String animal_type = multi.getParameter("animal_type");
 				
 				dto.setName(name);
 				dto.setTitle(title);
 				dto.setContent(content);
 				dto.setRegist_day(regist_day);
 				dto.setFilename(filename);
-				System.out.println(filename);
 				dto.setHit(0);
+				dto.setAnimal_type(animal_type);
 				
 				dao.writeacion(dto);
 				

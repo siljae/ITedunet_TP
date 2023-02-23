@@ -1,7 +1,6 @@
 drop database if exists cdcdb;
 create database cdcdb;
 use cdcdb;
-drop table if exists member;
 create table member
 (
 	m_num int not null auto_increment,
@@ -15,13 +14,8 @@ create table member
     m_level int default 1,
     primary key(m_num),
     unique key(m_name)
-)default charset=UTF8;
-
+)default charset=utf8;
 select*from member;
-alter table member modify m_level int default'1';
-update member set m_level=1 where m_name='abc';
-insert into member(m_email, m_name, m_pw, m_phone, m_post, m_addr1, m_addr2) values ('admin@gmail.com', 'admin', '1234', '010-1234-1234', '12345', '양덕동', '경민인터빌');
-update member set m_level=2 where m_name='admin';
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
 create table admin
 (
@@ -45,23 +39,24 @@ create table product
     p_untisinstock long not null,
     p_filename varchar(100) not null,
     primary key(p_num)
-);
+)default charset=utf8;
 
-create table mychildboard
+create table commuboard
 (
-	mb_num int not null auto_increment,
+	cb_num int not null auto_increment,
     m_name varchar(6) not null,
-    a_name varchar(6) not null,
-    mb_title varchar(100) not null,
-    mb_content text not null,
-    mb_date date not null,
-    mb_filename varchar(100),
-    mb_push int,
-    mb_reply int,
-    primary key(mb_num),
-    foreign key(m_name) references member(m_name),
-    foreign key(mb_reply) references reply(r_num)
-);
+    cb_title varchar(100) not null,
+    cb_content text not null,
+    cb_regist_day varchar(30) not null,
+    cb_filename varchar(100),
+    cb_hit int not null,
+    cb_reply int,
+    primary key(cb_num),
+    foreign key(m_name) references member(m_name)
+)default charset=utf8;
+drop table commuboard;
+select*from commuboard;
+insert into commuboard(m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
 create table reply
 (
 	r_num int not null auto_increment,
