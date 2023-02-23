@@ -32,11 +32,8 @@ public class boardController extends HttpServlet{
 		public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 			//.do 경로 자르기
 			String RequestURI = request.getRequestURI();
-			System.out.println(RequestURI);
 			String contextPath = request.getContextPath();
-			System.out.println(contextPath);
 			String command = RequestURI.substring(contextPath.length());
-			System.out.println(command);
 			
 			response.setContentType("text/html; charset=UTF-8");
 			request.setCharacterEncoding("UTF-8");
@@ -61,7 +58,7 @@ public class boardController extends HttpServlet{
 
 		
 		//게시판 목록
-		public void boardlist(HttpServletRequest request) {
+		public void boardlist(HttpServletRequest request) {			
 			boardDAO dao = boardDAO.getinstance();
 			List<boardDTO> boardlist = new ArrayList<boardDTO>();
 			
@@ -75,7 +72,6 @@ public class boardController extends HttpServlet{
 			String text = request.getParameter("text");
 			
 			int total_record = dao.getListCount(items,text);
-			System.out.println("총게시글숫자: "+total_record);
 			boardlist = dao.getBoardList(pageNum, limit, items, text);
 			
 			String animal_type;
@@ -84,8 +80,9 @@ public class boardController extends HttpServlet{
 			
 			for (boardDTO dto : boardlist) {
 				animal_type = dto.getAnimal_type();
-				System.out.println("db에서 가져온 동물타입"+animal_type);
+				String regist_day = dao.caltime(dto.getRegist_day());
 				
+				request.setAttribute("regist_day", regist_day);
 				if(animal_type != null && animal_type.equals("cat")) {
 					tag_src = "./resources/img/board/catface.png";
 					tag_value = "고양이";
@@ -120,7 +117,6 @@ public class boardController extends HttpServlet{
 		
 		//글쓰기 등록 기능
 		public void writeaction(HttpServletRequest request) {
-			System.out.println("글등록함수로 왔어요");
 			try {
 				boardDAO dao = boardDAO.getinstance();
 				boardDTO dto = new boardDTO();
@@ -129,6 +125,7 @@ public class boardController extends HttpServlet{
 				
 				String filename = "";
 				String realfolder = request.getServletContext().getRealPath("/resources/img");
+				System.out.println("폴더경로: "+realfolder);
 				int maxsize = 5*1024*1024;
 				String enctype ="UTF-8";
 				MultipartRequest multi = new MultipartRequest(request, realfolder,maxsize, enctype, new DefaultFileRenamePolicy());
@@ -138,15 +135,14 @@ public class boardController extends HttpServlet{
 				Enumeration files = multi.getFileNames();
 				String fname = (String)files.nextElement();
 				filename =multi.getFilesystemName(fname);
+				System.out.println("파일이름:"+filename);
 				String animal_type = multi.getParameter("animal_type");
-				System.out.println("동물타입머임??"+animal_type);
 				
 				dto.setName(name);
 				dto.setTitle(title);
 				dto.setContent(content);
 				dto.setRegist_day(regist_day);
 				dto.setFilename(filename);
-				System.out.println(filename);
 				dto.setHit(0);
 				dto.setAnimal_type(animal_type);
 				

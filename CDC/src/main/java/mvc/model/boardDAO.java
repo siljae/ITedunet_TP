@@ -1,8 +1,10 @@
 package mvc.model;
 
 import java.sql.Connection;
+import java.util.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 
@@ -118,6 +120,43 @@ public class boardDAO {
 			}
 		}
 		return null;
+	}
+	
+	//게시글 접속시간-작성시간 비교하는 기능
+	public String caltime(String time) {
+		System.out.println(time);
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd(HH:mm:ss");
+		String x="";
+		try {
+			Date date = sdf.parse(time);
+			System.out.println(date);
+			long curTime = System.currentTimeMillis();
+			long regTime = date.getTime();
+			long calTime = (curTime-regTime)/1000;
+			if(calTime<60) {
+				x="방금전";			
+			}
+			else if(calTime<3600) {
+				x=(calTime/60)+"분전";
+				return x;
+			}
+			else if(calTime<86400) {
+				x=(calTime/3600)+"시간전";
+				return x;
+			}
+			else if(calTime<(86400*30)) {
+				x=(calTime/86400)+"일전";
+				return x;
+			}
+			else {				
+				x=sdf.format(date);
+				return x;
+			}		
+		} catch (Exception e) {
+			System.out.println("접속시간 에러: "+e);
+		}
+		return x;
+		
 	}
 	
 	//글쓰기 기능

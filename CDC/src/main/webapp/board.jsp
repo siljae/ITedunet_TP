@@ -6,19 +6,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <% 
 	String username = (String) session.getAttribute("username");
-	System.out.println("게시판의닉넴: "+username);
 	List boardlist = (List)request.getAttribute("boardlist");
-	System.out.println("List: "+boardlist);
 	int total_record = ((Integer) request.getAttribute("total_record")).intValue();
-	System.out.println("전체글: "+total_record);
 	int total_page = ((Integer) request.getAttribute("total_page")).intValue();
-	System.out.println("전체페이지: "+total_page);
 	int pageNum = ((Integer) request.getAttribute("pageNum")).intValue();
-	System.out.println("현재페이지넘버: "+pageNum);
-	String tag_src = (String)request.getAttribute("tag_src");
-	System.out.println("동물이미지소스: "+tag_src);
-	String tag_value = (String)request.getAttribute("tag_value");
-	System.out.println("동물태그: "+tag_value);
 %>
 <html>
 <head>
@@ -178,14 +169,16 @@
                         <div class="colist">
                             <div>
                                 <div class="colbt">
-                                	<img  src="./resources/img/catface.png" alt="">
-                                    <img src="<%=tag_src %>" alt="">
-                                    <img src="./resources/img/borad/catface.png" alt="">
-                                    <div class="cattext1"><%=tag_value %></div>
+                                    <img src="${tag_src }" >
+                                    <div class="cattext1">${tag_value }</div>
                                 </div>
                                 <div class="coltitle">${board.title }</div>
                                 <div class="coltext">${board.content }</div>
                             </div>
+                            <div class="imgbox">
+								<img class="listimg" src="./resources/img/${board.filename }" alt="">
+								<p>${board.filename }
+							</div>
                         </div>
                         <div class="coreply">
                             <div class="core1">
@@ -193,7 +186,7 @@
                                 0
                             </div>
                             <div class="renickname">${board.name }</div>
-                            <div class="retime">59분 전</div>
+                            <div class="retime">${regist_day }</div>
                         </div>
                         <hr class="listgard">
                     </div>
