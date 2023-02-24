@@ -1,13 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="./resources/css/view.css">
-    <title>게시글보기</title>
-    <script>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="./resources/css/view.css">
+<script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+<script>
         function chat_show(){
             let show = document.getElementById('chat');
             if(show.style.display == 'none'){
@@ -18,8 +18,11 @@
             }
         }
     </script>
+    
+<title>커뮤니티 게시판의 게시글</title>
 </head>
 <body>
+	<jsp:include page="./header.jsp"/>
     <section>
         <div class="view_head">
             <h1>우리아이자랑</h1>
@@ -30,7 +33,7 @@
             </div>
             <div>
                 <div class="write_head">
-                    <h2>제목</h2>                    
+                    <h2>${board.title }</h2>                   
                     <div>
                         <button class="btn" onclick="write_update()">수정</button>
                         <button class="btn" onclick="write_delete()">삭제</button>
@@ -40,25 +43,17 @@
                 <div class="write_postbox">
                     <div class="postbox_user">
                         <button onclick="chat_show()">
-                            (userid)                        
+                            ${board.name }                        
                             <div id="chat" class="chat">
                                 <a onclick="window.open('chat.html','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                             </div>
                         </button>
-                        <p class="postbox_date">개시일자 : 2023/02/10/10:41:43</p>
+                        <p class="postbox_date">${board.regist_day }</p>
                     </div>
                     <div class="postbox_img">
                         <img src="./img/index/holong1.jpg" alt="게시글사진">
                     </div>
-                    <p class="postbox_text">
-                        대충 고양이가 귀엽다는 내용입니다
-                        우리집 고양이 너무 귀여웡
-                        우리집 고양이 베리귀여웡
-                        우리집 고양이 세상귀여웡
-                        세상에 너무 귀여웡
-                        
-                        너 고양이 있냥? 키킼                        
-                    </p>
+                    <p class="postbox_text">${board.content }</p>
                     <div>
                         <button class="recom" onclick="recom_sum()">
                             <i class="far fa-thumbs-up"></i>
@@ -116,5 +111,6 @@
             </div>
         </div>
     </section>
+
 </body>
 </html>

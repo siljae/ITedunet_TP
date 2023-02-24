@@ -172,13 +172,14 @@
                                     <img src="${tag_src }" >
                                     <div class="cattext1">${tag_value }</div>
                                 </div>
-                                <div class="coltitle">${board.title }</div>
-                                <div class="coltext">${board.content }</div>
+                                <div>
+	                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltitle">${board.title }</a>
+	                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltext">${board.content }</a>
+	                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="imgbox">
+										<img class="listimg" src="./resources/img/${board.filename }">
+									</a>
+								</div>
                             </div>
-                            <div class="imgbox">
-								<img class="listimg" src="./resources/img/${board.filename }" alt="">
-								<p>${board.filename }
-							</div>
                         </div>
                         <div class="coreply">
                             <div class="core1">

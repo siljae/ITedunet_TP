@@ -53,6 +53,13 @@ public class boardController extends HttpServlet{
 				RequestDispatcher rd = request.getRequestDispatcher("/board.jsp");
 				rd.forward(request, response);
 			}
+			else if(command.equals("/commuboardview.action")) {//선택된 글 상세 페이지 가져오기
+				requestboardview(request);
+				RequestDispatcher rd = request.getRequestDispatcher("./commuboardview.jsp");
+				rd.forward(request, response);
+				
+				
+			}
 		}
 		
 
@@ -151,5 +158,19 @@ public class boardController extends HttpServlet{
 			} catch (Exception e) {
 				System.out.println("파일업로드 에러: "+e);
 			}			
+		}
+		
+		//선택된 게시글 상세 페이지 가져오기
+		public void requestboardview(HttpServletRequest request) {
+			boardDAO dao = boardDAO.getinstance();
+			int num = Integer.parseInt(request.getParameter("num"));
+			int pageNum = Integer.parseInt(request.getParameter("pageNum"));
+			
+			boardDTO board = new boardDTO();
+			board = dao.getboardbynum(num, pageNum);
+			
+			request.setAttribute("num", num);
+			request.setAttribute("page", pageNum);
+			request.setAttribute("board", board);
 		}
 }

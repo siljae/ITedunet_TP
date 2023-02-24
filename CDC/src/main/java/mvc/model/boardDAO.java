@@ -87,6 +87,7 @@ public class boardDAO {
 			
 			while(rs.next()) {
 				boardDTO board = new boardDTO();
+				board.setNum(rs.getInt("cb_num"));
 				board.setName(rs.getString("m_name"));
 				board.setTitle(rs.getString("cb_title"));
 				board.setContent(rs.getString("cb_content"));
@@ -191,7 +192,90 @@ public class boardDAO {
 			} catch (Exception e2) {
 				System.out.println("글쓰기 프로세스 close() 예외 발생: "+e2);
 			}
-		}
+		}		
+	}
+	
+	//조회수 증가 기능
+	public void updatehit(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		
+		try {
+			conn = DBConnection.getConnection();
+			String sql = "select cb_hit from commuboard where cb_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+			int hit = 0;
+			
+			if(rs.next())
+				hit = rs.getInt("cb_hit")+1;
+			
+			
+			sql = "update commuboard set cb_hit=? where cb_num=?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, hit);
+			pstmt.setInt(2, num);
+			pstmt.executeUpdate();
+		}
+		catch (Exception e) {
+			System.out.println("조회수 증가 에러: "+e);
+		}
+		finally {
+			try {
+				if (rs != null) 
+					rs.close();							
+				if (pstmt != null) 
+					pstmt.close();				
+				if (conn != null) 
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}	
+		}		
+	}
+	
+	public boardDTO getboardbynum(int num, int pageNum) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		boardDTO board = null; 
+		updatehit(num);
+		String sql = "select * from commuboard where cb_num = ?";
+
+		try {
+			conn = DBConnection.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, num);
+			rs = pstmt.executeQuery();
+
+			if (rs.next()) {
+				board = new boardDTO();
+				board.setNum(rs.getInt("cb_num"));
+				board.setName(rs.getString("m_name"));
+				board.setAnimal_type(rs.getString("cb_animal_type"));
+				board.setTitle(rs.getString("cb_title"));
+				board.setContent(rs.getString("cb_content"));
+				board.setRegist_day(rs.getString("cb_regist_day"));
+				board.setFilename(rs.getString("cb_filename"));
+				board.setHit(rs.getInt("cb_hit"));
+			}
+			return board;
+		} catch (Exception ex) {
+			System.out.println("getBoardByNum() 에러 : " + ex);
+		} finally {
+			try {
+				if (rs != null) 
+					rs.close();							
+				if (pstmt != null) 
+					pstmt.close();				
+				if (conn != null) 
+					conn.close();
+			} catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}		
+		}
+		return null;
 	}
 }
