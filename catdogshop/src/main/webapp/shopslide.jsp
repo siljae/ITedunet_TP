@@ -10,7 +10,6 @@
 	int total_record = ((Integer) request.getAttribute("total_record")).intValue();
 	int pageNum = ((Integer) request.getAttribute("pageNum")).intValue();
 	int total_page = ((Integer) request.getAttribute("total_page")).intValue();
-	String tag_src = (String)request.getAttribute("tag_src");
 	
 	
 	
@@ -141,19 +140,19 @@
                 		productDTO dt = new productDTO();
                 		dt = productList.get(i);
                 		
-                		System.out.println("이름" + dt.getName());
+                		System.out.println("이름" + dt.getTitlefilename());
                 	
                 
                 %>
                     <div class="listbox">
-                        <a class="prodetail"href="productpage.jsp"></a>
+                        <a class="prodetail"href="productview.go"></a>
                         <div class="productbox">
-	                        <a class="prodetail2" href="">
-	                            <span class="proimg"><img src="<%=tag_src %>" alt=""></span>
+	                        <a class="prodetail2" href="productview.go">
+	                            <span class="proimg"><img src="./resources/img/<%=dt.getTitlefilename() %>" alt=""></span>
 	                            <span class="procompany"><%=dt.getManufacturer() %></span>
 	                            <div class="proname"><%=dt.getName() %></div>
 	                            <hr class="prohr">
-	                            <div class="proprice"><%=dt.getUnitprice() %></div>
+	                            <div class="proprice">\ <%=dt.getUnitprice() %>원</div>
 	                            <input type="hidden" class="donnkow" value="">
 	                        </a>
 	                        <div class="cartbt"><a href="">장바구니</a></div>

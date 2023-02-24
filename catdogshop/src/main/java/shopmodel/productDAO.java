@@ -175,7 +175,7 @@ public class productDAO {
 		}
 		return null;
 	}
-	public void insertProduct(productDTO product) { //add폼에서 쓰는 dao. product는 dto로 폼에서 먼저 파라미터 값 가져옴
+	public void insertProductAdd(productDTO product) { //add폼에서 쓰는 dao. product는 dto로 폼에서 먼저 파라미터 값 가져옴
 	//새로운 상품 등록하기
 		
 		Connection conn = null;

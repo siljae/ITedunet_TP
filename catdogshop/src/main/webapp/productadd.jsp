@@ -101,7 +101,7 @@
                     </div>
                     <hr class="hrline">
                     <div id="write_area">
-                        <form enctype="multipart/form-data" action="write_ok.php?board_id=<?echo $board_id;?>" method="post">
+                        <form enctype="multipart/form-data" action="./productaddaction.go" method="post">
                             <div id="in_title">
                                 <p class="titletxt">상품명</p>
                                 <select name="conoption" id="conoption">  
@@ -136,12 +136,12 @@
                             <div class="upinfo">
                                 <div class="pricebox">
                                     <p class="pricetxt">판매가</p>
-                                    <input type="text" class="upload-price" name="price" value="">
+                                    <input type="text" class="upload-price" name="price" >
                                     <p class="pricetxt">원</p>
                                 </div>
                                 <div class="quantitybox">
                                     <p class="quantitytxt">재고수량</p>
-                                    <input type="text" class="upload-quantity" name="quantity" value="">
+                                    <input type="text" class="upload-quantity" name="quantity" >
                                     <p class="quantitytxt">개</p>
                                 </div>
                                 <p class="waringtxt">※ 숫자로만 입력하세요 !</p>

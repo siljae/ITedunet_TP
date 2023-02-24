@@ -120,22 +120,25 @@ public class controller extends HttpServlet {
 	
 	
 	public void requestProductAdd(HttpServletRequest request) { //productadd 에서 요청받아옴
-		
+		System.out.println("글추가 폼 간다잇");
 		
 		productDAO dao = productDAO.getInstance();//써먹으려고 메소드 실행
 		
 		productDTO product = new productDTO(); //dto 만듬. 상품 데이터를 담아 옮길것
+		
+		
 		product.setNum(Integer.parseInt(request.getParameter("num")));
+		System.out.println(request.getParameter("num"));
 		product.setName(request.getParameter("name"));
 		product.setCategory(request.getParameter("category"));
 		product.setTitlement(request.getParameter("titlement"));
 		product.setSimpledescripton(request.getParameter("simpledescription"));
-		product.setManufacturer(request.getParameter("manufacturer"));
-		product.setUnitprice(Integer.parseInt(request.getParameter("unitprice")));
-		product.setUntisinstock(Integer.parseInt(request.getParameter("untisinstock")));
-		product.setDetailfilename(request.getParameter("detailfilename"));
-		product.setTitlefilename(request.getParameter("titlefile"));
-		product.setDate(request.getParameter("date"));
+		product.setManufacturer(request.getParameter("manufacturer").trim());
+		product.setUnitprice(Integer.parseInt(request.getParameter("unitprice").trim()));
+		product.setUntisinstock(Integer.parseInt(request.getParameter("untisinstock").trim()));
+		product.setDetailfilename(request.getParameter("detailfilename").trim());
+		product.setTitlefilename(request.getParameter("titlefile").trim());
+		product.setDate(request.getParameter("date").trim());
 		
 		System.out.println(Integer.parseInt(request.getParameter("num")));
 		System.out.println(request.getParameter("name"));
@@ -151,7 +154,7 @@ public class controller extends HttpServlet {
 		
 		product.setHit(0);
 		
-		dao.insertProduct(product);// 이 내용을 데이터 베이스에 옮김
+		dao.insertProductAdd(product);// 이 내용을 데이터 베이스에 옮김
 		
 	}
 	

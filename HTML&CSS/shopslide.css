@@ -14,6 +14,7 @@
     margin:0 auto;
 
 }
+/*네비바*/
 .mainnav{
     display: flex;
     justify-content: space-between;
@@ -54,6 +55,8 @@
 .nav_login:hover a{
     color: white;
 }
+
+/*카테고리제목표시바*/
 .bbubbu{
     margin-top: 50px;
     background-color: #FFC7C2;
@@ -64,6 +67,7 @@
     font-weight: bold;
 
 }
+/*네비바 밑 전체 박스*/
 .lounge{
 
     margin: 0 auto;
@@ -72,6 +76,8 @@
 .midbox{
     width: 20%;
 }
+
+/*카테고리 사이드바*/
 .sidecate{
     display: block;
     position: fixed;
@@ -148,40 +154,60 @@
 .shoplounge{
     margin-left: 20px;
 }
-.filterbox{
-    margin: 20px 0;
+
+/*슬라이드배너*/
+.slide_banner
+{
+    padding-top: 100px;
+    position: relative;
+    width: 100%;
+}
+.slide_banner input
+{
+    display: none;
+}
+.slide_control
+{
+    position: absolute;
+    z-index: 2;
+    bottom: 5%;
+    margin-left: 20px;
+}
+.slide_control label
+{
+    color: white;
+}
+.slide_content
+{
+    height: 300px;
     display: flex;
-    justify-content: left;
+    font-size: 0;
+    white-space: nowrap;
+    overflow: hidden;
 }
-.filterbt{
-    display: flex;
-    margin: 0 15px 0px 15px ;
+.slide_cont
+{
+    width: 100%;
 }
-.radiobox{
-    display: flex;
-    align-items: center;
-    font-size: 13px;
+.slide_cont img
+{
+    width: 100%;   
+    height: 300px;
 }
-.radiobt{
-    appearance: none;
-    background-color: white;
-    border: 2px solid #bcbcc0;
-    color: gray;
-    padding: auto;
-    width: 0.8rem;
-    height: 0.8rem;
-    border-radius: 100%;
-    margin-right: 0.4rem;
-    margin-top: 0;
+#slide01:checked ~ .slide_content .slide_cont
+{
+    transform: translateX(0%);
 }
-.radiobt:checked {
-    border: 4px solid #fcd11e;
+#slide02:checked ~ .slide_content .slide_cont
+{
+    transform: translateX(-100%);
+}
+#slide03:checked ~ .slide_content .slide_cont
+{
+    transform: translateX(-200%);
 }
 
-.radiobt:hover {
-    background-color: #FFFEF0;
-    cursor: pointer;
-}
+/*상품리스트*/
 .alllistbox{
     display: flex;
     flex-wrap: wrap;
@@ -260,39 +286,3 @@
     color: #FFFEF0;
 
 }
-.pagebutton{
-    display: flex;
-    justify-content: center;
-    margin-top: 30px;
-    margin-bottom: 16px;
-}
-ul.pagebutton li{
-    width: 30px;
-    height: 30px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1rem;
-}
-ul.pagebutton li a{
-    text-decoration: none;
-    color: #868688;
-    font-size: 1rem;
-    border: none;
-}
-
-.leftbt{
-    border-radius: 5px 0 0 5px;
-    border: none;
-}
-
-.active{
-    background-color: #ffeb994d;
-    border-radius: 50%;
-    border: 2px solid #fcd11e;
-}
-.active a{
-    color: black;
-    border: none;
-}
-
