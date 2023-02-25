@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CDC/src/main/webapp/resources/css/bord.css&apos; to &apos;board.css&apos;" description="Rename resource &apos;bord.css&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/main/webapp/resources/css/bord.css" name="board.css" stamp="1676786607818" updateReferences="true"/>
+</session>
