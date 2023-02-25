@@ -50,9 +50,11 @@
                         </button>
                         <p class="postbox_date">${board.regist_day }</p>
                     </div>
-                    <div class="postbox_img">
-                        <img src="./img/index/holong1.jpg" alt="게시글사진">
-                    </div>
+                    <c:if test="${board.filename != null }">
+	                    <div class="postbox_img">
+	                        <img src="./resources/img/${board.filename }" alt="게시글사진">
+	                    </div>
+                    </c:if>
                     <p class="postbox_text">${board.content }</p>
                     <div>
                         <button class="recom" onclick="recom_sum()">

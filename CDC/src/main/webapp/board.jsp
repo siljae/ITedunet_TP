@@ -166,29 +166,34 @@
                 <div class="conlist">
                 	<c:forEach items="${boardlist }" var="board">
                     <div class="content">
-                        <div class="colist">
-                            <div>
-                                <div class="colbt">
-                                    <img src="${tag_src }" >
-                                    <div class="cattext1">${tag_value }</div>
-                                </div>
-                                <div>
-	                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltitle">${board.title }</a>
-	                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltext">${board.content }</a>
-	                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="imgbox">
+                    	<div class="content_2">
+                    		<div>
+		                        <div class="colist">
+	                                <div class="colbt">
+	                                    <img src="${tag_src }" >
+	                                    <div class="cattext1">${tag_value }</div>
+	                                </div>
+	                                <div>
+		                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltitle">${board.title }</a>
+		                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltext">${board.content }</a>	                                
+		                            </div>
+	                            </div>
+	                       	    <div class="coreply">
+		                            <div class="core1">
+		                                답변 : 0
+		                            </div>
+		                            <div class="renickname">${board.name }</div>
+		                            <div class="retime">${regist_day }</div>
+		                        </div>
+	                        </div>
+                        	<c:if test="${board.filename != null }">
+		                        <div class="colbox">
+		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="imgbox">
 										<img class="listimg" src="./resources/img/${board.filename }">
 									</a>
-								</div>
-                            </div>
-                        </div>
-                        <div class="coreply">
-                            <div class="core1">
-                                답변 :
-                                0
-                            </div>
-                            <div class="renickname">${board.name }</div>
-                            <div class="retime">${regist_day }</div>
-                        </div>
+	                        	</div>	
+                        	</c:if>                     
+                        </div>                        
                         <hr class="listgard">
                     </div>
 					</c:forEach>

@@ -1,3 +1,8 @@
+*{
+    list-style: none;
+    text-decoration: none;
+    color: black;
+}
 .com_name{
     margin-top: 100px;    
     margin-bottom: 10px;
@@ -223,6 +228,9 @@
 .content{
     padding: 9px 0;
 }
+.content_2{
+    display: flex;
+}
 .colist{
     padding-right: 27px;
 }
@@ -241,6 +249,11 @@
 .colbt img{
     width: 15px;
     margin-right: 5px;
+}
+.colbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .coltitle{
     font-style: normal;
@@ -273,6 +286,17 @@
 }
 .coltext:hover{
     cursor: pointer;
+}
+.colbox{
+    min-width: 120px;
+    max-width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 15%);
+}
+.colbox img{
+    width: 100%;
 }
 .coreply{
     display: flex;
