@@ -142,7 +142,6 @@ public class boardController extends HttpServlet{
 				Enumeration files = multi.getFileNames();
 				String fname = (String)files.nextElement();
 				filename =multi.getFilesystemName(fname);
-				System.out.println("파일이름:"+filename);
 				String animal_type = multi.getParameter("animal_type");
 				
 				dto.setName(name);

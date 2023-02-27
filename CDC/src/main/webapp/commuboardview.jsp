@@ -17,6 +17,13 @@
                 show.style.display = 'none';
             }
         }
+        
+        function write_update(){
+        	location.href='commuboardupdate.action?page=${pageNum}';
+        }
+        function write_dalete(){
+        	location.href='commuboarddelete.action?page=${pageNum}';
+        }
     </script>
     
 <title>커뮤니티 게시판의 게시글</title>
@@ -29,15 +36,18 @@
         </div>
         <div class="container">
             <div class="view_tag">
-                <div>고양이</div>
+            	<img src="${tag_src }">
+                <div>${tag_value }</div>
             </div>
             <div>
                 <div class="write_head">
-                    <h2>${board.title }</h2>                   
+                    <h2>${board.title }</h2>
+                    <c:if test="${board.name == username }">                                       
                     <div>
                         <button class="btn" onclick="write_update()">수정</button>
                         <button class="btn" onclick="write_delete()">삭제</button>
-                    </div>                
+                    </div>
+                    </c:if>
                 </div>
                 <hr>
                 <div class="write_postbox">

@@ -282,6 +282,9 @@
 .colist{
     padding-right: 27px;
 }
+.colup{
+    display: flex;
+}
 .colbt{
     padding: 0 15px;
     margin-bottom:18px;
@@ -299,6 +302,16 @@
     width: 15px;
     margin-right: 5px;
 }
+.colhit{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    color: #868688;
+    font-size: 13px;
+    line-height: 160%;
+}
 .coltitle{
     font-style: normal;
     font-weight: 700;
@@ -306,6 +319,7 @@
     margin-top: 18px;
     font-size: 16px;
     line-height: 19px;
+    
 }
 .coltitle:hover{
     cursor: pointer;

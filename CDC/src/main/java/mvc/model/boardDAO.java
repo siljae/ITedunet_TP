@@ -236,6 +236,7 @@ public class boardDAO {
 		}		
 	}
 	
+	//선택된 글 상세 내용 가져오기
 	public boardDTO getboardbynum(int num, int pageNum) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;

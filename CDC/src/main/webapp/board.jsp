@@ -169,9 +169,12 @@
                     	<div class="content_2">
                     		<div>
 		                        <div class="colist">
-	                                <div class="colbt">
-	                                    <img src="${tag_src }" >
-	                                    <div class="cattext1">${tag_value }</div>
+		                        	<div class="colup">
+		                                <div class="colbt">
+		                                    <img src="${tag_src }" >
+		                                    <div class="cattext1">${tag_value }</div>
+		                                </div>
+		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
 		                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltitle">${board.title }</a>
@@ -180,10 +183,10 @@
 	                            </div>
 	                       	    <div class="coreply">
 		                            <div class="core1">
-		                                답변 : 0
+		                                답변 : 
 		                            </div>
 		                            <div class="renickname">${board.name }</div>
-		                            <div class="retime">${regist_day }</div>
+		                            <div class="retime">조회수 : ${regist_day }</div>
 		                        </div>
 	                        </div>
                         	<c:if test="${board.filename != null }">
