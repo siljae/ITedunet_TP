@@ -22,7 +22,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-        <h1>우리아이자랑</h1>
+        <h1><a href="#">전체</a></h1>
+        <h1><a href="#">우리아이자랑</a></h1>
+        <h1><a href="#">묻고답해요</a></h1>
+        <h1><a href="#">추천해요</a></h1>
     </div>
     <div class="container">
         <div class="midbox">

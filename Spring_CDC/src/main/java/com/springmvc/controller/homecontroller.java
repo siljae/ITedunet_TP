@@ -6,20 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/")
-public class maincontoller {
+public class homecontroller {
 
 	@RequestMapping
-	public String index(){
+	public String index() {
 		return "index";
 	}
 	
-	@GetMapping("/login")
-	public String login() {
-		return "login";
-	}
-	
-	@GetMapping("/board")
-	public String board() {
-		return "board";
+	@GetMapping("/home")
+	public String home() {
+		return "index";
 	}
 }

@@ -48,11 +48,11 @@
     	
     	function chkemail(){
     		var v = document.getElementById('email').value;
-    		window.open("check_email.jsp?email="+v,'_blank','width=500,height=300,top=200,left=200');
+    		window.open("chkemail?email="+v,'_blank','width=500,height=300,top=200,left=200');
     	}
     	function chkname(){
     		var v = document.getElementById('name').value;
-    		window.open("check_name.jsp?name="+v,'_blank','width=500,height=300,top=200,left=200');
+    		window.open("chkname?name="+v,'_blank','width=500,height=300,top=200,left=200');
     	}
     </script>
     <title>회원가입</title>
@@ -64,49 +64,49 @@
                 <h1>회원가입</h1>
                 <div class="hr1"></div>
             </div>
-            <form:form modelAttribute="member" action="./signupaction.do" method="post">
+            <form:form modelAttribute="member" action="./signup" method="post">
                 <div class="input_box">
                     <p>
                         이메일
-                        <input type="email" name="email" id="email" class="email"   required>
+                        <form:input type="email" path="email" id="email" class="email" required="required"/>
                         <input type="button" onclick="chkemail()" class="email_check" value="중복확인">
                     </p>
                     <br>
                     <p>
                         비밀번호
-                        <input type="password" name="pw" class="pw" required placeholder="ex)비밀번호양식">
+                        <form:input type="password" path="pw" class="pw" required="required" placeholder="ex)비밀번호양식"/>
                     </p>
                     <br>
                     <p>
                         비밀번호확인
-                        <input type="password" class="pw2" required>
+                        <input type="password" class="pw2" required="required">
                     </p>
                     <br>
                     <p>
                         닉네임
-                        <input type="text" name="name" id="name" class="name"  required>                    
+                        <form:input type="text" path="name" id="name" class="name"  required="required"/>                    
                         <input type="button" onclick="chkname()" class="name_check" value="중복확인">
                     </p>
                     <br>
                     <p>
                         전화번호
-                        <input type="text" id="num1" name="phone1" class="num1" value="010" size="1" readonly>
+                        <form:input type="text" id="num1" path="phone1" class="num1" value="010" size="1" readonly="readonly"/>
                         <span>-</span>
-                        <input type="text" id="num2" name="phone2" class="num2" maxlength="4" pattern="[0-9]{4}" size="4" title="'1234와 같은 4자리 숫자'" required>                        
+                        <form:input type="text" id="num2" path="phone2" class="num2" maxlength="4" pattern="[0-9]{4}" size="4" title="'1234와 같은 4자리 숫자'" required="required"/>                        
                         <span>-</span>
-                        <input type="text" id="num3" name="phone3" class="num3" pattern="[0-9]{4}" size="4" title="'1234와 같은 4자리 숫자'" maxlength="4" required>
+                        <form:input type="text" id="num3" path="phone3" class="num3" pattern="[0-9]{4}" size="4" title="'1234와 같은 4자리 숫자'" maxlength="4" required="required"/>
                     </p>
                     <br>
                     <p>
                         주소
-                        <input type="text" id="postcode" name="post" class="addr1" readonly="readonly">
+                        <form:input type="text" id="postcode" path="post" class="addr1" readonly="readonly"/>
                         <input type="button" onclick="execDaumPostcode()" class="postbox" name="post" value="우편번호">
                     </p>
                     <p>
-                        <input type="text" id="address" name="addr1" class="addr2" size ="30" readonly="readonly">
+                        <form:input type="text" id="address" path="addr1" class="addr2" size ="30" readonly="readonly"/>
                     </p>
                     <p>
-                        <input type="text" id="detailadress" name="addr2" class="addr3" size ="30"  placeholder="상세주소">
+                        <form:input type="text" id="detailadress" path="addr2" class="addr3" size ="30"  placeholder="상세주소"/>
                     </p>
                 </div>
                 <div class="sub_header">

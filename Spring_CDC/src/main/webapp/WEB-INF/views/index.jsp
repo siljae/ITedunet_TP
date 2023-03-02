@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 	String username = (String) session.getAttribute("username");
@@ -9,7 +10,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./resources/css/index.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/index.css"/>">
     <title>index</title>
     <script>
 
@@ -32,9 +33,9 @@
 
                 <div class="slide_content">
                     <div class="slide_cont">
-                        <a href="#"><img src="./resources/img/index/holong1.jpg" alt="slide01"></a>
-                        <a href="#"><img src="./resources/img/index/holong2.jpg" alt="slide02"></a>
-                        <a href="#"><img src="./resources/img/index/holong3.jpg" alt="slide03"></a>
+                        <a href="#"><img src="<c:url value="/resources/img/index/holong1.jpg"/>" alt="slide01"></a>
+                        <a href="#"><img src="<c:url value="/resources/img/index/holong2.jpg"/>" alt="slide02"></a>
+                        <a href="#"><img src="<c:url value="/resources/img/index/holong3.jpg"/>" alt="slide03"></a>
                     </div>
                 </div>
             </div>

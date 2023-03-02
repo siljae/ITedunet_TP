@@ -1,6 +1,11 @@
 package com.springmvc.domain;
 
-public class memberDTO {
+import java.io.Serializable;
+
+public class memberDTO implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
+	
 	private String email;
 	private String name;
 	private String pw;

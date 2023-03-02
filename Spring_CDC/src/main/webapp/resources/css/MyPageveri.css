@@ -31,6 +31,10 @@ body
 }
 
 /* 마이페이지 메뉴박스 */
+[name="mychk"]
+{
+    display: none;
+}
 .mypagebox
 {
     display: flex;
@@ -86,12 +90,26 @@ body
 {
     background-color: #ff8fa4;
 }
-.my_left_li2:hover a,.my_left_li2:hover .fas
-, .my_left_li3:hover a,.my_left_li3:hover .fas
-, .my_left_li4:hover a,.my_left_li4:hover .fas
-, .my_left_li5:hover a,.my_left_li5:hover .fas
+.my_left_li2:hover span,.my_left_li2:hover .fas, .my_left_li3:hover span,.my_left_li3:hover .fas
+, .my_left_li4:hover span,.my_left_li4:hover .fas, .my_left_li5:hover span,.my_left_li5:hover .fas
 {
     color : white;
+}
+#msb1:checked ~ .my_left_li2, #msb2:checked ~ .my_left_li3
+, #msb3:checked ~ .my_left_li4, #msb4:checked ~ .my_left_li5
+{
+    background-color: #ff8fa4;
+}
+#msb1:checked ~ .my_left_li2 span, #msb1:checked ~ .my_left_li2 .fas
+, #msb2:checked ~ .my_left_li3 span, #msb2:checked ~ .my_left_li3 .fas
+, #msb3:checked ~ .my_left_li4 span, #msb3:checked ~ .my_left_li4 .fas
+, #msb4:checked ~ .my_left_li5 span, #msb4:checked ~ .my_left_li5 .fas
+{
+    color: white;
+}
+.my_left span, .my_left i
+{
+    cursor: pointer;
 }
 
 /* 마이페이지 회원정보 확인  */
