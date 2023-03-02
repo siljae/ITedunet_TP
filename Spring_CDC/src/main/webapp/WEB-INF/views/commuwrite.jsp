@@ -11,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>커뮤니티 게시글 등록</title>
-    <link rel="stylesheet" href="./resources/css/qnawrite.css">
+    <link rel="stylesheet" href="<c:url value="/resources/css/qnawrite.css"/>">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
     <script>
 	    function printfile(){

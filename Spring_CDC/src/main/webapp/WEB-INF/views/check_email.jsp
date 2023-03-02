@@ -1,6 +1,7 @@
 <%@page import="java.io.PrintWriter"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 	<%	
 		String chk = request.getParameter("chk");
@@ -76,7 +77,7 @@
 <body>
     <div class="container">
         <h2>이메일 중복 체크</h2>
-        <form action="./checkemail.do" method="post">
+        <form action="<c:url value="/chkemail"/>" method="post">
             이메일  <input type="email" name="email" class="email" value="<%=request.getParameter("email") %>"  required>        
             <input type="submit" value="중복확인" class="email_check">
             <br>

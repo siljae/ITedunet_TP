@@ -1,12 +1,11 @@
-
-.com_name{    
-    margin-bottom: 10px;
-    padding-top:100px;
-    padding-bottom:10px;
-    background-color: #fec6ca;
-}
-.com_name h1{
-    text-align: center;
+*
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    color: black;
 }
 .container{
     width: 60%;
@@ -24,16 +23,6 @@
     z-index: 10;
     top: 0;
     
-}
-.bbubbu{
-	padding-top:150px;
-    background-color: #FFC7C2;
-    height: 50px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-
 }
 .midbox{
     width: 100%;
@@ -54,7 +43,22 @@
 
 }
 .com_name{
-	text-align:center;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-top: 150px;
+    padding-bottom: 10px;
+    background-color: #fec6ca;
+}
+.com_name h1{
+    margin-right: 20px;
+}
+.com_name :nth-child(1) a{
+    border-bottom: 2px solid red;
+}
+.com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover, .com_name :nth-child(3) a:hover, .com_name :nth-child(4) a:hover{
+    border-bottom: 2px solid red;
 }
 .com_search{
     width: 80%;
@@ -66,8 +70,6 @@
     background-size: 25px;
     background-position: 10px;
     border: 1px solid gray;
-
-
 }
 .button {
     border : none;

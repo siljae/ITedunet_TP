@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="./resources/css/view.css">
+<link rel="stylesheet" href="<c:url value="/resources/css/view.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script>
         function chat_show(){
@@ -62,7 +62,7 @@
                     </div>
                     <c:if test="${board.filename != null }">
 	                    <div class="postbox_img">
-	                        <img src="./resources/img/${board.filename }" alt="게시글사진">
+	                        <img src="<c:url value="/resources/img/${board.filename }"/>">
 	                    </div>
                     </c:if>
                     <p class="postbox_text">${board.content }</p>

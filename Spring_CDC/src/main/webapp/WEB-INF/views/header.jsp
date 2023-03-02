@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <%
 	String username = (String) session.getAttribute("username");
@@ -127,13 +128,13 @@ nav {
 		<div class="hea_con">
 			<nav>
 				<div class="nav_logo">
-					<a href="./index.jsp"><img src="./resources/img/logo3.png"
+					<a href="<c:url value="/home"/>"><img src="<c:url value="/resources/img/logo3.png" />"
 						alt="Logo"></a>
 				</div>
 				<ul class="nav_ul">
-					<li class="nav_commu"><a href="./board">커뮤니티</a></li>
-					<li class="nav_notice"><a href="#">캣독마당</a></li>
-					<li class="nav_hospital"><a href="#">우리동네</a></li>
+					<li class="nav_commu"><a href="<c:url value="/board"/>">커뮤니티</a></li>
+					<li class="nav_notice"><a href="<c:url value="/notice"/>">캣독마당</a></li>
+					<li class="nav_hospital"><a href="<c:url value="/hospital"/>">우리동네</a></li>
 					<li class="nav_shop"><a href="#">SHOP</a></li>
 				</ul>
 				<div class="nav_login">
