@@ -22,7 +22,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-        <h1>우리아이자랑</h1>
+        <h1><a href="#">전체</a></h1>
+        <h1><a href="#">우리아이자랑</a></h1>
+        <h1><a href="#">묻고답해요</a></h1>
+        <h1><a href="#">추천해요</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
@@ -166,28 +169,37 @@
                 <div class="conlist">
                 	<c:forEach items="${boardlist }" var="board">
                     <div class="content">
-                        <div class="colist">
-                            <div>
-                                <div class="colbt">
-                                    <img src="${tag_src }" >
-                                    <div class="cattext1">${tag_value }</div>
-                                </div>
-                                <div class="coltitle">${board.title }</div>
-                                <div class="coltext">${board.content }</div>
-                            </div>
-                            <div class="imgbox">
-								<img class="listimg" src="./resources/img/${board.filename }" alt="">
-								<p>${board.filename }
-							</div>
-                        </div>
-                        <div class="coreply">
-                            <div class="core1">
-                                답변 :
-                                0
-                            </div>
-                            <div class="renickname">${board.name }</div>
-                            <div class="retime">${regist_day }</div>
-                        </div>
+                    	<div class="content_2">
+                    		<div>
+		                        <div class="colist">
+		                        	<div class="colup">
+		                                <div class="colbt">
+		                                    <img src="${tag_src }" >
+		                                    <div class="cattext1">${tag_value }</div>
+		                                </div>
+		                            	<div class="colhit">조회수 : ${board.hit }</div>
+	                                </div>
+	                                <div>
+		                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltitle">${board.title }</a>
+		                                <a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="coltext">${board.content }</a>	                                
+		                            </div>
+	                            </div>
+	                       	    <div class="coreply">
+		                            <div class="core1">
+		                                답변 : 
+		                            </div>
+		                            <div class="renickname">${board.name }</div>
+		                            <div class="retime">조회수 : ${regist_day }</div>
+		                        </div>
+	                        </div>
+                        	<c:if test="${board.filename != null }">
+		                        <div class="colbox">
+		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=<%=pageNum %>" class="imgbox">
+										<img class="listimg" src="./resources/img/${board.filename }">
+									</a>
+	                        	</div>	
+                        	</c:if>                     
+                        </div>                        
                         <hr class="listgard">
                     </div>
 					</c:forEach>

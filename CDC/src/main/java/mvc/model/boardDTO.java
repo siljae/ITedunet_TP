@@ -1,14 +1,22 @@
 package mvc.model;
 
 public class boardDTO {
+	private int num;
+
 	private String name;
 	private String title;
 	private String content;
 	private String regist_day;
 	private String filename;
 	private int hit;
-	private String animal_type;
+	private String animal_type;	
 
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getName() {
 		return name;
 	}

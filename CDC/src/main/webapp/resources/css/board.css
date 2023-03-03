@@ -1,12 +1,11 @@
-
-.com_name{    
-    margin-bottom: 10px;
-    padding-top:100px;
-    padding-bottom:10px;
-    background-color: #fec6ca;
-}
-.com_name h1{
-    text-align: center;
+*
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    color: black;
 }
 .container{
     width: 60%;
@@ -24,16 +23,6 @@
     z-index: 10;
     top: 0;
     
-}
-.bbubbu{
-	padding-top:150px;
-    background-color: #FFC7C2;
-    height: 50px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-
 }
 .midbox{
     width: 100%;
@@ -54,7 +43,22 @@
 
 }
 .com_name{
-	text-align:center;
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-top: 150px;
+    padding-bottom: 10px;
+    background-color: #fec6ca;
+}
+.com_name h1{
+    margin-right: 20px;
+}
+.com_name :nth-child(1) a{
+    border-bottom: 2px solid red;
+}
+.com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover, .com_name :nth-child(3) a:hover, .com_name :nth-child(4) a:hover{
+    border-bottom: 2px solid red;
 }
 .com_search{
     width: 80%;
@@ -66,8 +70,6 @@
     background-size: 25px;
     background-position: 10px;
     border: 1px solid gray;
-
-
 }
 .button {
     border : none;
@@ -275,11 +277,19 @@
 .content{
     padding: 9px 0;
 }
+.content_2{
+	display:flex;
+	justify-content:space-between;
+}
 .colist{
     padding-right: 27px;
 }
+.colup{
+    display: flex;
+}
 .colbt{
     padding: 0 15px;
+    margin-bottom:18px;
     display: inline-flex;
     align-items: center;
     height: 30px;
@@ -294,6 +304,16 @@
     width: 15px;
     margin-right: 5px;
 }
+.colhit{
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-bottom: 15px;
+    font-weight: 400;
+    color: #868688;
+    font-size: 13px;
+    line-height: 160%;
+}
 .coltitle{
     font-style: normal;
     font-weight: 700;
@@ -301,6 +321,7 @@
     margin-top: 18px;
     font-size: 16px;
     line-height: 19px;
+    
 }
 .coltitle:hover{
     cursor: pointer;
@@ -325,6 +346,23 @@
 }
 .coltext:hover{
     cursor: pointer;
+}
+.colbox{
+    min-width: 120px;
+    max-width: 120px;
+    height: 120px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgb(0 0 0 / 15%);
+}
+.colbox a{
+	width:100%;
+	
+}
+.colbox img{
+    width: 100%;
+    height:100%;
+    object-fit: cover;
 }
 .coreply{
     display: flex;

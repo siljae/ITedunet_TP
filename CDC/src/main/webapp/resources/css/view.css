@@ -1,17 +1,4 @@
-/* 초기화 */
-*
-{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
-    box-sizing: border-box;
-    color: black;
-}
-body
-{
-    background-color: #fffef1;
-}
+
 .container
 {
     width: 40%;
@@ -19,11 +6,11 @@ body
 }
 /* 상단 메뉴바 */
 .view_head
-{
-    margin-top: 100px;    
+{   
     margin-bottom: 10px;
+    padding-top:100px;
+    padding-bottom:10px;
     background-color: #fec6ca;
-    padding: 20px;
 }
 .view_head h1
 {
