@@ -58,7 +58,7 @@
     <title>회원가입</title>
 </head>
 <body>
-    <section>
+    <section>		
         <div class="container">
             <div class="header">
                 <h1>회원가입</h1>
@@ -134,6 +134,7 @@
                     </textarea>
                     <br>
                     <div class="sign_submit">
+                    	<a href="<c:url value="/login"/>">돌아가기</a>
                         <input type="submit" value="가입하기">
                     </div>
                 </div>

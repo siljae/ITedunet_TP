@@ -78,7 +78,7 @@
     <div class="container">
         <h2>이메일 중복 체크</h2>
         <form action="<c:url value="/chkemail"/>" method="post">
-            이메일  <input type="email" name="email" class="email" value="<%=request.getParameter("email") %>"  required>        
+            이메일  <input type="email" name="email" class="email" value="${email }"  required>        
             <input type="submit" value="중복확인" class="email_check">
             <br>
             <div>

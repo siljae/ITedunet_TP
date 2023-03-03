@@ -8,14 +8,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<c:url value="/resources/css/hospitalreview.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/hospitalreviews.css"/>">
 	<title>동물병원 후기 게시판</title>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-		<h1><a href="<c:url value="/hospital"/>">전체</a></h1>
-		<h1><a href="<c:url value="/hospital/review"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/hospital"/>">우리동네동물병원</a></h1>
+		<h1><a href="<c:url value="/hospital/reviews"/>">동물병원후기</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
@@ -50,8 +50,8 @@
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
+		                                <a href="./reviews/view?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
+		                                <a href="./reviews/view?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -64,7 +64,7 @@
 	                        </div>
                         	<c:if test="${board.filename != null }">
 		                        <div class="colbox">
-		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=" class="imgbox">
+		                        	<a href="./reviews/view?num=${board.num }&pageNum=" class="imgbox">
 										<img class="listimg" src="./resources/img/${board.filename }">
 									</a>
 	                        	</div>	
@@ -85,8 +85,8 @@
 		                            	<div class="colhit">조회수 : 0</div>
 	                                </div>
 	                                <div>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltitle">반려동물 침대에서 함께자나요?</a>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltext">안녕하세요. 3년차 강아지 키우고 있는 아빠입니다. 처음 데려올 땐 "사람과 동물이 어디 한 침대야~" 라며 절대불가를 외쳤지만 지금은 잘때 한 방에 없으면 서운하고 꼭  불러서 침대로 오게 만드는 라이프를 살고 있습니다. 워낙 첨엔 숙면을 잘 못취하기도 하고, 불편했는데 그냥 매번 올라오는 강아지를 떨쳐낼 수가 없어 고민을 해결하다 못해 이런 가구는 어떨까 하며 여기까지 생각이 오게 되었습니다 ^^ 그냥 거창한 설문 조사는 아니고, 주변 반려인들께서는 어떤 잠자리를 하고 계실까 다른 반려동물들은 어떻게 침대에서 생활할까 궁금하기도 하고 자료가 필요하기도 하여 서투른 질문지들을 작성하여 이렇게 요청을 드립니다. 가벼운 마음으로, 작성해주시면 정말 감사하겠습니다. 추첨 통해 스타벅스 기프티콘 드려요! </a>	                                
+		                                <a href="./reviews/view?num=${board.num }&pageNum=" class="coltitle">반려동물 침대에서 함께자나요?</a>
+		                                <a href="./reviews/view?num=${board.num }&pageNum=" class="coltext">안녕하세요. 3년차 강아지 키우고 있는 아빠입니다. 처음 데려올 땐 "사람과 동물이 어디 한 침대야~" 라며 절대불가를 외쳤지만 지금은 잘때 한 방에 없으면 서운하고 꼭  불러서 침대로 오게 만드는 라이프를 살고 있습니다. 워낙 첨엔 숙면을 잘 못취하기도 하고, 불편했는데 그냥 매번 올라오는 강아지를 떨쳐낼 수가 없어 고민을 해결하다 못해 이런 가구는 어떨까 하며 여기까지 생각이 오게 되었습니다 ^^ 그냥 거창한 설문 조사는 아니고, 주변 반려인들께서는 어떤 잠자리를 하고 계실까 다른 반려동물들은 어떻게 침대에서 생활할까 궁금하기도 하고 자료가 필요하기도 하여 서투른 질문지들을 작성하여 이렇게 요청을 드립니다. 가벼운 마음으로, 작성해주시면 정말 감사하겠습니다. 추첨 통해 스타벅스 기프티콘 드려요! </a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -99,7 +99,7 @@
 	                        </div>
                         	<%-- <c:if test="${board.filename != null }"> --%>
 		                        <div class="colbox">
-		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=" class="imgbox">
+		                        	<a href="./reviews/view?num=${board.num }&pageNum=" class="imgbox">
 										<img class="listimg" src="<c:url value="/resources/img/ggimu.jpg"/>">
 									</a>
 	                        	</div>	

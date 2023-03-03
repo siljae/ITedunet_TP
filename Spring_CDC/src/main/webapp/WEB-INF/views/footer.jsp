@@ -25,7 +25,7 @@
     <!-- 하단 -->
     <footer>
 	    <div class="footer_box">
-	        <a href="./index.jsp"><img src="<c:url value="/resources/img/logo3.png"/>"></a>
+	        <a href="<c:url value="/home"/>"><img src="<c:url value="/resources/img/logo3.png"/>"></a>
 	        <a href="#">이용약관</a>
 	        <a href="#">개인정보활용</a>                
 	    </div>

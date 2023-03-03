@@ -11,8 +11,8 @@
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-		<h1><a href="<c:url value="/hospital"/>">전체</a></h1>
-		<h1><a href="<c:url value="/hospital/review"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/hospital"/>">우리동네동물병원</a></h1>
+		<h1><a href="<c:url value="/hospital/reviews"/>">동물병원후기</a></h1>
     </div>
     <div class="container">
         <div style="margin-top: 20px;">

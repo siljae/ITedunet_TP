@@ -13,8 +13,13 @@ public class hospitalcontroller {
 		return "hospitalmap";
 	}
 	
-	@GetMapping("/review")
-	public String hospitalreview() {
-		return "hospitalreview";
+	@GetMapping("/reviews")
+	public String hospitalreviews() {
+		return "hospitalreviews";
+	}
+	
+	@GetMapping("/reviews/view")
+	public String hospitalview() {
+		return "hospitalview";
 	}
 }

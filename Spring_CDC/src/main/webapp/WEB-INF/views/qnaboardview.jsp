@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/qnaboardview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script>
         function chat_show(){
@@ -26,7 +26,7 @@
         }
     </script>
     
-<title>커뮤니티 게시판의 게시글</title>
+<title>묻고답하기 게시글</title>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>

@@ -57,7 +57,7 @@
 .com_name :nth-child(2) a{
     border-bottom: 2px solid red;
 }
-.com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover, .com_name :nth-child(3) a:hover, .com_name :nth-child(4) a:hover{
+.com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover{
     border-bottom: 2px solid red;
 }
 .com_search{

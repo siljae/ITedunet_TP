@@ -18,13 +18,28 @@ public class boardcontroller {
 		return "commuboard";
 	}
 	
+	@GetMapping("/commu/view")
+	public String commuview() {
+		return "commuboardview";
+	}
+	
 	@GetMapping("/qna") //묻고답하기 게시판
 	public String qnaboard() {
 		return "qnaboard";
 	}
 	
+	@GetMapping("/qna/view")
+	public String qnaview() {
+		return "qnaboardview";
+	}
+	
 	@GetMapping("/recom") //추천해요 게시판
 	public String recomboard() {
 		return "recomboard";
+	}
+	
+	@GetMapping("/recom/view")
+	public String reconview() {
+		return "recomboardview";
 	}
 }

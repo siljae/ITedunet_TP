@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/hospitalview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script>
         function chat_show(){
@@ -31,10 +31,8 @@
 <body>
 	<jsp:include page="./header.jsp"/>
         <div class="view_head">
-			<h1><a href="<c:url value="/board"/>">전체</a></h1>
-			<h1><a href="<c:url value="/board/commu"/>">우리아이자랑</a></h1>
-			<h1><a href="<c:url value="/board/qna"/>">묻고답하기</a></h1>
-			<h1><a href="<c:url value="/board/recom"/>">추천해용</a></h1>
+			<h1><a href="<c:url value="/hospital"/>">우리동네동물병원</a></h1>
+			<h1><a href="<c:url value="/hospital/reviews"/>">동물병원후기</a></h1>
         </div>
         <div class="container">
             <div class="view_tag">

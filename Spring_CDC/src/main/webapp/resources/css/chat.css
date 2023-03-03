@@ -125,7 +125,7 @@ form
     border: none;
     background-color: transparent;
     color: transparent;
-    background-image: url('./img/chat/send.png');
+    background-image: url('../img/chat/send.png');
     background-repeat: no-repeat;
     background-size: 60px;
     background-position: center center;

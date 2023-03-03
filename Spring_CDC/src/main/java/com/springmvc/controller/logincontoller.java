@@ -27,6 +27,11 @@ public class logincontoller {
 		return "login";
 	}
 	
+	@GetMapping("/pwsearch")
+	public String pwsearch() {
+		return "pw_search";
+	}
+	
 	@GetMapping("/signup")
 	public String signupForm(@ModelAttribute("member")memberDTO member) {
 		return "signup";
@@ -49,6 +54,7 @@ public class logincontoller {
 	
 	@GetMapping("/chkemail") //이메일 중복체크 //배리에이블 써야됨
 	public String chkemail(HttpServletRequest req, Model model) {
+		System.out.println("req"+req.getParameter("email"));
 		model.addAttribute("email",req.getParameter("email"));
 		return "check_email";
 	}
@@ -69,9 +75,34 @@ public class logincontoller {
 		return "check_name";
 	}
 	
-	@GetMapping("/mypage")
+	@GetMapping("/mypage") //마이페이지 이동
 	public String mypage() {
 		return "mypage";
+	}
+	
+	@GetMapping("/mypage/cart") //마이페이지의 장바구니 이동
+	public String cart() {
+		return "mypagecart";
+	}
+	
+	@GetMapping("/mypage/chat") //마이페이지의 채팅 이동
+	public String chat() {
+		return "mypagechat";
+	}
+	
+	@GetMapping("/chat") //1:1 채팅 팝업창 띄우기
+	public String chatpop() {
+		return "chat";
+	}
+	
+	@GetMapping("/mypage/order") //마이페이지의 주문목록 이동
+	public String order() {
+		return "mypageorder";
+	}
+	
+	@GetMapping("/mypage/barrier") //마이페이지의 개인정보수정
+	public String veri() {
+		return "mypagebarrier";
 	}
 	
 }

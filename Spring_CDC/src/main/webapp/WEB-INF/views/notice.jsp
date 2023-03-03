@@ -43,8 +43,8 @@
                     		<div>
 		                        <div class="colist">
 	                                <div>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
+		                                <a href="./view?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
+		                                <a href="./view?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -54,7 +54,7 @@
 	                        </div>
                         	<c:if test="${board.filename != null }">
 		                        <div class="colbox">
-		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=" class="imgbox">
+		                        	<a href="./view?num=${board.num }&pageNum=" class="imgbox">
 										<img class="listimg" src="<c:url value="/resources/img/${board.filename }"/>">
 									</a>
 	                        	</div>	
@@ -63,21 +63,22 @@
                         <hr class="listgard">
                     </div>
 					</c:forEach>
-					<div class="content">
-                        <div class="colist">
-                            <div>
-                                <div class="listbox">
-                                    <div class="cotextbox">
-                                        <div class="coltitle">SHOP 설날 배송 택배사 공지</div>
-                                        <div class="coltext">메리 크리스마스!</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="coreply">
-                            <div class="renickname">관리자</div>
-                            <div class="retime">30일 전</div>
-                        </div>
+                    <div class="content">
+                    	<div class="content_2">
+                    		<div>
+		                        <div class="colist">
+	                                <div>
+		                                <a href="./notice/view?num=${board.num }&pageNum=" class="coltitle">SHOP 설날 배송 택배사 공지${board.title }</a>
+		                                <a href="./notice/view?num=${board.num }&pageNum=" class="coltext">해피 뉴 이어 !${board.content }</a>	                                
+		                            </div>
+	                            </div>
+	                       	    <div class="coreply">
+		                            <div class="renickname">${board.name }관리자</div>
+		                            <div class="retime">30일전 ${regist_day }</div>
+		                        </div>
+	                        </div>  
+                        </div>                        
+                        <hr class="listgard">
                     </div>
                 </div>
             </div>

@@ -153,6 +153,16 @@ body
     margin-bottom: 100px;
     
 }
+.sign_submit a
+{
+    border: 1px solid #e4e4e6;
+    padding: 5px 20px;
+    background-color: #fec6ca;
+    cursor: pointer;
+    font-size:14px;
+    margin-right:5px;
+}
+
 .sign_submit input
 {
     border: 1px solid #e4e4e6;

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/recomboardview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script>
         function chat_show(){

@@ -142,7 +142,7 @@ nav {
 					if (username == null) {
 					%>
 					<div class="loginbox">
-						<a href="./login">로그인</a>
+						<a href="<c:url value="/login"/>">로그인</a>
 					</div>
 					<%
 					} else if (username != null) {
