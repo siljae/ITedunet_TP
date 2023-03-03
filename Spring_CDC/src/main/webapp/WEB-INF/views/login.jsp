@@ -21,7 +21,7 @@
 	System.out.println("msg: "+msg);
 	if(msg == null){}
 	else if(msg.equals("1")){
-		System.out.println("여기로 오나");
+		System.out.println("회원가입성공!");
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('회원가입을 축하드립니다! 로그인해주세요!')");

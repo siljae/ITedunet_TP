@@ -24,7 +24,6 @@ public class logincontoller {
 	
 	@RequestMapping
 	public String login(){
-		System.out.println("여기로왔나?");
 		return "login";
 	}
 	
@@ -40,7 +39,7 @@ public class logincontoller {
 	}
 	
 	@PostMapping("/chklogin")
-	public String submitlogin(HttpServletRequest req,Model model,HttpSession session){
+	public String submitlogin(HttpServletRequest req, Model model, HttpSession session){
 		System.out.println("여기로 들어왔나");
 		String[] result = mr.login(req.getParameter("email"),req.getParameter("pw"));
 		
@@ -49,7 +48,8 @@ public class logincontoller {
 	}
 	
 	@GetMapping("/chkemail") //이메일 중복체크 //배리에이블 써야됨
-	public String chkemail(HttpServletRequest req) {
+	public String chkemail(HttpServletRequest req, Model model) {
+		model.addAttribute("email",req.getParameter("email"));
 		return "check_email";
 	}
 	
@@ -59,7 +59,8 @@ public class logincontoller {
 	}
 	
 	@GetMapping("/chkname") //닉네임 중복체크 //배리에이블 써야됨
-	public String chkname(HttpServletRequest req) {
+	public String chkname(HttpServletRequest req, Model model) {
+		model.addAttribute("name",req.getParameter("name"));
 		return "check_name";
 	}
 	
