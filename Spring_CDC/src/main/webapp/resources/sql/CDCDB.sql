@@ -51,15 +51,28 @@ create table commuboard
     cb_content text not null,
     cb_regist_day varchar(30) not null,
     cb_filename varchar(100),
-    cb_hit int not null,
-    cb_reply int,
+    cb_hit int not null default 0,
+    cb_reply int default 0,
     primary key(cb_num),
-    foreign key(m_name) references member(m_name)
+    foreign key(m_name) references member(m_name) on delete cascade
 )default charset=utf8;
 drop table commuboard;
 select*from commuboard;
 insert into commuboard(m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
 alter table commuboard add cb_tag varchar(10) not null;
+
+create table recom
+(
+	recom_num int auto_increment,
+    m_name varchar(6) not null,
+    cb_num int not null,
+    recom_chk int default 0,
+    primary key(recom_num),
+    foreign key(m_name) references member(m_name) on delete cascade,
+    foreign key(cb_num) references commuboard(cb_num) on delete cascade
+)default charset=utf8;
+select*from recom;
+drop table recom;
 create table reply
 (
    r_num int not null auto_increment,
