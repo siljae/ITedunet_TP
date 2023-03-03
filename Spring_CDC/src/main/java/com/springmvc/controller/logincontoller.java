@@ -22,35 +22,40 @@ public class logincontoller {
 	@Autowired
 	private MemberService mr;
 	
-	@RequestMapping
+	@RequestMapping //로그인 메인페이지
 	public String login(){
 		return "login";
 	}
 	
-	@GetMapping("/pwsearch")
+	@GetMapping("/pwsearch") //비밀번호 찾기
 	public String pwsearch() {
 		return "pw_search";
 	}
 	
-	@GetMapping("/signup")
+	@PostMapping("/chklogin") //로그인 기능
+	public String submitlogin(HttpServletRequest req, Model model, HttpSession session){
+		System.out.println("로그인기능을 실행합니다");
+		String[] result = mr.login(req.getParameter("email"),req.getParameter("pw"));		
+		mr.chklogin(result, session);
+		return "index";
+	}
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		mr.logout(session);
+		return "index";
+	}
+	
+	@GetMapping("/signup") //회원가입 페이지
 	public String signupForm(@ModelAttribute("member")memberDTO member) {
 		return "signup";
 	}
 	
-	@PostMapping("/signup")
+	@PostMapping("/signup") //회원가입 기능
 	public String submitsignup(@ModelAttribute("member") memberDTO member) throws Exception {
 		mr.join(member);
 		return "signup";
-	}
-	
-	@PostMapping("/chklogin")
-	public String submitlogin(HttpServletRequest req, Model model, HttpSession session){
-		System.out.println("여기로 들어왔나");
-		String[] result = mr.login(req.getParameter("email"),req.getParameter("pw"));
-		
-		model.addAttribute("result",result);
-		return "index";
-	}
+	}	
+
 	
 	@GetMapping("/chkemail") //이메일 중복체크 //배리에이블 써야됨
 	public String chkemail(HttpServletRequest req, Model model) {
@@ -75,34 +80,6 @@ public class logincontoller {
 		return "check_name";
 	}
 	
-	@GetMapping("/mypage") //마이페이지 이동
-	public String mypage() {
-		return "mypage";
-	}
 	
-	@GetMapping("/mypage/cart") //마이페이지의 장바구니 이동
-	public String cart() {
-		return "mypagecart";
-	}
-	
-	@GetMapping("/mypage/chat") //마이페이지의 채팅 이동
-	public String chat() {
-		return "mypagechat";
-	}
-	
-	@GetMapping("/chat") //1:1 채팅 팝업창 띄우기
-	public String chatpop() {
-		return "chat";
-	}
-	
-	@GetMapping("/mypage/order") //마이페이지의 주문목록 이동
-	public String order() {
-		return "mypageorder";
-	}
-	
-	@GetMapping("/mypage/barrier") //마이페이지의 개인정보수정
-	public String veri() {
-		return "mypagebarrier";
-	}
 	
 }

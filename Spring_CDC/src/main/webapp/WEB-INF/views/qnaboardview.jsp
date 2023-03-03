@@ -57,7 +57,7 @@
                         <button onclick="chat_show()">
                             ${board.name }사용자                        
                             <div id="chat" class="chat">
-                                <a onclick="window.open('<c:url value="/login/chat" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                                <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                             </div>
                         </button>
                         <p class="postbox_date">${board.regist_day }</p>
@@ -82,7 +82,7 @@
                             <div class="re_user_id">
                                 <div>찌무맘</div>
                                 <div class="rechat">
-                                    <a onclick="window.open('<c:url value="/login/chat" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                                    <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                                 </div>
                             </div>
                             <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
@@ -97,7 +97,7 @@
                             <div class="re_user_id">
                                 <div>찌무맘</div>
                                 <div class="rechat">
-                                    <a onclick="window.open('<c:url value="/login/chat" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                                    <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                                 </div>
                             </div>
                             <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>

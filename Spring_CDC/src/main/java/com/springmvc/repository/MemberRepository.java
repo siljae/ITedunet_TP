@@ -1,5 +1,10 @@
 package com.springmvc.repository;
 
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.ui.Model;
+
 import com.springmvc.domain.memberDTO;
 
 public interface MemberRepository {
@@ -7,5 +12,6 @@ public interface MemberRepository {
 	public void join(memberDTO dto);
 	//로그인기능
 	public String[] login(String email, String pw);
-	public String chklogin(String[] result);
+	public void chklogin(String[] result,HttpSession session);
+	public void logout(HttpSession session);
 }

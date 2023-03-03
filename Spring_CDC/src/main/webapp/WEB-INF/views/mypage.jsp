@@ -19,10 +19,10 @@
             <div class="mypagebox">
                 <ul class="my_left">
                     <li class="my_left_li1">
-                        <h2><a href="<c:url value="/login/mypage"/>">MyPage</a></h2>
+                        <h2><a href="<c:url value="/mypage"/>">MyPage</a></h2>
                     </li>
                     <li class="my_left_li2">
-                        <a href="<c:url value="/login/mypage/barrier"/>">
+                        <a href="<c:url value="/mypage/barrier"/>">
                             <label for="msb1">
                                 <span>개인정보수정</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -30,7 +30,7 @@
                         </a>
                     </li>
                     <li class="my_left_li3">
-                        <a href="<c:url value="/login/mypage/order"/>">
+                        <a href="<c:url value="/mypage/order"/>">
                             <label for="msb2">
                                 <span>주문목록</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -38,7 +38,7 @@
                         </a>
                     </li>
                     <li class="my_left_li4">
-                        <a href="<c:url value="/login/mypage/cart"/>">
+                        <a href="<c:url value="/mypage/cart"/>">
                             <label for="msb3">
                                 <span>장바구니</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -46,7 +46,7 @@
                         </a>
                     </li>
                     <li class="my_left_li5">                            
-                        <a href="<c:url value="/login/mypage/chat"/>">
+                        <a href="<c:url value="/mypage/chat"/>">
                             <label for="msb4">
                                 <span>1:1 채팅창</span>
                                 <i class="fas fa-chevron-right"></i>
