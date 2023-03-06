@@ -141,40 +141,7 @@ public class productDAO {
 		}
 		//member 테이블에서 인증된 id의 사용자명 가져오기
 	
-	public String getLoginNameByNum(int num) {//인수에 name 받아옴. name은 세션에 저장되어있음
-		Connection conn = null;
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		
-		String name=null;
-		String sql = "select * from member where num = ?";
-			
-		try {
-			conn = DBConnection.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, num); //name 입력
-			rs = pstmt.executeQuery();
-				
-			if(rs.next())
-				name = rs.getString("name"); //쿼리로 닉네임출력
-				
-			return name;
-		} catch (Exception ex) {
-			System.out.println("getProductByNum() 에러 : " +ex);
-		} finally {
-			try {
-				if (rs != null)
-					rs.close();
-				if (pstmt != null)
-					pstmt.close();
-				if (conn != null)
-					conn.close();
-			} catch (Exception ex) {
-				throw new RuntimeException(ex.getMessage());
-			}
-		}
-		return null;
-	}
+	
 	public void insertProductAdd(productDTO product) { //add폼에서 쓰는 dao. product는 dto로 폼에서 먼저 파라미터 값 가져옴
 	//새로운 상품 등록하기
 		

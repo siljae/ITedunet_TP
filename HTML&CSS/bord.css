@@ -70,7 +70,7 @@
     width: 100%;
     
     
-
+/*검색창 시작*/
 }
 .seabox{
     padding: 16px 0 16px;
@@ -107,6 +107,7 @@
     right: 130px;
     cursor: pointer;
 }
+/*검색창 끝*/
 .textbox{
     padding: 10px;
     display: flex;
@@ -174,8 +175,15 @@
 }
 
 .listtext{
+<<<<<<< Updated upstream
     margin: 15px 0;
     height: 48px;
+=======
+    /* margin: 15px 0;
+    height: 48px; */
+    margin: 10px 0;
+    height: 38px;
+>>>>>>> Stashed changes
     text-overflow: ellipsis;
     word-break: break-word;
     font-weight: 400;

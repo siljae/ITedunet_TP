@@ -10,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import shopmodel.productDTO;
 import shopmodel.productDAO;
@@ -42,7 +44,7 @@ public class controller extends HttpServlet {
 			rd.forward(request, response);
 			// forward = 특정 다원으로 제어를 넘김
 		}else if (command.equals("/prouductadd.go")) { // 상품등록 페이지 출력하기
-			requestLoginName(request);
+			System.out.println("dfdfdfdddd");
 			RequestDispatcher rd = request.getRequestDispatcher("./productadd.jsp");
 			rd.forward(request, response);				
 		} else if (command.equals("/productaddaction.go")) {// 새로운 상품 등록하기
@@ -106,18 +108,7 @@ public class controller extends HttpServlet {
 		request.setAttribute("productlist", productlist); // 게시글 제목들
 
 	}
-	// 인증된 사용자명 가져오기
-	public void requestLoginName(HttpServletRequest request) {
-		
-		int num = Integer.parseInt(request.getParameter("num")); // num 파라미터는 list 창에서 유효성 검사로 걸러줌. 반드시 보통 가지고 있음
-		
-		productDAO dao = productDAO.getInstance(); //num가 있으므로 dao를 인스턴스
-		
-		String name = dao.getLoginNameByNum(num); // num 찾아서 name을 받기위해서 실행
-		
-		request.setAttribute("name", name); // name 파라미터에 id에서 추출한 name을 할당
-	}
-	
+
 	
 	public void requestProductAdd(HttpServletRequest request) { //productadd 에서 요청받아옴
 		System.out.println("글추가 폼 간다잇");
@@ -126,6 +117,7 @@ public class controller extends HttpServlet {
 		
 		productDTO product = new productDTO(); //dto 만듬. 상품 데이터를 담아 옮길것
 		
+		System.out.println(request.getParameter("num"));
 		
 		product.setNum(Integer.parseInt(request.getParameter("num")));
 		System.out.println(request.getParameter("num"));
