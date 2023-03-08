@@ -37,16 +37,16 @@
                 <div class="listtitle">
                     <ul class="list">
                         <li class="catelist">
-                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">사료</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate" href="<c:url value="/shopmain/dogfood"/>"><span class="text">사료</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text2">간식</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate" href="<c:url value="/shopmain/dogsnack"/>"><span class="text2">간식</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text3">용품</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate"href="<c:url value="/shopmain/dogsup"/>"><span class="text3">용품</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text4">장난감</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate"href="<c:url value="/shopmain/dogtoy"/>"><span class="text4">장난감</span></a>
                         </li>
                     </ul>
                 </div>
@@ -56,16 +56,16 @@
                 <div class="listtitle">
                     <ul class="list">
                         <li class="catelist">
-                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">사료</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate" href="<c:url value="/shopmain/catfood"/>"><span class="text">사료</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">간식</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate" href="<c:url value="/shopmain/catsnack"/>"><span class="text">간식</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">용품</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate"href="<c:url value="/shopmain/catsup"/>"><span class="text">용품</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">장난감</span><img src="./img/foot-removebg-preview.png" alt=""></a>
+                            <a class="cate"href="<c:url value="/shopmain/cattoy"/>"><span class="text">장난감</span></a>
                         </li>
                     </ul>
                 </div>
@@ -75,10 +75,10 @@
                             <span class="listname">My Page</span>
                         </div>
                         <li class="catelist">
-                            <a class="cate" href=""><span class="text">장바구니</span></a>
+                            <a class="cate" href="<c:url value="/mypage/cart"/>"><span class="text">장바구니</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href=""><span class="text">주문목록</span></a>
+                            <a class="cate" href="<c:url value="/mypage/order"/>"><span class="text">주문목록</span></a>
                         </li>
                     </ul>
                 </div>
@@ -88,7 +88,7 @@
                             <span class="listname">고객센터</span>
                         </div>
                         <li class="catelist">
-                            <a class="cate" href=""><span class="text">QnA</span></a>
+                            <a class="cate" href="<c:url value="/board/qna"/>"><span class="text">QnA</span></a>
                         </li>
                         
                     </ul>

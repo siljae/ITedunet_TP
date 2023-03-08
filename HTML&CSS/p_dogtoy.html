@@ -1,33 +1,48 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.springmvc.domain.productDTO"%>
-
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<link rel = "stylesheet" href="<c:url value = "/resources/css/productlist.css" />">
-    <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
-
-<title>Insert title here</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/HTML&CSS/shopmain.css">
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
-	<div class="container1">
+    <header>
+        <div class="container">
+            <nav class="mainnav">
+                <div class="nav_logo">
+                    <a href="#"><img src="/HTML&CSS/img/logo1.png" alt="Logo"></a>
+                </div>
+                <ul class="nav_ul">
+                    <li class="nav_commu">
+                        <a href="#">커뮤니티</a>
+                    </li>
+                    <li class="nav_notice">
+                        <a href="#">캣독마당</a>
+                    </li>
+                    <li class="nav_hospital">
+                        <a href="#">우리동네</a>
+                    </li>
+                    <li class="nav_shop">
+                        <a href="#">SHOP</a>
+                    </li>
+                </ul>
+                <div class="nav_login">
+                    <a href="#">로그인</a>
+                </div>
+            </nav>
+        </div>    
+    </header>
+    <div class="container">
         <div class="bbubbu">
-            <div class="cos_nav">
+            <nav class="cos_nav">
                 <ul>
                     <li class = "com_name">
                         SHOP
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
     </div>
     <div class="lounge">
@@ -43,16 +58,16 @@
                 <div class="listtitle">
                     <ul class="list">
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/shopmain/dogfood"/>"><span class="text">사료</span></a>
+                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">사료</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/shopmain/dogsnack"/>"><span class="text2">간식</span></a>
+                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text2">간식</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href="<c:url value="/shopmain/dogsup"/>"><span class="text3">용품</span></a>
+                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text3">용품</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href="<c:url value="/shopmain/dogtoy"/>"><span class="text4">장난감</span></a>
+                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text4">장난감</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                     </ul>
                 </div>
@@ -62,16 +77,16 @@
                 <div class="listtitle">
                     <ul class="list">
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/shopmain/catfood"/>"><span class="text">사료</span></a>
+                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">사료</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/shopmain/catsnack"/>"><span class="text">간식</span></a>
+                            <a class="cate" href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">간식</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href="<c:url value="/shopmain/catsup"/>"><span class="text">용품</span></a>
+                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">용품</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate"href="<c:url value="/shopmain/cattoy"/>"><span class="text">장난감</span></a>
+                            <a class="cate"href=""><img src="./img/foot-removebg-preview.png" alt=""><span class="text">장난감</span><img src="./img/foot-removebg-preview.png" alt=""></a>
                         </li>
                     </ul>
                 </div>
@@ -81,10 +96,10 @@
                             <span class="listname">My Page</span>
                         </div>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/mypage/cart"/>"><span class="text">장바구니</span></a>
+                            <a class="cate" href=""><span class="text">장바구니</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/mypage/order"/>"><span class="text">주문목록</span></a>
+                            <a class="cate" href=""><span class="text">주문목록</span></a>
                         </li>
                     </ul>
                 </div>
@@ -94,7 +109,7 @@
                             <span class="listname">고객센터</span>
                         </div>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/board/qna"/>"><span class="text">QnA</span></a>
+                            <a class="cate" href=""><span class="text">QnA</span></a>
                         </li>
                         
                     </ul>
@@ -127,25 +142,10 @@
                 </div>
                 <ul class="alllistbox">
                     <li class="listbox">
-                    	<c:forEach items="${productlist}" var=""></c:forEach>
-                        <a class="prodetail"href="./productview."></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="productpage.jsp">
-                                <div class="proimg"><img src="<c:url value = "/resources/img/${product.filename}" />"alt=""></div>
-                                <div class="procompany">${product.manufacturer}</div>
-                                <div class="proname">${product.name }</div>
-                                <hr class="prohr">
-                                <div class="proprice">${product.unitprice}</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -159,7 +159,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -173,7 +173,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -187,7 +187,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -201,7 +201,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -215,7 +215,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -229,7 +229,21 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="procompany">오리젠</div>
+                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
+                                <hr class="prohr">
+                                <div class="proprice">₩38,000</div>
+                                <input type="hidden" class="donnkow" value="">
+                            </a>
+                            <div class="cartbt"><a href="">장바구니</a></div>
+                        </div>
+                    </li>
+                    <li class="listbox">
+                        <a class="prodetail"href=""></a>
+                        <div class="productbox">
+                            <a class="prodetail2" href="">
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">

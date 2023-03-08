@@ -27,5 +27,43 @@ public class productcontroller {
 	public String productadd() {
 		return "productadd";
 	}
+	@GetMapping("/dogfood")
+	public String p_dogfood() {
+		return "p_dogfood";
+	}
 	
+	@GetMapping("/dogsnack")
+	public String p_dogsnack() {
+		return "p_dogsnack";
+	}
+	
+	@GetMapping("/dogsup")
+	public String p_dogsup() {
+		return "p_dogsup";
+	}
+	
+	@GetMapping("/dogtoy")
+	public String p_dogtoy() {
+		return "p_dogtoy";
+	}
+	
+	@GetMapping("/catfood")
+	public String p_catfood() {
+		return "p_catfood";
+	}
+	
+	@GetMapping("/catsnack")
+	public String p_catsnack() {
+		return "p_catsnack";
+	}
+	
+	@GetMapping("/catsup")
+	public String p_catsup() {
+		return "p_catsup";
+	}
+	
+	@GetMapping("/cattoy")
+	public String p_cattoy() {
+		return "p_cattoy";
+	}
 }

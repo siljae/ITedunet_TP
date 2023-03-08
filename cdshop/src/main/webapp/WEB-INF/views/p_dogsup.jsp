@@ -1,33 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="java.util.*"%>
+<%@page import="com.springmvc.domain.productDTO"%>
+<%@page import="com.springmvc.repository.productRepository"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ page import="java.util.*"%>
-<%@ page import="com.springmvc.domain.productDTO"%>
-
-
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<link rel = "stylesheet" href="<c:url value = "/resources/css/productlist.css" />">
-    <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
-
+<meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel = "stylesheet" href="<c:url value = "/resources/css/dogsup.css" />">
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
-	<div class="container1">
+    <jsp:include page="header.jsp"/>
+    <div class="container1">
         <div class="bbubbu">
-            <div class="cos_nav">
+            <nav class="cos_nav">
                 <ul>
                     <li class = "com_name">
                         SHOP
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
     </div>
     <div class="lounge">
@@ -127,25 +121,10 @@
                 </div>
                 <ul class="alllistbox">
                     <li class="listbox">
-                    	<c:forEach items="${productlist}" var=""></c:forEach>
-                        <a class="prodetail"href="./productview."></a>
+                        <a class="prodetail"href="#"></a>
                         <div class="productbox">
-                            <a class="prodetail2" href="productpage.jsp">
-                                <div class="proimg"><img src="<c:url value = "/resources/img/${product.filename}" />"alt=""></div>
-                                <div class="procompany">${product.manufacturer}</div>
-                                <div class="proname">${product.name }</div>
-                                <hr class="prohr">
-                                <div class="proprice">${product.unitprice}</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="" alt=""></div>
+                            <a class="prodetail2" href="<c:url value="/shopmain/productview"/>">
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -159,7 +138,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -173,7 +152,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -187,7 +166,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -201,7 +180,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -215,7 +194,7 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
@@ -229,7 +208,21 @@
                         <a class="prodetail"href=""></a>
                         <div class="productbox">
                             <a class="prodetail2" href="">
-                                <div class="proimg"><img src="./resources/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
+                                <div class="procompany">오리젠</div>
+                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
+                                <hr class="prohr">
+                                <div class="proprice">₩38,000</div>
+                                <input type="hidden" class="donnkow" value="">
+                            </a>
+                            <div class="cartbt"><a href="">장바구니</a></div>
+                        </div>
+                    </li>
+                    <li class="listbox">
+                        <a class="prodetail"href=""></a>
+                        <div class="productbox">
+                            <a class="prodetail2" href="">
+                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
                                 <div class="procompany">오리젠</div>
                                 <div class="proname">오리젠 캣앤키튼 1.8kg</div>
                                 <hr class="prohr">
