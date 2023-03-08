@@ -153,9 +153,11 @@
                         <label for="views">조회순</label>
                     </div>
                 </div>
-                <div class="writebox">
-                    <a href="./commuwrite.action" class="write">글쓰기</a>
-                </div>
+                <c:if test="${name != null }">
+	                <div class="writebox">                	
+	                   	<a href="<c:url value="/board/boardwrite"/>" class="write">글쓰기</a>                    
+	                </div>
+                </c:if>
             </div>
             <div class="loungelist">
                 <div class="conlist">

@@ -46,15 +46,15 @@ create table commuboard
 (
    cb_num int not null auto_increment,
     m_name varchar(6) not null,
+    cb_board_type varchar(6) not null,
     cb_animal_type varchar(10) not null,
     cb_title varchar(100) not null,
     cb_content text not null,
     cb_regist_day varchar(30) not null,
     cb_filename varchar(100),
     cb_hit int not null default 0,
-    cb_reply int default 0,
     primary key(cb_num),
-    foreign key(m_name) references member(m_name) on delete cascade
+    foreign key(m_name) references member(m_name)
 )default charset=utf8;
 drop table commuboard;
 select*from commuboard;
