@@ -3,6 +3,7 @@ package com.springmvc.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class boardDTO {
+	
 	private int num;
 	private String name;
 	private String board_type;
@@ -13,6 +14,8 @@ public class boardDTO {
 	private int hit;
 	private MultipartFile fileimage;
 	private String filename;
+	private String tag_src;
+	private String tag_value;
 
 	public int getNum() {
 		return num;
@@ -74,6 +77,20 @@ public class boardDTO {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	
+	
+	public String getTag_src() {
+		return tag_src;
+	}
+	public void setTag_src(String tag_src) {
+		this.tag_src = tag_src;
+	}
+	public String getTag_value() {
+		return tag_value;
+	}
+	public void setTag_value(String tag_value) {
+		this.tag_value = tag_value;
 	}
 	@Override
 	public String toString() {

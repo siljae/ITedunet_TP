@@ -25,18 +25,38 @@ public class boardcontroller {
 	BoardService br;
 
 	@RequestMapping //전체 게시판
-	public String board() { 
+	public String board(Model model,HttpServletRequest req) {
+		br.boardlist(model,req);
 		return "board";
 	}
 	
 	@GetMapping("/commu") //커뮤니티 게시판 
-	public String commuboard() {
+	public String commuboard(Model model,HttpServletRequest req) {
+		br.boardlist(model,req);
 		return "commuboard";
 	}
 	
-	@GetMapping("/commu/view")
-	public String commuview() {
+	@GetMapping("/commu/view/{num}/{pageNum}")
+	public String commuview(@PathVariable String num,@PathVariable String pageNum,Model model) {
+		model.addAttribute("num",num);
+		model.addAttribute("pageNum",pageNum);
+		br.requestboardview(model);
 		return "commuboardview";
+	}
+	
+	@GetMapping("/commu/view/{num}/updateboard/{pageNum}")
+	public String updateboardview(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
+		model.addAttribute("num",num);
+		model.addAttribute("pageNum",pageNum);		
+		return "updateboard";
+	}
+	
+	@PostMapping("/updateboard/{num}/{pageNum}")
+	public String updateboard(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
+		model.addAttribute("num",num);
+		model.addAttribute("pageNum",pageNum);
+		br.updateboard(board, req);
+		return "board";
 	}
 	
 	@GetMapping("/qna") //묻고답하기 게시판
@@ -71,12 +91,6 @@ public class boardcontroller {
 		br.writeboard(board,req);
 		
 		return "board";
-	}
-	
-	@PostMapping("/boardwrite/{boardtype}")
-	public String writeboardtype(@PathVariable("boardtype") String boardtype) {
-		
-		return boardtype;		
 	}
 	
 	@GetMapping("/pagenum")

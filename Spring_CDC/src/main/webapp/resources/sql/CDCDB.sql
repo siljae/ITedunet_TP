@@ -58,7 +58,7 @@ create table commuboard
 )default charset=utf8;
 drop table commuboard;
 select*from commuboard;
-insert into commuboard(m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
+insert into commuboard(m_name,cb_board_type,cb_animal_type, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','우리아이자랑','고양이','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
 alter table commuboard add cb_tag varchar(10) not null;
 
 create table recom

@@ -28,16 +28,21 @@
 /* 뷰 페이지 시작 */
 .view_tag
 {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 80px;    
-    background-color: #ffe8a3;
-    border-radius: 10px;
-    font-size: 12px;
-    padding: 5px 20px;
-    margin-top: 40px;
-    margin-bottom: 20px;    
+   height: 30px;
+    display: inline-flex;
+    align-items: center;    
+    background: #fde791;
+    border-radius: 22px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 14px;
+    padding: 0 15px;
+    margin-top:40px;
+    margin-bottom: 18px;
+}
+.view_tag img{
+    width: 15px;
 }
 
 /* 제목 */

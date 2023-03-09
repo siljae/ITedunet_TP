@@ -19,7 +19,7 @@
         }
         
         function write_update(){
-        	location.href='commuboardupdate.action?page=${pageNum}';
+        	location.href='./updateboard/${pageNum}';
         }
         function write_dalete(){
         	location.href='commuboarddelete.action?page=${pageNum}';
@@ -38,13 +38,13 @@
         </div>
         <div class="container">
             <div class="view_tag">
-            	<img src="${tag_src }">
-                <div>${tag_value }고양이</div>
+            	<img src="<c:url value="/resources/img/board/${tag_src }"/>">
+                <div>${tag_value }</div>
             </div>
             <div>
                 <div class="write_head">
                     <h2>${board.title }제목</h2>
-                    <c:if test="${board.name == username }">                                       
+                    <c:if test="${board.name == name }">                                       
                     <div>
                         <button class="btn" onclick="write_update()">수정</button>
                         <button class="btn" onclick="write_delete()">삭제</button>
@@ -55,7 +55,7 @@
                 <div class="write_postbox">
                     <div class="postbox_user">
                         <button onclick="chat_show()">
-                            ${board.name }사용자                        
+                            ${board.name }                        
                             <div id="chat" class="chat">
                                 <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                             </div>
@@ -64,10 +64,10 @@
                     </div>
                     <c:if test="${board.filename != null }">
 	                    <div class="postbox_img">
-	                        <img src="<c:url value="/resources/img/${board.filename }"/>">
+	                        <img src="<c:url value="/resources/img/board/${board.filename }"/>">
 	                    </div>
                     </c:if>
-                    <p class="postbox_text">내용${board.content }</p>
+                    <p class="postbox_text">${board.content }</p>
                     <div>
                         <button class="recom" onclick="recom_sum()">
                             <i class="far fa-thumbs-up"></i>

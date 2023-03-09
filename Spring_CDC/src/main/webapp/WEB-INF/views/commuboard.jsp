@@ -1,3 +1,4 @@
+<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -66,14 +67,14 @@
 		                        <div class="colist">
 		                        	<div class="colup">
 		                                <div class="colbt">
-		                                    <img src="${tag_src }" >
+		                                    <img src="<c:url value="/resources/img/board/${tag_src }"/>" />
 		                                    <div class="cattext1">${tag_value }</div>
 		                                </div>
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="./commu/view?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
-		                                <a href="./commu/view?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
+		                                <a href="./commu/view/${board.num }/${pageNum}" class="coltitle">${board.title }</a>
+		                                <a href="./commu/view/${board.num }/${pageNum}" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -81,13 +82,13 @@
 		                                답변 : 
 		                            </div>
 		                            <div class="renickname">${board.name }</div>
-		                            <div class="retime">조회수 : ${regist_day }</div>
+			                            <div class="retime">작성시간 : ${regist_day}</div>
 		                        </div>
 	                        </div>
                         	<c:if test="${board.filename != null }">
 		                        <div class="colbox">
-		                        	<a href="./commu/view?num=${board.num }&pageNum=" class="imgbox">
-										<img class="listimg" src="<c:url value="/resources/img/${board.filename }"/>">
+		                        	<a href="./commu/view?num=${board.num }&pageNum=${pageNum}" class="imgbox">
+										<img class="listimg" src="<c:url value="/resources/img/board/${board.filename }"/>">
 									</a>
 	                        	</div>	
                         	</c:if>                     
