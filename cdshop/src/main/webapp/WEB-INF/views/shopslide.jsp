@@ -79,7 +79,7 @@
                             <span class="listname">My Page</span>
                         </div>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/mypage/cart"/>"><span class="text">장바구니</span></a>
+                            <a class="cate" href="<c:url value="/cart"/>"><span class="text">장바구니</span></a>
                         </li>
                         <li class="catelist">
                             <a class="cate" href="<c:url value="/mypage/order"/>"><span class="text">주문목록</span></a>
@@ -134,7 +134,7 @@
 	                            <span class="procompany"></span>
 	                            <div class="proname"></div>
 	                            <hr class="prohr">
-	                            <div class="proprice">원</div>
+	                            <div class="proprice">${product.unitPrice}원</div>
 	                            <input type="hidden" class="donnkow" value="">
 	                        </a>
 	                        <div class="cartbt"><a href="">장바구니</a></div>

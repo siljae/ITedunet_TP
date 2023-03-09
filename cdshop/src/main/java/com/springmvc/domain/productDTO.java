@@ -3,6 +3,7 @@ package com.springmvc.domain;
 import java.util.Date;
 
 public class productDTO {
+	private String productId;
 	private int num;
 	private String name;
 	private String category;
@@ -18,6 +19,16 @@ public class productDTO {
 	
 	public productDTO() {
 		super();
+	} 
+
+	
+	
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 	public int getNum() {

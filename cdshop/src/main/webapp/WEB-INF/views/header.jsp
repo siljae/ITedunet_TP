@@ -130,7 +130,7 @@ nav {
 								<ul class="m_ddb">
 									<li><a href="<c:url value="/mypage"/>">MyPage</a></li>
 									<li><a href="<c:url value="/mypage/order"/>">주문목록</a></li>
-									<li><a href="<c:url value="/mypage/cart"/>">장바구니</a></li>
+									<li><a href="<c:url value="/cart"/>">장바구니</a></li>
 									<li><a href="<c:url value="/mypage/chat"/>">1:1 채팅창</a></li>
 									<li><a href="./commuwrite.action">글쓰기</a></li>
 									<li><a href="<c:url value="/login/logout"/>">로그아웃</a></li>

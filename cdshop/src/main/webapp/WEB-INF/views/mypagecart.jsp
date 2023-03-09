@@ -61,7 +61,7 @@
                         </a>
                     </li>
                     <li class="my_left_li4">
-                        <a href="<c:url value="/mypage/cart"/>">
+                        <a href="<c:url value="/cart"/>">
                             <label for="msb3">
                                 <span>장바구니</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -85,19 +85,20 @@
                     <div>
                         <ul>
                             <li>
-                                <div class="product_list">                            
+                                <div class="product_list">
+                                <c:forEach items="${cart.cartitems}" var="item">                            
                                     <div class="product_img">
                                         <img src="./img/cart/product2.png" alt="product">
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_t">
-                                            <h3>상품명 : @1234</h3>
+                                            <h3>${item.value.product.productId}-${item.value.product.name}</h3>
                                             <input type="checkbox" id="allchk" name="chk" onclick="chkselectall()">
                                         </div>
                                         <div class="product_desc_b">
-                                            <p>상품금액 : 10,000원</p>
+                                            <p> 금액 : ${item.value.product.unitprice}</p>
                                             <div class="quanbox">                                                
-                                                수량 :
+                                                수량 : ${item.value.product.quantity}
                                                 <div class="quan_inbox">
                                                     <button onclick="fncalcount('p',this)" class="it_quan_p">+</button>
                                                     <input type="text"  value="1" class="it_quan" required>
@@ -105,7 +106,8 @@
                                                 </div>
                                             </div>                                            
                                             <button onclick="product_delete()" class="quandel">삭제</button>    
-                                        </div>                                                                            
+                                        </div>
+                                        </c:forEach>                                                                            
                                     </div>
                                 </div>
                                 <div class="hr"></div>
@@ -140,7 +142,7 @@
                         </ul>                        
                         <div class="product_sum">
                             <p>
-                                총 상품가격 <span>10,000</span>원
+                                총 상품가격 <span>${Cart.grandTotal}</span>원
                             </p> 
                             <i class="far fa-plus-square"></i>
                             <p>
