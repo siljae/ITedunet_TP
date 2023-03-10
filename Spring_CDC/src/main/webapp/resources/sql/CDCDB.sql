@@ -1,5 +1,5 @@
 drop database if exists cdcdb;
-create database cdcdb;
+create database cdcdb default character set utf8 collate utf8_general_ci;
 use cdcdb;
 create table member
 (
@@ -14,7 +14,7 @@ create table member
     m_level int default 1,
     primary key(m_num),
     unique key(m_name)
-)default charset=utf8;
+);
 drop table member;
 select*from member;
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
@@ -40,26 +40,51 @@ create table product
     p_untisinstock long not null,
     p_filename varchar(100) not null,
     primary key(p_num)
-)default charset=utf8;
+);
 
 create table commuboard
 (
    cb_num int not null auto_increment,
     m_name varchar(6) not null,
+    cb_board_type varchar(6) not null,
     cb_animal_type varchar(10) not null,
     cb_title varchar(100) not null,
     cb_content text not null,
     cb_regist_day varchar(30) not null,
-    cb_filename varchar(100),
-    cb_hit int not null,
-    cb_reply int,
+    cb_filename varchar(100) default 'null',
+    cb_hit int not null default 0,
     primary key(cb_num),
     foreign key(m_name) references member(m_name)
-)default charset=utf8;
+);
+desc commuboard;
 drop table commuboard;
 select*from commuboard;
-insert into commuboard(m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
+insert into commuboard(m_name,cb_board_type,cb_animal_type, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','우리아이자랑','고양이','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
+update commuboard 
+	set cb_board_type='commu',
+    cb_animal_type='cat',
+    m_name='abc',
+    cb_title='애옹',
+    cb_content='431',
+    cb_regist_day='2023/03/10 14:26:10',
+    cb_filename='holong1.jpg',
+    cb_hit=1
+    where cb_num=1;
 alter table commuboard add cb_tag varchar(10) not null;
+alter table commuboard alter cb_filename set default 'null';
+
+create table recom
+(
+	recom_num int auto_increment,
+    m_name varchar(6) not null,
+    cb_num int not null,
+    recom_chk int default 0,
+    primary key(recom_num),
+    foreign key(m_name) references member(m_name) on delete cascade,
+    foreign key(cb_num) references commuboard(cb_num) on delete cascade
+);
+select*from recom;
+drop table recom;
 create table reply
 (
    r_num int not null auto_increment,

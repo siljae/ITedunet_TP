@@ -46,9 +46,9 @@
         <div class="container posts_box">
             <div class="post_up">
                 <div class="up_left">
-                    <h5><a href="#">More</a></h5>                    
+                    <h5><a href="<c:url value="/notice"/>">More</a></h5>                    
                     <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
+                        <h4><a href="<c:url value="/notice"/>">공지사항</a></h4>
                         <ul>
                             <li><a href="#">첫번 째 글</a></li>
                             <li><a href="#">두번 째 글</a></li>
@@ -57,9 +57,9 @@
                     </div>
                 </div>
                 <div class="up_right">
-                    <h5><a href="#">More</a></h5>                    
+                    <h5><a href="<c:url value="/board/recom"/>">More</a></h5>                    
                     <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
+                        <h4><a href="<c:url value="/board/recom"/>">추천해요</a></h4>
                         <ul>
                             <li><a href="#">첫번 째 글</a></li>
                             <li><a href="#">두번 째 글</a></li>
@@ -70,9 +70,9 @@
             </div>
             <div class="post_down">
                 <div class="down_left">
-                    <h5><a href="#">More</a></h5>                    
+                    <h5><a href="<c:url value="/board/qna"/>">More</a></h5>                    
                     <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
+                        <h4><a href="<c:url value="/board/qna"/>">묻고답하기</a></h4>
                         <ul>
                             <li><a href="#">첫번 째 글</a></li>
                             <li><a href="#">두번 째 글</a></li>
@@ -81,9 +81,9 @@
                     </div>
                 </div>
                 <div class="down_right">
-                    <h5><a href="#">More</a></h5>                    
+                    <h5><a href="<c:url value="/hospital/reviews"/>">More</a></h5>                    
                     <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
+                        <h4><a href="<c:url value="/hospital/reviews"/>">동물병원후기</a></h4>
                         <ul>
                             <li><a href="#">첫번 째 글</a></li>
                             <li><a href="#">두번 째 글</a></li>
@@ -98,7 +98,7 @@
     <section>
         <div class="container">
             <div class="index_ad">
-                <a href="#">과아아앙고</a>
+                <a href="<c:url value="/notice/event"/>">과아아앙고</a>
             </div>
         </div>
     </section>

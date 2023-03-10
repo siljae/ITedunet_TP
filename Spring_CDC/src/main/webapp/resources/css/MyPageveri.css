@@ -20,10 +20,10 @@ body
 /* 상단 메뉴바 */
 .cart_head
 {
-    margin-top: 100px;    
     margin-bottom: 10px;
     background-color: #fec6ca;
-    padding: 20px;
+    padding-top: 100px;
+    padding-bottom: 20px;
 }
 .cart_head h1
 {

@@ -2,10 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<%
-	String username = (String) session.getAttribute("username");
-	String lv = (String) session.getAttribute("level");
-%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -123,7 +119,7 @@ nav {
 <title>header</title>
 </head>
 <body>
-	<!-- 상단 -->
+	<!-- 상단 -->	
 	<header>
 		<div class="hea_con">
 			<nav>
@@ -138,50 +134,44 @@ nav {
 					<li class="nav_shop"><a href="#">SHOP</a></li>
 				</ul>
 				<div class="nav_login">
-					<%
-					if (username == null) {
-					%>
-					<div class="loginbox">
-						<a href="./login">로그인</a>
-					</div>
-					<%
-					} else if (username != null) {
-					if (lv.equals("1")) {
-					%>
-					<div class="loginbox">
-						<div class="member">
-							<a href="#"><%=username%>님</a>
-							<ul class="m_ddb">
-								<li><a href="#">MyPage</a></li>
-								<li><a href="#">주문목록</a></li>
-								<li><a href="#">장바구니</a></li>
-								<li><a href="#">1:1 채팅창</a></li>
-								<li><a href="./commuwrite.action">글쓰기</a></li>
-								<li><a href="./logout.jsp">로그아웃</a></li>
-							</ul>
+					<c:if test="${name == null }">
+						<div class="loginbox">
+							<a href="<c:url value="/login"/>">로그인</a>
 						</div>
-					</div>
-					<%
-					} else if (lv.equals("2")) {
-					%>
-					<div class="loginbox">
-						<div class="admin">
-							<a href="#"><%=username%>님</a>
-							<ul class="a_ddb">
-								<li><a href="#">커뮤니티 관리</a></li>
-								<li><a href="#">캣독마당 관리</a></li>
-								<li><a href="#">우리동네병원 관리</a></li>
-								<li><a href="#">회원 관리</a></li>
-								<li><a href="#">SHOP 관리</a></li>
-								<li><a href="./commuwrite.action">글쓰기</a></li>
-								<li><a href="./logout.jsp">로그아웃</a></li>
-							</ul>
+					</c:if>
+					<c:choose>
+					<c:when test="${level ==1 }">
+						<div class="loginbox">
+							<div class="member">
+								<a href="<c:url value="/mypage"/>">${name }님</a>
+								<ul class="m_ddb">
+									<li><a href="<c:url value="/mypage"/>">MyPage</a></li>
+									<li><a href="<c:url value="/mypage/order"/>">주문목록</a></li>
+									<li><a href="<c:url value="/mypage/cart"/>">장바구니</a></li>
+									<li><a href="<c:url value="/mypage/chat"/>">1:1 채팅창</a></li>
+									<li><a href="./commuwrite.action">글쓰기</a></li>
+									<li><a href="<c:url value="/login/logout"/>">로그아웃</a></li>
+								</ul>
+							</div>
 						</div>
-					</div>
-					<%
-						}
-					}
-					%>
+					</c:when>
+					<c:when test="${level ==2 }">
+						<div class="loginbox">
+							<div class="admin">
+								<a href="<c:url value="/mypage"/>">${name }님</a>
+								<ul class="a_ddb">
+									<li><a href="<c:url value="/board/commu"/>">커뮤니티 관리</a></li>
+									<li><a href="<c:url value="/notice/"/>">캣독마당 관리</a></li>
+									<li><a href="<c:url value="/hospital/reviews"/>">우리동네병원 관리</a></li>
+									<li><a href="#">회원 관리</a></li>
+									<li><a href="#">SHOP 관리</a></li>
+									<li><a href="./commuwrite.action">글쓰기</a></li>
+									<li><a href="<c:url value="/login/logout"/>">로그아웃</a></li>
+								</ul>
+							</div>
+						</div>
+					</c:when>
+					</c:choose>
 				</div>
 			</nav>
 		</div>

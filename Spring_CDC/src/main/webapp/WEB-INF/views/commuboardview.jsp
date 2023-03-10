@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/view.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script>
         function chat_show(){
@@ -19,10 +19,10 @@
         }
         
         function write_update(){
-        	location.href='commuboardupdate.action?page=${pageNum}';
+        	location.href='./updateboard/${pageNum}';
         }
-        function write_dalete(){
-        	location.href='commuboarddelete.action?page=${pageNum}';
+        function write_delete(){
+        	location.href='./deleteboard/${pageNum}';
         }
     </script>
     
@@ -30,19 +30,21 @@
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
-    <section>
         <div class="view_head">
-            <h1>우리아이자랑</h1>
+			<h1><a href="<c:url value="/board"/>">전체</a></h1>
+			<h1><a href="<c:url value="/board/commu"/>">우리아이자랑</a></h1>
+			<h1><a href="<c:url value="/board/qna"/>">묻고답하기</a></h1>
+			<h1><a href="<c:url value="/board/recom"/>">추천해용</a></h1>
         </div>
         <div class="container">
             <div class="view_tag">
-            	<img src="${tag_src }">
+            	<img src="<c:url value="/resources/img/board/${tag_src }"/>">
                 <div>${tag_value }</div>
             </div>
             <div>
                 <div class="write_head">
-                    <h2>${board.title }</h2>
-                    <c:if test="${board.name == username }">                                       
+                    <h2>${board.title }</h2>                  
+                    <c:if test="${board.name == name }">                                       
                     <div>
                         <button class="btn" onclick="write_update()">수정</button>
                         <button class="btn" onclick="write_delete()">삭제</button>
@@ -55,14 +57,14 @@
                         <button onclick="chat_show()">
                             ${board.name }                        
                             <div id="chat" class="chat">
-                                <a onclick="window.open('chat.html','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                                <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                             </div>
                         </button>
                         <p class="postbox_date">${board.regist_day }</p>
                     </div>
-                    <c:if test="${board.filename != null }">
+                    <c:if test="${board.filename != null && !empty board.filename}">
 	                    <div class="postbox_img">
-	                        <img src="<c:url value="/resources/img/${board.filename }"/>">
+	                        <img src="<c:url value="/resources/img/board/${board.filename }"/>">
 	                    </div>
                     </c:if>
                     <p class="postbox_text">${board.content }</p>
@@ -80,7 +82,7 @@
                             <div class="re_user_id">
                                 <div>찌무맘</div>
                                 <div class="rechat">
-                                    <a onclick="window.open('chat.html','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                                    <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                                 </div>
                             </div>
                             <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
@@ -95,7 +97,7 @@
                             <div class="re_user_id">
                                 <div>찌무맘</div>
                                 <div class="rechat">
-                                    <a onclick="window.open('chat.html','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                                    <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                                 </div>
                             </div>
                             <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
@@ -122,7 +124,6 @@
                 </div>
             </div>
         </div>
-    </section>
 
 </body>
 </html>

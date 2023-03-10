@@ -7,14 +7,22 @@
 /* 상단 메뉴바 */
 .view_head
 {   
+    display: flex;    
+    justify-content: center;
+    align-items: center;
     margin-bottom: 10px;
-    padding-top:100px;
-    padding-bottom:10px;
+    padding-top: 100px;
+    padding-bottom: 10px;
     background-color: #fec6ca;
 }
-.view_head h1
-{
-    text-align: center;
+.view_head h1{
+    margin-right: 20px;
+}
+.view_head :nth-child(2) a{
+    border-bottom: 2px solid red;
+}
+.view_head :nth-child(1) a:hover, .view_head :nth-child(2) a:hover, .view_head :nth-child(3) a:hover, .view_head :nth-child(4) a:hover{
+    border-bottom: 2px solid red;
 }
 
 /* 뷰 페이지 시작 */

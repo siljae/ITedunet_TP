@@ -21,7 +21,7 @@
 	System.out.println("msg: "+msg);
 	if(msg == null){}
 	else if(msg.equals("1")){
-		System.out.println("여기로 오나");
+		System.out.println("회원가입성공!");
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('회원가입을 축하드립니다! 로그인해주세요!')");
@@ -55,7 +55,7 @@
         <div class="container">
             <div class="login_box">
                 <div class="login_logo">
-                    <a href="./index.jsp"><img src="<c:url value="/resources/img/logo3.png"/>" alt="Logo"></a>
+                    <a href="<c:url value="/home"/>"><img src="<c:url value="/resources/img/logo3.png"/>" alt="Logo"></a>
                 </div>
                 <div class="login_text">로그인</div>
                 <div class="login_text2">간편하게 SNS 로그인</div>
@@ -91,7 +91,7 @@
                     <input type="submit" class="email_login_box" value="로그인">                    
                 </form>
                 <br>
-                <a onclick="window.open('pw_search.html','_blank','width=500,height=200,top=200,left=200')">비밀번호 찾기</a>
+                <a onclick="window.open('<c:url value="/login/pwsearch" />','_blank','width=500,height=200,top=200,left=200')">비밀번호 찾기</a>
             </div>
             <div class="sign">
                 <a href="./login/signup">회원가입</a>

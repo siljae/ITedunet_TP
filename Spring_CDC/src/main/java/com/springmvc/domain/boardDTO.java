@@ -3,14 +3,19 @@ package com.springmvc.domain;
 import org.springframework.web.multipart.MultipartFile;
 
 public class boardDTO {
+	
 	private int num;
 	private String name;
+	private String board_type;
+	private String animal_type;
 	private String title;
 	private String content;
 	private String regist_day;
 	private int hit;
-	private String animal_type;	
 	private MultipartFile fileimage;
+	private String filename;
+	private String tag_src;
+	private String tag_value;
 
 	public int getNum() {
 		return num;
@@ -23,6 +28,13 @@ public class boardDTO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getBoard_type() {
+		return board_type;
+	}
+	public void setBoard_type(String board_type) {
+		this.board_type = board_type;
 	}
 	public String getTitle() {
 		return title;
@@ -60,6 +72,40 @@ public class boardDTO {
 	public void setFileimage(MultipartFile fileimage) {
 		this.fileimage = fileimage;
 	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
+	
+	
+	public String getTag_src() {
+		return tag_src;
+	}
+	public void setTag_src(String tag_src) {
+		this.tag_src = tag_src;
+	}
+	public String getTag_value() {
+		return tag_value;
+	}
+	public void setTag_value(String tag_value) {
+		this.tag_value = tag_value;
+	}
+	@Override
+	public String toString() {
+		return "boardDTO [num=" + num + ", name=" + name + ", board_type=" + board_type + ", animal_type=" + animal_type
+				+ ", title=" + title + ", content=" + content + ", regist_day=" + regist_day + ", hit=" + hit
+				+ ", fileimage=" + fileimage + ", filename=" + filename + "]";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 
