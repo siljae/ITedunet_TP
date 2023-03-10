@@ -1,20 +1,20 @@
 drop database if exists cdcdb;
-create database cdcdb;
+create database cdcdb default character set utf8 collate utf8_general_ci;
 use cdcdb;
 create table member
 (
 	m_num int not null auto_increment,
     m_email varchar(50) not null,
-    m_name varchar(6) not null,
+    m_name varchar(6) not null ,
     m_pw varchar(20) not null,
     m_phone varchar(20) not null,
     m_post varchar(5) not null,
     m_addr1 varchar(100) not null,
     m_addr2 varchar(100) not null,
     m_level int default 1,
-    primary key(m_name),
+    primary key(m_num),
     unique key(m_name)
-) default charset=utf8;
+); 
 
 select * from member;
 
@@ -55,10 +55,23 @@ create table buy
     b_amount int not null,
     b_date date not null,
     b_total_price int not null,
+    primary key(b_num),
     foreign key(p_id) references product(p_id),
-    foreign key(n_name) references member(m_name)
+    foreign key(m_name) references member(m_name)
 );
 
+create table cart
+(
+	ca_id int not null,
+    m_name varchar(6) not null,
+    p_id varchar(10) not null,
+    ca_qnt int not null,
+    primary key(ca_id),
+    foreign key(m_name) references member(m_name),
+    foreign key(p_id) references product(p_id)
+);
+
+drop table cart;
 
 create table commuboard
 (
@@ -83,7 +96,7 @@ create table recom
     recom_chk int default 0,
     primary key(recom_num),
     foreign key(m_name) references member(m_name) on delete cascade,
-    foreign key(cb_num) references commuboard(cd_num) on delete cascade
+    foreign key(cb_num) references commuboard(cb_num) on delete cascade
 );
 
 select * from recom;
@@ -96,5 +109,15 @@ create table reply
     r_content text not null,
     r_date date not null,
     primary key(r_num),
+    foreign key(m_name) references member(m_name)
+);
+
+create table chat
+(
+	c_num int not null auto_increment,
+    m_name varchar(6) not null,
+    c_content text not null,
+    c_date date not null,
+    primary key(c_num),
     foreign key(m_name) references member(m_name)
 );

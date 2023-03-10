@@ -123,13 +123,14 @@ body
     background-color: #fff;
     border: 1px solid gray;
     position: relative;    
+    
 }
 .allchkbox
 {
     margin: 20px 0;
     display: flex;
     justify-content: end;
-    margin-right: 131px;
+    /* margin-right: 50px; */
 }
 .allchkbox label
 {

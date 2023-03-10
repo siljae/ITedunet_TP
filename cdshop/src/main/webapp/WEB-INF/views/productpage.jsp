@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +11,13 @@
 <title>Insert title here</title>
 <link rel = "stylesheet" href="<c:url value="/resources/css/productpage.css" />">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+	<script>
+		function addToCart(action){
+			document.addForm.action = action;
+			document.addForm.submit();
+			alert("상품이 장바구니에 추가되었습니다!")
+		}
+	</script>
 </head>
 <body>
 	<jsp:include page="header.jsp"/>
@@ -152,10 +160,11 @@
                         </div>
                     </div>
                     <div class="cartbox">
-                        <div class="cartbt"><a href=""><span class="material-symbols-outlined">
-                            shopping_cart
-                            </span>장바구니</a></div>
-                    </div>
+	                    <form:form name="addForm" method="put">
+	                        <div class="cartbt"><a href="javascript:addToCart('/cart/add/${product.productId}')"><span class="material-symbols-outlined">
+	                            </span>장바구니</a></div>
+	                    </form:form>
+	                </div>
                     <div class="gardhr">
                         <hr class="gardline">
                     </div>

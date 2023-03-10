@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,6 +30,15 @@
         }else {
             selectAll.checked = false;
         }
+    }
+    function removeFromCart(action){
+    	document.removeForm.action = action;
+    	document.removeForm.submit();
+    	window.location.reload();
+    }
+    function clearCart(){
+    	document.clearForm.submit();
+    	window.location.reload();
     }
 </script>
 </head>
@@ -78,14 +88,22 @@
                     </li>
                 </ul>
                 <div class="my_right">
-                    <p class="allchkbox">
-                        <label for="allproduct">전체선택</label>
-                        <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
-                    </p>
+                    <div class ="mr2">
+	                    <p class="allchkbox">
+	                        <label for="allproduct">전체선택</label>
+	                        <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
+	                        <div class="quandel quandel2">
+	                        	<form:form name="clearForm" method="delete">
+	                        		<a href="clearForm()">전체삭제</a>
+	                        	</form:form>
+	                        </div> 
+	                    </p>
+                    </div>
                     <div>
                         <ul>
                             <li>
                                 <div class="product_list">
+                                <form:form name="removeForm" method="put">
                                 <c:forEach items="${cart.cartitems}" var="item">                            
                                     <div class="product_img">
                                         <img src="./img/cart/product2.png" alt="product">
@@ -104,10 +122,11 @@
                                                     <input type="text"  value="1" class="it_quan" required>
                                                     <button onclick="fncalcount('m',this)" class="it_quan_m">-</button>
                                                 </div>
-                                            </div>                                            
-                                            <button onclick="product_delete()" class="quandel">삭제</button>    
+                                            </div>                                           
+                                            <div class="quandel"><a href="javascript:removeFromCart('/cart/remove/${item.value.product.productId}')">삭제</a></div>    
                                         </div>
-                                        </c:forEach>                                                                            
+                                        </c:forEach>
+                                        </form:form>                                                                            
                                     </div>
                                 </div>
                                 <div class="hr"></div>
@@ -133,7 +152,7 @@
                                                     <button onclick="fncalcount('m',this)" class="it_quan_m">-</button>
                                                 </div>
                                             </div>                                            
-                                            <button onclick="product_delete()" class="quandel">삭제</button>    
+                                            <div class="quandel"><a href="javascript:removeFromCart('/cart/remove/${item.value.product.productId}')">삭제</a></div>  
                                         </div>                                                                            
                                     </div>
                                 </div>

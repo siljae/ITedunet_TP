@@ -6,8 +6,11 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.springmvc.domain.productDTO;
+import org.springframework.stereotype.Repository;
 
+import com.springmvc.domain.productDTO;
+import com.springmvc.exception.productIdException;
+@Repository
 public class productRepositoryImpl implements productRepository {
 	private List<productDTO> listOfProduct = new ArrayList<productDTO>();
 	
@@ -16,16 +19,36 @@ public class productRepositoryImpl implements productRepository {
 		return listOfProduct;
 	}
 	
+	
+	
 	public List<productDTO> getProductListByCategory (String category){
+		// 상품 카테고리 일치하는 상품 가져옴
 		List<productDTO> productByCategory = new ArrayList<productDTO>();
+		// 일치하는 상품 분야 저장하는 객체변수 productByCategort 선언
 		for(int i = 0; i < listOfProduct.size(); i++) {
+			// product에 상품 목록 i번째 상품 정보 저장
 			productDTO productdto = listOfProduct.get(i);
 			if(category.equalsIgnoreCase(productdto.getCategory()))
 				productByCategory.add(productdto);
+			// 대소문자 구분 안하고 매개변수 category와 상품 분야 일치하는 상품 목록 i번째 상품 정보를 저장
 		}
 		return productByCategory;
+		// 매개변수 category와 일치하는 상품 목록 반환
 	}
 	
+	public productDTO getProductById(String productId) {
+		productDTO productInfo = null;
+		for (int i = 0; i < listOfProduct.size(); i++) {
+			productDTO product = listOfProduct.get(i);
+			if(product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
+				productInfo = product;
+				break;
+			}
+		}
+		if (productInfo == null)
+			throw new productIdException(productId);
+		return productInfo;
+	}
 	
 	
 	
