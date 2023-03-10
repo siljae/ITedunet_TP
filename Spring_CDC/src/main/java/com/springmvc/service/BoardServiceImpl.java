@@ -38,6 +38,19 @@ public class BoardServiceImpl implements BoardService {
 		br.updateboard(board, req);
 		
 	}
+
+	@Override
+	public boardDTO getByNum(int num) {
+		boardDTO board = br.getByNum(num);		
+		return board;
+	}
+
+	@Override
+	public void deleteboard(String num) {
+		br.deleteboard(num);
+		
+	}
+	
 	
 	
 	

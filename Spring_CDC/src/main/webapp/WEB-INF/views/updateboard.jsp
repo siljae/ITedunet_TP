@@ -32,15 +32,17 @@
             <div class="writebox">
                 <div id="bodertitlebox">
                     <div class="title" >
-                        <h2 class="tltelcss">게시글 작성</h2>
+                        <h2 class="tltelcss">게시글 수정</h2>
                     </div>
                     <hr class="hrline">
                     <div id="write_area">
-                        <form:form modelAttribute="updateboard" enctype="multipart/form-data" action="./updateboard/${board.num }/${pageNum }" method="post">
+                        <form:form modelAttribute="updateboard" enctype="multipart/form-data" action="./${updateboard.num }" method="post">
                         	<input type="hidden" name="name" value="${name }"/>
+                        	<input type="hidden" name="hit" value="${updateboard.hit }"/>
+                        	<input type="hidden" name="filename" value="${updateboard.filename }"/>
                         	<div class="selectbox">
                         		<form:select path="board_type" class="board_type">
-                        			<option id="opdefult" >${board.board_type }</option>
+                        			<option id="opdefult" >게시판을 선택해주세요</option>
                         			<form:option value="commu">우리아이자랑</form:option>
                         			<form:option value="qna">묻고답하기</form:option>
                         			<form:option value="recom">추천해용</form:option>
@@ -52,7 +54,7 @@
                         		</form:select>
                         		<form:select path="animal_type" id="conoption">  
                                       <!-- 나중에 선택은 유효성 검사 통해서 잘못선택했다고 경고창 띄워줌 -->
-                                    <option id="opdefult" >${board.animal_type }</option>                             
+                                    <option id="opdefult" >반려동물태그를 선택해주세요</option>                             
                                     <form:option value="cat">[고양이]</form:option>
                                     <form:option value="dog">[강아지]</form:option>
                                 </form:select>
@@ -60,9 +62,14 @@
                        			
                             <div id="in_title">
                                 <p class="titletxt">제목</p>                                
-                                <form:textarea path="title" id="utitle" rows="1" cols="55" maxlength="100" value="${board.title }" required="required" ></form:textarea>
+                                <form:textarea path="title" id="utitle" rows="1" cols="55" maxlength="100" required="required" ></form:textarea>
                             </div>
                             <hr class="hrline">
+                            <c:if test="${board.filename != null && !empty board.filename}">
+			                    <div class="postbox_img">
+			                        <img src="<c:url value="/resources/img/board/${updateboard.filename }"/>">
+			                    </div>
+		                    </c:if>
                             <div id="in_content">
                                 <p class = "contenttxt">내용</p>
                                 <form:textarea path="content" id="ucontent" value="" required="required"></form:textarea>
@@ -70,9 +77,9 @@
                             <hr class="hrline">
                             <div class="filebox">
                                 <p class="filetitle">첨부파일1</p>
-                                <input class="upload-name" id="result" placeholder="첨부파일" readonly="readonly" value="${board.filename }"/>
-                                <label for="file1"> 파일찾기</label>
-                                <form:input type="file" path="fileimage" id="file1" onchange="printfile()"/>
+                                <input class="upload-name" id="result" placeholder="첨부파일" readonly="readonly" value="${updateboard.filename }"/>
+                                <label for="file1"> 파일찾기</label>                                                                
+                               	<form:input type="file" path="fileimage" id="file1" onchange="printfile()"/>                               
                             </div>
                             <hr class="hrline">
                             <hr class="hrline">

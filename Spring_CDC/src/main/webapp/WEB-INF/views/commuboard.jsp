@@ -85,7 +85,7 @@
 			                            <div class="retime">작성시간 : ${regist_day}</div>
 		                        </div>
 	                        </div>
-                        	<c:if test="${board.filename != null }">
+                        	<c:if test="${board.filename != null && !empty board.filename}">
 		                        <div class="colbox">
 		                        	<a href="./commu/view?num=${board.num }&pageNum=${pageNum}" class="imgbox">
 										<img class="listimg" src="<c:url value="/resources/img/board/${board.filename }"/>">

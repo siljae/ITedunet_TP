@@ -34,7 +34,7 @@
                         <div class="list1">
                             <div class="listlabel">
                                 <div class="labelname">
-                                    <img class="catface" src="<c:url value="/resources/img/catface.png"/>">
+                                    <img class="catface" src="<c:url value="/resources/img/board/catface.png"/>">
                                     <div class="cattext">고양이
                                     </div>
                                 </div>
@@ -59,7 +59,7 @@
                         <div class="list1">
                             <div class="listlabel">
                                 <div class="labelname">
-                                    <img class="dogface" src="<c:url value="/resources/img/dogface.png"/>" >
+                                    <img class="dogface" src="<c:url value="/resources/img/board/dogface.png"/>" >
                                     <div class="dog">강아지</div>
                                 </div>
                                 <div class="listhead">
@@ -83,7 +83,7 @@
                         <div class="list1">
                             <div class="listlabel">
                                 <div class="labelname">
-                                    <img src="./resources/img/catface.png" alt="">
+                                    <img src="<c:url value="/resources/img/board/catface.png"/>" alt="">
                                     <div class="cattext">고양이</div>
                                 </div>
                                 <div class="listhead">
@@ -107,7 +107,7 @@
                         <div class="list1">
                             <div class="listlabel">
                                 <div class="labelname">
-                                    <img class="dogface" src="./resources/img/dogface.png" alt="">
+                                    <img class="dogface" src="<c:url value="/resources/img/board/dogface.png"/>" alt="">
                                     <div class="dog">강아지</div>
                                 </div>
                                 <div class="listhead">
@@ -167,8 +167,9 @@
                     		<div>
 		                        <div class="colist">
 		                        	<div class="colup">
+		                        		${board.board_type }
 		                                <div class="colbt">
-		                                    <img src="<c:url value="/resources/img/board/${tag.src }" />" alt="아이콘" >
+		                                    <img src="<c:url value="/resources/img/board/${tag_src }" />" alt="아이콘" >
 		                                    <div class="cattext1">${tag_value }</div>
 		                                </div>
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
@@ -186,7 +187,7 @@
 		                            <div class="retime">조회수 : ${regist_day }</div>
 		                        </div>
 	                        </div>
-                        	<c:if test="${board.filename != null }">
+                        	<c:if test="${board.filename != null && !empty board.filename}">
 		                        <div class="colbox">
 		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=" class="imgbox">
 										<img class="listimg" src="<c:url value="/resources/img/${board.filename }"/>">

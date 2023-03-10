@@ -2,7 +2,7 @@ package com.springmvc.service;
 
 
 
-import java.util.ArrayList;
+
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,4 +15,6 @@ public interface BoardService {
 	public void boardlist(Model model,HttpServletRequest req);
 	public void requestboardview(Model model);
 	public void updateboard(boardDTO board,HttpServletRequest req);
+	public boardDTO getByNum(int num);
+	public void deleteboard(String num);
 }

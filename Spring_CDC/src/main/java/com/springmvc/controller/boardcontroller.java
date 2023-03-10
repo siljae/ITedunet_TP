@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
 import com.springmvc.service.BoardService;
@@ -36,7 +37,7 @@ public class boardcontroller {
 		return "commuboard";
 	}
 	
-	@GetMapping("/commu/view/{num}/{pageNum}")
+	@GetMapping("/commu/view/{num}/{pageNum}") //게시글 상세 페이지
 	public String commuview(@PathVariable String num,@PathVariable String pageNum,Model model) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
@@ -44,18 +45,30 @@ public class boardcontroller {
 		return "commuboardview";
 	}
 	
-	@GetMapping("/commu/view/{num}/updateboard/{pageNum}")
-	public String updateboardview(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
-		model.addAttribute("num",num);
-		model.addAttribute("pageNum",pageNum);		
-		return "updateboard";
+	@GetMapping("/commu/view/{num}/updateboard/{pageNum}") //게시글 수정 페이지
+	public ModelAndView updateboardview(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
+		ModelAndView mav = new ModelAndView();
+		int numInt = Integer.parseInt(num);
+		board = br.getByNum(numInt);
+		mav.addObject("updateboard",board);				
+		mav.addObject("num",num);
+		mav.addObject("pageNum",pageNum);
+		mav.setViewName("updateboard");
+		
+		return mav;
 	}
 	
-	@PostMapping("/updateboard/{num}/{pageNum}")
+	@PostMapping("/commu/view/{num}/updateboard/{pageNum}") //게시글 수정 기능
 	public String updateboard(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
-		br.updateboard(board, req);
+		br.updateboard(board, req);		
+		return "redirect:/board";
+	}
+	
+	@GetMapping("/commu/view/{num}/deleteboard/{pageNum}")
+	public String deleteboard(@PathVariable String num,@PathVariable String pageNum) {
+		br.deleteboard(num);
 		return "board";
 	}
 	
@@ -85,9 +98,7 @@ public class boardcontroller {
 	}
 	
 	@PostMapping("/boardwrite")
-	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {		
-		System.out.println(board.toString());
-		System.out.println("보드컨트롤러: "+board.getFilename());
+	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {
 		br.writeboard(board,req);
 		
 		return "board";

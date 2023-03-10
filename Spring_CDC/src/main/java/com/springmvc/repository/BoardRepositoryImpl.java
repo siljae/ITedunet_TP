@@ -25,6 +25,7 @@ import com.springmvc.domain.boardDTO;
 public class BoardRepositoryImpl implements BoardRepositoty {
 	private JdbcTemplate template;
 	private static final int LISTCOUNT =5;
+	private List<boardDTO> listOfboards = new ArrayList<boardDTO>();
 	
 	@Autowired
 	public void setJdbcTemplate(DataSource ds) {
@@ -35,14 +36,12 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	public void writeboard(boardDTO board,HttpServletRequest req) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String regist_day = sdf.format(new Date());
-		
+
 		MultipartFile boardimg = board.getFileimage();
 		
 		String saveName = boardimg.getOriginalFilename();
 		board.setFilename(saveName);
 		String path = req.getServletContext().getRealPath("/resources/img/board/");
-		
-		System.out.println("경로: "+path);
 		File saveFile = new File(path,saveName);
 		
 		if (boardimg != null && !boardimg.isEmpty()) {
@@ -72,30 +71,26 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 		int total_record = getlistcount(animal,content);
 		boardlist = getboardlist(pageNum, limit, animal, content);
+		this.listOfboards = boardlist;
 		
 		String animal_type;
 		String tag_src;
 		String tag_value;
 		
 		for (boardDTO board : boardlist) {
+			System.out.println("파일이름: "+board.getFilename());
 			animal_type = board.getAnimal_type();
 			String regist_day=caltime(board.getRegist_day());
 			
 			
 			model.addAttribute("regist_day",regist_day);
 			if(animal_type != null && animal_type.equals("cat")) {
-				System.out.println("게시글태그타입: "+board.getAnimal_type());
-				System.out.println("게시글제목: "+board.getTitle());
-				System.out.println("고양이를 담아요");
 				tag_src = "catface.png";
 				tag_value = "고양이";
 				model.addAttribute("tag_src", tag_src);				
 				model.addAttribute("tag_value", tag_value);
 			}
 			else if(animal_type != null && animal_type.equals("dog")) {
-				System.out.println("게시글태그타입: "+board.getAnimal_type());
-				System.out.println("게시글제목: "+board.getTitle());
-				System.out.println("개를 담아요");
 				tag_src = "dogface.png";
 				tag_value = "강아지";
 				model.addAttribute("tag_src", tag_src);
@@ -204,12 +199,14 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 				boardDTO board = new boardDTO();
 				board.setNum(rs.getInt("cb_num"));
 				board.setName(rs.getString("m_name"));
+				board.setBoard_type(rs.getString("cb_board_type"));
+				board.setAnimal_type(rs.getString("cb_animal_type"));
 				board.setTitle(rs.getString("cb_title"));
 				board.setContent(rs.getString("cb_content"));
 				board.setRegist_day(rs.getString("cb_regist_day"));
 				board.setFilename(rs.getString("cb_filename"));
 				board.setHit(rs.getInt("cb_hit"));
-				board.setAnimal_type(rs.getString("cb_animal_type"));
+				
 				list.add(board);
 				
 				if(index < (start+limit) && index <= total_record)
@@ -283,7 +280,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		board = getboardbynum(num, pageNum);
 		String tag_src;
 		String tag_value;
-		System.out.println(board.getAnimal_type());
 		if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
 			tag_src = "catface.png";
 			tag_value = "고양이";
@@ -391,34 +387,54 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	public void updateboard(boardDTO board,HttpServletRequest req) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String regist_day = sdf.format(new Date());
+		board.setHit(board.getHit()+1);
 		
-		MultipartFile boardimg = board.getFileimage();
-		
-		String saveName = boardimg.getOriginalFilename();
-		board.setFilename(saveName);
-		String path = req.getServletContext().getRealPath("/resources/img/board/");
-		
-		System.out.println("경로: "+path);
-		File saveFile = new File(path,saveName);
-		
-		if (boardimg != null && !boardimg.isEmpty()) {
-            try {
-            	boardimg.transferTo(saveFile);  
-            } catch (Exception e) {
-                throw new RuntimeException("게시판 이미지 업로드가 실패하였습니다", e);
-            }
-        }
+		if(board.getFileimage().getSize() != 0) {
+			MultipartFile boardimg = board.getFileimage();
+			
+			String saveName = boardimg.getOriginalFilename();
+			board.setFilename(saveName);
+			String path = req.getServletContext().getRealPath("/resources/img/board/");
+			File saveFile = new File(path,saveName);
+			
+			if (boardimg != null && !boardimg.isEmpty()) {
+	            try {
+	            	boardimg.transferTo(saveFile);  
+	            } catch (Exception e) {
+	                throw new RuntimeException("게시판 이미지 업로드가 실패하였습니다", e);
+	            }
+	        }
+		}
 		
 		if(board.getFilename() != null) {
-			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_filename=?, cb_hit=?) values(?,?,?,?,?,?,?,?)";
-			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit());
+			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_filename=?, cb_hit=? where cb_num=?";
+			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit(),board.getNum());
 		}
 		else if(board.getFilename() == null){
-			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=?) values(?,?,?,?,?,?,?,?)";
-			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getHit());
+			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=? where cb_num=?";
+			template.update(sql, board.getNum(), board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getHit());
 		}
 	}
 	
+	@Override //게시글 번호를 이용해서 해당 게시글 내용 모델에 담기
+	public boardDTO getByNum(int num) {
+		boardDTO boardinfo=null;	
+		for(int i=0;i<listOfboards.size();i++) {
+			boardDTO board = listOfboards.get(i);
+			if(board != null && board.getNum() == num) {
+				boardinfo = board;
+				break;
+			}
+		}		
+		return boardinfo;
+	}
+
+	@Override
+	public void deleteboard(String num) {
+		System.out.println("삭제하러 기능에 왔음");
+		String sql = "delete from commuboard where cb_num=?";
+		template.update(sql, num);
+	}
 	
 	
 }

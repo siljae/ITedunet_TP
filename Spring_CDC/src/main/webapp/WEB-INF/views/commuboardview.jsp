@@ -21,8 +21,8 @@
         function write_update(){
         	location.href='./updateboard/${pageNum}';
         }
-        function write_dalete(){
-        	location.href='commuboarddelete.action?page=${pageNum}';
+        function write_delete(){
+        	location.href='./deleteboard/${pageNum}';
         }
     </script>
     
@@ -43,7 +43,7 @@
             </div>
             <div>
                 <div class="write_head">
-                    <h2>${board.title }제목</h2>
+                    <h2>${board.title }</h2>                  
                     <c:if test="${board.name == name }">                                       
                     <div>
                         <button class="btn" onclick="write_update()">수정</button>
@@ -62,7 +62,7 @@
                         </button>
                         <p class="postbox_date">${board.regist_day }</p>
                     </div>
-                    <c:if test="${board.filename != null }">
+                    <c:if test="${board.filename != null && !empty board.filename}">
 	                    <div class="postbox_img">
 	                        <img src="<c:url value="/resources/img/board/${board.filename }"/>">
 	                    </div>

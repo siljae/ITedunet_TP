@@ -18,4 +18,6 @@ public interface BoardRepositoty {
 	public void requestboardview(Model model);
 	public boardDTO getboardbynum(int num, int pageNum);
 	public void updateboard(boardDTO board,HttpServletRequest req);
+	public boardDTO getByNum(int num);
+	public void deleteboard(String num);
 }

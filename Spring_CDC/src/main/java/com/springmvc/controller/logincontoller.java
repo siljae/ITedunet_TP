@@ -53,7 +53,7 @@ public class logincontoller {
 	@PostMapping("/signup") //회원가입 기능
 	public String submitsignup(@ModelAttribute("member") memberDTO member) throws Exception {
 		mr.join(member);
-		return "signup";
+		return "index";
 	}	
 
 	
