@@ -71,30 +71,20 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 		int total_record = getlistcount(animal,content);
 		boardlist = getboardlist(pageNum, limit, animal, content);
-		this.listOfboards = boardlist;
-		
-		String animal_type;
-		String tag_src;
-		String tag_value;
+		this.listOfboards = boardlist;	
 		
 		for (boardDTO board : boardlist) {
-			System.out.println("파일이름: "+board.getFilename());
-			animal_type = board.getAnimal_type();
-			String regist_day=caltime(board.getRegist_day());
+			String regist_day = caltime(board.getRegist_day());
 			
-			
-			model.addAttribute("regist_day",regist_day);
-			if(animal_type != null && animal_type.equals("cat")) {
-				tag_src = "catface.png";
-				tag_value = "고양이";
-				model.addAttribute("tag_src", tag_src);				
-				model.addAttribute("tag_value", tag_value);
+			if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
+				board.setCalregist(regist_day);
+				board.setTag_src("catface.png");
+				board.setTag_value("고양이");
 			}
-			else if(animal_type != null && animal_type.equals("dog")) {
-				tag_src = "dogface.png";
-				tag_value = "강아지";
-				model.addAttribute("tag_src", tag_src);
-				model.addAttribute("tag_value", tag_value);
+			else if(board.getAnimal_type() != null && board.getAnimal_type().equals("dog")) {
+				board.setCalregist(regist_day);
+				board.setTag_src("dogface.png");
+				board.setTag_value("강아지");
 			}
 		}
 		
@@ -275,9 +265,11 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		int num = Integer.parseInt(numStr);
 		String pageNumStr = (String) model.getAttribute("pageNum");
 		int pageNum = Integer.parseInt(pageNumStr);
-		
+		System.out.println("넘: "+numStr);
+		System.out.println("페이지넘: "+pageNumStr);
 		boardDTO board = new boardDTO();
 		board = getboardbynum(num, pageNum);
+		System.out.println("보드: "+board);
 		String tag_src;
 		String tag_value;
 		if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
@@ -341,6 +333,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 	//선택된 글 상세 내용 가져오기
 	public boardDTO getboardbynum(int num, int pageNum) {
+		System.out.println("넘넘: "+num);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -364,7 +357,9 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 				board.setRegist_day(rs.getString("cb_regist_day"));
 				board.setFilename(rs.getString("cb_filename"));
 				board.setHit(rs.getInt("cb_hit"));
+				System.out.println("board: "+board.getTitle());
 			}
+			System.out.println("보드접근: "+board);
 			return board;
 		} catch (Exception ex) {
 			System.out.println("getBoardByNum() 에러 : " + ex);
@@ -431,7 +426,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 
 	@Override
 	public void deleteboard(String num) {
-		System.out.println("삭제하러 기능에 왔음");
 		String sql = "delete from commuboard where cb_num=?";
 		template.update(sql, num);
 	}

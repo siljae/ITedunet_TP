@@ -128,7 +128,7 @@ nav {
 						alt="Logo"></a>
 				</div>
 				<ul class="nav_ul">
-					<li class="nav_commu"><a href="<c:url value="/board"/>">커뮤니티</a></li>
+					<li class="nav_commu"><a href="<c:url value="/board/${pageNum=1 }"/>">커뮤니티</a></li>
 					<li class="nav_notice"><a href="<c:url value="/notice"/>">캣독마당</a></li>
 					<li class="nav_hospital"><a href="<c:url value="/hospital"/>">우리동네</a></li>
 					<li class="nav_shop"><a href="#">SHOP</a></li>

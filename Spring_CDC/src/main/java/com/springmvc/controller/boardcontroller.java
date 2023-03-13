@@ -25,19 +25,21 @@ public class boardcontroller {
 	@Autowired
 	BoardService br;
 
-	@RequestMapping //전체 게시판
-	public String board(Model model,HttpServletRequest req) {
+	@RequestMapping("/{pageNum}") //전체 게시판
+	public String board(@PathVariable String pageNum, Model model,HttpServletRequest req) {
+		model.addAttribute("pageNum",pageNum);
 		br.boardlist(model,req);
 		return "board";
 	}
 	
-	@GetMapping("/commu") //커뮤니티 게시판 
-	public String commuboard(Model model,HttpServletRequest req) {
+	@GetMapping("/commu/{pageNum}") //커뮤니티 게시판 
+	public String commuboard(@PathVariable String pageNum, Model model,HttpServletRequest req) {
+		model.addAttribute("pageNum",pageNum);
 		br.boardlist(model,req);
 		return "commuboard";
 	}
 	
-	@GetMapping("/commu/view/{num}/{pageNum}") //게시글 상세 페이지
+	@GetMapping("/commu/view/{pageNum}/{num}") //게시글 상세 페이지
 	public String commuview(@PathVariable String num,@PathVariable String pageNum,Model model) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
@@ -45,7 +47,7 @@ public class boardcontroller {
 		return "commuboardview";
 	}
 	
-	@GetMapping("/commu/view/{num}/updateboard/{pageNum}") //게시글 수정 페이지
+	@GetMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 페이지
 	public ModelAndView updateboardview(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
 		int numInt = Integer.parseInt(num);
@@ -58,7 +60,7 @@ public class boardcontroller {
 		return mav;
 	}
 	
-	@PostMapping("/commu/view/{num}/updateboard/{pageNum}") //게시글 수정 기능
+	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
 	public String updateboard(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
@@ -66,7 +68,7 @@ public class boardcontroller {
 		return "redirect:/board";
 	}
 	
-	@GetMapping("/commu/view/{num}/deleteboard/{pageNum}")
+	@GetMapping("/commu/view/{pageNum}/deleteboard/{num}")
 	public String deleteboard(@PathVariable String num,@PathVariable String pageNum) {
 		br.deleteboard(num);
 		return "board";
@@ -101,7 +103,7 @@ public class boardcontroller {
 	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {
 		br.writeboard(board,req);
 		
-		return "board";
+		return "redirect:/board";
 	}
 	
 	@GetMapping("/pagenum")

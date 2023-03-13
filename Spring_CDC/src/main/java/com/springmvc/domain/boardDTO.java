@@ -16,6 +16,7 @@ public class boardDTO {
 	private String filename;
 	private String tag_src;
 	private String tag_value;
+	private String calregist;
 
 	public int getNum() {
 		return num;
@@ -79,7 +80,6 @@ public class boardDTO {
 		this.filename = filename;
 	}
 	
-	
 	public String getTag_src() {
 		return tag_src;
 	}
@@ -92,6 +92,13 @@ public class boardDTO {
 	public void setTag_value(String tag_value) {
 		this.tag_value = tag_value;
 	}
+	public String getCalregist() {
+		return calregist;
+	}
+	public void setCalregist(String calregist) {
+		this.calregist = calregist;
+	}
+	
 	@Override
 	public String toString() {
 		return "boardDTO [num=" + num + ", name=" + name + ", board_type=" + board_type + ", animal_type=" + animal_type

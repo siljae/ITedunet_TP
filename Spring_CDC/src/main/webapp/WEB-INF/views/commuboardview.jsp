@@ -19,10 +19,10 @@
         }
         
         function write_update(){
-        	location.href='./updateboard/${pageNum}';
+        	location.href='<c:url value="/board/commu/view/${pageNum}/updateboard/${num}"/>';
         }
         function write_delete(){
-        	location.href='./deleteboard/${pageNum}';
+        	location.href='<c:url value="/board/commu/view/${pageNum}/updateboard/${num}"/>';
         }
     </script>
     

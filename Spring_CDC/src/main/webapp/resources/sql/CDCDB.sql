@@ -59,7 +59,8 @@ create table commuboard
 desc commuboard;
 drop table commuboard;
 select*from commuboard;
-insert into commuboard(m_name,cb_board_type,cb_animal_type, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','우리아이자랑','고양이','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
+insert into commuboard(m_name,cb_board_type,cb_animal_type, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','우리아이자랑','고양이','테스트입니다','이거는 테스트내용입니다','2023/03/13 15:16:29',null,'0');
+
 update commuboard 
 	set cb_board_type='commu',
     cb_animal_type='cat',

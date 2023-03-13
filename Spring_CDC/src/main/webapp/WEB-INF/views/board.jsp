@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -14,10 +15,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
 	<div class="com_name">
-		<h1><a href="<c:url value="/board"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum=1 }"/>">전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum=1 }"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/board/qna/${pageNum=1 }"/>">묻고답하기</a></h1>
+		<h1><a href="<c:url value="/board/recom/${pageNum=1 }"/>">추천해용</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
@@ -169,14 +170,14 @@
 		                        	<div class="colup">
 		                        		${board.board_type }
 		                                <div class="colbt">
-		                                    <img src="<c:url value="/resources/img/board/${tag_src }" />" alt="아이콘" >
-		                                    <div class="cattext1">${tag_value }</div>
+		                                    <img src="<c:url value="/resources/img/board/${board.tag_src }" />" alt="아이콘" >
+		                                    <div class="cattext1">${board.tag_value }</div>
 		                                </div>
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
-		                                <a href="./commuboardview.action?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
+		                                <a href="<c:url value="/commu/view/${pageNum }/${num }"/>" class="coltitle">${board.title }</a>
+		                                <a href="<c:url value="/commu/view/${pageNum }/${num }"/>" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -184,13 +185,13 @@
 		                                답변 : 
 		                            </div>
 		                            <div class="renickname">${board.name }</div>
-		                            <div class="retime">조회수 : ${regist_day }</div>
+		                            <div class="retime">조회수 : ${board.calregist }</div>
 		                        </div>
 	                        </div>
                         	<c:if test="${board.filename != null && !empty board.filename}">
 		                        <div class="colbox">
-		                        	<a href="./commuboardview.action?num=${board.num }&pageNum=" class="imgbox">
-										<img class="listimg" src="<c:url value="/resources/img/${board.filename }"/>">
+		                        	<a href="<c:url value="/commu/view/${pageNum }/${num }"/>" class="imgbox">
+										<img class="listimg" src="<c:url value="/resources/img/board/${board.filename }"/>">
 									</a>
 	                        	</div>	
                         	</c:if>                     
@@ -235,28 +236,28 @@
                 </div>
             </div>
         </div>
-        <ul class="pagebutton">
+        <ul class="pagebutton">        	
             <li class="leftbt">
-                <a href="#" aria-label="Go to befor page">‹</a>
+                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
             </li>
-            <li class="active">
-                <a class="undefined" href="#" aria-label="Go to page number 1">1</a>
-            </li>
+            <c:forEach var="i" begin="1" end="${total_page }">
+	            <li class="active">
+	            	<a href="<c:url value="/board/${pageNum=i}" />" aria-label="Go to page number 1">
+	            		<c:choose>
+		            		<c:when test="${pageNum==i }">
+		                		<font class="undefined"><b>${i }</b></font>
+		                	</c:when>                	
+		                	<c:otherwise>
+		                		<font><b>0${i }</b></font>
+		                	</c:otherwise>
+	                	</c:choose>
+                	</a>
+	            </li>
+            </c:forEach>
             <li class>
-                <a href="#" aria-label="Go to page number 2">2</a>
+                <a href="${pageNum+1 }" aria-label="Go to after number ">›</a>
             </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 3">3</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 4">4</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 5">5</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to after number ">›</a>
-            </li>
+            
         </ul>
     </div>
 	<jsp:include page="footer.jsp"/>

@@ -36,7 +36,7 @@
                     </div>
                     <hr class="hrline">
                     <div id="write_area">
-                        <form:form modelAttribute="updateboard" enctype="multipart/form-data" action="./${updateboard.num }" method="post">
+                        <form:form modelAttribute="updateboard" enctype="multipart/form-data" action="./${num }" method="post">
                         	<input type="hidden" name="name" value="${name }"/>
                         	<input type="hidden" name="hit" value="${updateboard.hit }"/>
                         	<input type="hidden" name="filename" value="${updateboard.filename }"/>
