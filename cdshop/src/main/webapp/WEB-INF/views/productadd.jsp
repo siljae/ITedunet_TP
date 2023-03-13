@@ -105,6 +105,11 @@
                     <hr class="hrline">
                     <div id="write_area">
                         <form:form modelAttribute="NewProduct" enctype="multipart/form-data" action="./add${_csrf.parameterName}=${_csrf_token}" class="from-hori">
+                            <div id ="product_id">
+                                <p class="idname">상품ID</p>
+                                <textarea name="p_Id" id="idtxt" cols="30" rows="10"></textarea>
+                            </div>
+                            <hr class="hrline">
                             <div id="in_title">
                                 <p class="titletxt">상품명</p>
                                 <select name="conoption" id="conoption">  

@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
+import com.springmvc.database.DBConnection;
 import com.springmvc.domain.productDTO;
 import com.springmvc.exception.productIdException;
 @Repository
@@ -16,9 +17,54 @@ public class productRepositoryImpl implements productRepository {
 	
 	
 	public List<productDTO> getAllProductList(){
+		String SQL = "select * from product";
+		List<productDTO> listOfProduct = template.query(SQL, new ProductRowMapper());
 		return listOfProduct;
 	}
 	
+	
+	public int getListCount(String items, String text) {
+		Connection conn = null;
+		System.out.println("conn : " + conn);
+		PreparedStatement pstmt = null;
+		System.out.println("pstmt : " + pstmt);
+		ResultSet rs = null;
+		System.out.println("rs" + rs);
+		
+		int x = 0;
+		
+		String sql;
+		
+		if (items == null && text == null) {
+			sql = "select count(*) from product";
+		}else
+			sql = "select count(*) from product where" + items + " like '%" + text + "%'";
+		try {
+			conn = DBConnection.getConnection();
+			System.out.println("conn1 : " + conn);
+			pstmt = conn.prepareStatement(sql);
+			System.out.println("pstmt1 : " + pstmt);
+			rs = pstmt.executeQuery();
+			System.out.println("rs1 : " + rs);
+			
+			if(rs.next())
+				x = rs.getInt(1);
+		}catch (Exception ex) {
+			System.out.println("getListCount() 에러 : " + ex);
+		}finally {
+			try {
+				if (rs != null)
+					rs.close();
+				if (pstmt != null)
+					pstmt.close();
+				if (conn != null)
+					conn.close();
+			}catch (Exception ex) {
+				throw new RuntimeException(ex.getMessage());
+			}
+		}
+		return x;
+	}
 	
 	
 	public List<productDTO> getProductListByCategory (String category){
@@ -28,6 +74,7 @@ public class productRepositoryImpl implements productRepository {
 		for(int i = 0; i < listOfProduct.size(); i++) {
 			// product에 상품 목록 i번째 상품 정보 저장
 			productDTO productdto = listOfProduct.get(i);
+			System.out.println("product :" + productdto);
 			if(category.equalsIgnoreCase(productdto.getCategory()))
 				productByCategory.add(productdto);
 			// 대소문자 구분 안하고 매개변수 category와 상품 분야 일치하는 상품 목록 i번째 상품 정보를 저장

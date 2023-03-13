@@ -153,6 +153,21 @@
     padding: 20px;
     margin-left: 10px;
 }
+.idname{
+    margin-left: 5px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-right: 10px;
+    line-height: 100%;
+    color: rgb(74, 74, 74);
+}
+#product_id {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    margin-top: 10px;
+
+}
 .title{
     margin-bottom: 10px;
     margin-left: 10px;
@@ -199,8 +214,16 @@
 #in_content{
     margin-top: 10px;
 }
+#idtxt{
+    width: 730px;
+    height: 28px;
+    resize: none;
+    font-size: 18px;
+    padding: 1.5px 0 1.5px 6px;   
+    border: 1px solid grey;
+}
 #utitle{
-    width: 400px;
+    width: 610px;
     height: 28px;
     resize: none;
     font-size: 18px;
