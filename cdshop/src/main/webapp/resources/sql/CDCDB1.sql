@@ -49,10 +49,10 @@ create table product
 
 insert into product values (null, "DF001", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
 insert into product values (null, "CF001", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
-insert into product values (null, "DF001", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
-insert into product values (null, "CF001", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
-insert into product values (null, "DF001", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
-insert into product values (null, "CF001", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
+insert into product values (null, "DF002", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
+insert into product values (null, "CF002", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
+insert into product values (null, "DF003", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
+insert into product values (null, "CF003", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
 
 create table buy
 (
