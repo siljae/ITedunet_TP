@@ -25,16 +25,22 @@ public class boardcontroller {
 	@Autowired
 	BoardService br;
 
-	@RequestMapping("/{pageNum}") //전체 게시판
-	public String board(@PathVariable String pageNum, Model model,HttpServletRequest req) {
-		model.addAttribute("pageNum",pageNum);
+	@RequestMapping("/") //전체 게시판
+	public String board(Model model,HttpServletRequest req) {
+		br.boardlist(model,req);
+		return "board";
+	}
+	
+	@GetMapping("/{pageNum}")
+	public String boardnum(@PathVariable String pageNum, Model model,HttpServletRequest req) {
+		req.setAttribute("pageNum", pageNum);
 		br.boardlist(model,req);
 		return "board";
 	}
 	
 	@GetMapping("/commu/{pageNum}") //커뮤니티 게시판 
 	public String commuboard(@PathVariable String pageNum, Model model,HttpServletRequest req) {
-		model.addAttribute("pageNum",pageNum);
+		req.setAttribute("pageNum", pageNum);
 		br.boardlist(model,req);
 		return "commuboard";
 	}
@@ -62,16 +68,14 @@ public class boardcontroller {
 	
 	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
 	public String updateboard(@PathVariable String num,@PathVariable String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
-		model.addAttribute("num",num);
-		model.addAttribute("pageNum",pageNum);
-		br.updateboard(board, req);		
-		return "redirect:/board";
+		br.updateboard(board, req);
+		return "redirect:/board/"+pageNum;
 	}
 	
 	@GetMapping("/commu/view/{pageNum}/deleteboard/{num}")
 	public String deleteboard(@PathVariable String num,@PathVariable String pageNum) {
 		br.deleteboard(num);
-		return "board";
+		return "redirect:/board/"+pageNum;
 	}
 	
 	@GetMapping("/qna") //묻고답하기 게시판
@@ -103,12 +107,18 @@ public class boardcontroller {
 	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {
 		br.writeboard(board,req);
 		
-		return "redirect:/board";
+		return "redirect:/board/1";
 	}
 	
 	@GetMapping("/pagenum")
 	public String movepage(@PathVariable("pagenum") String pagenum,Model model) {
 		model.addAttribute("pagenum",pagenum);
 		return "";
+	}
+	
+	@GetMapping("/search")
+	public String serach(Model model,HttpServletRequest req) {
+		br.search(model, req);
+		return "redirect:";
 	}
 }

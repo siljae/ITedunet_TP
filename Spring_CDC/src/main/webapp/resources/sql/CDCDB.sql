@@ -51,7 +51,7 @@ create table commuboard
     cb_title varchar(100) not null,
     cb_content text not null,
     cb_regist_day varchar(30) not null,
-    cb_filename varchar(100) default 'null',
+    cb_filename varchar(100),
     cb_hit int not null default 0,
     primary key(cb_num),
     foreign key(m_name) references member(m_name)
@@ -59,7 +59,21 @@ create table commuboard
 desc commuboard;
 drop table commuboard;
 select*from commuboard;
-insert into commuboard(m_name,cb_board_type,cb_animal_type, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','우리아이자랑','고양이','테스트입니다','이거는 테스트내용입니다','2023/03/13 15:16:29',null,'0');
+-- 테스트용 게시글 8개
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다1', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다2', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다3', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다4', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다5', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다6', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다7', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다8', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다9', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다10', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다11', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다12', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다13', 'test', '2023/03/14 12:12:12');
+delete from commuboard where m_name='abc';
 
 update commuboard 
 	set cb_board_type='commu',
@@ -73,6 +87,7 @@ update commuboard
     where cb_num=1;
 alter table commuboard add cb_tag varchar(10) not null;
 alter table commuboard alter cb_filename set default 'null';
+alter table commuboard alter cb_filename drop default;
 
 create table recom
 (

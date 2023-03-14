@@ -416,12 +416,10 @@ ul.pagebutton li a{
     border: none;
 }
 
-.active{
+.undefined{
     background-color: #ffeb994d;
     border-radius: 50%;
     border: 2px solid #fcd11e;
-}
-.active a{
-    color: black;
-    border: none;
+    color:black;
+    padding:0px 5px;
 }

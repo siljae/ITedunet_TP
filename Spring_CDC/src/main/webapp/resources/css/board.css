@@ -421,4 +421,5 @@ ul.pagebutton li a{
     border-radius: 50%;
     border: 2px solid #fcd11e;
     color: black;
+    padding:0px 5px;
 }

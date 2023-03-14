@@ -15,10 +15,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-		<h1><a href="<c:url value="/board"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">묻고답하기</a></h1>
+		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해용</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
@@ -133,28 +133,32 @@
                 </div>
             </div>
         </div>
+        페이지넘:${pageNum }
         <ul class="pagebutton">
-            <li class="leftbt">
-                <a href="#" aria-label="Go to befor page">‹</a>
-            </li>
-            <li class="active">
-                <a class="undefined" href="#" aria-label="Go to page number 1">1</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 2">2</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 3">3</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 4">4</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 5">5</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to after number ">›</a>
-            </li>
+        	<c:if test="${pageNum>1 }">        	
+	            <li class="leftbt">
+	                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
+	            </li>
+            </c:if>
+            <c:forEach var="i" begin="1" end="${total_page }">
+	            <li class="active">
+	            	<a href="<c:url value="/board/commu/${i}" />" aria-label="Go to page number 1">
+	            		<c:choose>
+		            		<c:when test="${pageNum == i }">
+		                		<font class="undefined"><b>${i }</b></font>
+		                	</c:when>                	
+		                	<c:otherwise>
+		                		<font><b>${i }</b></font>
+		                	</c:otherwise>
+	                	</c:choose>
+                	</a>
+	            </li>
+            </c:forEach>
+            <c:if test="${total_page != pageNum }">
+	            <li>
+	                <a href="${pageNum+1 }" aria-label="Go to after number ">›</a>
+	            </li>
+            </c:if>            
         </ul>
     </div>
 	<jsp:include page="footer.jsp"/>

@@ -37,12 +37,12 @@ public class logincontoller {
 		System.out.println("로그인기능을 실행합니다");
 		String[] result = mr.login(req.getParameter("email"),req.getParameter("pw"));		
 		mr.chklogin(result, session);
-		return "index";
+		return "redirect:/home";
 	}
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		mr.logout(session);
-		return "index";
+		return "redirect:/home";
 	}
 	
 	@GetMapping("/signup") //회원가입 페이지

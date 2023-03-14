@@ -17,4 +17,5 @@ public interface BoardService {
 	public void updateboard(boardDTO board,HttpServletRequest req);
 	public boardDTO getByNum(int num);
 	public void deleteboard(String num);
+	public void search(Model model,HttpServletRequest req);
 }

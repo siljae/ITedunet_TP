@@ -1,7 +1,6 @@
-
+<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+    pageEncoding="UTF-8"%>    
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -15,19 +14,21 @@
 <body>
 	<jsp:include page="./header.jsp"/>
 	<div class="com_name">
-		<h1><a href="<c:url value="/board/${pageNum=1 }"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/${pageNum=1 }"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna/${pageNum=1 }"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom/${pageNum=1 }"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">묻고답하기</a></h1>
+		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해용</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                    <input type="text" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
-                    <button class="button" type="submit" >
-                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
-                    </button>
+                	<form action="<c:url value="/board/serach"/>" method="post">
+	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
+	                    <button class="button" type="submit" >
+	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
+	                    </button>
+                    </form>
                 </div>
                 <div class="textbox" id="hotline">인기글</div>
                 <div class="bestlist">
@@ -236,28 +237,31 @@
                 </div>
             </div>
         </div>
-        <ul class="pagebutton">        	
-            <li class="leftbt">
-                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
-            </li>
+        <ul class="pagebutton">
+        	<c:if test="${pageNum>1 }">        	
+	            <li class="leftbt">
+	                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
+	            </li>
+            </c:if>
             <c:forEach var="i" begin="1" end="${total_page }">
 	            <li class="active">
-	            	<a href="<c:url value="/board/${pageNum=i}" />" aria-label="Go to page number 1">
+	            	<a href="<c:url value="/board/${i}" />" aria-label="Go to page number 1">
 	            		<c:choose>
 		            		<c:when test="${pageNum==i }">
 		                		<font class="undefined"><b>${i }</b></font>
 		                	</c:when>                	
 		                	<c:otherwise>
-		                		<font><b>0${i }</b></font>
+		                		<font><b>${i }</b></font>
 		                	</c:otherwise>
 	                	</c:choose>
                 	</a>
 	            </li>
             </c:forEach>
-            <li class>
-                <a href="${pageNum+1 }" aria-label="Go to after number ">›</a>
-            </li>
-            
+            <c:if test="${total_page != pageNum }">
+	            <li>
+	                <a href="${pageNum+1 }" aria-label="Go to after number ">›</a>
+	            </li>
+            </c:if>            
         </ul>
     </div>
 	<jsp:include page="footer.jsp"/>

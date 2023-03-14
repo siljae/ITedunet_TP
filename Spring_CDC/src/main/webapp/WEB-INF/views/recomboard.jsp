@@ -14,10 +14,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-		<h1><a href="<c:url value="/board"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum=1 }"/>">전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum=1 }"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/board/qna/${pageNum=1 }"/>">묻고답하기</a></h1>
+		<h1><a href="<c:url value="/board/recom/${pageNum=1 }"/>">추천해용</a></h1>
     </div>
     <div class="container">
         <div class="midbox">

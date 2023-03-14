@@ -63,11 +63,12 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		int pageNum =1;
 		int limit = LISTCOUNT;
 		
-		if(model.getAttribute("pageNum") != null)
-			pageNum = Integer.parseInt((String)model.getAttribute("pageNum"));
+		if(req.getAttribute("pageNum") != null)
+			pageNum = Integer.parseInt((String)req.getAttribute("pageNum"));
 		
-		String animal = (String)model.getAttribute("animal_type");
-		String content = (String)model.getAttribute("content");
+		System.out.println("페이지넘: "+pageNum);
+		String animal = (String)req.getAttribute("animal_type");
+		String content = (String)req.getAttribute("content");
 		
 		int total_record = getlistcount(animal,content);
 		boardlist = getboardlist(pageNum, limit, animal, content);
@@ -99,10 +100,11 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			Math.floor(total_page);
 			total_page = total_page+1;
 		};
+		
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("total_record", total_record);
-		model.addAttribute("boardlist", boardlist);
+		model.addAttribute("boardlist", boardlist);		
 	}
 
 	@Override //게시글 숫자 가져오기
@@ -168,24 +170,27 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		int index = start +1;
 		
 		String sql;
-		
 		if(animal == null && content == null) {
 			sql = "select*from commuboard order by cb_num desc";
 		}
 		else if(animal != null) {
-			sql = "select*from commuboard where"+animal+"order by cb_num desc";
+			String cb_animal_type = animal;
+			sql = "select*from commuboard where"+cb_animal_type+"order by cb_num desc";
 		}
-		else
-			sql = "select*from commuboard where like '%"+content+ "%' order by cb_num desc";
+		else {
+			String cb_title = content;
+			String cb_content = content;
+			//이거 확인하고 적용시키셈 
+			sql = "select*from commuboard where like '%"+cb_title+ "%' or '%"+cb_content+"%' order by cb_num desc";
+		}
 		
 		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
 		
 		try {
 			conn = DBConnection.getConnection();
-			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
-			
-			while(rs.next()) {
+			pstmt = conn.prepareStatement(sql, ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+			rs = pstmt.executeQuery();		
+			while(rs.absolute(index)) {
 				boardDTO board = new boardDTO();
 				board.setNum(rs.getInt("cb_num"));
 				board.setName(rs.getString("m_name"));
@@ -203,7 +208,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 					index++;
 				else
 					break;
-			}
+			}				
 			return list;
 			
 		} 
@@ -424,11 +429,19 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return boardinfo;
 	}
 
-	@Override
+	@Override //게시글 삭제 기능
 	public void deleteboard(String num) {
 		String sql = "delete from commuboard where cb_num=?";
 		template.update(sql, num);
 	}
+
+	@Override //게시글 제목이나, 내용으로 검색하기
+	public void search(Model model,HttpServletRequest req) {
+		boardlist(model, req);
+		
+	}
+	
+	
 	
 	
 }

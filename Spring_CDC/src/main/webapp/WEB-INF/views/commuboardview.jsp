@@ -22,7 +22,7 @@
         	location.href='<c:url value="/board/commu/view/${pageNum}/updateboard/${num}"/>';
         }
         function write_delete(){
-        	location.href='<c:url value="/board/commu/view/${pageNum}/updateboard/${num}"/>';
+        	location.href='<c:url value="/board/commu/view/${pageNum}/deleteboard/${num}"/>';
         }
     </script>
     
