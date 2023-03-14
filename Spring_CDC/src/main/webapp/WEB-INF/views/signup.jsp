@@ -68,7 +68,11 @@
                 <div class="input_box">
                     <p>
                         이메일
+<<<<<<< HEAD
+                        <form:input type="email" path="email" id="email" class="email"   required="required"/>
+=======
                         <form:input type="email" path="email" id="email" class="email" required="required"/>
+>>>>>>> a888f96900ca2f19ec890412d5fdb22ec58fd95b
                         <input type="button" onclick="chkemail()" class="email_check" value="중복확인">
                     </p>
                     <br>
@@ -90,7 +94,11 @@
                     <br>
                     <p>
                         전화번호
+<<<<<<< HEAD
+                        <form:input type="text" id="num1" path="phone1" class="num1" value="010" size="1" readonly="required"/>
+=======
                         <form:input type="text" id="num1" path="phone1" class="num1" value="010" size="1" readonly="readonly"/>
+>>>>>>> a888f96900ca2f19ec890412d5fdb22ec58fd95b
                         <span>-</span>
                         <form:input type="text" id="num2" path="phone2" class="num2" maxlength="4" pattern="[0-9]{4}" size="4" title="'1234와 같은 4자리 숫자'" required="required"/>                        
                         <span>-</span>
