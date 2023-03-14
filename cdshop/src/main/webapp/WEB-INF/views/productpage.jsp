@@ -109,7 +109,7 @@
                 <div class="probox">
                     <div class="proname">
                         <div class="productname">
-                            <h2 class="name">오리젠 캣앤키튼 1.8kg</h2>
+                            <h2 class="name">${product.name}</h2>
                         </div>
                         <hr class="namehr">
                     </div>
@@ -122,23 +122,18 @@
                                 <h4 class="extitle">제품 요약 설명</h4>
                             </div>
                             <div class="procompany">
-                                <span class="comname">오리젠</span>
+                                <span class="comname">${product.manufacturer }</span>
                             </div>
                             <div class="prodetailbox">
                                 <div class="prodecontainer">
                                     <div class="promidtitle">
                                         <p>
-                                            <strong>고양이가 환장하는 맛!</strong>
-                                            <br>
-                                            <strong>인기순의 1위!</strong>
+                                            <strong>${product.titlement}</strong>
                                         </p>
                                     </div>
                                     <div class="prosmalltitle">
                                         <p>
-                                            <span class="emogi">✔️ 완벽한 영양소 밸런스</span>
-                                            <span class="emogi">✔️ 극강의 기호성</span>
-                                            <span class="emogi">✔️ 오랫동안 사랑받아온 부동의 1위</span>
-                                            <span class="emogi">✔️ 고양이 맞춤 고단백 사료</span>
+                                            <span class="emogi">${product.simpledescription}</span>
                                          </p>
                                     </div>
                                     
@@ -147,7 +142,7 @@
                             <div class="propricebox">
                                 <div class="propricecontainer">
                                     <p class="price">
-                                        <span class="proprice">₩</span>38,000
+                                        <span class="proprice">₩</span>${product.unitprice}
                                     </p>
                                 </div>
                             </div>

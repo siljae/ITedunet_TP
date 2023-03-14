@@ -5,7 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.database.DBConnection;
@@ -13,14 +19,28 @@ import com.springmvc.domain.productDTO;
 import com.springmvc.exception.productIdException;
 @Repository
 public class productRepositoryImpl implements productRepository {
+	
+	private JdbcTemplate template;
+	
+	public List<productDTO> productlist = new ArrayList<productDTO>();
+	
+	@Autowired
+	public void setJdbctemplate(DataSource dataSource) {
+		this.template = new JdbcTemplate(dataSource);
+	}
+	
 	private List<productDTO> listOfProduct = new ArrayList<productDTO>();
 	
-	
 	public List<productDTO> getAllProductList(){
+		System.out.println("getAllProductList 들어와땨");
 		String SQL = "select * from product";
-		List<productDTO> listOfProduct = template.query(SQL, new ProductRowMapper());
+		List<productDTO> listOfProduct = template.query(SQL, new productRowMapper());
+		System.out.println("listOfProduct : "+listOfProduct);
+		this.productlist = listOfProduct;
+		System.out.println("ddddddd"+productlist);
 		return listOfProduct;
 	}
+	
 	
 	
 	public int getListCount(String items, String text) {
@@ -67,6 +87,24 @@ public class productRepositoryImpl implements productRepository {
 	}
 	
 	
+	
+	public productDTO getProductById(String productId) {
+		System.out.println("DAO ProductById 들어왔댜아아아아아");
+		productDTO productById = null;
+		System.out.println("들어오냐나아아아아아아아"+productlist);
+		for(int i = 0; i<productlist.size(); i++) {
+			
+			productDTO product = productlist.get(i);
+			System.out.println("너 product에 담기늬: " + product);
+			if(product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
+				productById = product;
+				System.out.println("productById 값 담기니? : " + productById);
+				break;
+			}
+		}
+		return productById;
+	}
+	
 	public List<productDTO> getProductListByCategory (String category){
 		// 상품 카테고리 일치하는 상품 가져옴
 		List<productDTO> productByCategory = new ArrayList<productDTO>();
@@ -82,22 +120,7 @@ public class productRepositoryImpl implements productRepository {
 		return productByCategory;
 		// 매개변수 category와 일치하는 상품 목록 반환
 	}
-	
-	public productDTO getProductById(String productId) {
-		productDTO productInfo = null;
-		for (int i = 0; i < listOfProduct.size(); i++) {
-			productDTO product = listOfProduct.get(i);
-			if(product != null && product.getProductId() != null && product.getProductId().equals(productId)) {
-				productInfo = product;
-				break;
-			}
-		}
-		if (productInfo == null)
-			throw new productIdException(productId);
-		return productInfo;
-	}
-	
-	
+
 	
 	
 //	public List<productDTO> selectAllProducts(){

@@ -23,7 +23,9 @@ public class productServiceImpl implements productService {
 	}
 	
 	public productDTO getProductById(String productId) {
+		System.out.println("야 서비스 넌 들어오냐 값?");
 		productDTO productById = productrepository.getProductById(productId);
+		System.out.println("productById 가져오냐??? : " + productById);
 		return productById;
 	}
 }

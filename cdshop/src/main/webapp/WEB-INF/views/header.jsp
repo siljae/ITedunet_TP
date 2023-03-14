@@ -114,7 +114,7 @@ nav {
 					<li class="nav_commu"><a href="<c:url value="/board"/>">커뮤니티</a></li>
 					<li class="nav_notice"><a href="<c:url value="/notice"/>">캣독마당</a></li>
 					<li class="nav_hospital"><a href="<c:url value="/hospital"/>">우리동네</a></li>
-					<li class="nav_shop"><a href="/shopmain">SHOP</a></li>
+					<li class="nav_shop"><a href="/shopmain/all">SHOP</a></li>
 				</ul>
 				<div class="nav_login">
 					<c:if test="${name == null }">
