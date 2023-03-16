@@ -75,6 +75,8 @@ insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_conte
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다13', 'test', '2023/03/14 12:12:12');
 delete from commuboard where m_name='abc';
 
+
+
 update commuboard 
 	set cb_board_type='commu',
     cb_animal_type='cat',
@@ -86,7 +88,7 @@ update commuboard
     cb_hit=1
     where cb_num=1;
 alter table commuboard add cb_tag varchar(10) not null;
-alter table commuboard alter cb_filename set default 'null';
+alter table commuboard alter cb_filename set default null;
 alter table commuboard alter cb_filename drop default;
 
 create table recom

@@ -67,8 +67,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			pageNum = Integer.parseInt((String)req.getAttribute("pageNum"));
 		
 		System.out.println("페이지넘: "+pageNum);
-		String animal = (String)req.getAttribute("animal_type");
-		String content = (String)req.getAttribute("content");
+		String animal = (String)req.getParameter("animal_type");
+		String content = (String)req.getParameter("content");		
 		
 		int total_record = getlistcount(animal,content);
 		boardlist = getboardlist(pageNum, limit, animal, content);
@@ -121,10 +121,10 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		}
 			
 		else if(animal != null){
-			sql="select count(*) from commuboard where "+animal;
+			sql="select count(*) from commuboard where cb_animal_type='"+animal+"'";
 		}
 		else {
-			sql="select count(*) from commuboard where like '%" +content+"%'";
+			sql="select count(*) from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%'";
 		}
 			
 			
@@ -178,10 +178,10 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			sql = "select*from commuboard where"+cb_animal_type+"order by cb_num desc";
 		}
 		else {
-			String cb_title = content;
-			String cb_content = content;
-			//이거 확인하고 적용시키셈 
-			sql = "select*from commuboard where like '%"+cb_title+ "%' or '%"+cb_content+"%' order by cb_num desc";
+			//이거 확인하고 적용시키셈 > 동작하는거 확인했음 
+			sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";
+			System.out.println("sql문: "+sql);
+			
 		}
 		
 		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
@@ -437,6 +437,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 
 	@Override //게시글 제목이나, 내용으로 검색하기
 	public void search(Model model,HttpServletRequest req) {
+		System.out.println("dao왔음: "+req.getParameter("content"));
 		boardlist(model, req);
 		
 	}

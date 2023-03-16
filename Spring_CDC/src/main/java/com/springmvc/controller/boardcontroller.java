@@ -116,9 +116,9 @@ public class boardcontroller {
 		return "";
 	}
 	
-	@GetMapping("/search")
+	@PostMapping("/search") //게시글 제목 or 내용 검색
 	public String serach(Model model,HttpServletRequest req) {
 		br.search(model, req);
-		return "redirect:";
+		return "board";
 	}
 }

@@ -23,7 +23,7 @@
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                	<form action="<c:url value="/board/serach"/>" method="post">
+                	<form action="<c:url value="/board/search"/>" method="post" style="width:70%">
 	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
 	                    <button class="button" type="submit" >
 	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
