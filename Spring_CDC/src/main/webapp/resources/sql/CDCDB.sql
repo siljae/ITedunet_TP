@@ -75,6 +75,12 @@ insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_conte
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다13', 'test', '2023/03/14 12:12:12');
 delete from commuboard where m_name='abc';
 
+select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
+
+
+
+select count(*) from commuboard where cb_animal_type='cat';
+select count(*) from commuboard where cb_content like '%스트%';
 
 
 update commuboard 
