@@ -17,16 +17,8 @@ create table member
 ); 
 
 select * from member;
+insert into member values(null, "admin@gmail.com", "관리자", "1234", "010-1111-1111", "11111", "창원시", "의창구", 2);
 
-create table admin
-(
-	a_num int not null auto_increment,
-    a_email varchar(50) not null,
-    a_name varchar(6) not null,
-    a_pw varchar(20) not null,
-    a_phone varchar(11) not null,
-    primary key(a_num)
-);
 
 create table product
 (
@@ -35,26 +27,29 @@ create table product
     p_name varchar(30) not null,
     p_category varchar(10) not null,
     p_titlement varchar(30) not null,
-    p_simpledescription varchar(50) not null,
+    p_simpledescription varchar(100) not null,
     p_manufacturer varchar(10) not null,
     p_unitprice int not null,
     p_unitsinstock long not null,
-    p_detailfilename varchar(100) not null,
-    p_titlefilename varchar(100) not null,
-    p_date date,
+    p_dfilename varchar(100) not null,
+    p_tfilename varchar(100) not null,
+    p_date date default (current_date),
     p_hit int default 1,
     primary key(p_num),
-    unique key(p_id)
+    unique key(p_id),
+    unique key(p_tfilename)
 );
 
-insert into product values (null, "DF001", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
-insert into product values (null, "CF001", "오리젠 캣앤키튼 1.8kg", "CAT", "productp_num고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
-insert into product values (null, "DF002", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
-insert into product values (null, "CF002", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
-insert into product values (null, "DF003", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png", "2023/03/13", null);
-insert into product values (null, "CF003", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
-insert into product values (null, "CF004", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스 <br> ✔️ 극강의 기호성 <br> ✔️ 극강의 기호성 <br> ✔️ 극강의 기호성", "오리젠", 18000, 100, "origen1.png", "origen_catkitten.png", "2023/03/13", null);
+drop table product;
 
+insert into product values (null, "DF001", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog6.png", "2023/03/13", null);
+insert into product values (null, "CF001", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten1.png", "2023/03/13", null);
+insert into product values (null, "DF002", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png2", "2023/03/13", null);
+insert into product values (null, "CF002", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten2.png", "2023/03/13", null);
+insert into product values (null, "DF003", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog3.png", "2023/03/13", null);
+insert into product values (null, "CF003", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten3.png", "2023/03/13", null);
+insert into product values (null, "CF004", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스 <br> ✔️ 극강의 기호성 <br> ✔️ 극강의 기호성 <br> ✔️ 극강의 기호성", "오리젠", 18000, 100, "origen1.png", "origen_catkitten4.png", "2023/03/13", null);
+insert into product values(p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_date, p_hit)" + "values
 
 select * from product;
 
@@ -77,10 +72,13 @@ create table cart
     m_name varchar(6) not null,
     p_id varchar(10) not null,
     ca_qnt int not null,
+    p_tfilename varchar(100) not null,
     primary key(ca_id),
     foreign key(m_name) references member(m_name),
-    foreign key(p_id) references product(p_id)
+    foreign key(p_id) references product(p_id),
+    foreign key(p_tfilename) references product(p_tfilename)
 );
+
 
 drop table cart;
 
