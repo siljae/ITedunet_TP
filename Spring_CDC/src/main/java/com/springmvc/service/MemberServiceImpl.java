@@ -28,12 +28,12 @@ public class MemberServiceImpl implements MemberService{
 		return result;
 	}
 
-	@Override
+	@Override //로그인 확인기능
 	public void chklogin(String[] result, HttpSession session) {
 		mr.chklogin(result, session);		
 	}
 
-	@Override
+	@Override //로그아웃 기능
 	public void logout(HttpSession session) {
 		mr.logout(session);		
 	}

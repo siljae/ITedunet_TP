@@ -13,7 +13,8 @@ public interface boardService {
 	public List<boardDTO> getboardlist();
 	public void setboard(boardDTO board,HttpServletRequest req);
 	public void updateboard(boardDTO board, HttpServletRequest req);
-	public void deleteboard();
-	public void calTime();
+	public void deleteboard(int num);
+	public String calTime(String time);
+	public boardDTO view(int num);
 	
 }

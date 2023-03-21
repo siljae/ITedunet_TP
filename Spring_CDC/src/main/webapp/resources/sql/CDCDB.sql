@@ -76,7 +76,7 @@ insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_conte
 delete from commuboard where m_name='abc';
 
 select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
-
+select*from commuboard order by cb_hit desc;
 
 
 select count(*) from commuboard where cb_animal_type='cat';

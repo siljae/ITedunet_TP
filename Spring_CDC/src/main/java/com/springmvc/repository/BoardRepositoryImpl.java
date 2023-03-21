@@ -66,13 +66,14 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		if(req.getAttribute("pageNum") != null)
 			pageNum = Integer.parseInt((String)req.getAttribute("pageNum"));
 		
-		System.out.println("페이지넘: "+pageNum);
 		String animal = (String)req.getParameter("animal_type");
-		String content = (String)req.getParameter("content");		
+		String content = (String)req.getParameter("content");	
+		String sort = (String)req.getAttribute("sort");
+		System.out.println("레파지토리의 sort: "+sort);
 		
 		int total_record = getlistcount(animal,content);
-		boardlist = getboardlist(pageNum, limit, animal, content);
-		this.listOfboards = boardlist;	
+		boardlist = getboardlist(pageNum, limit, animal, content, sort);
+			
 		
 		for (boardDTO board : boardlist) {
 			String regist_day = caltime(board.getRegist_day());
@@ -101,6 +102,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			total_page = total_page+1;
 		};
 		
+		this.listOfboards = boardlist;
 		model.addAttribute("pageNum", pageNum);
 		model.addAttribute("total_page", total_page);
 		model.addAttribute("total_record", total_record);
@@ -157,7 +159,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 
 	@Override //게시글 목록 가져오기
-	public ArrayList<boardDTO> getboardlist(int pageNum, int limit, String animal, String content) {
+	public ArrayList<boardDTO> getboardlist(int pageNum, int limit, String animal, String content, String sort) {
+		System.out.println("디비에 접근예정");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -170,12 +173,24 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		int index = start +1;
 		
 		String sql;
-		if(animal == null && content == null) {
+		if(animal == null && content == null && sort == null) {
+			System.out.println("설마 여긴가");
 			sql = "select*from commuboard order by cb_num desc";
+			
 		}
 		else if(animal != null) {
 			String cb_animal_type = animal;
 			sql = "select*from commuboard where"+cb_animal_type+"order by cb_num desc";
+		}
+		else if(sort.equals("viewed")) {
+			System.out.println("여기로왔어");
+			sql = "select*from commuboard order by cb_hit desc";			
+		}
+		else if(sort.equals("popular")) {
+			sql = "select*from commuboard order by cb_recom desc";
+		}
+		else if(sort.equals("newest")) {
+			sql = "select*from commuboard order by cb_num desc";
 		}
 		else {
 			//이거 확인하고 적용시키셈 > 동작하는거 확인했음 
@@ -270,11 +285,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		int num = Integer.parseInt(numStr);
 		String pageNumStr = (String) model.getAttribute("pageNum");
 		int pageNum = Integer.parseInt(pageNumStr);
-		System.out.println("넘: "+numStr);
-		System.out.println("페이지넘: "+pageNumStr);
 		boardDTO board = new boardDTO();
 		board = getboardbynum(num, pageNum);
-		System.out.println("보드: "+board);
 		String tag_src;
 		String tag_value;
 		if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {

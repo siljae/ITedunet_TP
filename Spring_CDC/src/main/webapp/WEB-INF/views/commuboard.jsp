@@ -11,6 +11,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/commuboard.css"/>">
 	<title>커뮤니티 게시판</title>
+	<script>
+		function viewed(){
+			/* location.href='<c:url value="/board/commu/${pageNum}/viewed"/>'; */
+			
+		}
+	</script>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
@@ -36,19 +42,19 @@
             <div class="filterbox">
                 <div class="filterbt">
                     <div class="radiobox">
-                        <input class="radiobt" type="radio" id="newest" name="question" value="최신순" checked>
+                        <input class="radiobt" type="radio" id="newest" name="question" value="최신순" onchange="newest()" checked>
                         <label for="newest">최신순</label>
                     </div>
                 </div>
                 <div class="filterbt">
                     <div class="radiobox">
-                        <input class="radiobt" type="radio" id="popular" name="question" value="인기순">
+                        <input class="radiobt" type="radio" id="popular" name="question" value="인기순" onchange="popular()">
                         <label for="popular">인기순</label>
                     </div>
                 </div>
                 <div class="filterbt">
                     <div class="radiobox">
-                        <input class="radiobt" type="radio" id="views" name="question" value="조회순">
+                        <input class="radiobt" type="radio" id="views" name="question" value="조회순" onchange="viewed()">
                         <label for="views">조회순</label>
                     </div>
                 </div>
@@ -73,7 +79,7 @@
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="./view/${pageNum}/${board.num }" class="coltitle">${board.title }</a>
+		                                <a href="<c:url value="/board/commu/view/${pageNum}/${board.num }"/>" class="coltitle">${board.title }</a>
 		                                <a href="./view/${pageNum}/${board.num }" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>

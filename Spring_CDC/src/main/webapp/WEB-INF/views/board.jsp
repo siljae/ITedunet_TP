@@ -177,8 +177,8 @@
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="<c:url value="/commu/view/${pageNum }/${num }"/>" class="coltitle">${board.title }</a>
-		                                <a href="<c:url value="/commu/view/${pageNum }/${num }"/>" class="coltext">${board.content }</a>	                                
+		                                <a href="<c:url value="/board/commu/view/${pageNum }/${board.num }"/>" class="coltitle">${board.title }</a>
+		                                <a href="<c:url value="/board/commu/view/${pageNum }/${board.num }"/>" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -191,7 +191,7 @@
 	                        </div>
                         	<c:if test="${board.filename != null && !empty board.filename}">
 		                        <div class="colbox">
-		                        	<a href="<c:url value="/commu/view/${pageNum }/${num }"/>" class="imgbox">
+		                        	<a href="<c:url value="/commu/view/${pageNum }/${board.num }"/>" class="imgbox">
 										<img class="listimg" src="<c:url value="/resources/img/board/${board.filename }"/>">
 									</a>
 	                        	</div>	

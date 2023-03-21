@@ -31,10 +31,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
         <div class="view_head">
-			<h1><a href="<c:url value="/board"/>">전체</a></h1>
-			<h1><a href="<c:url value="/board/commu"/>">우리아이자랑</a></h1>
-			<h1><a href="<c:url value="/board/qna"/>">묻고답하기</a></h1>
-			<h1><a href="<c:url value="/board/recom"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">묻고답하기</a></h1>
+		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해용</a></h1>
         </div>
         <div class="container">
             <div class="view_tag">

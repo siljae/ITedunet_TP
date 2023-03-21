@@ -49,9 +49,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 			pstmt.setString(1, email);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				System.out.println("db에서 가져옴");
 				if(rs.getString(1).equals(pw)) {
-					System.out.println("로그인 성공");
 					result[0] = "1";
 					result[1] = rs.getString("m_name");
 					result[2] = rs.getString("m_level");
@@ -72,7 +70,7 @@ public class MemberRepositoryImpl implements MemberRepository {
 		}
 		finally {
 			try {
-					if(rs != null)
+					if(rs != null)                   
 						rs.close();
 					if(pstmt != null)
 						pstmt.close();

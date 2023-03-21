@@ -10,7 +10,7 @@ public class boardDTO {
 	private MultipartFile img;
 	private String imgname;
 	private String regist_day;
-	
+	private String calregist_day;
 	
 	public int getNum() {
 		return num;
@@ -48,6 +48,12 @@ public class boardDTO {
 	}
 	public void setRegist_day(String regist_day) {
 		this.regist_day = regist_day;
+	}
+	public String getCalregist_day() {
+		return calregist_day;
+	}
+	public void setCalregist_day(String calregist_day) {
+		this.calregist_day = calregist_day;
 	}
 	
 	
