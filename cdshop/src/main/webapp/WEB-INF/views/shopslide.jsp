@@ -131,7 +131,7 @@
                         <a class="prodetail" href="#"></a>
                         <div class="productbox">
 	                        <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
-	                            <span class="proimg"><img src="./resources/img/" alt="">${product.titlefilename }</span>
+	                            <span class="proimg"><img src="./resources/img/" alt="">${product.tfilename }</span>
 	                            <span class="procompany">${product.manufacturer }</span>
 	                            <div class="proname">${product.name}</div>
 	                            <hr class="prohr">

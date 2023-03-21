@@ -1,8 +1,13 @@
 package com.springmvc.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class productDTO {
+import org.springframework.web.multipart.MultipartFile;
+
+public class productDTO implements Serializable {
+	private static final long serialVersionUID = 1L;
+	
 	private String productId;
 	private int num;
 	private String name;
@@ -12,10 +17,12 @@ public class productDTO {
 	private String manufacturer;
 	private int unitprice;
 	private long unitsinstock;
-	private String detailfilename;
-	private String titlefilename;
+	private MultipartFile detailimage;
+	private MultipartFile titleimage;
 	private Date date;
 	private int hit;
+	private String dfilename;
+	private String tfilename;
 	
 	public productDTO() {
 		super();
@@ -95,20 +102,20 @@ public class productDTO {
 		this.unitsinstock = unitsinstock;
 	}
 
-	public String getDetailfilename() {
-		return detailfilename;
+	public MultipartFile getDetailimage() {
+		return detailimage;
 	}
 
-	public void setDetailfilename(String detailfilename) {
-		this.detailfilename = detailfilename;
+	public void setDetailimage(MultipartFile detailfilename) {
+		this.detailimage = detailfilename;
 	}
 
-	public String getTitlefilename() {
-		return titlefilename;
+	public MultipartFile getTitleimage() {
+		return titleimage;
 	}
 
-	public void setTitlefilename(String titlefilename) {
-		this.titlefilename = titlefilename;
+	public void setTitleimage(MultipartFile titleimage) {
+		this.titleimage = titleimage;
 	}
 
 	public Date getDate() {
@@ -125,6 +132,30 @@ public class productDTO {
 
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+
+
+
+	public String getDfilename() {
+		return dfilename;
+	}
+
+
+
+	public void setDfilename(String dfilename) {
+		this.dfilename = dfilename;
+	}
+
+
+
+	public String getTfilename() {
+		return tfilename;
+	}
+
+
+
+	public void setTfilename(String tfilename) {
+		this.tfilename = tfilename;
 	}
 	
 	

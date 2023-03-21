@@ -12,6 +12,30 @@
     <title>Document</title>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/productadd.css" />">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+    <script>
+	    function printfile(){
+	        let name = document.getElementById('file1').value;
+            //파일 전체 경로를 \ 로 나눔
+            let filePathSplit = name.split('\\');
+            //파일 전체 경로를 \ 로 나눈 길이
+            let filePathLength = filePathSplit.length;
+            //마지막 경로
+            let fileName = filePathSplit[filePathLength-1]
+            
+	        document.getElementById('result').value =fileName;
+	    }
+	    function printfile2(){
+	        let name = document.getElementById('file2').value;
+            //파일 전체 경로를 \ 로 나눔
+            let filePathSplit = name.split('\\');
+            //파일 전체 경로를 \ 로 나눈 길이
+            let filePathLength = filePathSplit.length;
+            //마지막 경로
+            let fileName = filePathSplit[filePathLength-1]
+            
+	        document.getElementById('result2').value =fileName;
+	    }
+    </script>
 </head>
 <body>
     <jsp:include page="header.jsp"/>
@@ -104,52 +128,57 @@
                     </div>
                     <hr class="hrline">
                     <div id="write_area">
-                        <form:form modelAttribute="NewProduct" enctype="multipart/form-data" action="./add${_csrf.parameterName}=${_csrf_token}" class="from-hori">
+                        <form:form modelAttribute="NewProduct" enctype="multipart/form-data" action="./add" class="from-hori" method="post">
                             <div id ="product_id">
                                 <p class="idname">상품ID</p>
-                                <textarea name="p_Id" id="idtxt" cols="30" rows="10"></textarea>
+                                <form:textarea path="productId" name="p_Id" id="idtxt" cols="30" rows="10" required="required"></form:textarea>
                             </div>
                             <hr class="hrline">
                             <div id="in_title">
                                 <p class="titletxt">상품명</p>
-                                <select name="conoption" id="conoption">  
+                                <form:select path="category" name="conoption" id="conoption">  
                                       <!-- 나중에 선택은 유효성 검사 통해서 잘못선택했다고 경고창 띄워줌 -->
                                     <option id="opdefult"value="none">카테고리</option>
                                     <optgroup label="DOG">
-                                        <option value="dogfood">사료</option>
-                                        <option value="dogsnake">간식</option>
-                                        <option value="dogliving">간식</option>
-                                        <option value="dogtoy">장난감</option>
+                                        <form:option value="dogfood">사료</form:option>
+                                        <form:option value="dogsnake">간식</form:option>
+                                        <form:option value="dogliving">간식</form:option>
+                                        <form:option value="dogtoy">장난감</form:option>
                                     </optgroup>                             
                                     <optgroup label="CAT">
-                                        <option value="catfood">사료</option>
-                                        <option value="catsnake">간식</option>
-                                        <option value="catliving">간식</option>
-                                        <option value="cattoy">장난감</option>
+                                        <form:option value="catfood">사료</form:option>
+                                        <form:option value="catsnake">간식</form:option>
+                                        <form:option value="catliving">간식</form:option>
+                                        <form:option value="cattoy">장난감</form:option>
                                     </optgroup> 
-                                </select>
-                                <textarea name="title" id="utitle" rows="1" cols="55" maxlength="100" required></textarea>
+                                </form:select>
+                                <form:textarea path="name" id="utitle" rows="1" cols="55" maxlength="100" required="required"></form:textarea>
+                            </div>
+                            <hr class="hrline">
+                            <div id ="product_id">
+                                <p class="manufacturer">제조사</p>
+                                <form:textarea path="manufacturer" id="matxt" cols="30" rows="10" required="required"></form:textarea>
                             </div>
                             <hr class="hrline">
                             <div id="in_content">
                                 <p class = "contenttxt">상품타이틀멘트</p>
-                                <textarea name="timent" id="utiment" required></textarea>
+                                <form:textarea path="titlement"  id="utiment" required="required"></form:textarea>
                             </div>
                             <hr class="hrline">
                             <div id="in_content">
                                 <p class = "contenttxt">상품간단설명</p>
-                                <textarea name="content" id="ucontent" required></textarea>
+                                <form:textarea path="simpledescription" id="ucontent" required="required"></form:textarea>
                             </div>
                             <hr class="hrline">
                             <div class="upinfo">
                                 <div class="pricebox">
                                     <p class="pricetxt">판매가</p>
-                                    <input type="text" class="upload-price" name="price" >
+                                    <form:input path="unitprice" type="text" class="upload-price"  />
                                     <p class="pricetxt">원</p>
                                 </div>
                                 <div class="quantitybox">
                                     <p class="quantitytxt">재고수량</p>
-                                    <input type="text" class="upload-quantity" name="quantity" >
+                                    <form:input path="unitsinstock" type="text" class="upload-quantity" />
                                     <p class="quantitytxt">개</p>
                                 </div>
                                 <p class="waringtxt">※ 숫자로만 입력하세요 !</p>
@@ -157,16 +186,16 @@
                             <hr class="hrline">
                             <div class="filebox">
                                 <p class="filetitle">상품 정보 이미지</p>
-                                <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
-                                <label for="file"> 파일찾기</label>
-                                <input type="file" id="file">
+                                <input class="upload-name" id="result" placeholder="첨부파일" readonly="readonly"/>
+                                <label for="file1"> 파일찾기</label>
+                                <form:input type="file" path="detailimage" id="file1" onchange="printfile()"/>
                             </div>
                             <hr class="hrline">
                             <div class="filebox">
                                 <p class="filetitle">상품 대표 이미지</p>
-                                <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
-                                <label for="file"> 파일찾기</label>
-                                <input type="file" id="file">
+                                <input class="upload-name" id="result2" placeholder="첨부파일" readonly="readonly"/>
+                                <label for="file2"> 파일찾기</label>
+                                <form:input type="file" path="titleimage" id="file2" onchange="printfile2()"/>
                             </div>
                             <hr class="hrline">
                             <div class="bt_se">

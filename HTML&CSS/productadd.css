@@ -231,8 +231,25 @@
     border: 1px solid grey;
 
 }
+
 textarea:focus {
     outline: 1.5px solid grey;
+}
+.manufacturer{
+    margin-left: 5px;
+    font-size: 22px;
+    font-weight: 600;
+    margin-right: 10px;
+    line-height: 100%;
+    color: rgb(74, 74, 74);
+}
+#matxt{
+    width: 730px;
+    height: 28px;
+    resize: none;
+    font-size: 18px;
+    padding: 1.5px 0 1.5px 6px;   
+    border: 1px solid grey;
 }
 #in_content{
     margin-left: 5px;

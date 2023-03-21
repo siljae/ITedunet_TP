@@ -131,7 +131,7 @@
                         <a class="prodetail"href="./productview."></a>
                         <div class="productbox">
                             <a class="prodetail2" href="productpage.jsp">
-                                <div class="proimg"><img src="<c:url value = "/resources/img/${product.filename}" />"alt=""></div>
+                                <div class="proimg"><img src="<c:url value = "/resources/img/${product.tfilename}" />"alt=""></div>
                                 <div class="procompany">${product.manufacturer}</div>
                                 <div class="proname">${product.name }</div>
                                 <hr class="prohr">

@@ -20,10 +20,11 @@ public class productRowMapper implements RowMapper<productDTO>{
 		product.setManufacturer(rs.getString(7));
 		product.setUnitprice(rs.getInt(8));
 		product.setUnitsinstock(rs.getLong(9));
-		product.setDetailfilename(rs.getString(10));
-		product.setTitlefilename(rs.getString(11));
+		product.setDfilename(rs.getString(10));
+		product.setTfilename(rs.getString(11));
 		product.setDate(rs.getDate(12));
 		product.setHit(rs.getInt(13));
+
 		return product;
 	}
 

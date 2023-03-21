@@ -106,8 +106,16 @@ public class productRepositoryImpl implements productRepository {
 	}
 	
 	public void setNewProduct(productDTO product) {
-		String SQL = "insert into product (p_num, p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_detailfilename, p_titlefilename, p_date, p_hit)" + "values(?,?,?,?,?,?,?,?,?,?,?,?,?)";
-		template.update(SQL, product.getNum(), product.getProductId(), product.getName(), product.getCategory(), product.getSimpledescription(), product.getManufacturer(), product.getUnitprice(), product.getDetailfilename(), product.getTitlefilename(), product.getDate(), product.getHit());
+		String SQL = "insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_date, p_hit)" + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
+		template.update(SQL, product.getProductId(), product.getName(), product.getCategory(),product.getTitlement(), product.getSimpledescription(), product.getManufacturer(), product.getUnitprice(),product.getUnitsinstock(), product.getDfilename(), product.getTfilename(), product.getDate(), product.getHit());
+	}
+
+
+
+	@Override
+	public List<productDTO> getProductListByCategory(String category) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

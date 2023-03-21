@@ -8,4 +8,5 @@ public interface productService {
 	List<productDTO> getAllProductList();
 	List<productDTO> getProductListByCategory(String category);
 	productDTO getProductById(String productId);
+	void setNewProduct(productDTO product);
 }

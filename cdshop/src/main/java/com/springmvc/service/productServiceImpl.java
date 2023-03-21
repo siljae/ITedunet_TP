@@ -28,4 +28,8 @@ public class productServiceImpl implements productService {
 		System.out.println("productById 가져오냐??? : " + productById);
 		return productById;
 	}
+	
+	public void setNewProduct(productDTO product) {
+		productrepository.setNewProduct(product);
+	}
 }
