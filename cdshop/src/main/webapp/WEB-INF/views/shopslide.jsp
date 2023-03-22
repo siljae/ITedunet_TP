@@ -11,7 +11,7 @@
 <head>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/shopslide.css" />">
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>shopmain</title>
 <style>
 	
 </style>
@@ -131,7 +131,7 @@
                         <a class="prodetail" href="#"></a>
                         <div class="productbox">
 	                        <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
-	                            <span class="proimg"><img src="./resources/img/" alt="">${product.tfilename }</span>
+	                            <span class="proimg"><img src="/resources/img/${product.tfilename }" alt=""></span>
 	                            <span class="procompany">${product.manufacturer }</span>
 	                            <div class="proname">${product.name}</div>
 	                            <hr class="prohr">

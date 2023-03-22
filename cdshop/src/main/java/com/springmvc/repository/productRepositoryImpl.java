@@ -43,6 +43,7 @@ public class productRepositoryImpl implements productRepository {
 	
 	
 	
+	
 	public int getListCount(String items, String text) {
 		Connection conn = null;
 		System.out.println("conn : " + conn);
@@ -106,16 +107,20 @@ public class productRepositoryImpl implements productRepository {
 	}
 	
 	public void setNewProduct(productDTO product) {
-		String SQL = "insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_date, p_hit)" + "values(?,?,?,?,?,?,?,?,?,?,?,?)";
-		template.update(SQL, product.getProductId(), product.getName(), product.getCategory(),product.getTitlement(), product.getSimpledescription(), product.getManufacturer(), product.getUnitprice(),product.getUnitsinstock(), product.getDfilename(), product.getTfilename(), product.getDate(), product.getHit());
+		String SQL = "insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_hit)" + "values(?,?,?,?,?,?,?,?,?,?,?)";
+		template.update(SQL, product.getProductId(), product.getName(), product.getCategory(),product.getTitlement(), product.getSimpledescription(), product.getManufacturer(), product.getUnitprice(),product.getUnitsinstock(), product.getDfilename(), product.getTfilename(), product.getHit());
+		System.out.println("들어갔니?" + SQL);
 	}
 
 
 
 	@Override
 	public List<productDTO> getProductListByCategory(String category) {
-		// TODO Auto-generated method stub
-		return null;
+		List<productDTO> productByCategory = new ArrayList<productDTO>();
+	
+		String SQL = "select*from product where p_category like '%" + category + "%'";
+		productByCategory = template.query(SQL, new productRowMapper());
+		return productByCategory;
 	}
 	
 	

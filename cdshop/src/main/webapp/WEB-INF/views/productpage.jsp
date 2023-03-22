@@ -115,7 +115,7 @@
                     </div>
                     <div class="protext">
                         <div class="proimg">
-                            <img src="./resources/img/origen_catkitten.jpg" alt="">
+                            <img src="/resources/img/${product.tfilename }" alt="">
                         </div>
                         <div class="productex">
                             <div class="proexbox">
@@ -166,7 +166,7 @@
                     <div class="detailsbox">
                         <div class="detailphoto">
                             <div class="detailimg">
-                                <img src="./resources/img/origen1.jpg" alt="">
+                                <img src="/resources/img/${product.dfilename }" alt="">
                             </div>
                         </div>
                     </div>

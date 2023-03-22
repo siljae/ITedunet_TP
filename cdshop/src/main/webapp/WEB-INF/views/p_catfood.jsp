@@ -4,6 +4,7 @@
 <%@page import="com.springmvc.domain.productDTO"%>
 <%@page import="com.springmvc.repository.productRepository"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +12,7 @@
 <title>Insert title here</title>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/catfood.css" />">
 </head>
+
 <body>
     <jsp:include page="header.jsp"/>
     <div class="container1">
@@ -123,138 +125,27 @@
                             <label for="rprice">낮은가격순</label>
                         </div>
                     </div>
-                  
-                    
-    
                 </div>
-                <ul class="alllistbox">
-                    <li class="listbox">
+                <div class="alllistbox">
+                <c:forEach items="${productlist}" var="product">
+                <c:if test="${product.category eq 'catfood'}">
+                    <div class="listbox">
                         <a class="prodetail"href="#"></a>
                         <div class="productbox">
-                            <a class="prodetail2" href="<c:url value="/shopmain/productview"/>">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
+                            <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
+                                <div class="proimg"><img src="/resources/img/${product.tfilename }" alt=""></div>
+                                <div class="procompany">${product.manufacturer }</div>
+                                <div class="proname">${product.name}</div>
                                 <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
+                                <div class="proprice">${product.unitprice}원</div>
                                 <input type="hidden" class="donnkow" value="">
                             </a>
                             <div class="cartbt"><a href="">장바구니</a></div>
                         </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                    <li class="listbox">
-                        <a class="prodetail"href=""></a>
-                        <div class="productbox">
-                            <a class="prodetail2" href="">
-                                <div class="proimg"><img src="/HTML&CSS/img/origen_catkitten.jpg" alt=""></div>
-                                <div class="procompany">오리젠</div>
-                                <div class="proname">오리젠 캣앤키튼 1.8kg</div>
-                                <hr class="prohr">
-                                <div class="proprice">₩38,000</div>
-                                <input type="hidden" class="donnkow" value="">
-                            </a>
-                            <div class="cartbt"><a href="">장바구니</a></div>
-                        </div>
-                    </li>
-                </ul>
+                    </div>
+                </c:if>
+               	</c:forEach>
+                </div>
             </div>
             <ul class="pagebutton">
                 <li class="leftbt">

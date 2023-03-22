@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.productDTO;
+import com.springmvc.exception.CategoryException;
 import com.springmvc.service.productService;
 
 @Controller
@@ -71,7 +73,7 @@ public class productcontroller {
 		System.out.println("detailimage 넣었니" + detailimage);
 		String saveName = detailimage.getOriginalFilename();
 		System.out.println("originalname 넣었니" + saveName);
-		File saveFile = new File("C:\\upload", saveName);
+		File saveFile = new File("D:/KSH/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/cdshop/resources/img", saveName);
 		System.out.println("파일 업로드에 들어갔니" + saveFile);
 		if (detailimage != null && !detailimage.isEmpty()) {
 			System.out.println("예외처리 if문");
@@ -86,7 +88,7 @@ public class productcontroller {
 		System.out.println("detailimage 넣었니" + titleimage);
 		String saveName1 = titleimage.getOriginalFilename();
 		System.out.println("originalname 넣었니" + saveName1);
-		File saveFile1 = new File("C:\\upload", saveName1);
+		File saveFile1 = new File("D:/KSH/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/cdshop/resources/img", saveName1);
 		System.out.println("파일 업로드에 들어갔니" + saveFile1);
 		if (titleimage != null && !titleimage.isEmpty()) {
 			System.out.println("예외처리 if문");
@@ -99,46 +101,113 @@ public class productcontroller {
 		}
 		
 		ps.setNewProduct(product);
-		return "redirect:/shopslide";
+		System.out.println("product" + product);
+		return "redirect:/shopmain/all";
 	}
 	
+//	@GetMapping("/dogfood/{category}")
+//	public String requestProductByCategory(@PathVariable("category") String productCategory, Model model) {
+//		List<productDTO> productByCategory = ps.getProductListByCategory(productCategory);
+//		if (productByCategory == null || productByCategory.isEmpty()) {
+//			throw new CategoryException();
+//		}
+//		model.addAttribute("productList", productByCategory);
+//		return "p_dogfood";
+//	}
+//	
 	@GetMapping("/dogfood")
-	public String p_dogfood() {
-		return "p_dogfood";
+	public ModelAndView p_dogfood(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_dogfood");
+		return modelandview;
 	}
 	
 	@GetMapping("/dogsnack")
-	public String p_dogsnack() {
-		return "p_dogsnack";
+	public ModelAndView p_dogsnack(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_dogsnack");
+		return modelandview;
 	}
 	
 	@GetMapping("/dogsup")
-	public String p_dogsup() {
-		return "p_dogsup";
+	public ModelAndView p_dogsup(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_dogsup");
+		return modelandview;
 	}
 	
 	@GetMapping("/dogtoy")
-	public String p_dogtoy() {
-		return "p_dogtoy";
+	public ModelAndView p_dogtoy(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_dogtoy");
+		return modelandview;
 	}
 	
 	@GetMapping("/catfood")
-	public String p_catfood() {
-		return "p_catfood";
+	public ModelAndView p_catfood(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_catfood");
+		return modelandview;
 	}
 	
 	@GetMapping("/catsnack")
-	public String p_catsnack() {
-		return "p_catsnack";
+	public ModelAndView p_catsnack(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_catsnack");
+		return modelandview;
 	}
 	
 	@GetMapping("/catsup")
-	public String p_catsup() {
-		return "p_catsup";
+	public ModelAndView p_catsup(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_catsup");
+		return modelandview;
 	}
 	
 	@GetMapping("/cattoy")
-	public String p_cattoy() {
-		return "p_cattoy";
+	public ModelAndView p_cattoy(Model model) {
+		ModelAndView modelandview = new ModelAndView();
+		List<productDTO> list = ps.getAllProductList();
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
+		}
+		modelandview.addObject("productlist", list);
+		modelandview.setViewName("p_cattoy");
+		return modelandview;
 	}
 }

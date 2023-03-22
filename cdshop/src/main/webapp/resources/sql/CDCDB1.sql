@@ -33,24 +33,12 @@ create table product
     p_unitsinstock long not null,
     p_dfilename varchar(100) not null,
     p_tfilename varchar(100) not null,
-    p_date date default (current_date),
-    p_hit int default 1,
+    p_hit int not null default 1,
     primary key(p_num),
-    unique key(p_id),
-    unique key(p_tfilename)
+    unique key(p_id)
 );
 
 drop table product;
-
-insert into product values (null, "DF001", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog6.png", "2023/03/13", null);
-insert into product values (null, "CF001", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten1.png", "2023/03/13", null);
-insert into product values (null, "DF002", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog.png2", "2023/03/13", null);
-insert into product values (null, "CF002", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten2.png", "2023/03/13", null);
-insert into product values (null, "DF003", "오리젠 독 6kg", "DOG", "강아지가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 60000, 100, "orijendog1.png", "orijendog3.png", "2023/03/13", null);
-insert into product values (null, "CF003", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스", "오리젠", 18000, 100, "origen1.png", "origen_catkitten3.png", "2023/03/13", null);
-insert into product values (null, "CF004", "오리젠 캣앤키튼 1.8kg", "CAT", "고양이가 환장하는 맛! 인기순위 1위", "✔️완벽한 영양소 밸런스 <br> ✔️ 극강의 기호성 <br> ✔️ 극강의 기호성 <br> ✔️ 극강의 기호성", "오리젠", 18000, 100, "origen1.png", "origen_catkitten4.png", "2023/03/13", null);
-insert into product values(p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_date, p_hit)" + "values
-
 select * from product;
 
 create table buy
@@ -75,8 +63,7 @@ create table cart
     p_tfilename varchar(100) not null,
     primary key(ca_id),
     foreign key(m_name) references member(m_name),
-    foreign key(p_id) references product(p_id),
-    foreign key(p_tfilename) references product(p_tfilename)
+    foreign key(p_id) references product(p_id)
 );
 
 

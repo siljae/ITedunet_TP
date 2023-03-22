@@ -19,7 +19,6 @@ public class productDTO implements Serializable {
 	private long unitsinstock;
 	private MultipartFile detailimage;
 	private MultipartFile titleimage;
-	private Date date;
 	private int hit;
 	private String dfilename;
 	private String tfilename;
@@ -118,13 +117,6 @@ public class productDTO implements Serializable {
 		this.titleimage = titleimage;
 	}
 
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
 
 	public int getHit() {
 		return hit;

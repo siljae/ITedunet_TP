@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>상품등록</title>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/productadd.css" />">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
     <script>
@@ -141,14 +141,14 @@
                                     <option id="opdefult"value="none">카테고리</option>
                                     <optgroup label="DOG">
                                         <form:option value="dogfood">사료</form:option>
-                                        <form:option value="dogsnake">간식</form:option>
-                                        <form:option value="dogliving">간식</form:option>
+                                        <form:option value="dogsnack">간식</form:option>
+                                        <form:option value="dogsup">용품</form:option>
                                         <form:option value="dogtoy">장난감</form:option>
                                     </optgroup>                             
                                     <optgroup label="CAT">
                                         <form:option value="catfood">사료</form:option>
-                                        <form:option value="catsnake">간식</form:option>
-                                        <form:option value="catliving">간식</form:option>
+                                        <form:option value="catsnack">간식</form:option>
+                                        <form:option value="catsup">용품</form:option>
                                         <form:option value="cattoy">장난감</form:option>
                                     </optgroup> 
                                 </form:select>
