@@ -52,8 +52,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
             }
         }
 		
-		String sql = "insert into commuboard(cb_board_type,cb_animal_type,m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values(?,?,?,?,?,?,?,?)";
-		template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit());
+		String sql = "insert into commuboard(cb_board_type,cb_animal_type,m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit, cb_recom) values(?,?,?,?,?,?,?,?,?)";
+		template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit(), board.getRecom());
 	}
 
 	@Override //전체 게시글 불러오기
@@ -69,7 +69,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		String animal = (String)req.getParameter("animal_type");
 		String content = (String)req.getParameter("content");	
 		String sort = (String)req.getAttribute("sort");
-		System.out.println("레파지토리의 sort: "+sort);
 		
 		int total_record = getlistcount(animal,content);
 		boardlist = getboardlist(pageNum, limit, animal, content, sort);
@@ -160,7 +159,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 
 	@Override //게시글 목록 가져오기
 	public ArrayList<boardDTO> getboardlist(int pageNum, int limit, String animal, String content, String sort) {
-		System.out.println("디비에 접근예정");
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -174,7 +172,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 		String sql;
 		if(animal == null && content == null && sort == null) {
-			System.out.println("설마 여긴가");
 			sql = "select*from commuboard order by cb_num desc";
 			
 		}
@@ -183,7 +180,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			sql = "select*from commuboard where"+cb_animal_type+"order by cb_num desc";
 		}
 		else if(sort.equals("viewed")) {
-			System.out.println("여기로왔어");
 			sql = "select*from commuboard order by cb_hit desc";			
 		}
 		else if(sort.equals("popular")) {
@@ -195,7 +191,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		else {
 			//이거 확인하고 적용시키셈 > 동작하는거 확인했음 
 			sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";
-			System.out.println("sql문: "+sql);
 			
 		}
 		
@@ -350,7 +345,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 	//선택된 글 상세 내용 가져오기
 	public boardDTO getboardbynum(int num, int pageNum) {
-		System.out.println("넘넘: "+num);
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -363,7 +357,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, num);
 			rs = pstmt.executeQuery();
-
 			if (rs.next()) {
 				board = new boardDTO();
 				board.setNum(rs.getInt("cb_num"));
@@ -374,9 +367,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 				board.setRegist_day(rs.getString("cb_regist_day"));
 				board.setFilename(rs.getString("cb_filename"));
 				board.setHit(rs.getInt("cb_hit"));
-				System.out.println("board: "+board.getTitle());
+				board.setRecom(rs.getInt("cb_recom"));
 			}
-			System.out.println("보드접근: "+board);
 			return board;
 		} catch (Exception ex) {
 			System.out.println("getBoardByNum() 에러 : " + ex);
@@ -419,12 +411,12 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		}
 		
 		if(board.getFilename() != null) {
-			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_filename=?, cb_hit=? where cb_num=?";
-			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit(),board.getNum());
+			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_filename=?, cb_hit=?, cb_recom=? where cb_num=?";
+			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit(),board.getNum(), board.getRecom());
 		}
 		else if(board.getFilename() == null){
-			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=? where cb_num=?";
-			template.update(sql, board.getNum(), board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getHit());
+			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=?, cb_recom=? where cb_num=?";
+			template.update(sql, board.getNum(), board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getHit(), board.getRecom());
 		}
 	}
 	
@@ -446,15 +438,17 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		String sql = "delete from commuboard where cb_num=?";
 		template.update(sql, num);
 	}
-
+	
 	@Override //게시글 제목이나, 내용으로 검색하기
 	public void search(Model model,HttpServletRequest req) {
-		System.out.println("dao왔음: "+req.getParameter("content"));
 		boardlist(model, req);
 		
 	}
 	
-	
+	public void recom(int num, int recom) {
+		String sql = "update commuboard set recom=? where cb_num=?";
+		template.update(sql,recom,num);
+	}
 	
 	
 }

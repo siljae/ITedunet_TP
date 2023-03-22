@@ -10,13 +10,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/commuboard.css"/>">
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<title>커뮤니티 게시판</title>
 	<script>
+	    window.onload = function(){
+	        let sort = '${sort}';
+	        if(sort != null){
+	        	document.getElementById(sort).checked=true;
+	        }
+	        else{
+	            document.getElementById('newest').checked=true;
+	        }
+	    }	
+	</script>
+	<script>
+		function newest(){
+			location.href='<c:url value="/board/commu/${pageNum}/newest"/>';
+		}
+		function popular(){
+			location.href='<c:url value="/board/commu/${pageNum}/popular"/>';
+		}
 		function viewed(){
-			/* location.href='<c:url value="/board/commu/${pageNum}/viewed"/>'; */
-			
+			location.href='<c:url value="/board/commu/${pageNum}/viewed"/>';
 		}
 	</script>
+	
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
@@ -54,8 +72,8 @@
                 </div>
                 <div class="filterbt">
                     <div class="radiobox">
-                        <input class="radiobt" type="radio" id="views" name="question" value="조회순" onchange="viewed()">
-                        <label for="views">조회순</label>
+                        <input class="radiobt" type="radio" id="viewed" name="question" value="조회순" onchange="viewed()">
+                        <label for="viewed">조회순</label>
                     </div>
                 </div>
                 <c:if test="${name != null }">

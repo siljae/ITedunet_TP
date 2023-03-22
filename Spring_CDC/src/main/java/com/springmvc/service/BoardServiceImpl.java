@@ -50,13 +50,12 @@ public class BoardServiceImpl implements BoardService {
 		br.deleteboard(num);
 		
 	}
-
+	
 	@Override
 	public void search(Model model, HttpServletRequest req) {
 		br.search(model, req);
 		
 	}
-	
 	
 	
 	

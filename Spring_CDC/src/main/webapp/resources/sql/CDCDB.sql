@@ -53,6 +53,7 @@ create table commuboard
     cb_regist_day varchar(30) not null,
     cb_filename varchar(100),
     cb_hit int not null default 0,
+    cb_recom int not null default 0,
     primary key(cb_num),
     foreign key(m_name) references member(m_name)
 );
@@ -73,6 +74,9 @@ insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_conte
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다11', 'test', '2023/03/14 12:12:12');
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다12', 'test', '2023/03/14 12:12:12');
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다13', 'test', '2023/03/14 12:12:12');
+
+update commuboard set cb_recom= cb_recom+1 where cb_title= '33333';
+
 delete from commuboard where m_name='abc';
 
 select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
@@ -96,17 +100,28 @@ update commuboard
 alter table commuboard add cb_tag varchar(10) not null;
 alter table commuboard alter cb_filename set default null;
 alter table commuboard alter cb_filename drop default;
-
+alter table commuboard add cb_recom int not null default 0;
+-- 아래 리콤은 추천테이블이다 해당 테이블에 대한 로직을 작성하려면 아직 이해도가 부족하기때문에 나중에 작성하다 해당 테이블과 관련된 모든 sql문은 현재 사용해서는 안된다
 create table recom
 (
 	recom_num int auto_increment,
     m_name varchar(6) not null,
     cb_num int not null,
-    recom_chk int default 0,
+    recom_chk boolean default false,
     primary key(recom_num),
-    foreign key(m_name) references member(m_name) on delete cascade,
-    foreign key(cb_num) references commuboard(cb_num) on delete cascade
+    foreign key (cb_num) references commuboard(cb_num),
+	foreign key (m_name) references member(m_name) 
 );
+
+insert into recom(m_name, cb_num, recom_chk) values('admin',38,true);
+update commuboard as cb
+	set cb.cb_recom = 
+		(
+			select count(*)
+			from recom as r
+			where r.cb_num = cb.cb_num and r.recom_chk =true
+		);
+
 select*from recom;
 drop table recom;
 create table reply

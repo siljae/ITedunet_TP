@@ -24,6 +24,14 @@
         function write_delete(){
         	location.href='<c:url value="/board/commu/view/${pageNum}/deleteboard/${num}"/>';
         }
+        
+        function recom(){
+        	/* let value = false;
+        	
+        	let recom = document.getEle */
+        	
+        	location.href='<c:url value="/board/commu/view/${pageNum}/{num}/${board.recom}"/>';
+        }
     </script>
     
 <title>커뮤니티 게시판의 게시글</title>
@@ -69,9 +77,9 @@
                     </c:if>
                     <p class="postbox_text">${board.content }</p>
                     <div>
-                        <button class="recom" onclick="recom_sum()">
+                        <button class="recom"  onclick="recom()">
                             <i class="far fa-thumbs-up"></i>
-                            <span>0</span>
+                            <span>${board.recom }</span>
                         </button>
                     </div>                
                 </div>

@@ -17,7 +17,15 @@ public class boardDTO {
 	private String tag_src;
 	private String tag_value;
 	private String calregist;
+	private int recom;
 
+	@Override
+	public String toString() {
+		return "boardDTO [num=" + num + ", name=" + name + ", board_type=" + board_type + ", animal_type=" + animal_type
+				+ ", title=" + title + ", content=" + content + ", regist_day=" + regist_day + ", hit=" + hit
+				+ ", fileimage=" + fileimage + ", filename=" + filename + "]";
+	}
+	
 	public int getNum() {
 		return num;
 	}
@@ -99,11 +107,12 @@ public class boardDTO {
 		this.calregist = calregist;
 	}
 	
-	@Override
-	public String toString() {
-		return "boardDTO [num=" + num + ", name=" + name + ", board_type=" + board_type + ", animal_type=" + animal_type
-				+ ", title=" + title + ", content=" + content + ", regist_day=" + regist_day + ", hit=" + hit
-				+ ", fileimage=" + fileimage + ", filename=" + filename + "]";
+	
+	public int getRecom() {
+		return recom;
+	}
+	public void setRecom(int recom) {
+		this.recom = recom;
 	}
 	
 	
