@@ -18,6 +18,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 import com.springmvc.database.DBConnection;
 import com.springmvc.domain.boardDTO;
 
@@ -170,7 +171,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		//다음 페이지
 		int index = start +1;
 		
-		String sql;
+		String sql = null;
 		if(animal == null && content == null && sort == null) {
 			sql = "select*from commuboard order by cb_num desc";
 			
@@ -179,19 +180,20 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			String cb_animal_type = animal;
 			sql = "select*from commuboard where"+cb_animal_type+"order by cb_num desc";
 		}
-		else if(sort.equals("viewed")) {
-			sql = "select*from commuboard order by cb_hit desc";			
-		}
-		else if(sort.equals("popular")) {
-			sql = "select*from commuboard order by cb_recom desc";
-		}
-		else if(sort.equals("newest")) {
-			sql = "select*from commuboard order by cb_num desc";
+		else if(sort != null) {
+			if(sort.equals("viewed")) {
+				sql = "select*from commuboard order by cb_hit desc";			
+			}
+			else if(sort.equals("popular")) {
+				sql = "select*from commuboard order by cb_recom desc";
+			}
+			else if(sort.equals("newest")) {
+				sql = "select*from commuboard order by cb_num desc";
+			}
 		}
 		else {
 			//이거 확인하고 적용시키셈 > 동작하는거 확인했음 
-			sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";
-			
+			sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";			
 		}
 		
 		ArrayList<boardDTO> list = new ArrayList<boardDTO>();
@@ -445,9 +447,40 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 	}
 	
-	public void recom(int num, int recom) {
-		String sql = "update commuboard set recom=? where cb_num=?";
-		template.update(sql,recom,num);
+	@Override	//추천 기능
+	public void recom(String num, String recom) {
+		if(recom.equals("true")) {
+			int cnt = 1;
+			String sql = "update commuboard set cb_recom=cb_recom+? where cb_num=?";
+			template.update(sql,cnt,num);
+		}
+		else if(recom.equals("false")) {
+			int cnt = 1;
+			String sql = "update commuboard set cb_recom=cb_recom-? where cb_num=?";
+			template.update(sql,cnt,num);
+		}
+		
+	}
+	
+	@Override	//인기글 가져오기
+	public List<boardDTO> recomboard() {
+		String sql = "select*from commuboard where cb_recom >= 10 limit 5";
+		List<boardDTO> recomlist = template.query(sql, new BoardMapper());
+		for (boardDTO board : recomlist) {
+			String regist_day = caltime(board.getRegist_day());
+			
+			if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
+				board.setCalregist(regist_day);
+				board.setTag_src("catface.png");
+				board.setTag_value("고양이");
+			}
+			else if(board.getAnimal_type() != null && board.getAnimal_type().equals("dog")) {
+				board.setCalregist(regist_day);
+				board.setTag_src("dogface.png");
+				board.setTag_value("강아지");
+			}
+		}
+		return recomlist;
 	}
 	
 	

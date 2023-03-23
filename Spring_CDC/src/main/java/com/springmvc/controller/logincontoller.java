@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.memberDTO;
 import com.springmvc.service.MemberService;
@@ -23,7 +24,7 @@ public class logincontoller {
 	private MemberService mr;
 	
 	@RequestMapping //로그인 메인페이지
-	public String login(){
+	public String login(@ModelAttribute("member") memberDTO member){
 		return "login";
 	}
 	
@@ -32,14 +33,14 @@ public class logincontoller {
 		return "pw_search";
 	}
 	
-	@PostMapping("/chklogin") //로그인 기능
-	public String submitlogin(HttpServletRequest req, Model model, HttpSession session){
-		System.out.println("로그인기능을 실행합니다");
-		String[] result = mr.login(req.getParameter("email"),req.getParameter("pw"));		
-		mr.chklogin(result, session);
-		return "redirect:/home";
+	@PostMapping("/loginchk")	//로그인기능
+	public ModelAndView loginchk(@ModelAttribute("member")memberDTO member,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mr.chklogin(member.getEmail(), member.getPw(), session,mav);		
+		return mav;
 	}
-	@GetMapping("/logout")
+	
+	@GetMapping("/logout")	//로그아웃 기능
 	public String logout(HttpSession session) {
 		mr.logout(session);
 		return "redirect:/home";
@@ -79,6 +80,7 @@ public class logincontoller {
 	public String chkname2(HttpServletRequest req) {
 		return "check_name";
 	}
+	
 	
 	
 	

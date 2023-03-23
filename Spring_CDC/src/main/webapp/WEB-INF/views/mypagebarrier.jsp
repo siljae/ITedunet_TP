@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,17 +57,17 @@
                 </ul>
                 <div class="my_right">
                     <h2>개인정보 수정</h2>
-                    <p>(회원)님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 입력해주시기 바랍니다.</p>
-                    <form action="#" method="post">
+                    <p>${name }님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 입력해주시기 바랍니다.</p>
+                    <form:form modelAttribute="member" action="./barrier" method="post">
                         <table class="my_table">
                             <tr>
                                 <td class="td_left">이메일</td>
-                                <td class="td_right">catmom22@naver.com</td>
+                                <td class="td_right">${member.email }</td>
                             </tr>
                             <tr>
                                 <td class="td_left">비밀번호</td>
                                 <td class="td_right">
-                                    <input type="password" name="pw" size="10" required="required" class="my_pw">
+                                    <form:input type="password" path="pw" size="10" required="required" class="my_pw"/>
                                 </td>
                             </tr>
                         </table>
@@ -74,7 +75,7 @@
                         <div class="my_inputbox">
                             <input type="submit" value="확인" class="submit">
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

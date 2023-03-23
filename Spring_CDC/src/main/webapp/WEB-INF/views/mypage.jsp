@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,18 @@
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <title>마이페이지</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/MyPage.css"/>">
+<!-- 카카오 우편번호 API -->
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    function execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+                document.querySelector("#postcode").value = data.zonecode;
+                document.querySelector("#address").value = data.address
+            }
+        }).open();
+    }
+</script>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
@@ -56,53 +69,59 @@
                 </ul>
                 <div class="my_right">
                     <h2>개인정보 수정</h2>                    
-                    <form action="#" method="post">
+                    <form:form action="/mypage/mypage" modelAttribute="member" method="post">
                         <table class="my_table">
                             <tr>
                                 <td class="td_left">이메일</td>
                                 <td class="td_right">
-                                    <input type="text" name="email" class="inbox1 read" readonly value="abc@email.com">
+                                    <form:input type="text" path="email" class="inbox1 read" readonly="readonly"/>
                                 </td>
+                            </tr>
+                            <tr>
+                            	<td class="td_left">닉네임</td>
+                            	<td class="td_right">
+                            		<form:input type="text" path="name" class="inbox1" required="required" />
+                           		</td>
                             </tr>
                             <tr>
                                 <td class="td_left">비밀번호</td>
                                 <td class="td_right">
-                                    <input type="password" name="pw" class="inbox1" required>
+                                    <form:input type="password" path="pw" class="inbox1" required="required"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_left">비밀번호확인</td>
                                 <td class="td_right">
-                                    <input type="password" name="pw2" class="inbox1" required>
+                                    <input type="password" name="pw2" class="inbox1" required="required">
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_left">전화번호</td>
                                 <td>
-                                    <input type="text" name="num" value="010" class="inboxnum read" readonly>
+                                    <form:input type="text" path="num" class="inboxnum read" readonly="readonly"/>
                                     <span>-</span>
-                                    <input type="text" name="num1" class="inboxnum" required>
+                                    <form:input type="text" path="num1" class="inboxnum" required="required"/>
                                     <span>-</span>
-                                    <input type="text" name="num2" class="inboxnum" required>
+                                    <form:input type="text" path="num2" class="inboxnum" required="required"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_left">주소</td>
                                 <td>
-                                    <input type="text" name="post" class="inboxpost read"  value="12345" readonly>
-                                    <button onclick="" class="postbox" name="post">우편번호</button>
+                                    <form:input type="text" id="postcode" path="post" class="inboxpost read"  value="12345" readonly="readonly"/>
+                                    <button onclick="execDaumPostcode()" class="postbox" name="post">우편번호</button>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_left"></td>
                                 <td>
-                                    <input type="text" name="addr" class="inbox2">
+                                    <form:input type="text" id="address" path="addr" class="inbox2"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="td_left"></td>
                                 <td>
-                                    <input type="text" name="addr1" class="inbox2" placeholder="상세주소">
+                                    <form:input type="text" path="addr1" class="inbox2" placeholder="상세주소"/>
                                 </td>
                             </tr>
                         </table>
@@ -110,7 +129,7 @@
                             <input type="reset" value="취소" class="reset">
                             <input type="submit" value="확인" class="submit">
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

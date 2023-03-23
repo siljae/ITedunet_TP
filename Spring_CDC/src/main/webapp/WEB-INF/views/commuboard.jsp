@@ -13,7 +13,7 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<title>커뮤니티 게시판</title>
 	<script>
-	    window.onload = function(){
+	    $(document).ready(function(){
 	        let sort = '${sort}';
 	        if(sort != null){
 	        	document.getElementById(sort).checked=true;
@@ -21,7 +21,7 @@
 	        else{
 	            document.getElementById('newest').checked=true;
 	        }
-	    }	
+	    });
 	</script>
 	<script>
 		function newest(){
@@ -157,7 +157,6 @@
                 </div>
             </div>
         </div>
-        페이지넘:${pageNum }
         <ul class="pagebutton">
         	<c:if test="${pageNum>1 }">        	
 	            <li class="leftbt">

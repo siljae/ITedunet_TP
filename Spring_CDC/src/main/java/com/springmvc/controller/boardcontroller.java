@@ -1,9 +1,6 @@
 package com.springmvc.controller;
 
 
-
-import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
@@ -29,7 +25,9 @@ public class boardcontroller {
 
 	@RequestMapping("/") //전체 게시판
 	public String board(Model model,HttpServletRequest req) {
+		System.out.println("전체페이지~ ");
 		br.boardlist(model,req);
+		br.recomboard(model);
 		return "board";
 	}
 	
@@ -37,6 +35,7 @@ public class boardcontroller {
 	public String boardnum(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req) {
 		req.setAttribute("pageNum", pageNum);
 		br.boardlist(model,req);
+		br.recomboard(model);
 		return "board";
 	}
 	
@@ -80,23 +79,22 @@ public class boardcontroller {
 		return "redirect:/board/"+pageNum;
 	}
 	
-	@GetMapping("/commu/view/{pageNum}/{num}/{recom}")
-	public String viewrecom(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num, @PathVariable("recom")int recom) {
-		
-		return "redirect:";
+	@GetMapping("/commu/view/{pageNum}/{num}/{recom}")	//추천기능
+	public String viewrecom(@PathVariable("pageNum") String pageNum,@PathVariable("num") String num, @PathVariable("recom")String recom,Model model) {
+		br.recom(model, pageNum, num, recom);
+		return "commuboardview";
 	}
 	
 	@GetMapping("/commu/{pageNum}/{sort}")	//정렬 기능
 	public String viewed(@PathVariable("pageNum")String pageNum, @PathVariable("sort")String sort, Model model,HttpServletRequest req) {
-		System.out.println("컨트롤의 sort: "+sort);
 		req.setAttribute("pageNum", pageNum);
-		req.setAttribute("sort", sort);		
-		br.boardlist(model, req);
+		req.setAttribute("sort", sort);
 		model.addAttribute("sort",sort);
-		String a = (String)model.getAttribute("sort");
-		System.out.println("a: "+a);
+		br.boardlist(model, req);
 		return "commuboard";
 	}
+	
+	
 	
 	@GetMapping("/qna") //묻고답하기 게시판
 	public String qnaboard() {
@@ -118,12 +116,12 @@ public class boardcontroller {
 		return "recomboardview";
 	}
 	
-	@GetMapping("/boardwrite")
+	@GetMapping("/boardwrite")	//게시글 작성 페이지
 	public String boardwrite(@ModelAttribute("board") boardDTO board,Model model) {
 		return "boardwrite";
 	}
 	
-	@PostMapping("/boardwrite")
+	@PostMapping("/boardwrite")	//게시글 등록
 	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {
 		br.writeboard(board,req);
 		
@@ -138,6 +136,7 @@ public class boardcontroller {
 	
 	@PostMapping("/search") //게시글 제목 or 내용 검색
 	public String serach(Model model,HttpServletRequest req) {
+		System.out.println("검색하러 왔다");
 		br.search(model, req);
 		return "board";
 	}

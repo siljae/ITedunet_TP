@@ -81,6 +81,7 @@ delete from commuboard where m_name='abc';
 
 select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
 select*from commuboard order by cb_hit desc;
+select*from commuboard where cb_recom >= 10 limit 5;
 
 
 select count(*) from commuboard where cb_animal_type='cat';

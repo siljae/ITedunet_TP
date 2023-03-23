@@ -1,8 +1,12 @@
 package com.springmvc.service;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -33,29 +37,64 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-	@Override
+	@Override	//게시글수정
 	public void updateboard(boardDTO board, HttpServletRequest req) {
 		br.updateboard(board, req);
 		
 	}
 
-	@Override
+	@Override	//게시글번호가져오기
 	public boardDTO getByNum(int num) {
 		boardDTO board = br.getByNum(num);		
 		return board;
 	}
 
-	@Override
+	@Override	//게시글 삭제
 	public void deleteboard(String num) {
 		br.deleteboard(num);
 		
 	}
 	
-	@Override
+	@Override	//게시글 검색
 	public void search(Model model, HttpServletRequest req) {
 		br.search(model, req);
 		
 	}
+
+	@Override	//추천 기능
+	public void recom(Model model, String pageNum, String num, String recom) {
+		br.recom(num, recom);
+		model.addAttribute("num",num);
+		model.addAttribute("pageNum",pageNum);
+		br.requestboardview(model);
+		
+	}
+
+	@Override	//인기글 가져오기
+	public void recomboard(Model model) {
+		List<boardDTO> recomlist = br.recomboard();
+		for(boardDTO board : recomlist) {
+			System.out.println(board.getTag_src());
+		}
+		model.addAttribute("recomlist",recomlist);		
+	}
+
+	/*
+	 * @Override //만들었으나 아직 활용을 안함 public JSONArray sortboard(Model model,
+	 * HttpServletRequest req) { br.boardlist(model, req); List<boardDTO> boardlist
+	 * = (List<boardDTO>) model.getAttribute("boardlist"); JSONArray jboardlist =
+	 * new JSONArray(); for(boardDTO board : boardlist) { JSONObject jboard = new
+	 * JSONObject(); jboard.put("num", board.getNum()); jboard.put("name",
+	 * board.getName()); jboard.put("board_type", board.getBoard_type());
+	 * jboard.put("animal_type", board.getAnimal_type()); jboard.put("title",
+	 * board.getTitle()); jboard.put("content", board.getContent());
+	 * jboard.put("regist_day", board.getRegist_day()); jboard.put("hit",
+	 * board.getHit()); jboard.put("filename", board.getFilename());
+	 * jboard.put("tag_src", board.getTag_src()); jboard.put("tag_value",
+	 * board.getTag_value()); jboard.put("tag_calregist", board.getCalregist());
+	 * jboard.put("tag_recom", board.getRecom()); jboardlist.put(jboard); } return
+	 * jboardlist; }
+	 */
 	
 	
 	

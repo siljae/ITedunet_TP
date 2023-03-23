@@ -13,15 +13,16 @@ public class BoardMapper implements RowMapper<boardDTO>{
 	public boardDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
 		boardDTO board = new boardDTO();
 		board.setNum(rs.getInt(1));
-		board.setBoard_type(rs.getString(2));
-		board.setAnimal_type(rs.getString(3));
-		board.setName(rs.getString(4));
+		board.setName(rs.getString(2));
+		board.setBoard_type(rs.getString(3));
+		board.setAnimal_type(rs.getString(4));		
 		board.setTitle(rs.getString(5));
-		board.setBoard_type(rs.getString(6));
+		board.setContent(rs.getString(6));
 		board.setRegist_day(rs.getString(7));
-		board.setHit(rs.getInt(8));
-		board.setFilename(rs.getString(9));
-		return null;
+		board.setFilename(rs.getString(8));
+		board.setHit(rs.getInt(9));
+		board.setRecom(rs.getInt(10));		
+		return board;
 	}
 	
 	

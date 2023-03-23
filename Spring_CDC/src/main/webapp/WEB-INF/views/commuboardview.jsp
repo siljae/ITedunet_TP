@@ -8,31 +8,50 @@
 <link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script>
-        function chat_show(){
-            let show = document.getElementById('chat');
-            if(show.style.display == 'none'){
-                show.style.display = 'block';
-            }
-            else{
-                show.style.display = 'none';
-            }
-        }
-        
-        function write_update(){
-        	location.href='<c:url value="/board/commu/view/${pageNum}/updateboard/${num}"/>';
-        }
-        function write_delete(){
-        	location.href='<c:url value="/board/commu/view/${pageNum}/deleteboard/${num}"/>';
-        }
-        
-        function recom(){
-        	/* let value = false;
-        	
-        	let recom = document.getEle */
-        	
-        	location.href='<c:url value="/board/commu/view/${pageNum}/{num}/${board.recom}"/>';
-        }
-    </script>
+	let value = false;
+	let re = 0;
+	function chat_show(){
+	    let show = document.getElementById('chat');
+	    if(show.style.display == 'none'){
+        	show.style.display = 'block';
+    	}
+    	else{
+	        show.style.display = 'none';
+	    }
+	}
+       
+	function write_update(){
+		location.href='<c:url value="/board/commu/view/${pageNum}/updateboard/${num}"/>';
+	}
+      
+	function write_delete(){
+		location.href='<c:url value="/board/commu/view/${pageNum}/deleteboard/${num}"/>';
+	}
+      
+	function recom() {
+		let rc = document.getElementById('recom');
+		let i = rc.querySelector('i');
+		let span = rc.querySelector('span'); // span 엘리먼트 찾기
+		rc.addEventListener("click", function(){
+			value = !value;
+	
+	    	if(value){
+	        	re = re+1;
+	        	i.classList.remove('far');
+	        	i.classList.add('fas');
+	        	location.href='<c:url value="/board/commu/view/${pageNum}/${num}/true"/>';
+	    	}
+	    	else{
+		        re = re-1;
+		        i.classList.remove('fas');
+	    	    i.classList.add('far');
+	    	    location.href='<c:url value="/board/commu/view/${pageNum}/${num}/false"/>';
+	    	}	
+	    	span.innerText = re; // span 내용 업데이트
+		})
+}
+</script>
+    
     
 <title>커뮤니티 게시판의 게시글</title>
 </head>
@@ -76,12 +95,24 @@
 	                    </div>
                     </c:if>
                     <p class="postbox_text">${board.content }</p>
-                    <div>
-                        <button class="recom"  onclick="recom()">
-                            <i class="far fa-thumbs-up"></i>
-                            <span>${board.recom }</span>
-                        </button>
-                    </div>                
+                    <c:choose>
+                    <c:when test="${name != null }">
+	                    <div>
+	                        <button class="recom" id="recom"  onclick="recom()">
+	                            <i class="far fa-thumbs-up"></i>
+	                            <span>${board.recom }</span>
+	                        </button>
+	                    </div>
+                   	</c:when>
+                   	<c:otherwise>
+	                    <div>
+	                        <button class="recom" id="recom">
+	                            <i class="far fa-thumbs-up"></i>
+	                            <span>${board.recom }</span>
+	                        </button>
+	                    </div>
+                    </c:otherwise>
+                    </c:choose>                
                 </div>
                 <div class="replybox">
                     <h3>댓글목록</h3>

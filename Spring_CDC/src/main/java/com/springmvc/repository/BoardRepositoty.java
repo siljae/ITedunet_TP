@@ -1,6 +1,7 @@
 package com.springmvc.repository;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -21,4 +22,6 @@ public interface BoardRepositoty {
 	public boardDTO getByNum(int num);
 	public void deleteboard(String num);
 	public void search(Model model,HttpServletRequest req);
+	public void recom(String num, String recom);
+	public List<boardDTO> recomboard();
 }

@@ -33,103 +33,33 @@
                 <div class="textbox" id="hotline">인기글</div>
                 <div class="bestlist">
                     <div class="bestbox">
-                        <div class="list1">
-                            <div class="listlabel">
-                                <div class="labelname">
-                                    <img class="catface" src="<c:url value="/resources/img/board/catface.png"/>">
-                                    <div class="cattext">고양이
-                                    </div>
-                                </div>
-                                <div class="listhead">
-                                    울집고양이귀엽
-                                </div>
-                                <div class="listtext">
-                                    대충 우리집 고양이가 귀엽다는 말
-                                </div>
-                                <div class="reply">
-                                    <span class="re1">
-                                        답변 
-                                        3
-                                    </span>
-                                    <span class="day">2023.02.07</span>
-                                </div>
-                                <div class="listgo">
-                                    <a href="#" class="gobutton">바로가기</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list1">
-                            <div class="listlabel">
-                                <div class="labelname">
-                                    <img class="dogface" src="<c:url value="/resources/img/board/dogface.png"/>" >
-                                    <div class="dog">강아지</div>
-                                </div>
-                                <div class="listhead">
-                                    울집 강아지 왜이럼?
-                                </div>
-                                <div class="listtext">
-                                    대충 우리집 강아지가 귀엽다는 말
-                                </div>
-                                <div class="reply">
-                                    <span class="re1">
-                                        답변 
-                                        3
-                                    </span>
-                                    <span class="day">2023.02.07</span>
-                                </div>
-                                <div class="listgo">
-                                    <a href="#" class="gobutton">바로가기</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list1">
-                            <div class="listlabel">
-                                <div class="labelname">
-                                    <img src="<c:url value="/resources/img/board/catface.png"/>" alt="">
-                                    <div class="cattext">고양이</div>
-                                </div>
-                                <div class="listhead">
-                                    울집 고양이가 낙법을 써요ㅇㅇㅇㅇ
-                                </div>
-                                <div class="listtext">
-                                    대충 우리집 고양이가 귀엽다는 말
-                                </div>
-                                <div class="reply">
-                                    <span class="re1">
-                                        답변 
-                                        3
-                                    </span>
-                                    <span class="day">2023.02.07</span>
-                                </div>
-                                <div class="listgo">
-                                    <a href="#" class="gobutton">바로가기</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="list1">
-                            <div class="listlabel">
-                                <div class="labelname">
-                                    <img class="dogface" src="<c:url value="/resources/img/board/dogface.png"/>" alt="">
-                                    <div class="dog">강아지</div>
-                                </div>
-                                <div class="listhead">
-                                    울집 강아지 왜이럼?
-                                </div>
-                                <div class="listtext">
-                                    대충 우리집 강아지가 귀엽다는 말
-                                </div>
-                                <div class="reply">
-                                    <span class="re1">
-                                        답변 
-                                        3
-                                    </span>
-                                    <span class="day">2023.02.07</span>
-                                </div>
-                                <div class="listgo">
-                                    <a href="#" class="gobutton">바로가기</a>
-                                </div>
-                            </div>
-                        </div>
+                    	<c:forEach items="${recomlist }" var="recomboard">
+	                        <div class="list1">
+	                            <div class="listlabel">
+	                                <div class="labelname">
+	                                    <img class="catface" src="<c:url value="/resources/img/board/${recomboard.tag_src }"/>">
+	                                    <div class="cattext">${recomboard.tag_value }
+	                                    </div>
+	                                </div>
+	                                <div class="listhead">
+	                                    ${recomboard.title }
+	                                </div>
+	                                <div class="listtext">
+	                                    ${recomboard.content }
+	                                </div>
+	                                <div class="reply">
+	                                    <span class="re1">
+	                                        답변 
+	                                        3
+	                                    </span>
+	                                    <span class="day">${recomboard.calregist }</span>
+	                                </div>
+	                                <div class="listgo">
+	                                    <a href="<c:url value="/board/commu/view/${pageNum }/${recomboard.num }"/>" class="gobutton">바로가기</a>
+	                                </div>
+	                            </div>
+	                        </div>
+                        </c:forEach>
                     </div>
                 </div>
             </div>
