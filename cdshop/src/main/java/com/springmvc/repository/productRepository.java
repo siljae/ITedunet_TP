@@ -13,4 +13,6 @@ public interface productRepository {
 //	Set<productDTO> getProductListByFilter(Map<String, List<String>> filter);
 	public void setNewProduct(productDTO product);
 //	public List<productDTO> selectAllProducts();
+	void setUpdateProduct(productDTO product);
+	void setDeleteProduct(String productId);
 }

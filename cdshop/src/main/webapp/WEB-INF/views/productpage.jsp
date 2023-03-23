@@ -17,6 +17,10 @@
 			document.addForm.submit();
 			alert("상품이 장바구니에 추가되었습니다!")
 		}
+		function deleteConfirm(id){
+			if (confirm("삭제합니다!") == true) location.href="./delete?id="+id;
+			else return;
+		}
 	</script>
 </head>
 <body>
@@ -154,6 +158,20 @@
                             <hr class="quanboxhr">                    
                         </div>
                     </div>
+                    <c:if test="${level==2 }">
+                    <div class="adminbt">
+                        <div class="updatebt">
+                            <div class="upbt">
+                                <a href="<c:url value="/shopmain/update?id=${product.productId }"/>">수정</a>
+                            </div>
+                        </div>
+                        <div class="deletebt">
+                            <div class="debt">
+                                <a href="<c:url value="javascript:deleteConfirm('${product.productId }')"/>"><span>삭제</span></a>
+                            </div>
+                        </div>
+                    </div>
+                    </c:if>
                     <div class="cartbox">
 	                    <form:form name="addForm" method="put">
 	                        <div class="cartbt"><a href="javascript:addToCart('/cart/add/${product.productId}')"><span class="material-symbols-outlined">

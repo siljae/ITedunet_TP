@@ -199,10 +199,51 @@
     height: 1px;
     background-color: rgb(167, 167, 167);
 }
+.adminbt{
+    display: flex;
+    justify-content: end;
+    margin-right: 50px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.updatebt{
+    background-color: #FFC7C2;
+    width: 70px;
+    height: 34px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-size: 15px;
+    font-weight: bold;
+    transition-duration: 400ms;
+    margin-right: 5px;
+}
+.updatebt:hover{
+    background-color: #f65371;
+    color: #FFFEF0;
+}
+.deletebt{
+    background-color: #FFC7C2;
+    width: 70px;
+    height: 34px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5px;
+    font-weight: bold;
+    transition-duration: 400ms;
+}
+.deletebt:hover{
+    background-color: #f65371;
+    color: #FFFEF0;
+}
 .cartbt{
     display: flex;
     justify-content: end;
-    margin-right: 100px;
+    margin-right: 50px;
     margin-top: 20px;
     margin-bottom: 20px;
 }

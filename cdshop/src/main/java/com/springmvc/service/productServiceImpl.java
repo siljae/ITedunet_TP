@@ -32,4 +32,15 @@ public class productServiceImpl implements productService {
 	public void setNewProduct(productDTO product) {
 		productrepository.setNewProduct(product);
 	}
+	
+	public void setUpdateProduct(productDTO product) {
+		System.out.println("updateservice 들어오니?");
+		productrepository.setUpdateProduct(product);
+		
+	}
+	
+	public void setDeleteProduct(String productId) {
+		System.out.println("deleteservice 들어오니?");
+		productrepository.setDeleteProduct(productId);
+	}
 }

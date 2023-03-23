@@ -9,4 +9,6 @@ public interface productService {
 	List<productDTO> getProductListByCategory(String category);
 	productDTO getProductById(String productId);
 	void setNewProduct(productDTO product);
+	void setUpdateProduct(productDTO product);
+	void setDeleteProduct(String productId);
 }

@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./productpage.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+    <link rel="stylesheet" href="./productupdate.css">
+    <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -38,13 +37,13 @@
     </header>
     <div class="container">
         <div class="bbubbu">
-            <div class="cos_nav">
+            <nav class="cos_nav">
                 <ul>
                     <li class = "com_name">
                         SHOP
                     </li>
                 </ul>
-            </div>
+            </nav>
         </div>
     </div>
     <div class="lounge">
@@ -113,96 +112,93 @@
                         <li class="catelist">
                             <a class="cate" href=""><span class="text">QnA</span></a>
                         </li>
-                        
                     </ul>
                 </div>
-                
             </div>
         </div>
-        <div class="productpage">
-            <div class="productbox">
-                <div class="probox">
-                    <div class="proname">
-                        <div class="productname">
-                            <h2 class="name">오리젠 캣앤키튼 1.8kg</h2>
-                        </div>
-                        <hr class="namehr">
+        <div class="midlounge">
+            <div class="writebox">
+                <div id="bodertitlebox">
+                    <div class="title" >
+                        <h2 class="tltelcss">상품등록</h2>
                     </div>
-                    <div class="protext">
-                        <div class="proimg">
-                            <img src="./img/origen_catkitten.jpg" alt="">
-                        </div>
-                        <div class="productex">
-                            <div class="proexbox">
-                                <h4 class="extitle">제품 요약 설명</h4>
+                    <hr class="hrline">
+                    <div id="write_area">
+                        <form enctype="multipart/form-data" action="write_ok.php?board_id=<?echo $board_id;?>" method="post">
+                            <div id ="product_id">
+                                <p class="idname">상품ID</p>
+                                <textarea name="p_Id" id="idtxt" cols="30" rows="10"></textarea>
                             </div>
-                            <div class="procompany">
-                                <span class="comname">오리젠</span>
+                            <hr class="hrline">
+                            <div id="in_title">
+                                <p class="titletxt">상품명</p>
+                                <select name="conoption" id="conoption">  
+                                      <!-- 나중에 선택은 유효성 검사 통해서 잘못선택했다고 경고창 띄워줌 -->
+                                    <option id="opdefult"value="none">카테고리</option>
+                                    <optgroup label="DOG">
+                                        <option value="dogfood">사료</option>
+                                        <option value="dogsnake">간식</option>
+                                        <option value="dogliving">간식</option>
+                                        <option value="dogtoy">장난감</option>
+                                    </optgroup>                             
+                                    <optgroup label="CAT">
+                                        <option value="catfood">사료</option>
+                                        <option value="catsnake">간식</option>
+                                        <option value="catliving">간식</option>
+                                        <option value="cattoy">장난감</option>
+                                    </optgroup> 
+                                </select>
+                                <textarea name="title" id="utitle" rows="1" cols="55" maxlength="100" required></textarea>
                             </div>
-                            <div class="prodetailbox">
-                                <div class="prodecontainer">
-                                    <div class="promidtitle">
-                                        <p>
-                                            <strong>고양이가 환장하는 맛!</strong>
-                                            <br>
-                                            <strong>인기순의 1위!</strong>
-                                        </p>
-                                    </div>
-                                    <div class="prosmalltitle">
-                                        <p>
-                                            <span class="emogi">✔️ 완벽한 영양소 밸런스</span>
-                                            <span class="emogi">✔️ 극강의 기호성</span>
-                                            <span class="emogi">✔️ 오랫동안 사랑받아온 부동의 1위</span>
-                                            <span class="emogi">✔️ 고양이 맞춤 고단백 사료</span>
-                                         </p>
-                                    </div>
-                                    
+                            <hr class="hrline">
+                            <div id ="product_id">
+                                <p class="manufacturer">제조사</p>
+                                <textarea name="p_Id" id="matxt" cols="30" rows="10"></textarea>
+                            </div>
+                            <hr class="hrline">
+                            <div id="in_content">
+                                <p class = "contenttxt">상품타이틀멘트</p>
+                                <textarea name="timent" id="utiment" required></textarea>
+                            </div>
+                            <hr class="hrline">
+                            <div id="in_content">
+                                <p class = "contenttxt">상품간단설명</p>
+                                <textarea name="content" id="ucontent" required></textarea>
+                            </div>
+                            <hr class="hrline">
+                            <div class="upinfo">
+                                <div class="pricebox">
+                                    <p class="pricetxt">판매가</p>
+                                    <input type="text" class="upload-price" name="price" value="">
+                                    <p class="pricetxt">원</p>
                                 </div>
-                            </div>
-                            <div class="propricebox">
-                                <div class="propricecontainer">
-                                    <p class="price">
-                                        <span class="proprice">₩</span>38,000
-                                    </p>
+                                <div class="quantitybox">
+                                    <p class="quantitytxt">재고수량</p>
+                                    <input type="text" class="upload-quantity" name="quantity" value="">
+                                    <p class="quantitytxt">개</p>
                                 </div>
+                                <p class="waringtxt">※ 숫자로만 입력하세요 !</p>
                             </div>
-                            <div class="quanbox">                                                
-                                <div class="quan_inbox">
-                                    수량 <input type="text"  value="1" class="it_quan" readonly>
-                                </div>
-                            </div>    
-                            <hr class="quanboxhr">                    
-                        </div>
-                    </div>
-                    <div class="adminbt">
-                        <div class="updatebt">
-                            <div class="upbt">
-                                <a href="#">수정</a>
+                            <hr class="hrline">
+                            <div class="filebox">
+                                <p class="filetitle">상품 정보 이미지</p>
+                                <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
+                                <label for="file"> 파일찾기</label>
+                                <input type="file" id="file">
                             </div>
-                        </div>
-                        <div class="deletebt">
-                            <div class="debt">
-                                <a href="#">삭제</a>
+                            <hr class="hrline">
+                            <div class="filebox">
+                                <p class="filetitle">상품 대표 이미지</p>
+                                <input class="upload-name" value="첨부파일" placeholder="첨부파일"/>
+                                <label for="file"> 파일찾기</label>
+                                <input type="file" id="file">
                             </div>
-                        </div>
-                    </div>    
-                    <div class="cartbox">
-                            <div class="cartbt"><a href=""><span class="material-symbols-outlined">
-                                shopping_cart
-                                </span>장바구니</a></div>
-                        </div>
-                    <div class="gardhr">
-                        <hr class="gardline">
-                    </div>
-                    <div class="detailsbox">
-                        <div class="detailphoto">
-                            <div class="detailimg">
-                                <img src="./img/origen1.jpg" alt="">
+                            <hr class="hrline">
+                            <div class="bt_se">
+                                <button class="subutton" type="submit">글 작성</button>
+                                <a href="#" class="canclebt">취소</a>
                             </div>
-                        </div>
-                    </div>
-                    <div class="gardhr2">
-                        <hr class="gardline2">
+                        </form>
                     </div>
                 </div>
             </div>

@@ -124,23 +124,19 @@ public class productRepositoryImpl implements productRepository {
 	}
 	
 	
-//	public List<productDTO> getProductListByCategory (String category){
-//		// 상품 카테고리 일치하는 상품 가져옴
-//		List<productDTO> productByCategory = new ArrayList<productDTO>();
-//		// 일치하는 상품 분야 저장하는 객체변수 productByCategort 선언
-//		for(int i = 0; i < listOfProduct.size(); i++) {
-//			// product에 상품 목록 i번째 상품 정보 저장
-//			productDTO productdto = listOfProduct.get(i);
-//			System.out.println("product :" + productdto);
-//			if(category.equalsIgnoreCase(productdto.getCategory()))
-//				productByCategory.add(productdto);
-//			// 대소문자 구분 안하고 매개변수 category와 상품 분야 일치하는 상품 목록 i번째 상품 정보를 저장
-//		}
-//		return productByCategory;
-//		// 매개변수 category와 일치하는 상품 목록 반환
-//	}
-
+	public void setUpdateProduct(productDTO product) {
+		System.out.println("updaterepository 들어왔니?");
+		String SQL = "update product set p_num=? , p_name=?, p_category=?, p_titlement=?, p_simpledescription=?, p_manufacturer=?, p_unitprice=?, p_unitsinstock=?, p_hit=?, p_dfilename=?, p_tfilename=? where p_id=?";
+		template.update(SQL, product.getNum(), product.getName(), product.getCategory(), product.getTitlement(), product.getSimpledescription(), product.getManufacturer(), product.getUnitprice(), product.getUnitsinstock(), product.getHit(), product.getDfilename(), product.getTfilename(), product.getProductId());
+		System.out.println("값 들어왔니 ..?" + SQL);
+	}
 	
+	public void setDeleteProduct(String productId) {
+		System.out.println("deleterepository 들어왔니?");
+		String SQL = "delete from product where p_id=?";
+		System.out.println("deleterepository-sql값 삭제했니?");
+		this.template.update(SQL, productId);
+	}
 	
 //	public List<productDTO> selectAllProducts(){
 //		
