@@ -21,6 +21,8 @@
 			if (confirm("삭제합니다!") == true) location.href="./delete?id="+id;
 			else return;
 		}
+		
+		
 	</script>
 </head>
 <body>
@@ -152,7 +154,7 @@
                             </div>
                             <div class="quanbox">                                                
                                 <div class="quan_inbox">
-                                    수량 <input type="text"  value="1" class="it_quan" readonly>
+                                    수량 <input type="number"  value="1" class="it_quan" min="1" max="100">
                                 </div>
                             </div>    
                             <hr class="quanboxhr">                    

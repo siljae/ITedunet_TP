@@ -16,6 +16,7 @@ public class mypagecontroller {
 	
 	@GetMapping("/cart") //마이페이지의 장바구니 이동
 	public String cart() {
+		System.out.println("mypage cart로 들어오나?");
 		return "mypagecart";
 	}
 	
