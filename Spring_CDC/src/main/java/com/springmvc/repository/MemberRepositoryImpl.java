@@ -46,12 +46,24 @@ public class MemberRepositoryImpl implements MemberRepository {
 		}
 		return memberinfo;
 	}
+	
+	@Override	//세션에 저장된 닉네임과 일치하는 멤버객체반환하는 기능
+	public memberDTO getmemberByname(String name) {
+		memberDTO memberinfo = new memberDTO();		
+		getmemberlist();
+		for(memberDTO member : listOfmember) {
+			if(member.getName().equals(name)) {
+				memberinfo = member;					
+			}
+		}
+		return memberinfo; 
+	}
 
 	@Override	//회원정보 수정
 	public void updatemember(memberDTO member) {
 		String phone = member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3();
-		String sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post, m_addr1, m_addr2 where m_email=?";
-		template.update(sql, member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2());		
+		String sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post=?, m_addr1=?, m_addr2=? where m_email=?";
+		template.update(sql, member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2(), member.getEmail());		
 	}
 
 	

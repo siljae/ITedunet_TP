@@ -12,7 +12,13 @@ public interface MemberService {
 	public void join(memberDTO dto);
 	//로그인기능	
 	public void chklogin(String email, String pw,HttpSession session,ModelAndView mav);
+	//로그아웃기능
 	public void logout(HttpSession session);
+	//회원정보수정 기능
 	public void updatemember(memberDTO member);
+	//마이페이지에서 해당 회원이 맞는지 확인하는 기능
+	public String chkuser(memberDTO member,Model model,  String chkpw);
+	//세션에 저장된 닉네임과 일치하는 멤버객체반환하는 기능
+	public void getmemberByname(memberDTO member, Model model);
 	
 }

@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.memberDTO;
@@ -20,7 +21,7 @@ public class MemberServiceImpl implements MemberService{
 		mr.join(member);
 	}
 	
-	@Override	//새로운 로그인 기능
+	@Override	//로그인 기능
 	public void chklogin(String email, String pw,HttpSession session,ModelAndView mav) {
 		memberDTO member = mr.chkmember(email, pw);
 		if(member.getName() != null) {
@@ -42,12 +43,22 @@ public class MemberServiceImpl implements MemberService{
 
 	@Override	//회원정보수정
 	public void updatemember(memberDTO member) {
-		memberDTO mb =mr.chkmember(member.getEmail(),member.getPw());
-		mr.updatemember(mb);		
+		mr.updatemember(member);		
 	}
-		//마이페이지에서 해당 회원이 맞는지 한번 더 확인하는 작업
-	public void chkuser(memberDTO member) {
-		
+	@Override	//마이페이지에서 해당 회원이 맞는지 한번 더 확인하는 작업
+	public String chkuser(memberDTO member,Model model, String chkpw) {		
+		if(!member.getPw().equals(chkpw)) {
+			model.addAttribute("msg",-1);
+			return "mypagebarrier";
+		}
+		return "mypage";
+	}
+	
+	@Override	//세션에 저장된 닉네임과 일치하는 멤버객체반환하는 기능
+	public void getmemberByname(memberDTO member, Model model) {
+		String name = member.getName();
+		member = mr.getmemberByname(name);
+		model.addAttribute("member",member);
 	}
 	
 	
