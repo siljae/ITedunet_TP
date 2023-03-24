@@ -28,6 +28,12 @@ public class mypagecontroller {
 		return "mypagebarrier";
 	}
 	
+	@PostMapping("/mypage")	//개인정보 수정
+	public String updatemypge(@ModelAttribute("member")memberDTO member) {
+		mr.updatemember(member);
+		return "redirect:/mypage";
+	}
+	
 	@GetMapping("/barrier") //마이페이지의 개인정보수정
 	public String veri(@ModelAttribute("member")memberDTO member, Model model,HttpSession session) {
 		member.setName((String) session.getAttribute("name"));
@@ -63,11 +69,13 @@ public class mypagecontroller {
 		return "mypageorder";
 	}
 	
-	
-	
-	@PostMapping("/mypage")	//마이페이지 수정
-	public String updatemypge(@ModelAttribute("member")memberDTO member) {
-		mr.updatemember(member);
-		return "redirect:/mypage";
+	@GetMapping("/mgn")	//회원관리 페이지
+	public String management() {
+		//관리자일 때만 올 수 있는 페이지
+		//모든 회원의 정보를 볼 수 있고 특정 회원의 정보를 클릭하면 해당 회원의 정보를 수정하는 페이지로 이동하여 해당 회원의 정보를 수정할 수 있고
+		//삭제도 가능
+		//제일 중요한 기능은 회원의 등급을 변경시키는 일
+		//
+		return "management";
 	}
 }
