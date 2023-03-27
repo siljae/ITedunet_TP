@@ -112,16 +112,13 @@ create procedure insertloop()
 begin
 	declare i int default 1;
     while i <= 100 do
-		insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values(concat('abc',i),'commu', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
+		insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc','commu', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
 		set i = i+1;
 	end while;
 end $$
 delimiter $$
 
 call insertloop;
-
-
-
 
 -- 아래 리콤은 추천테이블이다 해당 테이블에 대한 로직을 작성하려면 아직 이해도가 부족하기때문에 나중에 작성하다 해당 테이블과 관련된 모든 sql문은 현재 사용해서는 안된다
 create table recom
