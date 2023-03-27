@@ -30,17 +30,18 @@ public class MemberRepositoryImpl implements MemberRepository {
 	
 	@Override	//전체 회원을 DB에서 다 가져옴
 	public void getmemberlist() {		
-		String sql = "select*from member";
-		List<memberDTO> memberlist = template.query(sql, new MemberMapper());
-		this.listOfmember = memberlist;
+		String sql = "select*from member where m_email=?";
+		memberDTO member = template.queryForObject(sql, new MemberMapper());
+		
 	}
 	
 	@Override	//회원정보 일치하는지 확인하는 기능
 	public memberDTO chkmember(String email, String pw) {
 		memberDTO memberinfo = new memberDTO();
-		getmemberlist();
+		String sql = "select*from member where m_email=?";
+		listOfmember = template.query(sql, new MemberMapper(), email);
 		for(memberDTO member : listOfmember) {
-			if(member.getEmail().equals(email) && member.getPw().equals(pw)) {
+			if(member.getPw().equals(pw)) {
 				memberinfo = member;					
 			}
 		}
@@ -50,7 +51,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 	@Override	//세션에 저장된 닉네임과 일치하는 멤버객체반환하는 기능
 	public memberDTO getmemberByname(String name) {
 		memberDTO memberinfo = new memberDTO();		
-		getmemberlist();
+		String sql = "select*from member where m_name=?";
+		listOfmember = template.query(sql, new MemberMapper(), name);
 		for(memberDTO member : listOfmember) {
 			if(member.getName().equals(name)) {
 				memberinfo = member;					
@@ -61,11 +63,41 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	@Override	//회원정보 수정
 	public void updatemember(memberDTO member) {
+		String sql = "select*from member where m_name=?";
+		listOfmember = template.query(sql, new MemberMapper(), member.getName());
+		
+		for(memberDTO mb : listOfmember) {
+			if(mb.getEmail().equals(member.getEmail())) {
+				if(mb.getLevel() != member.getLevel()) {
+					String phone = member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3();
+					sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post=?, m_addr1=?, m_addr2=?, m_level=? where m_email=?";
+					template.update(sql, member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2(), member.getLevel(), member.getEmail());
+				}
+			}
+		}
 		String phone = member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3();
-		String sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post=?, m_addr1=?, m_addr2=? where m_email=?";
+		sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post=?, m_addr1=?, m_addr2=? where m_email=?";
 		template.update(sql, member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2(), member.getEmail());		
 	}
 
+	@Override	//전체 멤버 받아오는 기능
+	public List<memberDTO> getallmemberlist() {
+		String sql = "select*from member";
+		List<memberDTO> memberlist = template.query(sql, new MemberMapper());
+		return memberlist;
+	}
+	@Override	//num이 일치하는 멤버정보가져오는 기능
+	public memberDTO getmemberBynum(int num) {
+		memberDTO memberinfo = new memberDTO();
+		String sql = "select*from member where m_num=?";
+		listOfmember = template.query(sql, new MemberMapper(), num);
+		for(memberDTO member : listOfmember) {
+			if(member.getNum() == num) {
+				memberinfo = member;					
+			}
+		}
+		return memberinfo;
+	}
 	
 
 	

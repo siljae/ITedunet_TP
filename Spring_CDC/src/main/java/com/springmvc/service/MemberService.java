@@ -20,5 +20,10 @@ public interface MemberService {
 	public String chkuser(memberDTO member,Model model,  String chkpw);
 	//세션에 저장된 닉네임과 일치하는 멤버객체반환하는 기능
 	public void getmemberByname(memberDTO member, Model model);
+	//전체 회원정보를 가져오는 기능
+	public void getallmember(Model model);
+	//num과 일치하는 회원정보 모델에 담는 기능
+	public void getmemberBynum(int num, Model model);
+	
 	
 }

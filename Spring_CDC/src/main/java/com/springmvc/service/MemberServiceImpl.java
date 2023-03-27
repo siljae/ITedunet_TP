@@ -1,5 +1,7 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,6 +61,19 @@ public class MemberServiceImpl implements MemberService{
 		String name = member.getName();
 		member = mr.getmemberByname(name);
 		model.addAttribute("member",member);
+	}
+
+	@Override	//전체 회원정보를 가져와서 모델에 담는 기능
+	public void getallmember(Model model) {
+		List<memberDTO> memberlist = mr.getallmemberlist();
+		model.addAttribute("memberlist",memberlist);		
+	}
+	
+	@Override	//num과 일치하는 회원정보 모델에 담는 기능
+	public void getmemberBynum(int num, Model model) {
+		memberDTO member = mr.getmemberBynum(num);
+		model.addAttribute("member",member);		
+		
 	}
 	
 	

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -69,13 +70,47 @@ public class mypagecontroller {
 		return "mypageorder";
 	}
 	
-	@GetMapping("/mgn")	//회원관리 페이지
-	public String management() {
+	/* 관리자 기능 시작 */
+	
+	@GetMapping("/mgnmember")	//회원관리 페이지
+	public String management(Model model) {
+		mr.getallmember(model);		
 		//관리자일 때만 올 수 있는 페이지
 		//모든 회원의 정보를 볼 수 있고 특정 회원의 정보를 클릭하면 해당 회원의 정보를 수정하는 페이지로 이동하여 해당 회원의 정보를 수정할 수 있고
 		//삭제도 가능
 		//제일 중요한 기능은 회원의 등급을 변경시키는 일
-		//
 		return "management";
+	}
+	
+	@GetMapping("/mgnview/{num}")	//회원상세보기
+	public String managementview(@ModelAttribute("member") memberDTO member, @PathVariable("num") int num, Model model) {
+		mr.getmemberBynum(num, model);
+		return "managementdetail2";
+	}
+	
+	@PostMapping("/mgnview/{num}")	//회원정보수정
+	public String updatemanagementview(@ModelAttribute("member") memberDTO member, @PathVariable("num") int num, Model model) {
+		mr.updatemember(member);
+		return "redirect:/mypage/mgn";
+	}
+	
+	@GetMapping("/mgncommu")	//커뮤니티 관리
+	public String managementcommu() {
+		return "";
+	}
+	
+	@GetMapping("/mgnnotice")	//공지사항 관리
+	public String managementnotice() {
+		return "";
+	}
+	
+	@GetMapping("/mgnhos")	//우리동네병원 관리
+	public String managementhos() {
+		return "";
+	}
+	
+	@GetMapping("/mgnshop")	//shop관리
+	public String managementshop() {
+		return "";
 	}
 }

@@ -484,4 +484,11 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	
+	@Override	//게시글 총 숫자 
+	 public int gettotalcount() {
+	        String sql = "select count(*) from commuboard";
+	        int total_recond = template.queryForObject(sql, Integer.class);
+	        return total_recond;
+	    }
+	
 }

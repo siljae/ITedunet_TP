@@ -25,7 +25,6 @@ public class boardcontroller {
 
 	@RequestMapping("/") //전체 게시판
 	public String board(Model model,HttpServletRequest req) {
-		System.out.println("전체페이지~ ");
 		br.boardlist(model,req);
 		br.recomboard(model);
 		return "board";

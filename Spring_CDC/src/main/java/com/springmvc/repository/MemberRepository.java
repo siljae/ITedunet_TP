@@ -1,6 +1,8 @@
 package com.springmvc.repository;
 
 
+import java.util.List;
+
 import com.springmvc.domain.memberDTO;
 
 public interface MemberRepository {
@@ -14,4 +16,8 @@ public interface MemberRepository {
 	public void updatemember(memberDTO member);
 	//세션에 저장된 닉네임과 일치하는 멤버객체반환하는 기능
 	public memberDTO getmemberByname(String name);
+	//전체 회원목록을 반환하는 기능
+	public List<memberDTO> getallmemberlist();
+	//num과 일치하는 회원정보 반환하는 기능
+	public memberDTO getmemberBynum(int num);
 }
