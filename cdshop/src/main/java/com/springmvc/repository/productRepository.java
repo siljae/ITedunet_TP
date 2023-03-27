@@ -8,7 +8,7 @@ import com.springmvc.domain.productDTO;
 
 public interface productRepository {
 	List<productDTO> getAllProductList();
-	List<productDTO> getProductListByCategory(String category);
+//	List<productDTO> getProductListByCategory(String category);
 	productDTO getProductById(String productId);
 //	Set<productDTO> getProductListByFilter(Map<String, List<String>> filter);
 	public void setNewProduct(productDTO product);

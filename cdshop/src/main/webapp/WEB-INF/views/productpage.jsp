@@ -2,6 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ page import = "com.springmvc.domain.productDTO" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,8 +177,9 @@
                     </div>
                     </c:if>
                     <div class="cartbox">
-	                    <form:form name="addForm" method="put">
-	                        <div class="cartbt"><a href="javascript:addToCart('/cart/add/${product.productId}')"><span class="material-symbols-outlined">
+	                    <form:form name="addCart" method="get">
+	                        <div class="cartbt"><a href="<c:url value="/cart"/>">
+	                        <span class="material-symbols-outlined">
 	                            </span>장바구니</a></div>
 	                    </form:form>
 	                </div>

@@ -31,13 +31,14 @@
             selectAll.checked = false;
         }
     }
+    
+    function clearCart(){
+    	document.clearForm.submit();
+    	window.location.reload();
+    }
     function removeFromCart(action){
     	document.removeForm.action = action;
     	document.removeForm.submit();
-    	window.location.reload();
-    }
-    function clearCart(){
-    	document.clearForm.submit();
     	window.location.reload();
     }
 </script>

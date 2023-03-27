@@ -31,6 +31,7 @@ public class productRepositoryImpl implements productRepository {
 	
 	private List<productDTO> listOfProduct = new ArrayList<productDTO>();
 	
+	// 전체 상품 목록 가져오기
 	public List<productDTO> getAllProductList(){
 		System.out.println("getAllProductList 들어와땨");
 		String SQL = "select * from product";
@@ -43,7 +44,7 @@ public class productRepositoryImpl implements productRepository {
 	
 	
 	
-	
+	// product 테이블의 레코드 개수
 	public int getListCount(String items, String text) {
 		Connection conn = null;
 		System.out.println("conn : " + conn);
@@ -88,7 +89,7 @@ public class productRepositoryImpl implements productRepository {
 	}
 	
 	
-	
+	// productId와 일치하는 상품 가져오기
 	public productDTO getProductById(String productId) {
 		System.out.println("DAO ProductById 들어왔댜아아아아아");
 		productDTO productById = null;
@@ -106,6 +107,7 @@ public class productRepositoryImpl implements productRepository {
 		return productById;
 	}
 	
+	//상품등록하기
 	public void setNewProduct(productDTO product) {
 		String SQL = "insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_hit)" + "values(?,?,?,?,?,?,?,?,?,?,?)";
 		template.update(SQL, product.getProductId(), product.getName(), product.getCategory(),product.getTitlement(), product.getSimpledescription(), product.getManufacturer(), product.getUnitprice(),product.getUnitsinstock(), product.getDfilename(), product.getTfilename(), product.getHit());
@@ -114,16 +116,16 @@ public class productRepositoryImpl implements productRepository {
 
 
 
-	@Override
-	public List<productDTO> getProductListByCategory(String category) {
-		List<productDTO> productByCategory = new ArrayList<productDTO>();
+//	@Override
+//	public List<productDTO> getProductListByCategory(String category) {
+//		List<productDTO> productByCategory = new ArrayList<productDTO>();
+//	
+//		String SQL = "select*from product where p_category like '%" + category + "%'";
+//		productByCategory = template.query(SQL, new productRowMapper());
+//		return productByCategory;
+//	}
 	
-		String SQL = "select*from product where p_category like '%" + category + "%'";
-		productByCategory = template.query(SQL, new productRowMapper());
-		return productByCategory;
-	}
-	
-	
+	// 상품 수정
 	public void setUpdateProduct(productDTO product) {
 		System.out.println("updaterepository 들어왔니?");
 		String SQL = "update product set p_num=? , p_name=?, p_category=?, p_titlement=?, p_simpledescription=?, p_manufacturer=?, p_unitprice=?, p_unitsinstock=?, p_hit=?, p_dfilename=?, p_tfilename=? where p_id=?";
@@ -131,6 +133,7 @@ public class productRepositoryImpl implements productRepository {
 		System.out.println("값 들어왔니 ..?" + SQL);
 	}
 	
+	//상품 삭제
 	public void setDeleteProduct(String productId) {
 		System.out.println("deleterepository 들어왔니?");
 		String SQL = "delete from product where p_id=?";

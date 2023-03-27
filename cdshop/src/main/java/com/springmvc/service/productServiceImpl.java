@@ -13,15 +13,18 @@ public class productServiceImpl implements productService {
 	@Autowired
 	private productRepository productrepository;
 	
+	//전체상품 뿌리기
 	public List<productDTO> getAllProductList(){
 		return productrepository.getAllProductList();
 	}
 	
-	public List<productDTO> getProductListByCategory(String category){
-		List<productDTO> productByCategory = productrepository.getProductListByCategory(category);
-		return productByCategory;
-	}
+//	public List<productDTO> getProductListByCategory(String category){
+//		List<productDTO> productByCategory = productrepository.getProductListByCategory(category);
+//		return productByCategory;
+//	}
+//	
 	
+	//productid와 일치하는 상품 가져오기
 	public productDTO getProductById(String productId) {
 		System.out.println("야 서비스 넌 들어오냐 값?");
 		productDTO productById = productrepository.getProductById(productId);

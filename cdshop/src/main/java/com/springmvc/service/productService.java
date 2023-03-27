@@ -6,7 +6,7 @@ import com.springmvc.domain.productDTO;
 
 public interface productService {
 	List<productDTO> getAllProductList();
-	List<productDTO> getProductListByCategory(String category);
+//	List<productDTO> getProductListByCategory(String category);
 	productDTO getProductById(String productId);
 	void setNewProduct(productDTO product);
 	void setUpdateProduct(productDTO product);

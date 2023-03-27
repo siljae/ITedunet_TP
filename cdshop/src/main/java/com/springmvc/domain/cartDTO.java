@@ -5,23 +5,22 @@ import org.springframework.web.multipart.MultipartFile;
 public class cartDTO {
 	
 	private int cartId;
-	private String m_name;
+	private String name;
 	private String productId;
 	private int quantity;
 	private String tfilename;
 	private MultipartFile titleimage;
-	
 	public int getCartId() {
 		return cartId;
 	}
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
 	}
-	public String getM_name() {
-		return m_name;
+	public String getName() {
+		return name;
 	}
-	public void setM_name(String m_name) {
-		this.m_name = m_name;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getProductId() {
 		return productId;
@@ -32,8 +31,8 @@ public class cartDTO {
 	public int getQuantity() {
 		return quantity;
 	}
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
+	public void setQuantity(int unitprice) {
+		this.quantity = unitprice;
 	}
 	public String getTfilename() {
 		return tfilename;
@@ -48,6 +47,7 @@ public class cartDTO {
 		this.titleimage = titleimage;
 	}
 	
+		
 	
 	
 }

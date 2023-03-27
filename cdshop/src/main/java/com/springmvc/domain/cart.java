@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class cart {
 	private String cartId;
-	private Map<String, cartitem> cartitems;
+	private Map<String, cartDTO> cartdto;
 	private int grandTotal;
 	
 	public cart() {
-		cartitems = new HashMap<String, cartitem>();
+		cartdto = new HashMap<String, cartDTO>();
 		grandTotal = 0;
 	}
 	
@@ -26,12 +26,12 @@ public class cart {
 		this.cartId = cartId;
 	}
 
-	public Map<String, cartitem> getCartitems() {
-		return cartitems;
+	public Map<String, cartDTO> getCartdto() {
+		return cartdto;
 	}
 
-	public void setCartitems(Map<String, cartitem> cartitems) {
-		this.cartitems = cartitems;
+	public void setCartdto(Map<String, cartDTO> cartdto) {
+		this.cartdto = cartdto;
 	}
 
 	public int getGrandTotal() {
@@ -40,8 +40,8 @@ public class cart {
 	
 	public void updateGrandTotal() {
 		grandTotal = 0;
-		for (cartitem item : cartitems.values()) {
-			grandTotal = grandTotal + item.getTotalPrice();
+		for (cartDTO item : cartdto.values()) {
+			grandTotal = grandTotal + item.get();
 		}
 	}
 
