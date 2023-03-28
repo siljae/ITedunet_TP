@@ -19,8 +19,10 @@ public class MemberServiceImpl implements MemberService{
 	private MemberRepository mr;
 	
 	@Override //회원가입 기능
-	public void join(memberDTO member) {
+	public void join(memberDTO member, Model model) {
 		mr.join(member);
+		model.addAttribute("msg",2);
+		
 	}
 	
 	@Override	//로그인 기능
@@ -74,6 +76,20 @@ public class MemberServiceImpl implements MemberService{
 		memberDTO member = mr.getmemberBynum(num);
 		model.addAttribute("member",member);		
 		
+	}
+	
+	@Override	//회원가입 시 이메일 중복체크 기능
+	public void chkemail(Model model) {
+		String email = (String) model.getAttribute("email");
+		int msg = mr.chkemail(email);
+		model.addAttribute("msg",msg);
+	}
+	
+	@Override	//회원가입 시 닉네임 중복체크 기능
+	public void chkname(Model model) {
+		String name = (String) model.getAttribute("name");
+		int msg = mr.chkname(name);
+		model.addAttribute("msg",msg);
 	}
 	
 	

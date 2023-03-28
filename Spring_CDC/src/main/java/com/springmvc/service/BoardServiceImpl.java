@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.criteria;
+import com.springmvc.domain.pageDTO;
 import com.springmvc.repository.BoardRepositoty;
 
 @Service
@@ -26,8 +28,13 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override //게시판 목록
-	public void boardlist(Model model,HttpServletRequest req) {
+	public void boardlist(Model model,HttpServletRequest req, criteria cri) {
 		br.boardlist(model,req);
+		int total = br.getallcount();
+		int pagenum = (int) model.getAttribute("pageNum");
+		cri.setPagenum(pagenum);
+		pageDTO page = new pageDTO(cri, total);
+		model.addAttribute("page",page);
 		
 	}
 
@@ -56,9 +63,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	@Override	//게시글 검색
-	public void search(Model model, HttpServletRequest req) {
-		br.search(model, req);
-		
+	public void search(Model model, String content, criteria cri) {
+		List<boardDTO> boardlist = br.search(content);
+		int total = br.getcount(content);
+		pageDTO page = new pageDTO(cri, total);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
 	}
 
 	@Override	//추천 기능
@@ -73,9 +83,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override	//인기글 가져오기
 	public void recomboard(Model model) {
 		List<boardDTO> recomlist = br.recomboard();
-		for(boardDTO board : recomlist) {
-			System.out.println(board.getTag_src());
-		}
 		model.addAttribute("recomlist",recomlist);		
 	}
 

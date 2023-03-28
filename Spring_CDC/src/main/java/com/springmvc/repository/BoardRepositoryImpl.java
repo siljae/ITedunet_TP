@@ -25,7 +25,7 @@ import com.springmvc.domain.boardDTO;
 @Repository
 public class BoardRepositoryImpl implements BoardRepositoty {
 	private JdbcTemplate template;
-	private static final int LISTCOUNT =5;
+	private static final int LISTCOUNT =10;
 	private List<boardDTO> listOfboards = new ArrayList<boardDTO>();
 	
 	@Autowired
@@ -35,16 +35,21 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	
 	@Override //글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req) {
+		//게시글 작성시간
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String regist_day = sdf.format(new Date());
-
+		
+		//이미지 파일업로드
 		MultipartFile boardimg = board.getFileimage();
 		
+		//이미지 이름 가져오기
 		String saveName = boardimg.getOriginalFilename();
+		//이미지 이름 board객체에 저장
 		board.setFilename(saveName);
+		//이미지 경로 변수에 담기
 		String path = req.getServletContext().getRealPath("/resources/img/board/");
-		File saveFile = new File(path,saveName);
-		
+		//파일 업로드
+		File saveFile = new File(path,saveName);		
 		if (boardimg != null && !boardimg.isEmpty()) {
             try {
             	boardimg.transferTo(saveFile);  
@@ -61,8 +66,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	public void boardlist(Model model,HttpServletRequest req) {
 		List<boardDTO> boardlist = new ArrayList<boardDTO>();
 		
-		int pageNum =1;
-		int limit = LISTCOUNT;
+		int pageNum =1;			//현재 페이지
+		int limit = LISTCOUNT;	//한 페이지에 보여줄 게시글 숫자 (현재 : 10)
 		
 		if(req.getAttribute("pageNum") != null)
 			pageNum = Integer.parseInt((String)req.getAttribute("pageNum"));
@@ -171,16 +176,16 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		//다음 페이지
 		int index = start +1;
 		
-		String sql = null;
-		if(animal == null && content == null && sort == null) {
-			sql = "select*from commuboard order by cb_num desc";
-			
+		String sql = null;		
+		if(animal == null && content == null && sort == null) {	//전체 게시판
+			sql = "select*from commuboard order by cb_num desc";		
 		}
-		else if(animal != null) {
+		
+		else if(animal != null) {	//태그 별 정렬(고양이, 강아지)
 			String cb_animal_type = animal;
 			sql = "select*from commuboard where"+cb_animal_type+"order by cb_num desc";
 		}
-		else if(sort != null) {
+		else if(sort != null) {	//최신순, 인기순, 조회순으로 정렬
 			if(sort.equals("viewed")) {
 				sql = "select*from commuboard order by cb_hit desc";			
 			}
@@ -191,7 +196,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 				sql = "select*from commuboard order by cb_num desc";
 			}
 		}
-		else {
+		else {	//게시글 검색 기능
 			//이거 확인하고 적용시키셈 > 동작하는거 확인했음 
 			sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";			
 		}
@@ -442,9 +447,24 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	@Override //게시글 제목이나, 내용으로 검색하기
-	public void search(Model model,HttpServletRequest req) {
-		boardlist(model, req);
-		
+	public List<boardDTO> search(String content) {
+		String sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";
+		List<boardDTO> boardlist = template.query(sql, new BoardMapper());	
+		for (boardDTO board : boardlist) {
+			String regist_day = caltime(board.getRegist_day());
+			
+			if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
+				board.setCalregist(regist_day);
+				board.setTag_src("catface.png");
+				board.setTag_value("고양이");
+			}
+			else if(board.getAnimal_type() != null && board.getAnimal_type().equals("dog")) {
+				board.setCalregist(regist_day);
+				board.setTag_src("dogface.png");
+				board.setTag_value("강아지");
+			}
+		}
+		return boardlist;		
 	}
 	
 	@Override	//추천 기능
@@ -483,12 +503,20 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return recomlist;
 	}
 	
+	@Override
+	public int getallcount() {
+		String sql = "select count(*) from commuboard";
+        int total_recond = template.queryForObject(sql, Integer.class);
+        return total_recond;
+	}
+	
 	
 	@Override	//게시글 총 숫자 
-	 public int gettotalcount() {
-	        String sql = "select count(*) from commuboard";
-	        int total_recond = template.queryForObject(sql, Integer.class);
-	        return total_recond;
-	    }
+	public int getcount(String content) {
+		String sql = "select count(*) from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%'";
+		int total_recond = template.queryForObject(sql, Integer.class);
+		return total_recond;
+    }
+	
 	
 }

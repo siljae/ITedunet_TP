@@ -163,7 +163,7 @@ nav {
 									<li><a href="<c:url value="/board/commu"/>">커뮤니티 관리</a></li>
 									<li><a href="<c:url value="/notice/"/>">캣독마당 관리</a></li>
 									<li><a href="<c:url value="/hospital/reviews"/>">우리동네병원 관리</a></li>
-									<li><a href="<c:url value="/mypage/mgn"/>">회원 관리</a></li>
+									<li><a href="<c:url value="/mypage/mgnmember"/>">회원 관리</a></li>
 									<li><a href="#">SHOP 관리</a></li>
 									<li><a href="<c:url value="/board/boardwrite"/>">글쓰기</a></li>
 									<li><a href="<c:url value="/login/logout"/>">로그아웃</a></li>

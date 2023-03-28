@@ -10,6 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 	<title>커뮤니티 게시판</title>
+	<script type="text/javascript">
+		function searchForm(){
+			let content = document.getElementById('content').value;
+			location.href = '<c:url value="/board/search/content"/>';
+		}
+	</script>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
@@ -23,7 +29,8 @@
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                	<form action="<c:url value="/board/search"/>" method="post" style="width:70%">
+                <!-- action="<c:url value="/board/search"/>" -->
+                	<form onsubmit="searchForm()"  method="post" style="width:70%">
 	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
 	                    <button class="button" type="submit" >
 	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
@@ -168,12 +175,12 @@
             </div>
         </div>
         <ul class="pagebutton">
-        	<c:if test="${pageNum>1 }">        	
+        	<c:if test="${pageNum != 1 }">        	
 	            <li class="leftbt">
 	                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
 	            </li>
             </c:if>
-            <c:forEach var="i" begin="1" end="${total_page }">
+            <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
 	            <li class="active">
 	            	<a href="<c:url value="/board/${i}" />" aria-label="Go to page number 1">
 	            		<c:choose>
@@ -187,11 +194,16 @@
                 	</a>
 	            </li>
             </c:forEach>
-            <c:if test="${total_page != pageNum }">
+            <c:if test="${pageNum < total_page }">
 	            <li>
 	                <a href="${pageNum+1 }" aria-label="Go to after number ">›</a>
 	            </li>
             </c:if>            
+            <c:if test="${page.next }">
+            	<li>
+            		<a href="${total_page }">END</a>
+            	</li>
+            </c:if>
         </ul>
     </div>
 	<jsp:include page="footer.jsp"/>

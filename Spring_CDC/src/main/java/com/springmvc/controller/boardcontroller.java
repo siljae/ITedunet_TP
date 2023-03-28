@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.criteria;
 import com.springmvc.service.BoardService;
 
 @Controller
@@ -24,24 +25,24 @@ public class boardcontroller {
 	BoardService br;
 
 	@RequestMapping("/") //전체 게시판
-	public String board(Model model,HttpServletRequest req) {
-		br.boardlist(model,req);
+	public String board(Model model,HttpServletRequest req, criteria cri) {
+		br.boardlist(model,req,cri);
 		br.recomboard(model);
 		return "board";
 	}
 	
-	@GetMapping("/{pageNum}")
-	public String boardnum(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req) {
+	@GetMapping("/{pageNum}")	//페이징된 전체 게시판
+	public String boardnum(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req, criteria cri) {
 		req.setAttribute("pageNum", pageNum);
-		br.boardlist(model,req);
+		br.boardlist(model,req,cri);
 		br.recomboard(model);
 		return "board";
 	}
 	
 	@GetMapping("/commu/{pageNum}") //커뮤니티 게시판 
-	public String commuboard(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req) {
+	public String commuboard(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req, criteria cri) {
 		req.setAttribute("pageNum", pageNum);
-		br.boardlist(model,req);
+		br.boardlist(model,req,cri);
 		return "commuboard";
 	}
 	
@@ -85,11 +86,11 @@ public class boardcontroller {
 	}
 	
 	@GetMapping("/commu/{pageNum}/{sort}")	//정렬 기능
-	public String viewed(@PathVariable("pageNum")String pageNum, @PathVariable("sort")String sort, Model model,HttpServletRequest req) {
+	public String viewed(@PathVariable("pageNum")String pageNum, @PathVariable("sort")String sort, Model model,HttpServletRequest req, criteria cri) {
 		req.setAttribute("pageNum", pageNum);
 		req.setAttribute("sort", sort);
 		model.addAttribute("sort",sort);
-		br.boardlist(model, req);
+		br.boardlist(model, req, cri);
 		return "commuboard";
 	}
 	
@@ -133,11 +134,12 @@ public class boardcontroller {
 		return "";
 	}
 	
-	@PostMapping("/search") //게시글 제목 or 내용 검색
-	public String serach(Model model,HttpServletRequest req) {
-		System.out.println("검색하러 왔다");
-		br.search(model, req);
+	@PostMapping("/search/{content}") //게시글 제목 or 내용 검색
+	public String serach(@PathVariable("content") String content, Model model, criteria cri) {
+		br.search(model, content, cri);
+		System.out.println("검색");
 		return "board";
 	}
+	
 	
 }

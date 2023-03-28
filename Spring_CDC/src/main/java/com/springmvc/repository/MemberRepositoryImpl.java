@@ -99,10 +99,34 @@ public class MemberRepositoryImpl implements MemberRepository {
 		return memberinfo;
 	}
 	
+	@Override	//이메일 중복확인 기능
+	public int chkemail(String email) {
+		int x=2;
+		String sql ="select*from member where m_email=?";
+		listOfmember = template.query(sql, new MemberMapper(), email);
+		for(memberDTO member : listOfmember) {
+			if(member.getEmail().equals(email)) {
+				x=1;
+				return x;
+			}
+		}
+		return x;
+	}
 
-	
-
-	
+	@Override	//닉네임 중복확인 기능
+	public int chkname(String name) {
+		int x=2;
+		String sql ="select*from member where m_name=?";
+		listOfmember = template.query(sql, new MemberMapper(), name);
+		for(memberDTO member : listOfmember) {
+			if(member.getName().equals(name)) {
+				x=1;
+				return x;
+			}
+		}
+		return x;
+		
+	}
 	
 	
 	

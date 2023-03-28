@@ -3,7 +3,10 @@ package com.springmvc.domain;
 public class criteria {
 	private int pagenum;
 	private int amount;
-	private int startnum;
+	
+	public int getpagestart() {
+		return (this.pagenum-1)*this.amount;
+	}
 	
 	public criteria() {
 		//객체 생성시 기본 생성자를 호출하여 매개변수를 줘서 매개변수를 가지고 있는 생성자 함수 호출
@@ -26,12 +29,6 @@ public class criteria {
 	}
 	public void setAmount(int amount) {
 		this.amount = amount;
-	}
-	public int getStartnum() {
-		return startnum;
-	}
-	public void setStartnum(int startnum) {
-		this.startnum = startnum;
 	}
 	@Override
 	public String toString() {

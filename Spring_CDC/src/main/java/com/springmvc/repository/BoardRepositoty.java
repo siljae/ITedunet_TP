@@ -21,7 +21,12 @@ public interface BoardRepositoty {
 	public void updateboard(boardDTO board,HttpServletRequest req);
 	public boardDTO getByNum(int num);
 	public void deleteboard(String num);
-	public void search(Model model,HttpServletRequest req);
+	//게시글 검색
+	public List<boardDTO> search(String content);
 	public void recom(String num, String recom);
 	public List<boardDTO> recomboard();
+	//전체 게시글 개수
+	public int getallcount();
+	//검색한 게시글 개수
+	public int getcount(String content);
 }

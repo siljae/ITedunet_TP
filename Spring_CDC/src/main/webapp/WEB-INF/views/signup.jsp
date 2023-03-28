@@ -54,6 +54,25 @@
     		var v = document.getElementById('name').value;
     		window.open("chkname?name="+v,'_blank','width=500,height=300,top=200,left=200');
     	}
+    	
+    	function chkForm(){
+    		const pw = document.getElementById('pw').value;
+    		const pw2 = document.getElementById('pw2').value;
+    		if(pw == pw2){
+    			const ischk = document.getElementById('allagree').checked; 
+    			if(ischk == true){
+    				return true;
+    			}
+    			else{
+                    alert("약관에 동의해주세요!")
+    				return false;
+                }
+    		}
+    		else{
+                alert("비밀번호가 일치하지 않습니다!");
+    			return false;
+    		}
+    	}
     </script>
     <title>회원가입</title>
 </head>
@@ -64,7 +83,7 @@
                 <h1>회원가입</h1>
                 <div class="hr1"></div>
             </div>
-            <form:form modelAttribute="member" action="./signup" method="post">
+            <form:form modelAttribute="member" action="./signup" method="post" onsubmit="return chkForm()">
                 <div class="input_box">
                     <p>
                         이메일
@@ -74,12 +93,12 @@
                     <br>
                     <p>
                         비밀번호
-                        <form:input type="password" path="pw" class="pw" required="required" placeholder="ex)비밀번호양식"/>
+                        <form:input type="password" id="pw" path="pw" class="pw" required="required" placeholder="ex)비밀번호양식"/>
                     </p>
                     <br>
                     <p>
                         비밀번호확인
-                        <input type="password" class="pw2" required="required">
+                        <input type="password" id="pw2" class="pw2" required="required">
                     </p>
                     <br>
                     <p>

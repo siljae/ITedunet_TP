@@ -18,6 +18,9 @@
     		else if(msg == 1){
     			alert("어서오세요! 오늘도 좋은 하루되세요!");
     		}
+    		else if(msg == 2){
+    			alert("회원가입을 축하합니다!\n로그인해주세요~");
+    		}
     	});
     </script>
 </head>

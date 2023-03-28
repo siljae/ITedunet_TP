@@ -20,4 +20,8 @@ public interface MemberRepository {
 	public List<memberDTO> getallmemberlist();
 	//num과 일치하는 회원정보 반환하는 기능
 	public memberDTO getmemberBynum(int num);
+	//회원가입시 이메일 중복체크 기능
+	public int chkemail(String email);
+	//회원가입시 닉네임 중복체크 기능
+	public int chkname(String name);
 }

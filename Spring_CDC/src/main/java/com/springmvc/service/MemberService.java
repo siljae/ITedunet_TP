@@ -9,7 +9,7 @@ import com.springmvc.domain.memberDTO;
 
 public interface MemberService {
 	//회원가입기능
-	public void join(memberDTO dto);
+	public void join(memberDTO dto, Model model);
 	//로그인기능	
 	public void chklogin(String email, String pw,HttpSession session,ModelAndView mav);
 	//로그아웃기능
@@ -24,6 +24,10 @@ public interface MemberService {
 	public void getallmember(Model model);
 	//num과 일치하는 회원정보 모델에 담는 기능
 	public void getmemberBynum(int num, Model model);
+	//이메일중복체크 기능
+	public void chkemail(Model model);
+	//닉네임중복체크 기능
+	public void chkname(Model model);
 	
 	
 }

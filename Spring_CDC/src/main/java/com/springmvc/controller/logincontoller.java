@@ -28,7 +28,7 @@ public class logincontoller {
 		return "login";
 	}
 	
-	@GetMapping("/pwsearch") //비밀번호 찾기
+	@GetMapping("/pwsearch") //비밀번호 찾기, 아직 구현안됨 이메일로 해쉬코드를 발급해야되는 부분이라 나중에 공부하고 구현하기
 	public String pwsearch() {
 		return "pw_search";
 	}
@@ -52,32 +52,35 @@ public class logincontoller {
 	}
 	
 	@PostMapping("/signup") //회원가입 기능
-	public String submitsignup(@ModelAttribute("member") memberDTO member) throws Exception {
-		mr.join(member);
-		return "index";
+	public String submitsignup(@ModelAttribute("member") memberDTO member, Model model) throws Exception {
+		mr.join(member, model);
+		return "login";
 	}	
 
 	
-	@GetMapping("/chkemail") //이메일 중복체크 //배리에이블 써야됨
+	@GetMapping("/chkemail") //이메일 중복체크
 	public String chkemail(HttpServletRequest req, Model model) {
-		System.out.println("req"+req.getParameter("email"));
 		model.addAttribute("email",req.getParameter("email"));
 		return "check_email";
 	}
 	
 	@PostMapping("/chkemail") //이메일 중복체크하고 와서 값 넘겨주기
-	public String chkemail2(HttpServletRequest req) {
+	public String chkemail2(HttpServletRequest req, Model model) {
+		model.addAttribute("email", req.getParameter("email"));
+		mr.chkemail(model);
 		return "check_email";
 	}
 	
-	@GetMapping("/chkname") //닉네임 중복체크 //배리에이블 써야됨
+	@GetMapping("/chkname") //닉네임 중복체크
 	public String chkname(HttpServletRequest req, Model model) {
 		model.addAttribute("name",req.getParameter("name"));
 		return "check_name";
 	}
 	
 	@PostMapping("/chkname") //닉네임 중복체크하고 와서 값 넘겨주기
-	public String chkname2(HttpServletRequest req) {
+	public String chkname2(HttpServletRequest req, Model model) {
+		model.addAttribute("name",req.getParameter("name"));
+		mr.chkname(model);
 		return "check_name";
 	}
 	

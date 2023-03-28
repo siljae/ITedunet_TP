@@ -71,7 +71,7 @@
             <div>
                 <div class="write_head">
                     <h2>${board.title }</h2>                  
-                    <c:if test="${board.name == name }">                                       
+                    <c:if test="${board.name == name || level == 2 }">                                       
                     <div>
                         <button class="btn" onclick="write_update()">수정</button>
                         <button class="btn" onclick="write_delete()">삭제</button>

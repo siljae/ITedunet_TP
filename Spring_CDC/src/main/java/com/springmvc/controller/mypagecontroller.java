@@ -91,7 +91,7 @@ public class mypagecontroller {
 	@PostMapping("/mgnview/{num}")	//회원정보수정
 	public String updatemanagementview(@ModelAttribute("member") memberDTO member, @PathVariable("num") int num, Model model) {
 		mr.updatemember(member);
-		return "redirect:/mypage/mgn";
+		return "redirect:/mypage/mgnmember";
 	}
 	
 	@GetMapping("/mgncommu")	//커뮤니티 관리

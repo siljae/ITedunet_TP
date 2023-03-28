@@ -5,7 +5,7 @@ public class pageDTO {
 	private int endpage;		//끝 페이지
 	private boolean prev, next;	//이전 페이지, 다음 페이지 존재 유무	
 	private int total;			//전체 개수
-	private criteria cri;		//현재 페이지번호 , 한 페이지에 표시할 데이터 정보
+	private criteria cri;		//page, amount
 	
 	public pageDTO(criteria cri, int total) {
 		this.cri = cri;
@@ -16,7 +16,7 @@ public class pageDTO {
 		//시작 페이지
 		this.startpage = this.endpage-9;
 		//전체 마지막 페이지
-		int realend = (int)(Math.ceil(total*1.0)/cri.getAmount());
+		int realend = (int)(Math.ceil(total*1.0/cri.getAmount()));
 		//전체 마지막 페이지(realend)가 화면에 보이는 마지막페이지(endPage)보다 작은 경우, 보이는 페이지(endPage) 값 조정 
 		if(realend < this.endpage) {
 			this.endpage = realend;
@@ -29,36 +29,81 @@ public class pageDTO {
 		
 		
 	}
-
+	
 	public int getStartpage() {
 		return startpage;
 	}
+
+
+
+	public void setStartpage(int startpage) {
+		this.startpage = startpage;
+	}
+
+
 
 	public int getEndpage() {
 		return endpage;
 	}
 
+
+
+	public void setEndpage(int endpage) {
+		this.endpage = endpage;
+	}
+
+
+
 	public boolean isPrev() {
 		return prev;
 	}
+
+
+
+	public void setPrev(boolean prev) {
+		this.prev = prev;
+	}
+
+
 
 	public boolean isNext() {
 		return next;
 	}
 
+
+
+	public void setNext(boolean next) {
+		this.next = next;
+	}
+
+
+
 	public int getTotal() {
 		return total;
 	}
+
+
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+
 
 	public criteria getCri() {
 		return cri;
 	}
 
+
+
+	public void setCri(criteria cri) {
+		this.cri = cri;
+	}
+	
 	@Override
 	public String toString() {
 		return "PageVO [startpage=" + startpage + ", endpage=" + endpage + ", prev=" + prev + ", next=" + next
 				+ ", total=" + total + "]";
 	}
-	
 	
 }
