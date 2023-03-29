@@ -12,7 +12,7 @@
         $(document).ready(function () {
             $(".slide_banner").not(".active").hide(); //화면 로딩 후 첫번째 div를 제외한 나머지 숨김
             
-            setInterval(nextSlide, 10000); //4초(4000)마다 다음 슬라이드로 넘어감
+            setInterval(nextSlide, 10000); //10초(10000)마다 다음 슬라이드로 넘어감
         });
         
         //이전 슬라이드
@@ -82,8 +82,8 @@
 </head>
 <body>
     <!-- 슬라이드 배너 -->
-    <section>
-        <div class="container">
+    <section id="slide">
+        <div class="container slidebox">
             <div class="slide_banner fade active">
                 <img src="../img/index/slide01.jpg" alt="">
             </div>
@@ -91,64 +91,56 @@
                 <img src="../img/index/slide02.jpg" alt="">
             </div>
             <div class="slide_banner fade">
-                <img src="../img/index/slide03.jpg" alt="">
+                <img src="../img/index/slide03_1.jpg" alt="">
             </div>
 
             <a class="prev" onclick="prevSlide()">&#10094;</a>
             <a class="next" onclick="nextSlide()">&#10095;</a>
         </div>
     </section>
+    <!-- 바로가기 아이콘 -->
+    <section id="shortcut">
+        <div class="container">
+            <h1>바로가기</h1>
+            <ul class="linkbox">
+                <li class="linkimgbox">
+                    <a href="#">
+                        <img class="linkimg" src="../img/index/commuicon.png" alt="커뮤니티">
+                        <span class="linkspan">우리아이자랑</span>
+                    </a>
+                </li>
+                <li class="linkimgbox">
+                    <a href="#">
+                        <img class="linkimg" src="../img/index/noticeicon.png" alt="공지사항">
+                        <span class="linkspan">공지사항</span>
+                    </a>
+                </li>
+                <li class="linkimgbox">
+                    <a href="#">
+                        <img class="linkimg" src="../img/index/hosicon.png" alt="병원">
+                        <span class="linkspan">우리동네병원</span>
+                    </a>
+                </li>
+                <li class="linkimgbox">
+                    <a href="#">
+                        <img class="linkimg" src="../img/index/shopicon.png" alt="마켓">
+                        <span class="linkspan">SHOP</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </section>
     <!-- 글 상자 -->
-    <section>
-        <div class="container posts_box">
-            <div class="post_up">
-                <div class="up_left">
-                    <h5><a href="#">More</a></h5>                    
-                    <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
-                        <ul>
-                            <li><a href="#">첫번 째 글</a></li>
-                            <li><a href="#">두번 째 글</a></li>
-                            <li><a href="#">세번 째 글</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="up_right">
-                    <h5><a href="#">More</a></h5>                    
-                    <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
-                        <ul>
-                            <li><a href="#">첫번 째 글</a></li>
-                            <li><a href="#">두번 째 글</a></li>
-                            <li><a href="#">세번 째 글</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="post_down">
-                <div class="down_left">
-                    <h5><a href="#">More</a></h5>                    
-                    <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
-                        <ul>
-                            <li><a href="#">첫번 째 글</a></li>
-                            <li><a href="#">두번 째 글</a></li>
-                            <li><a href="#">세번 째 글</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="down_right">
-                    <h5><a href="#">More</a></h5>                    
-                    <div class="post_box">
-                        <h4>우리아이 자랑 인기글</h4>
-                        <ul>
-                            <li><a href="#">첫번 째 글</a></li>
-                            <li><a href="#">두번 째 글</a></li>
-                            <li><a href="#">세번 째 글</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+    <section id="textbox">
+        <div class="container">
+            <h1>공지사항</h1>
+            <ul>
+                <li>
+                    <a href="#">
+                        ㅁㄴㅇ
+                    </a>
+                </li>
+            </ul>
         </div>
     </section>
     <!-- shop 광고 -->

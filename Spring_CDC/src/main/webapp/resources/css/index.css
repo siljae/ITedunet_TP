@@ -1,3 +1,12 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    color: black;
+}
 /* index 시작 */
 .container
 {
@@ -5,20 +14,17 @@
     margin: 0 auto;
 }
 
-
 /* 이벤트 배너 (슬라이드) */    
 /* Slideshow container */
-.container {
-    width: 100%;
-    height: 500px;
-    overflow: hidden;
+.slidebox {
     position: relative;
+    overflow: hidden;
     margin: auto;
     margin-top: 120px;
 }
 .slide_banner{
     width: 100%;
-    height: 100%;
+    height: 400px;
 }
 .slide_banner img{
     width: 100%;
@@ -69,45 +75,44 @@
   background-color: rgba(0,0,0,0.8);
 }
 
+/* 바로가기 아이콘 상자 */
+#shortcut > div > h1{
+    margin-top: 50px;
+    margin-bottom: 20px;
+}
+.linkbox{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    list-style: none;
+    margin: 0 auto;
+}
+.linkimgbox{
+    width: 100px;
+}
+.linkimgbox img{
+    width: 100%;
+    object-fit: cover;
+}
+.linkimgbox a span{
+    padding-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+.linkimgbox:hover .linkimg{
+    transform: scale(1.2);
+}
+.linkimgbox:hover .linkspan{
+    color: #b77700;
+}
+
 /* 글 상자 */
-.posts_box
-{
-    margin-top: 100px;
-}
-.posts_box h5
-{
-    text-align: right;
-    margin-right: 20px;
-}
-.posts_box h5 a
-{
-    color: cornflowerblue;
-}
-.post_up
-{
-    display: flex;
-}
-.up_left, .up_right, .down_left, .down_right
-{
-    width: 50%;
-    margin: 0 20px;
-}
-.post_box ul
-{
-    margin-top: 20px;
-}
-.post_down
-{
-    display: flex;
-    margin-top: 20px;
-}
-.post_box
-{
-    border: 1px solid silver;
-    height: 300px;
-    padding: 20px;
-    border-radius: 20px;
-    background-color: #fff;
+#textbox > div > h1{
+    margin-top: 50px;
+    margin-bottom: 20px;
 }
 
 /* 광고 */
