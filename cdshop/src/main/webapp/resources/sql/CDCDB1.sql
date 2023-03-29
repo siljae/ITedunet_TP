@@ -18,7 +18,7 @@ create table member
 
 select * from member;
 insert into member values(null, "admin@gmail.com", "관리자", "1234", "010-1111-1111", "11111", "창원시", "의창구", 2);
-insert into member values(null, "seoh@naver.com", "회원", "1234", "010-3012-5225", "22222", "창원시", "의창구", 1);
+insert into member values(null, "seoh@naver.com", "서현", "1234", "010-3012-5225", "22222", "창원시", "의창구", 1);
 
 
 create table product
@@ -40,7 +40,24 @@ create table product
 );
 
 insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
-p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF001", "개사료", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "김서현", 10, 1, "몰라.jpg", "몰라2.jpg");
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF001", "오리젠 오리지널 독", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF002", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DS001", "퓨어튜나스틱", "dogsnack", "이거는 개 간식이당", "이거 비슷하게하면 돼", "퍼스텝", 10000, 100, "stickdetail.jpg", "puretunastick.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DL001", "강아지 쿠션", "dogsup", "이거는 개쿠션이당", "이거 비슷하게하면 돼", "하이드앤울프", 30000, 100, "dogcushiondetail.jpg", "dogcushion.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DT001", "강아지 장난감", "dogtoy", "이건 강아지 장난감", "이거 비슷하게하면 돼", "바잇미", 20000, 100, "dogtoydetaile.jpg", "dogtoy.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CF001", "오리젠 캣엔키튼", "catfood", "이거는 냥사료양", "이거 비슷하게하면 돼", "오리젠", 40000, 100, "origen1.jpg", "origen_catkitten.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CS001", "고양이 트릿", "catsnack", "이거는 냥 간식이당", "이거 비슷하게하면 돼", "퍼스텝", 19000, 100, "catsnackdetail.jpg", "catsnack.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CL001", "고양이 스크래쳐", "catsup", "이거는 냥이 스크래쳐", "이거 비슷하게하면 돼", "퍼스텝", 36000, 100, "catlivingdetail.jpg", "catliving.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CT001", "고양이 낚시대", "cattoy", "이거는 고양이 장난감이양", "이거 비슷하게하면 돼", "벨버드", 10000, 100, "cattoydetail.jpg", "cattoy.jpg");
+
 drop table product;
 select * from product;
 
