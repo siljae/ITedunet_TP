@@ -18,6 +18,7 @@ create table member
 
 select * from member;
 insert into member values(null, "admin@gmail.com", "관리자", "1234", "010-1111-1111", "11111", "창원시", "의창구", 2);
+insert into member values(null, "seoh@naver.com", "회원", "1234", "010-3012-5225", "22222", "창원시", "의창구", 1);
 
 
 create table product
@@ -38,6 +39,8 @@ create table product
     unique key(p_id)
 );
 
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF001", "개사료", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "김서현", 10, 1, "몰라.jpg", "몰라2.jpg");
 drop table product;
 select * from product;
 
@@ -56,17 +59,17 @@ create table buy
 
 create table cart
 (
-	ca_id int not null,
+	ca_id int not null auto_increment,
     m_name varchar(6) not null,
     p_id varchar(10) not null,
+    p_unitprice int not null,
     ca_qnt int not null,
     p_tfilename varchar(100) not null,
     primary key(ca_id),
-    foreign key(m_name) references member(m_name),
-    foreign key(p_id) references product(p_id)
+    foreign key(m_name) references member(m_name)
 );
 
-
+select * from cart;
 drop table cart;
 
 create table commuboard

@@ -15,8 +15,9 @@ public class cartRowMapper implements RowMapper<cartDTO>{
 		cart.setCartId(rs.getInt(1));
 		cart.setName(rs.getString(2));
 		cart.setProductId(rs.getString(3));
-		cart.setQuantity(rs.getInt(4));
-		cart.setTfilename(rs.getString(5));
+		cart.setPrice(rs.getInt(4));
+		cart.setQuantity(rs.getInt(5));
+		cart.setTfilename(rs.getString(6));
 		
 		return cart;
 	}

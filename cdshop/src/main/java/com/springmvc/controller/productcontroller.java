@@ -48,6 +48,7 @@ public class productcontroller {
 		System.out.println("너 productview 들어옴?");
 		productDTO productById = ps.getProductById(productId);
 		System.out.println(productById);
+		System.out.println(productById.getTitlement());
 		model.addAttribute("product", productById);
 		return "productpage";
 	}

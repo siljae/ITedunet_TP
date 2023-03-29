@@ -32,20 +32,60 @@
         }
     }
     
-    function clearCart(){
-    	document.clearForm.submit();
-    	window.location.reload();
+    function chkForm(){
+    	let name = "${name}";
+    	const ischk = document.getElementById('allproduct').checked;
+    	if(ischk == true){
+    		return location.href="./alldelete?name="+name;
+    	}
+    	else {
+    		alert("전체체크를 해주세요")
+    			return false;
+    	}
     }
-    function removeFromCart(action){
-    	document.removeForm.action = action;
-    	document.removeForm.submit();
-    	window.location.reload();
+    
+    function deleteConfirm(id){
+    	if(confirm("삭제합니다 !") == true) location.href="./delete?id="+id;
+    	else return;
     }
+    
+    $(document).ready(function(){
+    	setTotalInfo();
+    });
+    
+    $("allproduct").on("change", function(){
+    	setTotalInfo($(".product_list"))
+    })
+    
+    function setTotalInfo(){
+    	let totalprict = 0;
+    	let totalcount = 0;
+    	let delivertprice = 0;
+    	let finaltotalprict = 0;
+    	
+    	$("allproduct").each(function(index, element){
+    		totalprice += perseInt($(element).find(".totalprice_input").val());
+    		totalcount += parseInt($(element).find(".totalcount_input").val());
+    	});
+    	
+    	if(totalprice == 0){
+    		deliveryprice = 0;
+    	} else {
+    		deliveryprice = 2500;
+    	}
+    	finaltotalprice = totalprice + deliveryprice;
+    	
+    	$(".totalprice_span").text(totalprice.toLocaleString());
+    	$(".delivary_span").text(delivaryprice);
+    	$(".finaltotalprice_span").text(finaltotalprice.toLocaleString());
+    }
+    
+    
 </script>
 </head>
 <body>
-	<jsp:include page="./header.jsp"/>
-	<section>
+   <jsp:include page="./header.jsp"/>
+   <section>
         <div class="cart_head">
             <h1>장바구니</h1>
         </div>
@@ -90,87 +130,59 @@
                 </ul>
                 <div class="my_right">
                     <div class ="mr2">
-	                    <p class="allchkbox">
-	                        <label for="allproduct">전체선택</label>
-	                        <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
-	                        <div class="quandel quandel2">
-	                        	<form:form name="clearForm" method="delete">
-	                        		<a href="clearForm()">전체삭제</a>
-	                        	</form:form>
-	                        </div> 
-	                    </p>
+                       <p class="allchkbox">
+                           <label for="allproduct">전체선택</label>
+                           <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
+                           <div class="quandel quandel2">
+                                 <a href="<c:url value = "javascript:chkForm()"/>">전체삭제</a>
+                           </div> 
+                       </p>
                     </div>
+                    <c:forEach items="${cartlist}" var="item">
                     <div>
-                        <ul>
-                            <li>
-                                <div class="product_list">
-                                <form:form name="removeForm" method="put">
-                                <c:forEach items="${cart.cartitems}" var="item">                            
+                            <div class="product_list">
+                                <%-- <form:form name="removeForm" method="put">     
+                                </form:form> --%>                        
                                     <div class="product_img">
-                                        <img src="./img/cart/product2.png" alt="product">
+                                        <img src="./img/cart/${item.tfilename}" alt="product">
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_t">
-                                            <h3>${item.value.product.productId}-${item.value.product.name}</h3>
+                                            <h3>${item.productId}</h3>
                                             <input type="checkbox" id="allchk" name="chk" onclick="chkselectall()">
                                         </div>
                                         <div class="product_desc_b">
-                                            <p> 금액 : ${item.value.product.unitprice}</p>
+                                            <p> 금액 : ${item.price}</p>
                                             <div class="quanbox">                                                
-                                                수량 : ${item.value.product.quantity}
+                                               <p> 수량 : </p>
                                                 <div class="quan_inbox">
-                                                    <button onclick="fncalcount('p',this)" class="it_quan_p">+</button>
-                                                    <input type="text"  value="1" class="it_quan" required>
-                                                    <button onclick="fncalcount('m',this)" class="it_quan_m">-</button>
+                                                    <input type="number"  value="${item.quantity}" class="it_quan" required>
+                                                    <input type="hidden" class="totalcount_input" value="${item.quantity}">
+                                                </div>
+                                                <div class="allprice">
+                                                	합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
+                                                	<input type="hidden" class="totalprice_input" value="${item.price * item.quantity}">
                                                 </div>
                                             </div>                                           
-                                            <div class="quandel"><a href="javascript:removeFromCart('/cart/remove/${item.value.product.productId}')">삭제</a></div>    
+                                            <div class="quandel"><a href="<c:url value = "javascript:deleteConfirm('${item.productId}')"/>">삭제</a></div>    
                                         </div>
-                                        </c:forEach>
-                                        </form:form>                                                                            
                                     </div>
                                 </div>
+                            </div>
                                 <div class="hr"></div>
-                            </li>
-                            <!-- 지워도됨 예시임 -->
-                            <li>
-                                <div class="product_list">                            
-                                    <div class="product_img">
-                                        <img src="./img/cart/product2.png" alt="product">
-                                    </div>
-                                    <div class="product_desc">
-                                        <div class="product_desc_t">
-                                            <h3>상품명 : @1234</h3>
-                                            <input type="checkbox" id="allchk" name="chk" onclick="chkselectall()">
-                                        </div>
-                                        <div class="product_desc_b">
-                                            <p>상품금액 : 10,000원</p>
-                                            <div class="quanbox">                                                
-                                                수량 :
-                                                <div class="quan_inbox">
-                                                    <button onclick="fncalcount('p',this)" class="it_quan_p">+</button>
-                                                    <input type="text"  value="1" class="it_quan" required>
-                                                    <button onclick="fncalcount('m',this)" class="it_quan_m">-</button>
-                                                </div>
-                                            </div>                                            
-                                            <div class="quandel"><a href="javascript:removeFromCart('/cart/remove/${item.value.product.productId}')">삭제</a></div>  
-                                        </div>                                                                            
-                                    </div>
-                                </div>
-                                <div class="hr"></div>
-                            </li>
-                        </ul>                        
+                      </c:forEach>
+                          
                         <div class="product_sum">
-                            <p>
-                                총 상품가격 <span>${Cart.grandTotal}</span>원
-                            </p> 
+                            <div>
+                                총 상품가격 <span class="totalprice_span"></span>원
+                            </div> 
                             <i class="far fa-plus-square"></i>
                             <p>
-                                총 배송비 <span>2500</span>원
+                                총 배송비 <span class="delivary_span"></span>원
                             </p>
                             <i class="fas fa-equals"></i>
                             <p>
-                                총 주문 금액 <span>12,500</span>원
+                                총 주문 금액 <span class="finaltotalprice_span"></span>원
                             </p>
                         </div>
                     </div>

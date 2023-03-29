@@ -13,23 +13,30 @@
 <title>Insert title here</title>
 <link rel = "stylesheet" href="<c:url value="/resources/css/productpage.css" />">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
-	<script>
-		function addToCart(action){
-			document.addForm.action = action;
-			document.addForm.submit();
-			alert("상품이 장바구니에 추가되었습니다!")
-		}
-		function deleteConfirm(id){
-			if (confirm("삭제합니다!") == true) location.href="./delete?id="+id;
-			else return;
-		}
-		
-		
-	</script>
+   <script>
+   
+      function deleteConfirm(id){
+         if (confirm("삭제합니다!") == true) location.href="./delete?id="+id;
+         else return;
+      }
+      
+      window.onload = function(){
+      const qnt = document.getElementById('qnt');
+      const add = document.getElementById('addcart')
+      add.addEventListener('click', function(){
+          const data = qnt.value;
+          alert("상품이 장바구니에 추가되었습니다!")
+          window.location.href = "/cart/add?productId=${product.productId}&qnt="+data;
+      });
+      };
+      
+      
+      
+   </script>
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
-	<div class="container">
+   <jsp:include page="header.jsp"/>
+   <div class="container">
         <div class="bbubbu">
             <div class="cos_nav">
                 <ul>
@@ -156,7 +163,7 @@
                             </div>
                             <div class="quanbox">                                                
                                 <div class="quan_inbox">
-                                    수량 <input type="number"  value="1" class="it_quan" min="1" max="100">
+                                    수량 <input type="number"  value="1" class="it_quan" min="1" max="100" id="qnt">
                                 </div>
                             </div>    
                             <hr class="quanboxhr">                    
@@ -177,12 +184,12 @@
                     </div>
                     </c:if>
                     <div class="cartbox">
-	                    <form:form name="addCart" method="get">
-	                        <div class="cartbt"><a href="<c:url value="/cart"/>">
-	                        <span class="material-symbols-outlined">
-	                            </span>장바구니</a></div>
-	                    </form:form>
-	                </div>
+                       <form:form name="addCart" method="get">
+                           <div class="cartbt" ><a href="#" id="addcart">
+                           <span class="material-symbols-outlined">
+                               </span>장바구니</a></div>
+                       </form:form>
+                   </div>
                     <div class="gardhr">
                         <hr class="gardline">
                     </div>
