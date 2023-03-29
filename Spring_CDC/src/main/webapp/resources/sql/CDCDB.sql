@@ -17,6 +17,7 @@ create table member
 );
 drop table member;
 select*from member;
+delete from member where m_name='aaa';
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
 create table admin
 (
@@ -78,14 +79,16 @@ insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_conte
 update commuboard set cb_recom= cb_recom+1 where cb_title= '33333';
 
 delete from commuboard where m_name='abc';
-
+select*from commuboard order by cb_num desc;
 select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
+select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc limit 0,10;
+select*from commuboard where cb_title like '%19%' or cb_content like '%19%' order by cb_num desc limit 10,10;
 select*from commuboard order by cb_hit desc;
 select*from commuboard where cb_recom >= 10 limit 5;
 
 
 select count(*) from commuboard where cb_animal_type='cat';
-select count(*) from commuboard where cb_content like '%스트%';
+select count(*) from commuboard where cb_title like '%스트%' or cb_content like '%스트%';
 
 
 update commuboard 

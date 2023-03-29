@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 import com.springmvc.database.DBConnection;
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.criteria;
+import com.springmvc.domain.pageDTO;
 
 @Repository
 public class BoardRepositoryImpl implements BoardRepositoty {
@@ -399,7 +401,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String regist_day = sdf.format(new Date());
 		board.setHit(board.getHit()+1);
-		
 		if(board.getFileimage().getSize() != 0) {
 			MultipartFile boardimg = board.getFileimage();
 			
@@ -416,14 +417,13 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	            }
 	        }
 		}
-		
 		if(board.getFilename() != null) {
 			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_filename=?, cb_hit=?, cb_recom=? where cb_num=?";
-			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit(),board.getNum(), board.getRecom());
+			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getFilename(), board.getHit(), board.getRecom(), board.getNum());
 		}
 		else if(board.getFilename() == null){
 			String sql = "update commuboard set cb_board_type=?, cb_animal_type=?, m_name=?, cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=?, cb_recom=? where cb_num=?";
-			template.update(sql, board.getNum(), board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getHit(), board.getRecom());
+			template.update(sql, board.getBoard_type(), board.getAnimal_type(), board.getName(), board.getTitle(), board.getContent(), regist_day, board.getHit(), board.getRecom(), board.getNum());
 		}
 	}
 	
@@ -447,8 +447,9 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	@Override //게시글 제목이나, 내용으로 검색하기
-	public List<boardDTO> search(String content) {
-		String sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc";
+	public List<boardDTO> search(String content,pageDTO page) {
+		int start = page.getCri().getpagestart();
+		String sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc limit "+start+","+page.getCri().getAmount();
 		List<boardDTO> boardlist = template.query(sql, new BoardMapper());	
 		for (boardDTO board : boardlist) {
 			String regist_day = caltime(board.getRegist_day());

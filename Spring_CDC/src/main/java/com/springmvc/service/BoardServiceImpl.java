@@ -46,6 +46,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override	//게시글수정
 	public void updateboard(boardDTO board, HttpServletRequest req) {
+		System.out.println("서비스");
 		br.updateboard(board, req);
 		
 	}
@@ -64,9 +65,10 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override	//게시글 검색
 	public void search(Model model, String content, criteria cri) {
-		List<boardDTO> boardlist = br.search(content);
 		int total = br.getcount(content);
 		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.search(content, page);
+		model.addAttribute("search",content);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);
 	}

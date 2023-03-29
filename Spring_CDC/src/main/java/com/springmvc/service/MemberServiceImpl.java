@@ -92,7 +92,9 @@ public class MemberServiceImpl implements MemberService{
 		model.addAttribute("msg",msg);
 	}
 	
-	
-	
+	@Override 	//회원 삭제 기능
+	public void deletemember(int num) {
+		mr.deletemember(num);
+	}
 	
 }

@@ -17,19 +17,13 @@
 	box-sizing: border-box;
 	color: black;
 }
-
-body {
-	background-color: #fffef1;
-}
-
 .hea_con {
 	width: 100%;
 	height: 100px;
-	background: #fec6ca;
+	background: #f4eded;
 	position: fixed;
 	z-index: 10;
 }
-
 /* nav 시작 */
 nav {
 	display: flex;
@@ -40,16 +34,15 @@ nav {
 	font-weight: bold;
 	margin: 0 auto;
 }
-
-.nav_logo {
+.nav_logo
+{
 	margin-left: 20px;
 	width: 200px;
 }
-
-.nav_logo img {
+.nav_logo img
+{
 	width: 100%;
 }
-
 .nav_ul {
 	display: flex;
 	justify-content: space-around;
@@ -58,10 +51,30 @@ nav {
 	white-space: nowrap;
 }
 
+.nav_commu, .nav_notice, .nav_hospital, .nav_shop{
+	position: relative;
+}
+.circle{
+	display: none;
+	position: absolute;
+	z-index: -1;
+	top: -3px;
+	right: -5px;
+	width: 12px;
+	height: 12px;
+	border-radius: 7px;
+	background-color: rgb(255,128,0);
+}
+.nav_commu:hover a, .nav_notice:hover a, .nav_hospital:hover a, .nav_shop:hover a{
+	color: #5f5f5f;
+}
+.nav_commu:hover .circle, .nav_notice:hover .circle, .nav_hospital:hover .circle, .nav_shop:hover .circle{
+	display: block;
+}
 .nav_login {
 	margin-right: 20px;
 	border-radius: 5px;
-	background-color: #ff8fa4;
+	background-color: #ffaac7;
 	padding: 5px 10px;
 }
 
@@ -128,10 +141,22 @@ nav {
 						alt="Logo"></a>
 				</div>
 				<ul class="nav_ul">
-					<li class="nav_commu"><a href="<c:url value="/board/${pageNum }"/>">커뮤니티</a></li>
-					<li class="nav_notice"><a href="<c:url value="/notice"/>">캣독마당</a></li>
-					<li class="nav_hospital"><a href="<c:url value="/hospital"/>">우리동네</a></li>
-					<li class="nav_shop"><a href="#">SHOP</a></li>
+					<li class="nav_commu">
+						<a href="<c:url value="/board/${pageNum }"/>">커뮤니티</a>
+						<div class="circle"></div>
+					</li>
+					<li class="nav_notice">
+						<a href="<c:url value="/notice"/>">캣독마당</a>
+						<div class="circle"></div>
+					</li>
+					<li class="nav_hospital">
+						<a href="<c:url value="/hospital"/>">우리동네</a>
+						<div class="circle"></div>
+					</li>
+					<li class="nav_shop">
+						<a href="#">SHOP</a>
+						<div class="circle"></div>
+					</li>
 				</ul>
 				<div class="nav_login">
 					<c:if test="${name == null }">

@@ -94,6 +94,12 @@ public class mypagecontroller {
 		return "redirect:/mypage/mgnmember";
 	}
 	
+	@GetMapping("/mgndelete/{num}")	//회원 삭제
+	public String deletemanagement(@PathVariable("num")int num) {
+		mr.deletemember(num);
+		return "redirect:/mypage/mgnmember";
+	}
+	
 	@GetMapping("/mgncommu")	//커뮤니티 관리
 	public String managementcommu() {
 		return "";

@@ -24,4 +24,6 @@ public interface MemberRepository {
 	public int chkemail(String email);
 	//회원가입시 닉네임 중복체크 기능
 	public int chkname(String name);
+	//회원 삭제
+	public void deletemember(int num);
 }

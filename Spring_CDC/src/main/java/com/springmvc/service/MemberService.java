@@ -28,6 +28,8 @@ public interface MemberService {
 	public void chkemail(Model model);
 	//닉네임중복체크 기능
 	public void chkname(Model model);
+	//회원 삭제 기능
+	public void deletemember(int num);
 	
 	
 }

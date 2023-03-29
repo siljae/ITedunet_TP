@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.criteria;
+import com.springmvc.domain.pageDTO;
 
 public interface BoardRepositoty {
 
@@ -22,7 +24,7 @@ public interface BoardRepositoty {
 	public boardDTO getByNum(int num);
 	public void deleteboard(String num);
 	//게시글 검색
-	public List<boardDTO> search(String content);
+	public List<boardDTO> search(String content,pageDTO page);
 	public void recom(String num, String recom);
 	public List<boardDTO> recomboard();
 	//전체 게시글 개수

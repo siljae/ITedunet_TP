@@ -16,7 +16,7 @@
         let i = confirm("정말 삭제하시겠습니까?\n삭제한 회원은 복원하실 수 없습니다.");
 
         if(i == true){
-            location.href = "삭제할 매핑경로"+num;
+            location.href = "./mgndelete/"+num;
         }
     }
 </script>

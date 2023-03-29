@@ -69,6 +69,7 @@ public class boardcontroller {
 	
 	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
 	public String updateboard(@PathVariable("num") String num,@PathVariable("pageNum") String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
+		System.out.println("보드컨트롤러");
 		br.updateboard(board, req);
 		return "redirect:/board/"+pageNum;
 	}
@@ -128,18 +129,18 @@ public class boardcontroller {
 		return "redirect:/board/1";
 	}
 	
-	@GetMapping("/pagenum")
-	public String movepage(@PathVariable("pagenum") String pagenum,Model model) {
-		model.addAttribute("pagenum",pagenum);
-		return "";
-	}
-	
-	@PostMapping("/search/{content}") //게시글 제목 or 내용 검색
-	public String serach(@PathVariable("content") String content, Model model, criteria cri) {
+	@PostMapping("/search") //게시글 제목 or 내용 검색
+	public String serach(Model model, HttpServletRequest req, criteria cri) {
+		String content = req.getParameter("content");
 		br.search(model, content, cri);
-		System.out.println("검색");
 		return "board";
 	}
 	
+	@GetMapping("/{search}/{pageNum}")	//검색된 게시글 페이징처리
+	public String urlsearch(@PathVariable("search") String search, @PathVariable("pageNum") int pageNum,Model model, criteria cri) {
+		cri.setPagenum(pageNum);
+		br.search(model, search, cri);
+		return "board";
+	}
 	
 }

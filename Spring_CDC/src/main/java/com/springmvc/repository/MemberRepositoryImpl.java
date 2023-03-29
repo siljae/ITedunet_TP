@@ -128,6 +128,11 @@ public class MemberRepositoryImpl implements MemberRepository {
 		
 	}
 	
+	@Override	//회원 삭제
+	public void deletemember(int num) {
+		String sql ="delete from member where m_num=?";
+		template.update(sql, num);
+	}
 	
 	
 }

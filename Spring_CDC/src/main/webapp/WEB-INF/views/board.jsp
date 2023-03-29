@@ -10,12 +10,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 	<title>커뮤니티 게시판</title>
-	<script type="text/javascript">
+	<!-- <script type="text/javascript">
 		function searchForm(){
 			let content = document.getElementById('content').value;
 			location.href = '<c:url value="/board/search/content"/>';
 		}
-	</script>
+	</script> -->
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
@@ -29,8 +29,8 @@
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                <!-- action="<c:url value="/board/search"/>" -->
-                	<form onsubmit="searchForm()"  method="post" style="width:70%">
+                <!-- onsubmit="searchForm()" -->
+                	<form action="<c:url value="/board/search"/>"  method="post" style="width:70%">
 	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
 	                    <button class="button" type="submit" >
 	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
@@ -174,7 +174,52 @@
                 </div>
             </div>
         </div>
+        <c:choose>
+        <c:when test="${search != null }">
         <ul class="pagebutton">
+        	<c:if test="${page.prev }">
+            	<li>
+            		<a href="<c:url value="/board/${search }/1"/>">‹‹</a>
+            	</li>
+            </c:if>
+        	<c:if test="${page.cri.pagenum != 1 }">        	
+	            <li class="leftbt">
+	                <a href="${page.cri.pagenum-1 }" aria-label="Go to befor page">‹</a>
+	            </li>
+            </c:if>
+            <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
+	            <li class="active">
+	            	<a href="<c:url value="/board/${search }/${i}" />" aria-label="Go to page number 1">
+	            		<c:choose>
+		            		<c:when test="${page.cri.pagenum==i }">
+		                		<font class="undefined"><b>${i }</b></font>
+		                	</c:when>                	
+		                	<c:otherwise>
+		                		<font><b>${i }</b></font>
+		                	</c:otherwise>
+	                	</c:choose>
+                	</a>
+	            </li>
+            </c:forEach>
+            <c:if test="${page.cri.pagenum < page.endpage }">
+	            <li>
+	                <a href="${page.cri.pagenum+1 }" aria-label="Go to after number ">›</a>
+	            </li>
+            </c:if>            
+            <c:if test="${page.next }">
+            	<li>
+            		<a href="${page.total }">››</a>
+            	</li>
+            </c:if>
+        </ul>
+        </c:when>
+        <c:otherwise>
+        <ul class="pagebutton">
+        	<c:if test="${page.prev }">
+            	<li>
+            		<a href="<c:url value="/board/1"/>">‹‹</a>
+            	</li>
+            </c:if>
         	<c:if test="${pageNum != 1 }">        	
 	            <li class="leftbt">
 	                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
@@ -201,10 +246,12 @@
             </c:if>            
             <c:if test="${page.next }">
             	<li>
-            		<a href="${total_page }">END</a>
+            		<a href="${total_page }">››</a>
             	</li>
             </c:if>
         </ul>
+        </c:otherwise>
+        </c:choose>
     </div>
 	<jsp:include page="footer.jsp"/>
 </body>
