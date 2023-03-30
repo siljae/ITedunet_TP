@@ -71,7 +71,9 @@
                 </div>
             </div>
         </div>
-        <hr class="borderline">
+	</div>
+    <hr class="borderline">
+    <div class="container">
         <div class="loungebox">
             <div class="filterbox">
                 <div class="filterbt">

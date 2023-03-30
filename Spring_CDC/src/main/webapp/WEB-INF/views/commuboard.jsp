@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<c:url value="/resources/css/commuboard.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 	<title>커뮤니티 게시판</title>
 	<script>
@@ -40,7 +40,7 @@
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
 		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">우리아이자랑</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum}" />" style="color: #090909; border-bottom: 4px solid #fcd11e;">우리아이자랑</a></h1>
 		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">묻고답하기</a></h1>
 		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해용</a></h1>
     </div>

@@ -22,6 +22,7 @@
 	height: 100px;
 	background: #f4eded;
 	position: fixed;
+	top:0;
 	z-index: 10;
 }
 /* nav 시작 */
