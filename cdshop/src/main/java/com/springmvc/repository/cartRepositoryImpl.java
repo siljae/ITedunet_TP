@@ -30,8 +30,8 @@ public class cartRepositoryImpl implements cartRepository {
    {
       String selectSql = "select * from product where p_id=?";
       productDTO product = template.queryForObject(selectSql, new productRowMapper(), productId);
-      String insertSql = "insert into cart (m_name, p_id, p_unitprice, ca_qnt, p_tfilename) values(?, ?, ?, ?, ?)";
-      template.update(insertSql, name, product.getName(), product.getUnitprice(), quantity, product.getTfilename());
+      String insertSql = "insert into cart (m_name, p_id, p_unitprice, ca_qnt, p_tfilename) values(?, ?, ?, ?, ?) on duplicate key update m_name=?, p_id=?, p_unitprice=?, ca_qnt=ca_qnt+?, p_tfilename=?";
+      template.update(insertSql, name, product.getName(), product.getUnitprice(), quantity, product.getTfilename(), name, product.getName(), product.getUnitprice(), quantity, product.getTfilename());
    }
    
    public List<cartDTO> getAllCartList(String name){

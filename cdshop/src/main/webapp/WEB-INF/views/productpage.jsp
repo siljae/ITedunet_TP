@@ -30,7 +30,14 @@
       });
       };
       
-      
+      const newCart = cart.concat(options).filter((product, index, array) => {
+    	  const sameOptionIndex = array.findIndex(
+		  	arr => arr.productId === product.productId && arr.size === product.size
+    	  );
+    	  
+    	  if (sameOptionIndex === index) return true;
+    	  array[sameOptionIndex].quantity += item.quantity;
+      });
       
    </script>
 </head>

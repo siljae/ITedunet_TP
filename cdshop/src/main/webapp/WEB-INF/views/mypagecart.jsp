@@ -31,7 +31,7 @@
             selectAll.checked = false;
         }
     }
-    
+    //장바구니 전체 삭제 (name 찾아서 일칠하는거 삭제)
     function chkForm(){
     	let name = "${name}";
     	const ischk = document.getElementById('allproduct').checked;
@@ -44,40 +44,10 @@
     	}
     }
     
+    // 장바구니 개별삭제
     function deleteConfirm(id){
     	if(confirm("삭제합니다 !") == true) location.href="./delete?id="+id;
     	else return;
-    }
-    
-    $(document).ready(function(){
-    	setTotalInfo();
-    });
-    
-    $("allproduct").on("change", function(){
-    	setTotalInfo($(".product_list"))
-    })
-    
-    function setTotalInfo(){
-    	let totalprict = 0;
-    	let totalcount = 0;
-    	let delivertprice = 0;
-    	let finaltotalprict = 0;
-    	
-    	$("allproduct").each(function(index, element){
-    		totalprice += perseInt($(element).find(".totalprice_input").val());
-    		totalcount += parseInt($(element).find(".totalcount_input").val());
-    	});
-    	
-    	if(totalprice == 0){
-    		deliveryprice = 0;
-    	} else {
-    		deliveryprice = 2500;
-    	}
-    	finaltotalprice = totalprice + deliveryprice;
-    	
-    	$(".totalprice_span").text(totalprice.toLocaleString());
-    	$(".delivary_span").text(delivaryprice);
-    	$(".finaltotalprice_span").text(finaltotalprice.toLocaleString());
     }
     
     
@@ -130,19 +100,17 @@
                 </ul>
                 <div class="my_right">
                     <div class ="mr2">
-                       <p class="allchkbox">
+                       <div class="allchkbox">
                            <label for="allproduct">전체선택</label>
                            <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
                            <div class="quandel quandel2">
                                  <a href="<c:url value = "javascript:chkForm()"/>">전체삭제</a>
                            </div> 
-                       </p>
+                       </div>
                     </div>
                     <c:forEach items="${cartlist}" var="item">
-                    <div>
-                            <div class="product_list">
-                                <%-- <form:form name="removeForm" method="put">     
-                                </form:form> --%>                        
+                    	<div>
+                            <div class="product_list">                    
                                     <div class="product_img">
                                         <img src="./img/cart/${item.tfilename}" alt="product">
                                     </div>
@@ -150,6 +118,9 @@
                                         <div class="product_desc_t">
                                             <h3>${item.productId}</h3>
                                             <input type="checkbox" id="allchk" name="chk" onclick="chkselectall()">
+                                            <input type="hidden" class="price" value="${item.price}">
+                                            <input type="hidden" class="totalprice_input" value="${item.price * item.quantity}">
+                                            <input type="hidden" class="totalcount_input" value="${item.quantity}">
                                         </div>
                                         <div class="product_desc_b">
                                             <p> 금액 : ${item.price}</p>
@@ -157,11 +128,9 @@
                                                <p> 수량 : </p>
                                                 <div class="quan_inbox">
                                                     <input type="number"  value="${item.quantity}" class="it_quan" required>
-                                                    <input type="hidden" class="totalcount_input" value="${item.quantity}">
                                                 </div>
                                                 <div class="allprice">
                                                 	합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
-                                                	<input type="hidden" class="totalprice_input" value="${item.price * item.quantity}">
                                                 </div>
                                             </div>                                           
                                             <div class="quandel"><a href="<c:url value = "javascript:deleteConfirm('${item.productId}')"/>">삭제</a></div>    
@@ -172,23 +141,103 @@
                                 <div class="hr"></div>
                       </c:forEach>
                           
-                        <div class="product_sum">
+                        <div class="product_sum" >
                             <div>
-                                총 상품가격 <span class="totalprice_span"></span>원
+                                총 상품가격 <div id="orderPrice"></div>원
                             </div> 
                             <i class="far fa-plus-square"></i>
-                            <p>
-                                총 배송비 <span class="delivary_span"></span>원
-                            </p>
+                            <div>
+                                총 배송비 <div id="delPrice"></div>원
+                            </div>
                             <i class="fas fa-equals"></i>
-                            <p>
-                                총 주문 금액 <span class="finaltotalprice_span"></span>원
-                            </p>
+                            <div>
+                                총 주문 금액 <div id="totalPrice"></div>원
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </section>
+    <script>
+    /*
+    let checkboxes = document.getElementsByName('chk');
+    let allchkbox = document.getElementById('allproduct');
+    let sumPriceElems = document.getElementsByClassName('sumprice');
+    let orderPriceElem = document.getElementById('orderPrice');
+    let totalPriceElem = document.getElementById('totalPrice');
+    
+
+    function updateOrderPrice() {
+    let del = 2500;
+      let sum = 0;
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+        	sum += parseInt(sumPriceElems[i].textContent);
+        }
+      }
+      orderPriceElem.innerText = sum;
+      totalPriceElem.innerHTML = sum + del;
+    }
+
+    function selectall(elem) {
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = elem.checked;
+      }
+      updateOrderPrice();
+    }
+
+    allchkbox.addEventListener('change', function() {
+      selectall(this);
+    });
+
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].addEventListener('change', function() {
+        updateOrderPrice();
+      });
+    }
+
+    updateOrderPrice(); // 초기화
+    
+    */
+    
+    let checkboxes = document.getElementsByName('chk');
+    let allchkbox = document.getElementById('allproduct');
+    let sumPriceElems = document.getElementsByClassName('sumprice');
+    let orderPriceElem = document.getElementById('orderPrice');
+    let totalPriceElem = document.getElementById('totalPrice');
+
+    function updateOrderPrice() {
+      let sum = 0;
+      for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked) {
+          let del = 2500;
+          sum += parseInt(sumPriceElems[i].textContent);
+          totalPriceElem.innerHTML = sum + del;
+        }
+      }
+      orderPriceElem.innerText = sum;
+    }
+
+    function selectall(elem) {
+      for (let i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].checked = elem.checked;
+      }
+      updateOrderPrice();
+    }
+
+    allchkbox.addEventListener('change', function() {
+      selectall(this);
+    });
+
+    for (let i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].addEventListener('change', function() {
+        updateOrderPrice();
+      });
+    }
+
+    updateOrderPrice();
+    
+    
+    </script>
 </body>
 </html>
