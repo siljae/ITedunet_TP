@@ -52,11 +52,7 @@
 }
 .com_name a{
     padding: 8px 0;
-    color:#868688
-}
-.com_name :nth-child(1) a{
-    color: #090909;
-    border-bottom: 4px solid #fcd11e;
+    color:#868688;
 }
 .com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover, .com_name :nth-child(3) a:hover, .com_name :nth-child(4) a:hover{
     padding: 8px 0;
@@ -299,6 +295,11 @@
 }
 .colup{
     display: flex;
+}
+.colut{
+	margin-right: 10px;
+    font-weight: 700;
+    font-size: 22px;
 }
 .colbt{
     padding: 0 15px;

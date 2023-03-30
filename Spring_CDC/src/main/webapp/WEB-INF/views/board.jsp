@@ -20,10 +20,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
 	<div class="com_name">
-		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum }"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">자랑해요</a></h1>
+		<h1><a href="<c:url value="/board/qna"/>">Q&A</a></h1>
+		<h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
@@ -108,7 +108,7 @@
                     		<div>
 		                        <div class="colist">
 		                        	<div class="colup">
-		                        		${board.board_type }
+		                        		<div class="colut">${board.board_type }</div>
 		                                <div class="colbt">
 		                                    <img src="<c:url value="/resources/img/board/${board.tag_src }" />" alt="아이콘" >
 		                                    <div class="cattext1">${board.tag_value }</div>

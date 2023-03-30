@@ -151,7 +151,6 @@ textarea:focus {
 
 }
 .filebox .upload-name:focus{
-    outline: none;
 }
 .filebox label {
     display: inline-block;
@@ -214,4 +213,25 @@ textarea:focus {
 }
 .subutton:hover{
     background-color: #FF8EA3;
+}
+
+#write_area{
+    position: relative;
+}
+.addfilediv{
+    position: absolute;
+    right: 85px;
+    bottom: 88px;
+}
+.addfilediv button{
+    display: inline-block;
+    padding: 5px ;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 15px;
+    border: none;
 }

@@ -37,6 +37,24 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	
 	@Override //글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req) {
+		//board_type에 따른 한글로 변환해주기
+		if(board.getBoard_type().equals("commu")) {
+			board.setBoard_type("자랑해요");
+		}
+		else if(board.getBoard_type().equals("qna")) {
+			board.setBoard_type("Q&A");
+		}
+		else if(board.getBoard_type().equals("recom")) {
+			board.setBoard_type("추천해요");
+		}
+		else if(board.getBoard_type().equals("event")) {
+			board.setBoard_type("이벤트");
+		}
+		else if(board.getBoard_type().equals("hosreview")) {
+			board.setBoard_type("후기에요");
+		}
+			
+		
 		//게시글 작성시간
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String regist_day = sdf.format(new Date());

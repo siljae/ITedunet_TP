@@ -64,18 +64,24 @@
                                 <textarea name="content" id="ucontent" required></textarea>
                             </div>
                             <hr class="hrline">
-                            <div class="filebox">
-                                <p class="filetitle">첨부파일1</p>
-                                <input class="upload-name" id="result" placeholder="첨부파일"/>
-                                <label for="file1"> 파일찾기</label>
-                                <input type="file" name="file" id="file1" onchange="printfile()">
+                            <div id="adddiv">
+                                <div class="filebox">
+                                    <p class="filetitle">첨부파일</p>
+                                    <input class="upload-name" id="result" placeholder="첨부파일"/>
+                                    <label for="file1"> 파일찾기</label>
+                                    <input multiple="multiple" type="file" name="file" id="file1" onchange="printfile()">                                
+                                </div>
+                                <input type="file" multiple="multiple">
+                                <hr class="hrline">
                             </div>
-                            <hr class="hrline">
-                            <hr class="hrline">
                             <div class="bt_se">
                                 <button class="subutton" type="submit">글 작성</button>
                             </div>
                         </form>
+                        <div class="addfilediv">
+                            <button onclick="delfile()">삭제하기</button>
+                            <button onclick="addfile()">첨부파일 추가</button>
+                        </div>
                     </div>
                 </div>
             </div>

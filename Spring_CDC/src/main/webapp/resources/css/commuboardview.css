@@ -10,19 +10,28 @@
     display: flex;    
     justify-content: center;
     align-items: center;
+    background-color: #f4eded;
+    border-top: 1px solid #e4e4e6;
+    border-bottom: 1px solid #e4e4e6;
+    margin-top: 100px;
     margin-bottom: 10px;
-    padding-top: 100px;
-    padding-bottom: 10px;
-    background-color: #fec6ca;
+    padding: 11px 0;
 }
 .view_head h1{
-    margin-right: 20px;
+    margin: 0 30px;
+    font-weight: 700;
+    font-size: 16px;
+    list-style: none;
 }
-.view_head :nth-child(2) a{
-    border-bottom: 2px solid red;
+.com_name a{
+    padding: 8px 0;
+    color:#868688;
 }
 .view_head :nth-child(1) a:hover, .view_head :nth-child(2) a:hover, .view_head :nth-child(3) a:hover, .view_head :nth-child(4) a:hover{
-    border-bottom: 2px solid red;
+    padding: 8px 0;
+    color:#090909;
+    border-bottom: 2px solid #fcd11e;
+    transition: 300ms;
 }
 
 /* 뷰 페이지 시작 */

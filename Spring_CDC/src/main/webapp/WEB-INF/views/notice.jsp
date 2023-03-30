@@ -8,23 +8,25 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<c:url value="/resources/css/notice.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 	<title>커뮤니티 게시판</title>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
 	<div class="com_name">
-		<h1><a href="<c:url value="/notice"/>">공지사항</a></h1>
+		<h1><a href="<c:url value="/notice"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">공지사항</a></h1>
 		<h1><a href="<c:url value="/notice/event"/>">이벤트</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                    <input type="text" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
-                    <button class="button" type="submit" >
-                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
-                    </button>
+                	<form action="<c:url value="/board/search"/>"  method="post" style="width:70%">
+	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
+	                    <button class="button" type="submit" >
+	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
+	                    </button>
+                    </form>
                 </div>
             </div>
         </div>

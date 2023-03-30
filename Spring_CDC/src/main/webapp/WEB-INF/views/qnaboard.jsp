@@ -8,25 +8,27 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<c:url value="/resources/css/qnaboard.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
 	<title>커뮤니티 게시판</title>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
-		<h1><a href="<c:url value="/board/${pageNum=1 }"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/${pageNum=1 }"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna/${pageNum=1 }"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom/${pageNum=1 }"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/${pageNum }"/>" >전체</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum=1}"/>">자랑해요</a></h1>
+		<h1><a href="<c:url value="/board/qna"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">Q&A</a></h1>
+		<h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                    <input type="text" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
-                    <button class="button" type="submit" >
-                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
-                    </button>
+                	<form action="<c:url value="/board/search"/>"  method="post" style="width:70%">
+	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
+	                    <button class="button" type="submit" >
+	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
+	                    </button>
+                    </form>
                 </div>
             </div>
         </div>
