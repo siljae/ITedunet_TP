@@ -1,5 +1,6 @@
 package com.springmvc.repository;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,15 @@ public class cartRepositoryImpl implements cartRepository {
       }
       return MemberByName;
    }
+   
+   public void setUpdateQnt(String productId, int quantity) {
+	   String selectsql = "select * from cart where p_id=?";
+	   cartDTO cart = template.queryForObject(selectsql, new cartRowMapper(), productId);
+	   String updatesql = "update cart set ca_qnt=?";
+	   template.update(updatesql, quantity);
+	   
+   }
+   
    
    public void setDeleteCart(String productId) {
 	   String sql = "delete from cart where p_id =?";

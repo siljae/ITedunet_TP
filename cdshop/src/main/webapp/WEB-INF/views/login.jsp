@@ -4,37 +4,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<%	
-	//로그인 실패
-	String error = request.getParameter("error");
-	if (error != null) {
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('이메일과 비밀번호가 일치하지 않습니다')");
-		script.println("history.back()");
-		script.println("</script>");
-		
-	}
-	//회원가입 성공
-	String msg = request.getParameter("msg");
-	System.out.println("msg: "+msg);
-	if(msg == null){}
-	else if(msg.equals("1")){
-		System.out.println("회원가입성공!");
-		PrintWriter script = response.getWriter();
-		script.println("<script>");
-		script.println("alert('회원가입을 축하드립니다! 로그인해주세요!')");
-		script.println("</script>");
-	}
-%>
 <html>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="<c:url value="/resources/css/login.css"/>">
+	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
     <script>
+	    $(document).ready(function(){
+	    	let msg = null;
+	    	msg = "${msg}";
+	    	if(msg == 1){
+	    		alert("회원가입을 축하드립니다! 로그인해주세요!");
+	    	}
+	   		else if(msg == null){	
+	   		}
+	    	else if(msg == -1){
+	    		alert("아이디와 비밀번호가 일치하지 않습니다. 다시 입력해주세요!");
+	    	}       	
+	    });
+    
         function show()
         {
             var show = document.getElementById("email");
@@ -44,7 +34,9 @@
             else{
                 show.style.display = 'none';
             }
-        }
+        };
+		
+        
     </script>
     <title>login</title>
 </head>
@@ -81,7 +73,7 @@
             <div class="hr"></div>
             <button class="login_email" onclick="show()">이메일로 로그인</button>
             <div class="email_box" id="email">
-                <form  action="./login/chklogin" method="post">
+                <form  action="./login/loginchk" method="post">
                     <input type="email" class="email" name="email" placeholder="이메일" required="required"/>
                     <br>
                     <input type="password" class="pw" name="pw" placeholder="비밀번호" required="required"/>

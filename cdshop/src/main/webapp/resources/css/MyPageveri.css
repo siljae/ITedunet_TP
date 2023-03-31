@@ -18,7 +18,6 @@ body
     width: 60%;
     margin: 0 auto;
 }
-
 /* 상단 메뉴바 */
 .cart_head
 {
@@ -70,11 +69,11 @@ body
     display: flex;
     position: relative;
 }
-.my_left_li4
+.my_left_li2
 {
     background-color: #ff8fa4;
 }
-.my_left_li4 span, .my_left_li4 i
+.my_left_li2 span, .my_left_li2 i
 {
     color: #fff;
 }
@@ -114,144 +113,63 @@ body
     cursor: pointer;
 }
 
-/* 상품 정보  */
+/* 마이페이지 회원정보 확인  */
 .my_right
 {
-    width: 800px;
     margin-top: 10px;
     margin-left: 20px;
-    padding-left: 30px;
+    padding: 10px;
     background-color: #fff;
     border: 1px solid gray;
-    position: relative;    
 }
-.allchkbox
+.my_right h2
 {
-    margin: 20px 0;
-    display: flex;
-    justify-content: end;
-    margin-right: 131px;
+    margin: 30px 0;
 }
-.allchkbox label
+.my_right p
 {
-    padding-right: 5px;
+    margin-top: 20px;
+    margin-bottom: 40px;
+    text-align: center;
 }
-.allchkbox input
+table
 {
-    margin-right: 8px;
+    
+    border-bottom: 1px;
+    border-collapse: collapse;
+    margin: 0 auto;
+    font-weight: bold;
 }
-.product_list
-{   
-    display: flex;
-    width: 639px;
-}
-.product_img
+td,tr
 {
-    width: 150px;
+    border-bottom: 1px solid gray;
+    padding: 20px 50px;
 }
-.product_img img
+.my_pw
 {
-    width: 100%;
+    height: 50px;
+    width: 350px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 20px;
+    padding-left:10px;
 }
-.product_desc
-{
-    width: 100%;
-    margin-left: 20px;
-}
-.product_desc_t
-{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-    margin-bottom: 50px;
-}
-.product_desc_t input
-{
-    margin-right: 10px;
-}
-.product_desc_b
-{
-    display: flex;
-    justify-content: space-between;
-}
-.quanbox
+.my_inputbox
 {
     display: flex;
     justify-content: center;
 }
-.quan_inbox
+.submit
 {
-    margin-left: 5px;
-    border: 1px solid;
-    padding: 0 10px;
-}
-
-.it_quan
-{
-    width: 60px;
-    height: 30px;
-    text-align: center;
     border: none;
-}
-
-.quandel
-{
-    margin-left: 10px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-    background-color: red;
-    color: #fff;
+    font-size: 18px;
     padding: 5px 10px;
-}
-.quandel2
-{
-	display: inline-block;
-}
-.hr
-{
-    width: 90%;
-    border: 1px solid lightgray;
-    margin: 10px 0;
-}
-.product_sum
-{
-    display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-    margin-bottom: 20px;
-}
-.allprice
-{
-	margin-left : 15px;
-}
-
-button {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-}
-
-.orderbnt_bnt{
-    display: block;
-    
-}
-.orderbnt{
-    justify-content: end;
-    border: none;
-    background-color: #f0d264;
-    padding: 8px 18px;  
-    font-size: 14px;
-    border-radius: 10px;
-    color: black;
-    box-shadow:0px 4px 0px #D1B757;
+    background-color: #fec6ca ;
+    border-radius: 5px;
     cursor: pointer;
 }
-.orderbnt:hover{
-    background: #D1B757;
+.submit:hover
+{
+    background-color: #ff8fa4;
+    color: white;
 }
-.orderbtn:active {
-    top: 4px;
-    box-shadow: 0 0 #ff4c4b; 
-    background-color: #D6BB59;
-  }

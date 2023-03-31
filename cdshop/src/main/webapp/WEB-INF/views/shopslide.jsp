@@ -138,7 +138,7 @@
 	                            <div class="proprice">${product.unitprice}원</div>
 	                            <input type="hidden" class="donnkow" value="">
 	                        </a>
-	                        <div class="cartbt"><a href="">장바구니</a></div>
+	                        <div class="cartbt"><a href="<c:url value="/mypage/cart"/>">장바구니</a></div>
                         </div>
                     </div>
 	              </c:forEach>

@@ -66,23 +66,26 @@ create table buy
 	b_num int not null auto_increment,
     p_id varchar(10) not null,
     m_name varchar(6) not null,
-    b_amount int not null,
-    b_date date not null,
+    b_qnt int not null,
+    b_date timestamp default now(),
     b_total_price int not null,
+    p_tfilename varchar(100) not null,
     primary key(b_num),
     foreign key(p_id) references product(p_id),
     foreign key(m_name) references member(m_name)
 );
-
+drop table buy;
 create table cart
 (
 	ca_id int not null auto_increment,
     m_name varchar(6) not null,
-    p_id varchar(10) not null,
+    p_id varchar(10) not null ,
     p_unitprice int not null,
     ca_qnt int not null,
     p_tfilename varchar(100) not null,
     primary key(ca_id),
+    unique key(ca_qnt),
+    unique key(p_id),
     foreign key(m_name) references member(m_name)
 );
 

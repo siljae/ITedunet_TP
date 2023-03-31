@@ -1,4 +1,5 @@
 package com.springmvc.controller;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.memberDTO;
 import com.springmvc.service.MemberService;
+
 @Controller
 @RequestMapping("/login")
 public class logincontoller {
@@ -21,23 +24,23 @@ public class logincontoller {
 	private MemberService mr;
 	
 	@RequestMapping //로그인 메인페이지
-	public String login(){
+	public String login(@ModelAttribute("member") memberDTO member){
 		return "login";
 	}
 	
-	@GetMapping("/pwsearch") //비밀번호 찾기
+	@GetMapping("/pwsearch") //비밀번호 찾기, 아직 구현안됨 이메일로 해쉬코드를 발급해야되는 부분이라 나중에 공부하고 구현하기
 	public String pwsearch() {
 		return "pw_search";
 	}
 	
-	@PostMapping("/chklogin") //로그인 기능
-	public String submitlogin(HttpServletRequest req, Model model, HttpSession session){
-		System.out.println("로그인기능을 실행합니다");
-		String[] result = mr.login(req.getParameter("email"),req.getParameter("pw"));		
-		mr.chklogin(result, session);
-		return "redirect:/home";
+	@PostMapping("/loginchk")	//로그인기능
+	public ModelAndView loginchk(@ModelAttribute("member")memberDTO member,HttpSession session) {
+		ModelAndView mav = new ModelAndView();
+		mr.chklogin(member.getEmail(), member.getPw(), session,mav);		
+		return mav;
 	}
-	@GetMapping("/logout")
+	
+	@GetMapping("/logout")	//로그아웃 기능
 	public String logout(HttpSession session) {
 		mr.logout(session);
 		return "redirect:/home";
@@ -49,34 +52,38 @@ public class logincontoller {
 	}
 	
 	@PostMapping("/signup") //회원가입 기능
-	public String submitsignup(@ModelAttribute("member") memberDTO member) throws Exception {
-		mr.join(member);
-		return "index";
+	public String submitsignup(@ModelAttribute("member") memberDTO member, Model model) throws Exception {
+		mr.join(member, model);
+		return "login";
 	}	
 
 	
-	@GetMapping("/chkemail") //이메일 중복체크 //배리에이블 써야됨
+	@GetMapping("/chkemail") //이메일 중복체크
 	public String chkemail(HttpServletRequest req, Model model) {
-		System.out.println("req"+req.getParameter("email"));
 		model.addAttribute("email",req.getParameter("email"));
 		return "check_email";
 	}
 	
 	@PostMapping("/chkemail") //이메일 중복체크하고 와서 값 넘겨주기
-	public String chkemail2(HttpServletRequest req) {
+	public String chkemail2(HttpServletRequest req, Model model) {
+		model.addAttribute("email", req.getParameter("email"));
+		mr.chkemail(model);
 		return "check_email";
 	}
 	
-	@GetMapping("/chkname") //닉네임 중복체크 //배리에이블 써야됨
+	@GetMapping("/chkname") //닉네임 중복체크
 	public String chkname(HttpServletRequest req, Model model) {
 		model.addAttribute("name",req.getParameter("name"));
 		return "check_name";
 	}
 	
 	@PostMapping("/chkname") //닉네임 중복체크하고 와서 값 넘겨주기
-	public String chkname2(HttpServletRequest req) {
+	public String chkname2(HttpServletRequest req, Model model) {
+		model.addAttribute("name",req.getParameter("name"));
+		mr.chkname(model);
 		return "check_name";
 	}
+	
 	
 	
 	

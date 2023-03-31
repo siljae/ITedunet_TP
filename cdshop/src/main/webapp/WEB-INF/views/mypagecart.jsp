@@ -82,7 +82,7 @@
                         </a>
                     </li>
                     <li class="my_left_li4">
-                        <a href="<c:url value="/cart"/>">
+                        <a href="<c:url value="/mypage/cart"/>">
                             <label for="msb3">
                                 <span>장바구니</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -126,9 +126,14 @@
                                             <p> 금액 : ${item.price}</p>
                                             <div class="quanbox">                                                
                                                <p> 수량 : </p>
+                                               <form:form modelAttribute="updateQnt" name="qntform" method="post">
                                                 <div class="quan_inbox">
-                                                    <input type="number"  value="${item.quantity}" class="it_quan" required>
+                                                    	<form:input path="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
+                                                    	<input type="hidden" value="${item.productId}" class="uplodeid">
+                                                    	
                                                 </div>
+                                                <button type="submit" class="updatebnt">변경</button>
+                                                </form:form>
                                                 <div class="allprice">
                                                 	합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
                                                 </div>
@@ -147,97 +152,77 @@
                             </div> 
                             <i class="far fa-plus-square"></i>
                             <div>
-                                총 배송비 <div id="delPrice"></div>원
+                                총 배송비 <div id="delPrice">2500</div>원
                             </div>
                             <i class="fas fa-equals"></i>
                             <div>
                                 총 주문 금액 <div id="totalPrice"></div>원
                             </div>
+                            <div class="orderbnt_bnt">
+                            	<button type="button" class="orderbnt">주문하기</button>
+                        	</div>
                         </div>
                     </div>
                 </div>
             </div>
     </section>
     <script>
-    /*
     let checkboxes = document.getElementsByName('chk');
     let allchkbox = document.getElementById('allproduct');
     let sumPriceElems = document.getElementsByClassName('sumprice');
     let orderPriceElem = document.getElementById('orderPrice');
     let totalPriceElem = document.getElementById('totalPrice');
-    
-
     function updateOrderPrice() {
-    let del = 2500;
       let sum = 0;
       for (let i = 0; i < checkboxes.length; i++) {
         if (checkboxes[i].checked) {
-        	sum += parseInt(sumPriceElems[i].textContent);
+          sum += parseInt(sumPriceElems[i].textContent);
         }
       }
+      let del = 2500;
       orderPriceElem.innerText = sum;
       totalPriceElem.innerHTML = sum + del;
+      if(sum == 0)
+       {
+         totalPriceElem.innerHTML = 0;
+       }
     }
-
     function selectall(elem) {
       for (let i = 0; i < checkboxes.length; i++) {
         checkboxes[i].checked = elem.checked;
       }
       updateOrderPrice();
     }
-
     allchkbox.addEventListener('change', function() {
       selectall(this);
     });
-
     for (let i = 0; i < checkboxes.length; i++) {
       checkboxes[i].addEventListener('change', function() {
         updateOrderPrice();
       });
     }
-
-    updateOrderPrice(); // 초기화
-    
-    */
-    
-    let checkboxes = document.getElementsByName('chk');
-    let allchkbox = document.getElementById('allproduct');
-    let sumPriceElems = document.getElementsByClassName('sumprice');
-    let orderPriceElem = document.getElementById('orderPrice');
-    let totalPriceElem = document.getElementById('totalPrice');
-
-    function updateOrderPrice() {
-      let sum = 0;
-      for (let i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked) {
-          let del = 2500;
-          sum += parseInt(sumPriceElems[i].textContent);
-          totalPriceElem.innerHTML = sum + del;
-        }
-      }
-      orderPriceElem.innerText = sum;
-    }
-
-    function selectall(elem) {
-      for (let i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].checked = elem.checked;
-      }
-      updateOrderPrice();
-    }
-
-    allchkbox.addEventListener('change', function() {
-      selectall(this);
-    });
-
-    for (let i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].addEventListener('change', function() {
-        updateOrderPrice();
-      });
-    }
-
     updateOrderPrice();
     
-    
+    </script>
+    <script>
+    	document.querySelector('.orderbnt').addEventListener('click', () => {
+        const chkbox = document.getElementsByName('chk');
+        let selectedItems = [];
+
+        for (let i = 0; i < chkbox.length; i++) {
+            if (chkbox[i].checked) {
+            let productId = chkbox[i].value;
+            let quantity = parseInt(document.getElementsByClassName(`it_quan`).value);
+            selectedItems.push({ productId, quantity });
+            }
+        }
+
+        if (selectedItems.length > 0) {
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", window.location.href = "/mypage/order");
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.send(JSON.stringify(selectedItems));
+        }
     </script>
 </body>
 </html>

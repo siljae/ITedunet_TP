@@ -11,5 +11,6 @@ public interface cartService {
    public cartDTO getMemberByNmae(String m_name);
    void setDeleteCart(String productId);
    void setAllDeleteCart(String name);
+   void setUpdateQnt(String productId, int quantity);
    
 }

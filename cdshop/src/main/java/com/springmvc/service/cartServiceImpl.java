@@ -37,4 +37,8 @@ public class cartServiceImpl implements cartService {
 	   cr.setAllDeleteCart(name);
    }
    
+   public void setUpdateQnt(String productId, int quantity) {
+	  
+   }
+   
 }

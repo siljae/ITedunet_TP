@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,8 +29,7 @@ import com.springmvc.service.productService;
 public class cartController {
    @Autowired
    private cartService cs;
-   @Autowired
-   private productService ps;
+
    
    @RequestMapping
    public String requestCart(@ModelAttribute cartDTO cart, HttpSession session) {
@@ -59,6 +59,13 @@ public class cartController {
       return mav;
       
    }
+   
+   @PostMapping("/update")
+   public String submitupdateQntForm(@ModelAttribute("updateQnt") cartDTO cart, @RequestParam("productId") String ProductId, @RequestParam("qnt") int quantity) {
+	   cs.setUpdateQnt(ProductId, quantity);
+	   return "redirect:/cart/list";
+   }
+   
    
    @RequestMapping(value="/delete")
    public String getDeleteCartForm(Model model, @RequestParam("id") String productId) {
