@@ -12,17 +12,83 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/qnawrite.css"/>">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
     <script>
-	    function printfile(){
-	        let name = document.getElementById('file1').value;
-            //파일 전체 경로를 \ 로 나눔
-            let filePathSplit = name.split('\\');
-            //파일 전체 경로를 \ 로 나눈 길이
-            let filePathLength = filePathSplit.length;
-            //마지막 경로
-            let fileName = filePathSplit[filePathLength-1]
-            
-	        document.getElementById('result').value =fileName;
-	    }
+        function chkboardtype() {
+          const boardType = document.getElementById("board_type").value;
+          const animalType = document.getElementById("conoption");
+          
+          if (boardType === "notice" || boardType === "event") {
+            animalType.disabled = true; // 비활성화
+          } else {
+            animalType.disabled = false; // 활성화
+          }
+        }
+	    
+	    function chkForm(){
+           
+            let btype = document.getElementById('board_type').value;
+            let atype = document.getElementById('conoption').value;
+
+            if(btype == "none"){
+                alert("게시판을 선택해주세요!");
+                return false;
+            }
+            if(btype == "notice" || btype == "event"){
+                return true;
+            }
+            if(atype == "none"){
+                alert("반려동물을 선택해주세요!");
+                return false;
+            }
+            return true;
+        }
+
+        function printfile(){ //파일업로드시 이름 나오게 하기
+            let input = document.getElementById('file'); //파일 받기
+            let files = input.files; //배열처리
+            let fileList = document.getElementById('fileList'); //이름이 나올 div
+            fileList.innerHTML = ''; //공백처리
+            if (files.length > 5) {
+                alert('최대 5개까지 선택 가능합니다.');
+                document.getElementById('file').value = '';
+            }
+            for(let i = 0; i < files.length; i++){ 
+                let fileName = files[i].name; //배열의 인덱스마다 파일이름 나오게 하기
+                let fileNode = document.createElement('div'); //파일이름을 넣을 div 생성
+                fileNode.innerHTML = '<span class="file-name">' + fileName + '</span><button type="button" class="delete-btn" onclick="deleteFile(this)">삭제</button>';
+                fileList.appendChild(fileNode);
+            }
+            if(files.length === 0){ //파일이 없을 때 뜨게하기
+                let fileName = '첨부파일 (최대5개까지 가능합니다)';
+                document.getElementById('result').value = fileName;
+            }
+            else if(files.length === 1){ //파일이 1개일 때 해당 파일명을 result에 넣기
+                let fileName = files[0].name;
+                document.getElementById('result').value = fileName;
+            }
+            else{ //다중 파일 일 때 파일즈의 길이 갯수만큼 첨부되었다고 알려주기
+                let fileName = files.length + '개의 파일이 첨부되었습니다.';
+                document.getElementById('result').value = fileName;
+            }
+        }
+        
+        function deleteFile(btn){ //첨부파일 삭제하기
+            let fileNode = btn.parentNode; //삭제버튼의 부모노드를 filenode에 담음
+            let fileList = fileNode.parentNode; //fileNode의 부모노드를 fileList에 담음
+            fileList.removeChild(fileNode); //fileList에서 fileNode를 삭제 == div 안의 해당div 삭제
+            let files = Array.from(document.getElementById('file').files); //input="file" 에 저장된 해당 파일 삭제하기 위한 배열을 files에 담음
+            for(let i = 0; i < files.length; i++){
+                if(files[i].name === fileNode.firstChild.textContent){ //fileNode의 첫번째 자식의 텍스트 = <span>fileName</span> 의 fileName 을 가져옴
+                    files.splice(i, 1); //해당 파일 삭제
+                    let newFileList = new DataTransfer(); //데이터 전송을 위한 API객체 삭제한 파일을 제외한 나머지 파일들을 다시 input="file" 에 담는 역할을 함
+                    for (let j = 0; j < files.length; j++) {
+                        newFileList.items.add(files[j]);
+                    }
+                    document.getElementById('file').files = newFileList.files;
+                    printfile();
+                    return;
+                }
+            }
+        }
     </script>
 </head>
 <body>
@@ -36,28 +102,25 @@
                     </div>
                     <hr class="hrline">
                     <div id="write_area">
-                        <form:form modelAttribute="board" enctype="multipart/form-data" action="./boardwrite" method="post">
+                        <form:form modelAttribute="board" enctype="multipart/form-data" action="./boardwrite" method="post" onsubmit="return chkForm()">
                         	<input type="hidden" name="name" value="${name }"/>
                         	<div class="selectbox">
-                        		<form:select path="board_type" class="board_type">
-                        			<option id="opdefult">게시판을 선택해주세요</option>
-                        			<form:option value="commu">우리아이자랑</form:option>
-                        			<form:option value="qna">묻고답하기</form:option>
-                        			<form:option value="recom">추천해용</form:option>
+                        		<form:select path="board_type" class="board_type" id="board_type" onchange="chkboardtype()">
+                        			<option id="opdefult" value="none">게시판을 선택해주세요</option>
+                        			<form:option value="commu">자랑해요</form:option>
+                        			<form:option value="qna">Q&A</form:option>
                         			<c:if test="${level == 2 }">
                         				<form:option value="notice">공지사항</form:option>
                         			</c:if>
                         			<form:option value="event">이벤트</form:option>
-                        			<form:option value="hosreview">동물병원후기</form:option>
+                        			<form:option value="hosreview">후기에요</form:option>
                         		</form:select>
-                        		<form:select path="animal_type" id="conoption">  
-                                      <!-- 나중에 선택은 유효성 검사 통해서 잘못선택했다고 경고창 띄워줌 -->
-                                    <option id="opdefult" >반려동물을 선택해주세요</option>                             
+                        		<form:select path="animal_type" id="conoption">
+                                    <option id="opdefult" value="none">반려동물을 선택해주세요</option>                             
                                     <form:option value="cat">[고양이]</form:option>
                                     <form:option value="dog">[강아지]</form:option>
-                                </form:select>
+                                </form:select>                                
                         	</div>
-                       			
                             <div id="in_title">
                                 <p class="titletxt">제목</p>                                
                                 <form:textarea path="title" id="utitle" rows="1" cols="55" maxlength="100" required="required"></form:textarea>
@@ -69,12 +132,11 @@
                             </div>
                             <hr class="hrline">
                             <div class="filebox">
-                                <p class="filetitle">첨부파일1</p>
-                                <input class="upload-name" id="result" placeholder="첨부파일" readonly="readonly"/>
-                                <label for="file1"> 파일찾기</label>
-                                <form:input type="file" path="fileimage" id="file1" onchange="printfile()"/>
+                                <label for="file">파일찾기</label> 
+                                <input class="upload-name" id="result"  placeholder="첨부파일 (최대5개까지 가능합니다)" readonly>
+                                <form:input path="fileimages" type="file" id="file" multiple="multiple" onchange="printfile()"/>                                    
                             </div>
-                            <hr class="hrline">
+                            <div id="fileList"></div>
                             <hr class="hrline">
                             <div class="bt_se">
                                 <button class="subutton" type="submit">글 작성</button>

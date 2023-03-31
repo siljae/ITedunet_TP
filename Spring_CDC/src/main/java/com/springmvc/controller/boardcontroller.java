@@ -26,16 +26,17 @@ public class boardcontroller {
 
 	@RequestMapping("/") //전체 게시판
 	public String board(Model model,HttpServletRequest req, criteria cri) {
-		br.boardlist(model,req,cri);
-		br.recomboard(model);
+		/*
+		 * br.boardlist(model,req,cri); br.recomboard(model);
+		 */
+		br.getboardlist(model, cri);
 		return "board";
 	}
 	
 	@GetMapping("/{pageNum}")	//페이징된 전체 게시판
 	public String boardnum(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req, criteria cri) {
 		req.setAttribute("pageNum", pageNum);
-		br.boardlist(model,req,cri);
-		br.recomboard(model);
+		br.getboardlist(model, cri);
 		return "board";
 	}
 	
@@ -50,7 +51,7 @@ public class boardcontroller {
 	public String commuview(@PathVariable("pageNum") String pageNum,@PathVariable("num") String num,Model model) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
-		br.requestboardview(model);
+		br.getboardview(model);
 		return "commuboardview";
 	}
 	

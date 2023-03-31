@@ -1,5 +1,7 @@
 package com.springmvc.domain;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 public class boardDTO {
@@ -12,18 +14,19 @@ public class boardDTO {
 	private String content;
 	private String regist_day;
 	private int hit;
-	private MultipartFile fileimage;
-	private String filename;
-	private String tag_src;
-	private String tag_value;
+	private List<MultipartFile> fileimages;
+	private String filename;	
+	private String tagsrc;
+	private String tagvalue;
 	private String calregist;
 	private int recom;
+	private List<fileDTO> files;
 
 	@Override
 	public String toString() {
 		return "boardDTO [num=" + num + ", name=" + name + ", board_type=" + board_type + ", animal_type=" + animal_type
 				+ ", title=" + title + ", content=" + content + ", regist_day=" + regist_day + ", hit=" + hit
-				+ ", fileimage=" + fileimage + ", filename=" + filename + "]";
+				+ ", fileimage=" + fileimages + ", filename=" + filename + "]";
 	}
 	
 	public int getNum() {
@@ -75,11 +78,12 @@ public class boardDTO {
 	public void setAnimal_type(String animal_type) {
 		this.animal_type = animal_type;
 	}
-	public MultipartFile getFileimage() {
-		return fileimage;
+	public List<MultipartFile> getFileimages() {
+		return fileimages;
 	}
-	public void setFileimage(MultipartFile fileimage) {
-		this.fileimage = fileimage;
+
+	public void setFileimages(List<MultipartFile> fileimage) {
+		this.fileimages = fileimage;
 	}
 	public String getFilename() {
 		return filename;
@@ -88,17 +92,17 @@ public class boardDTO {
 		this.filename = filename;
 	}
 	
-	public String getTag_src() {
-		return tag_src;
+	public String getTagsrc() {
+		return tagsrc;
 	}
-	public void setTag_src(String tag_src) {
-		this.tag_src = tag_src;
+	public void setTagsrc(String tagsrc) {
+		this.tagsrc = tagsrc;
 	}
-	public String getTag_value() {
-		return tag_value;
+	public String getTagvalue() {
+		return tagvalue;
 	}
-	public void setTag_value(String tag_value) {
-		this.tag_value = tag_value;
+	public void setTagvalue(String tagvalue) {
+		this.tagvalue = tagvalue;
 	}
 	public String getCalregist() {
 		return calregist;
@@ -114,6 +118,18 @@ public class boardDTO {
 	public void setRecom(int recom) {
 		this.recom = recom;
 	}
+
+	public List<fileDTO> getFiles() {
+		return files;
+	}
+
+	public void setFiles(List<fileDTO> files) {
+		this.files = files;
+	}
+
+	
+
+	
 	
 	
 	

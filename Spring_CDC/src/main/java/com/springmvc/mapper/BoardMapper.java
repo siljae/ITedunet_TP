@@ -1,4 +1,4 @@
-package com.springmvc.repository;
+package com.springmvc.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,11 +15,11 @@ public class BoardMapper implements RowMapper<boardDTO>{
 		board.setNum(rs.getInt(1));
 		board.setName(rs.getString(2));
 		board.setBoard_type(rs.getString(3));
-		board.setAnimal_type(rs.getString(4));		
-		board.setTitle(rs.getString(5));
-		board.setContent(rs.getString(6));
-		board.setRegist_day(rs.getString(7));
-		board.setFilename(rs.getString(8));
+		board.setTagsrc(rs.getString(4));
+		board.setTagvalue(rs.getString(5));
+		board.setTitle(rs.getString(6));
+		board.setContent(rs.getString(7));
+		board.setRegist_day(rs.getString(8));
 		board.setHit(rs.getInt(9));
 		board.setRecom(rs.getInt(10));		
 		return board;

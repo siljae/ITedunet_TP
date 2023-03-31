@@ -15,7 +15,7 @@
 	    $(document).ready(function(){
 	    	let msg = null;
 	    	msg = "${msg}";
-	    	if(msg == 1){
+	    	if(msg == 2){
 	    		alert("회원가입을 축하드립니다! 로그인해주세요!");
 	    	}
 	   		else if(msg == null){	

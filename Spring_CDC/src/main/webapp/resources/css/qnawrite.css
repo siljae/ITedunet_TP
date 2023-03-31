@@ -150,8 +150,6 @@ textarea:focus {
     color: #999999;
 
 }
-.filebox .upload-name:focus{
-}
 .filebox label {
     display: inline-block;
     padding: 5px ;
@@ -189,6 +187,30 @@ textarea:focus {
 }
 .filebox input[type="password"]:focus{
     outline: 1.5px solid grey;
+}
+
+#fileList div{
+    width: 50%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+    padding: 5px;
+    border-bottom: 1px solid lightgray;
+}
+#fileList button{
+    display: inline-block;
+    padding: 5px ;
+    color: #fff;
+    vertical-align: middle;
+    background-color: #999999;
+    cursor: pointer;
+    height: 30px;
+    margin-left: 10px;
+    font-size: 15px;
+    border: none;
 }
 .bt_se{
     display: flex;

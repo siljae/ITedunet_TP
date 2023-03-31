@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
 import com.springmvc.domain.criteria;
+import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
 import com.springmvc.repository.BoardRepositoty;
 
@@ -27,27 +28,38 @@ public class BoardServiceImpl implements BoardService {
 		br.writeboard(board,req);
 	}
 
+	@Override	//게시판목록기능
+	public void getboardlist(Model model,criteria cri) {
+		int total = br.getallcount();		
+		int pageNum =1;
+		if(model.getAttribute("pageNum") != null)
+			pageNum = Integer.parseInt((String)model.getAttribute("pageNum"));
+		cri.setPagenum(pageNum);
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getboardlist(page);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
 	@Override //게시판 목록
-	public void boardlist(Model model,HttpServletRequest req, criteria cri) {
-		br.boardlist(model,req);
+	public void boardlist(Model model,HttpServletRequest req, criteria cri) {		
 		int total = br.getallcount();
 		int pagenum = (int) model.getAttribute("pageNum");
 		cri.setPagenum(pagenum);
 		pageDTO page = new pageDTO(cri, total);
-		model.addAttribute("page",page);
-		
+		model.addAttribute("page",page);		
 	}
 
 	@Override //선택된 게시글 상세 페이지 가져오기
-	public void requestboardview(Model model) {
-		br.requestboardview(model);
-		
+	public void getboardview(Model model) {
+		int num = (Integer) model.getAttribute("num");
+		boardDTO board = br.getboardview(num);
+		model.addAttribute("board",board);		
 	}
 
 	@Override	//게시글수정
 	public void updateboard(boardDTO board, HttpServletRequest req) {
 		System.out.println("서비스");
-		br.updateboard(board, req);
 		
 	}
 
@@ -78,7 +90,6 @@ public class BoardServiceImpl implements BoardService {
 		br.recom(num, recom);
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
-		br.requestboardview(model);
 		
 	}
 

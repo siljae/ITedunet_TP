@@ -1,6 +1,6 @@
-<%@page import="org.springframework.ui.Model"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>    
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <%@ page import="java.util.*" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
@@ -43,11 +43,13 @@
                     	<c:forEach items="${recomlist }" var="recomboard">
 	                        <div class="list1">
 	                            <div class="listlabel">
+	                            	<c:if test="${recomboard.animal_type != 'none'}">
 	                                <div class="labelname">
 	                                    <img class="catface" src="<c:url value="/resources/img/board/${recomboard.tag_src }"/>">
 	                                    <div class="cattext">${recomboard.tag_value }
 	                                    </div>
 	                                </div>
+	                                </c:if>
 	                                <div class="listhead">
 	                                    ${recomboard.title }
 	                                </div>
@@ -109,15 +111,17 @@
 		                        <div class="colist">
 		                        	<div class="colup">
 		                        		<div class="colut">${board.board_type }</div>
+		                        		<c:if test="${board.tagsrc != null }">
 		                                <div class="colbt">
-		                                    <img src="<c:url value="/resources/img/board/${board.tag_src }" />" alt="아이콘" >
-		                                    <div class="cattext1">${board.tag_value }</div>
+		                                    <img src="<c:url value="/resources/img/board/${board.tagsrc }" />" alt="아이콘" >
+		                                    <div class="cattext1">${board.tagvalue }</div>
 		                                </div>
+		                                </c:if>
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="<c:url value="/board/commu/view/${pageNum }/${board.num }"/>" class="coltitle">${board.title }</a>
-		                                <a href="<c:url value="/board/commu/view/${pageNum }/${board.num }"/>" class="coltext">${board.content }</a>	                                
+		                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
+		                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -128,11 +132,14 @@
 		                            <div class="retime">조회수 : ${board.calregist }</div>
 		                        </div>
 	                        </div>
-                        	<c:if test="${board.filename != null && !empty board.filename}">
+                        	<c:if test="${board.files != null && !empty board.files}">
 		                        <div class="colbox">
-		                        	<a href="<c:url value="/commu/view/${pageNum }/${board.num }"/>" class="imgbox">
-										<img class="listimg" src="<c:url value="/resources/img/board/${board.filename }"/>">
+		                        	<a href="<c:url value="/commu/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
+		                        		<c:forEach items="${board.files }" var="file">
+										<img class="listimg" src="<c:url value="/resources/img/board/${file.filename }"/>">
+										</c:forEach>
 									</a>
+									
 	                        	</div>	
                         	</c:if>                     
                         </div>                        

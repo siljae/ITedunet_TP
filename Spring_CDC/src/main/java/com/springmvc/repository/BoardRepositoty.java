@@ -12,15 +12,17 @@ import com.springmvc.domain.criteria;
 import com.springmvc.domain.pageDTO;
 
 public interface BoardRepositoty {
-
+	
+	//글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req);
-	public void boardlist(Model model,HttpServletRequest req);
-	public int getlistcount(String animal, String content);
-	public ArrayList<boardDTO> getboardlist(int pageNum, int limit, String animal, String content, String sort);
+	//게시글 가져오기 기능
+	public List<boardDTO> getboardlist(pageDTO page);
+	//게시글 작성시간 비교하는 기능
 	public String caltime(String time);
-	public void requestboardview(Model model);
-	public boardDTO getboardbynum(int num, int pageNum);
-	public void updateboard(boardDTO board,HttpServletRequest req);
+	//게시글 상세페이지 가져오기 기능
+	public boardDTO getboardview(int num);
+	//게시글 조회수 증가 기능
+	public void updatehit(int num);
 	public boardDTO getByNum(int num);
 	public void deleteboard(String num);
 	//게시글 검색

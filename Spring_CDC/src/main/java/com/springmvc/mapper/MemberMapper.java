@@ -1,4 +1,4 @@
-package com.springmvc.repository;
+package com.springmvc.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

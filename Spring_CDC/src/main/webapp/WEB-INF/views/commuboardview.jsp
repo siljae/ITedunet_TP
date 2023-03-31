@@ -65,8 +65,8 @@
         </div>
         <div class="container">
             <div class="view_tag">
-            	<img src="<c:url value="/resources/img/board/${tag_src }"/>">
-                <div>${tag_value }</div>
+            	<img src="<c:url value="/resources/img/board/${tagsrc }"/>">
+                <div>${tagvalue }</div>
             </div>
             <div>
                 <div class="write_head">

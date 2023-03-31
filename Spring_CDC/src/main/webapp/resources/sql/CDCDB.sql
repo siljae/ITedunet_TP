@@ -52,7 +52,6 @@ create table commuboard
     cb_title varchar(100) not null,
     cb_content text not null,
     cb_regist_day varchar(30) not null,
-    cb_filename varchar(100),
     cb_hit int not null default 0,
     cb_recom int not null default 0,
     primary key(cb_num),
@@ -115,11 +114,11 @@ create procedure insertloop()
 begin
 	declare i int default 1;
     while i <= 100 do
-		insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc','commu', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
+		insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc','자랑해요', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
 		set i = i+1;
 	end while;
 end $$
-delimiter $$
+delimiter ;
 
 call insertloop;
 
@@ -165,3 +164,78 @@ create table chat
     primary key(c_num),
     foreign key(m_name) references member(m_name)
 );
+
+create table qnaboard(
+	qb_num int not null auto_increment,
+    m_name varchar(6) not null,
+    qb_board_type varchar(6) not null,
+    qb_animal_type varchar(10) not null,
+    qb_title varchar(100) not null,
+    qb_content text not null,
+    qb_regist_day varchar(30) not null,
+    qb_hit int not null default 0,
+    qb_recom int not null default 0,
+    primary key(qb_num),
+    foreign key(m_name) references member(m_name)
+);
+
+create table noticeboard(
+	nb_num int not null auto_increment,
+    m_name varchar(6) not null,
+    nb_board_type varchar(6) not null,
+    nb_title varchar(100) not null,
+    nb_content text not null,
+    nb_regist_day varchar(30) not null,
+    nb_hit int not null default 0,
+    primary key(nb_num),
+    foreign key(m_name) references member(m_name)
+);
+
+create table eventboard(
+	eb_num int not null auto_increment,
+    m_name varchar(6) not null,
+    eb_board_type varchar(6) not null,
+    eb_title varchar(100) not null,
+    eb_content text not null,
+    eb_regist_day varchar(30) not null,
+    eb_hit int not null default 0,
+    eb_recom int not null default 0,
+    primary key(eb_num),
+    foreign key(m_name) references member(m_name)
+);
+
+create table hosreviewboard(
+	hvb_num int not null auto_increment,
+    m_name varchar(6) not null,
+    hvb_board_type varchar(6) not null,
+    hvb_animal_type varchar(10) not null,
+    hvb_title varchar(100) not null,
+    hvb_content text not null,
+    hvb_regist_day varchar(30) not null,
+    hvb_hit int not null default 0,
+    hvb_recom int not null default 0,
+    primary key(hvb_num),
+    foreign key(m_name) references member(m_name)
+);
+
+CREATE TABLE board_file (
+  bf_num INT NOT NULL AUTO_INCREMENT,
+  board_type VARCHAR(50) NOT NULL,
+  cb_num INT DEFAULT NULL,
+  qb_num INT DEFAULT NULL,
+  nb_num INT DEFAULT NULL,
+  eb_num INT DEFAULT NULL,
+  hvb_num INT DEFAULT NULL,
+  filename VARCHAR(255) NOT NULL,
+  PRIMARY KEY (bf_num),
+  FOREIGN KEY (cb_num) REFERENCES commuboard(cb_num) on delete cascade,
+  FOREIGN KEY (qb_num) REFERENCES qnaboard(qb_num) on delete cascade,
+  FOREIGN KEY (nb_num) REFERENCES noticeboard(nb_num) on delete cascade,
+  FOREIGN KEY (eb_num) REFERENCES eventboard(eb_num) on delete cascade,
+  FOREIGN KEY (hvb_num) REFERENCES hosreviewboard(hvb_num) on delete cascade
+);
+drop table board_file;
+select*from board_file;
+alter table board_file change column file_name filename varchar(255) not null;
+
+insert into board_file(board_type, cb_num, file_name) values('자랑해요',302,'naver.jpg');

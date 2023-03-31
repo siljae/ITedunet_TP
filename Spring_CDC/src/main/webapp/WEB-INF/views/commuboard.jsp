@@ -161,18 +161,24 @@
                 </div>
             </div>
         </div>
-	</div>
+        <c:choose>
+        <c:when test="${search != null }">
         <ul class="pagebutton">
-        	<c:if test="${pageNum>1 }">        	
+        	<c:if test="${page.prev }">
+            	<li>
+            		<a href="<c:url value="/board/${search }/1"/>">‹‹</a>
+            	</li>
+            </c:if>
+        	<c:if test="${page.cri.pagenum != 1 }">        	
 	            <li class="leftbt">
-	                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
+	                <a href="${page.cri.pagenum-1 }" aria-label="Go to befor page">‹</a>
 	            </li>
             </c:if>
-            <c:forEach var="i" begin="1" end="${total_page }">
+            <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
 	            <li class="active">
-	            	<a href="<c:url value="/board/commu/${i}" />" aria-label="Go to page number 1">
+	            	<a href="<c:url value="/board/${search }/${i}" />" aria-label="Go to page number 1">
 	            		<c:choose>
-		            		<c:when test="${pageNum == i }">
+		            		<c:when test="${page.cri.pagenum==i }">
 		                		<font class="undefined"><b>${i }</b></font>
 		                	</c:when>                	
 		                	<c:otherwise>
@@ -182,12 +188,57 @@
                 	</a>
 	            </li>
             </c:forEach>
-            <c:if test="${total_page != pageNum }">
+            <c:if test="${page.cri.pagenum < page.endpage }">
+	            <li>
+	                <a href="${page.cri.pagenum+1 }" aria-label="Go to after number ">›</a>
+	            </li>
+            </c:if>            
+            <c:if test="${page.next }">
+            	<li>
+            		<a href="${page.total }">››</a>
+            	</li>
+            </c:if>
+        </ul>
+        </c:when>
+        <c:otherwise>
+        <ul class="pagebutton">
+        	<c:if test="${page.prev }">
+            	<li>
+            		<a href="<c:url value="/board/1"/>">‹‹</a>
+            	</li>
+            </c:if>
+        	<c:if test="${pageNum != 1 }">        	
+	            <li class="leftbt">
+	                <a href="${pageNum-1 }" aria-label="Go to befor page">‹</a>
+	            </li>
+            </c:if>
+            <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
+	            <li class="active">
+	            	<a href="<c:url value="/board/${i}" />" aria-label="Go to page number 1">
+	            		<c:choose>
+		            		<c:when test="${pageNum==i }">
+		                		<font class="undefined"><b>${i }</b></font>
+		                	</c:when>                	
+		                	<c:otherwise>
+		                		<font><b>${i }</b></font>
+		                	</c:otherwise>
+	                	</c:choose>
+                	</a>
+	            </li>
+            </c:forEach>
+            <c:if test="${pageNum < total_page }">
 	            <li>
 	                <a href="${pageNum+1 }" aria-label="Go to after number ">›</a>
 	            </li>
             </c:if>            
+            <c:if test="${page.next }">
+            	<li>
+            		<a href="${total_page }">››</a>
+            	</li>
+            </c:if>
         </ul>
+        </c:otherwise>
+        </c:choose>
     </div>
 	<jsp:include page="footer.jsp"/>
 </body>
