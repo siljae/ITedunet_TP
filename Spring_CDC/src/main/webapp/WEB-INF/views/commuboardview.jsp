@@ -65,8 +65,8 @@
         </div>
         <div class="container">
             <div class="view_tag">
-            	<img src="<c:url value="/resources/img/board/${tagsrc }"/>">
-                <div>${tagvalue }</div>
+            	<img src="<c:url value="/resources/img/board/${board.tagsrc }"/>">
+                <div>${board.tagvalue }</div>
             </div>
             <div>
                 <div class="write_head">
@@ -89,10 +89,12 @@
                         </button>
                         <p class="postbox_date">${board.regist_day }</p>
                     </div>
-                    <c:if test="${board.filename != null && !empty board.filename}">
+                    <c:if test="${board.files != null && !empty board.files}">
+                    	<c:forEach items="${board.files }" var="file">
 	                    <div class="postbox_img">
-	                        <img src="<c:url value="/resources/img/board/${board.filename }"/>">
+	                        <img src="<c:url value="/resources/img/board/${file.filename }"/>">
 	                    </div>
+	                    </c:forEach>
                     </c:if>
                     <p class="postbox_text">${board.content }</p>
                     <c:choose>

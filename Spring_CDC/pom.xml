@@ -194,6 +194,20 @@
 		    <artifactId>jackson-core-asl</artifactId>
 		    <version>1.9.13</version>
 		</dependency>
+		<!-- xercesImpl //파일경로에 한글이 있는데 기본 내장으로는 한글처리가 힘들어서 추가했다  -->
+		<!-- 참고링크 : http://www.mungchung.com/xe/spring/33423 -->
+		<dependency>
+		    <groupId>xerces</groupId>
+		    <artifactId>xercesImpl</artifactId>
+		    <version>2.9.1</version>
+		</dependency>
+		<!-- httpclient -->
+		<dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>4.5.13</version>
+		</dependency>
+
 
 
 	

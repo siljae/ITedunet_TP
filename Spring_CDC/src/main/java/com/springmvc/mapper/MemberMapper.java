@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.memberDTO;
-@Repository
+
 public class MemberMapper implements RowMapper<memberDTO>{
 
 	@Override

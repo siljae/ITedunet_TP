@@ -212,6 +212,10 @@ textarea:focus {
     font-size: 15px;
     border: none;
 }
+.filenames{
+    border: none;
+    padding: 5px;
+}
 .bt_se{
     display: flex;
     justify-content: end;

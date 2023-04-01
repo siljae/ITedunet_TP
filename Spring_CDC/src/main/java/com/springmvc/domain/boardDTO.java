@@ -15,6 +15,7 @@ public class boardDTO {
 	private String regist_day;
 	private int hit;
 	private List<MultipartFile> fileimages;
+	private String[] filenames;
 	private String filename;	
 	private String tagsrc;
 	private String tagvalue;
@@ -29,6 +30,9 @@ public class boardDTO {
 				+ ", fileimage=" + fileimages + ", filename=" + filename + "]";
 	}
 	
+	
+	
+
 	public int getNum() {
 		return num;
 	}
@@ -84,6 +88,12 @@ public class boardDTO {
 
 	public void setFileimages(List<MultipartFile> fileimage) {
 		this.fileimages = fileimage;
+	}
+	public String[] getFilenames() {
+		return filenames;
+	}
+	public void setFilenames(String[] filenames) {
+		this.filenames = filenames;
 	}
 	public String getFilename() {
 		return filename;

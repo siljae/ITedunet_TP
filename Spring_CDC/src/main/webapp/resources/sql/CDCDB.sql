@@ -48,7 +48,8 @@ create table commuboard
    cb_num int not null auto_increment,
     m_name varchar(6) not null,
     cb_board_type varchar(6) not null,
-    cb_animal_type varchar(10) not null,
+    cb_tagsrc varchar(12) not null,
+    cb_tagvalue varchar(3) not null,
     cb_title varchar(100) not null,
     cb_content text not null,
     cb_regist_day varchar(30) not null,
@@ -91,7 +92,7 @@ select count(*) from commuboard where cb_title like '%스트%' or cb_content lik
 
 
 update commuboard 
-	set cb_board_type='commu',
+   set cb_board_type='commu',
     cb_animal_type='cat',
     m_name='abc',
     cb_title='애옹',
@@ -112,11 +113,11 @@ delimiter $$
 drop procedure if exists insertloop;
 create procedure insertloop()
 begin
-	declare i int default 1;
+   declare i int default 1;
     while i <= 100 do
-		insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc','자랑해요', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
-		set i = i+1;
-	end while;
+      insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc','자랑해요', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
+      set i = i+1;
+   end while;
 end $$
 delimiter ;
 
@@ -125,23 +126,23 @@ call insertloop;
 -- 아래 리콤은 추천테이블이다 해당 테이블에 대한 로직을 작성하려면 아직 이해도가 부족하기때문에 나중에 작성하다 해당 테이블과 관련된 모든 sql문은 현재 사용해서는 안된다
 create table recom
 (
-	recom_num int auto_increment,
+   recom_num int auto_increment,
     m_name varchar(6) not null,
     cb_num int not null,
     recom_chk boolean default false,
     primary key(recom_num),
     foreign key (cb_num) references commuboard(cb_num),
-	foreign key (m_name) references member(m_name) 
+   foreign key (m_name) references member(m_name) 
 );
 
 insert into recom(m_name, cb_num, recom_chk) values('admin',38,true);
 update commuboard as cb
-	set cb.cb_recom = 
-		(
-			select count(*)
-			from recom as r
-			where r.cb_num = cb.cb_num and r.recom_chk =true
-		);
+   set cb.cb_recom = 
+      (
+         select count(*)
+         from recom as r
+         where r.cb_num = cb.cb_num and r.recom_chk =true
+      );
 
 select*from recom;
 drop table recom;
@@ -166,7 +167,7 @@ create table chat
 );
 
 create table qnaboard(
-	qb_num int not null auto_increment,
+   qb_num int not null auto_increment,
     m_name varchar(6) not null,
     qb_board_type varchar(6) not null,
     qb_animal_type varchar(10) not null,
@@ -180,7 +181,7 @@ create table qnaboard(
 );
 
 create table noticeboard(
-	nb_num int not null auto_increment,
+   nb_num int not null auto_increment,
     m_name varchar(6) not null,
     nb_board_type varchar(6) not null,
     nb_title varchar(100) not null,
@@ -192,7 +193,7 @@ create table noticeboard(
 );
 
 create table eventboard(
-	eb_num int not null auto_increment,
+   eb_num int not null auto_increment,
     m_name varchar(6) not null,
     eb_board_type varchar(6) not null,
     eb_title varchar(100) not null,
@@ -205,7 +206,7 @@ create table eventboard(
 );
 
 create table hosreviewboard(
-	hvb_num int not null auto_increment,
+   hvb_num int not null auto_increment,
     m_name varchar(6) not null,
     hvb_board_type varchar(6) not null,
     hvb_animal_type varchar(10) not null,

@@ -1,6 +1,8 @@
 package com.springmvc.controller;
 
 
+import java.util.Arrays;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
 import com.springmvc.domain.criteria;
+import com.springmvc.domain.fileDTO;
 import com.springmvc.service.BoardService;
 
 @Controller
@@ -48,30 +52,31 @@ public class boardcontroller {
 	}
 	
 	@GetMapping("/commu/view/{pageNum}/{num}") //게시글 상세 페이지
-	public String commuview(@PathVariable("pageNum") String pageNum,@PathVariable("num") String num,Model model) {
+	public String commuview(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num,Model model, HttpServletRequest req) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
-		br.getboardview(model);
+		br.getboardview(model, req);
 		return "commuboardview";
 	}
 	
 	@GetMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 페이지
-	public ModelAndView updateboardview(@PathVariable("pageNum") String pageNum,@PathVariable("num") String num,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
+	public ModelAndView updateboardview(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		int numInt = Integer.parseInt(num);
-		board = br.getByNum(numInt);
+		board = br.getByNum(num , req);
 		mav.addObject("updateboard",board);				
 		mav.addObject("num",num);
 		mav.addObject("pageNum",pageNum);
 		mav.setViewName("updateboard");
+		for(String fn : board.getFilenames()) {
+			System.out.println();
+		}
 		
 		return mav;
 	}
 	
 	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
 	public String updateboard(@PathVariable("num") String num,@PathVariable("pageNum") String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
-		System.out.println("보드컨트롤러");
-		br.updateboard(board, req);
+		br.updateboard(board, req);		
 		return "redirect:/board/"+pageNum;
 	}
 	

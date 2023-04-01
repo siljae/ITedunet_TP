@@ -134,7 +134,7 @@
 	                        </div>
                         	<c:if test="${board.files != null && !empty board.files}">
 		                        <div class="colbox">
-		                        	<a href="<c:url value="/commu/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
+		                        	<a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
 		                        		<c:forEach items="${board.files }" var="file">
 										<img class="listimg" src="<c:url value="/resources/img/board/${file.filename }"/>">
 										</c:forEach>

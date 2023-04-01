@@ -84,6 +84,9 @@
                 <div class="my_right">
                     <h2>개인정보 수정</h2>                    
                     <form:form action="./mypage" modelAttribute="member" method="post" onsubmit="return chkForm()">
+                    	<input type="hidden" name="num" value="${member.num }">
+                    	<input type="hidden" name="level" value="${member.level }">
+                    	
                         <table class="my_table">
                             <tr>
                                 <td class="td_left">이메일</td>

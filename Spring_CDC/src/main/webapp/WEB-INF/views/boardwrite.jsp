@@ -12,36 +12,6 @@
     <link rel="stylesheet" href="<c:url value="/resources/css/qnawrite.css"/>">
     <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
     <script>
-        function chkboardtype() {
-          const boardType = document.getElementById("board_type").value;
-          const animalType = document.getElementById("conoption");
-          
-          if (boardType === "notice" || boardType === "event") {
-            animalType.disabled = true; // 비활성화
-          } else {
-            animalType.disabled = false; // 활성화
-          }
-        }
-	    
-	    function chkForm(){
-           
-            let btype = document.getElementById('board_type').value;
-            let atype = document.getElementById('conoption').value;
-
-            if(btype == "none"){
-                alert("게시판을 선택해주세요!");
-                return false;
-            }
-            if(btype == "notice" || btype == "event"){
-                return true;
-            }
-            if(atype == "none"){
-                alert("반려동물을 선택해주세요!");
-                return false;
-            }
-            return true;
-        }
-
         function printfile(){ //파일업로드시 이름 나오게 하기
             let input = document.getElementById('file'); //파일 받기
             let files = input.files; //배열처리
@@ -54,7 +24,7 @@
             for(let i = 0; i < files.length; i++){ 
                 let fileName = files[i].name; //배열의 인덱스마다 파일이름 나오게 하기
                 let fileNode = document.createElement('div'); //파일이름을 넣을 div 생성
-                fileNode.innerHTML = '<span class="file-name">' + fileName + '</span><button type="button" class="delete-btn" onclick="deleteFile(this)">삭제</button>';
+                fileNode.innerHTML = '<input name="filenames" class="filenames" value="' + fileName + '"></input><button type="button" class="delete-btn" onclick="deleteFile(this)">삭제</button>';
                 fileList.appendChild(fileNode);
             }
             if(files.length === 0){ //파일이 없을 때 뜨게하기
@@ -72,18 +42,20 @@
         }
         
         function deleteFile(btn){ //첨부파일 삭제하기
-            let fileNode = btn.parentNode; //삭제버튼의 부모노드를 filenode에 담음
-            let fileList = fileNode.parentNode; //fileNode의 부모노드를 fileList에 담음
-            fileList.removeChild(fileNode); //fileList에서 fileNode를 삭제 == div 안의 해당div 삭제
+            let btnparent = btn.parentNode; //버튼의 부모 div 
+            let fileNode = btnparent.firstChild; //div의 첫번째 자식 == input 
+            let fileList = btnparent.parentNode; //fileNode의 부모노드를 fileList에 담음
+            fileList.removeChild(btnparent); //fileList에서 fileNode를 삭제 == div 안의 해당div 삭제
             let files = Array.from(document.getElementById('file').files); //input="file" 에 저장된 해당 파일 삭제하기 위한 배열을 files에 담음
             for(let i = 0; i < files.length; i++){
-                if(files[i].name === fileNode.firstChild.textContent){ //fileNode의 첫번째 자식의 텍스트 = <span>fileName</span> 의 fileName 을 가져옴
+                if(files[i].name === fileNode.value){ //fileNode의 첫번째 자식의 텍스트 = <span>fileName</span> 의 fileName 을 가져옴
                     files.splice(i, 1); //해당 파일 삭제
                     let newFileList = new DataTransfer(); //데이터 전송을 위한 API객체 삭제한 파일을 제외한 나머지 파일들을 다시 input="file" 에 담는 역할을 함
                     for (let j = 0; j < files.length; j++) {
                         newFileList.items.add(files[j]);
                     }
                     document.getElementById('file').files = newFileList.files;
+                    console.log("이리왔나?");
                     printfile();
                     return;
                 }

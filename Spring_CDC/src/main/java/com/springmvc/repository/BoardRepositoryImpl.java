@@ -1,6 +1,12 @@
 package com.springmvc.repository;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -8,11 +14,17 @@ import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
 
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItem;
+import org.apache.commons.io.IOUtils;
+import org.apache.http.entity.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -20,6 +32,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.ui.Model;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 import com.springmvc.database.DBConnection;
@@ -33,8 +46,6 @@ import com.springmvc.mapper.FileMapper;
 @Repository
 public class BoardRepositoryImpl implements BoardRepositoty {
 	private JdbcTemplate template;
-	private static final int LISTCOUNT =10;
-	private List<boardDTO> listOfboards = new ArrayList<boardDTO>();
 	
 	@Autowired
 	public void setJdbcTemplate(DataSource ds) {
@@ -43,6 +54,12 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	
 	@Override //글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req) {
+		for (int i = 0; i < board.getFileimages().size(); i++) {
+			MultipartFile mf = board.getFileimages().get(i);
+			if(mf.getSize() == 0) {
+				board.getFileimages().remove(i);
+			}
+		}
 		board.setBoard_type("자랑해요");
 		if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
 			board.setTagsrc("catface.png");
@@ -75,11 +92,16 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		}, keyHolder);
 		
 		// 생성된 pk의 값을 num으로 가져오기
-		int pk_num = keyHolder.getKey().intValue();
-		//이미지 파일업로드
+		board.setNum(keyHolder.getKey().intValue());
+		// DB에 파일업로드 하는 메소드, 업데이트에서도 사용하기 때문에 메소드로 따로 만들어 분리했다
+		fileupload(board, req);
+	}
+	
+	//DB에 파일업로드하기
+	public void fileupload(boardDTO board, HttpServletRequest req) {
 		List<MultipartFile> filelist = board.getFileimages();
 		String path = req.getServletContext().getRealPath("/resources/img/board/");		
-		String filesql = "insert into board_file(board_type, cb_num, filename) values(?,?,?)";
+		String filesql = "insert into boardfile(board_type, cb_num, filename) values(?,?,?)";
 		for(MultipartFile mf : filelist) {
 			//이미지 이름 가져오기			
 			String saveName = mf.getOriginalFilename();
@@ -96,7 +118,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	                throw new RuntimeException("게시판 이미지 업로드가 실패하였습니다", e);
 	            }
 	        }
-			template.update(filesql,board.getBoard_type(), pk_num, saveName);			
+			template.update(filesql,board.getBoard_type(), board.getNum(), saveName);			
 		}
 	}
 
@@ -107,14 +129,11 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		List<boardDTO> boardlist =  template.query(sql, new BoardMapper());
 		
 		for(boardDTO board : boardlist) {
-			board.setCalregist(caltime(board.getRegist_day())); 
-			int cb_num = board.getNum();
-			String boardtype = board.getBoard_type();
-			String filesql = "select * from board_file where board_type=? and cb_num=?";
-			List<fileDTO> files = template.query(filesql, new FileMapper(), boardtype, cb_num);
+			board.setCalregist(caltime(board.getRegist_day()));
+			String filesql = "select * from boardfile where board_type=? and cb_num=?";
+			List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
 			board.setFiles(files);
-		}
-		
+		}		
 		return boardlist;
 	}
 	
@@ -154,9 +173,20 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 		
 	@Override	//게시글 상세페이지 가져오기
-	public boardDTO getboardview(int num) {
+	public boardDTO getboardview(int num, HttpServletRequest req) {
 		String sql = "select * from commuboard where cb_num=?";
-		return template.queryForObject(sql, new BoardMapper(), num);
+		boardDTO board = template.queryForObject(sql, new BoardMapper(), num);
+		String filesql = "select * from boardfile where board_type=? and cb_num=?";
+		List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+		board.setFiles(files);
+		String[] filenames = new String[files.size()];
+		for(int i = 0;i < files.size();i++) {			
+			fileDTO file = files.get(i);
+			filenames[i] = file.getFilename();
+			System.out.println("filenames["+i+"] = "+file.getFilename());
+		}
+		board.setFilenames(filenames);
+		return board;
 	}
 	
 	@Override	//게시글 조회수 증가
@@ -164,26 +194,52 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		String sql = "update commuboard set cb_hit = cb_hit+1 where cb_num=?";
 		template.update(sql, num);
 	}
-	
-	
-	
-	@Override //게시글 번호를 이용해서 해당 게시글 내용 모델에 담기
-	public boardDTO getByNum(int num) {
-		boardDTO boardinfo=null;	
-		for(int i=0;i<listOfboards.size();i++) {
-			boardDTO board = listOfboards.get(i);
-			if(board != null && board.getNum() == num) {
-				boardinfo = board;
-				break;
-			}
-		}		
-		return boardinfo;
-	}
 
 	@Override //게시글 삭제 기능
 	public void deleteboard(String num) {
 		String sql = "delete from commuboard where cb_num=?";
 		template.update(sql, num);
+	}
+	
+	@Override //게시글 수정하기 기능
+	public void updateboard(boardDTO board, HttpServletRequest req) {
+		for (int i = 0; i < board.getFileimages().size(); i++) {
+			MultipartFile mf = board.getFileimages().get(i);
+			if(mf.getSize() == 0) {
+				board.getFileimages().remove(i);
+			}
+		}
+		board.setBoard_type("자랑해요");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		String regist_day = sdf.format(new Date());
+		
+		//DB에 게시글 수정
+		String sql = "update commuboard set cb_board_type=?, cb_tagsrc=?, cb_tagvalue=? , cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=?, cb_recom=? where cb_num=?";
+		template.update(sql, board.getBoard_type(), board.getTagsrc(), board.getTagvalue(), board.getTitle(), board.getContent(), regist_day, board.getHit(), board.getRecom(), board.getNum());
+		
+		//boardfile테이블에서 해당게시글의 번호랑 일치하는 업로드된 파일이름들 가져와서 변수에 담음 
+		String filesql = "select*from boardfile where board_type=? and cb_num=?";
+		List<fileDTO> dbfiles = template.query(filesql, new FileMapper(),board.getBoard_type(), board.getNum());
+		
+		//파일업로드 수정
+		List<fileDTO> updatefiles =  new ArrayList<fileDTO>();
+		//수정 파일 DB에 추가
+		
+		//파일이 없으면 boardfile테이블에서 삭제
+		if (board.getFileimages().size() == 0 && board.getFilenames() == null) {		    
+		    String deletesql = "delete from boardfile where board_type=? and cb_num=?";
+		    template.update(deletesql, board.getBoard_type(), board.getNum());
+		}
+		else {
+			String deletesql = "delete from boardfile where board_type=? and cb_num=?";
+			template.update(deletesql, board.getBoard_type(), board.getNum());
+			
+			String insertsql = "insert into boardfile(board_type, cb_num, filename) values(?,?,?)";
+			for(String filename : board.getFilenames()) {
+				template.update(insertsql, board.getBoard_type(), board.getNum(), filename);
+			}	
+			fileupload(board, req);
+		}
 	}
 	
 	@Override //게시글 제목이나, 내용으로 검색하기
@@ -216,7 +272,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return recomlist;
 	}
 	
-	@Override
+	@Override	//게시글 전체 개수 가져오기
 	public int getallcount() {
 		String sql = "select count(*) from commuboard";
         int total_recond = template.queryForObject(sql, Integer.class);
@@ -224,7 +280,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	
-	@Override	//게시글 총 숫자 
+	@Override	//검색할 게시글의 전체 개수 가져오기
 	public int getcount(String content) {
 		String sql = "select count(*) from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%'";
 		int total_recond = template.queryForObject(sql, Integer.class);

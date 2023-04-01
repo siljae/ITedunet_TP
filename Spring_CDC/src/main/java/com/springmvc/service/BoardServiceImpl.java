@@ -41,7 +41,7 @@ public class BoardServiceImpl implements BoardService {
 		model.addAttribute("page",page);
 	}
 	
-	@Override //게시판 목록
+	@Override //게시판 목록	//이제 안씀
 	public void boardlist(Model model,HttpServletRequest req, criteria cri) {		
 		int total = br.getallcount();
 		int pagenum = (int) model.getAttribute("pageNum");
@@ -51,26 +51,37 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override //선택된 게시글 상세 페이지 가져오기
-	public void getboardview(Model model) {
-		int num = (Integer) model.getAttribute("num");
-		boardDTO board = br.getboardview(num);
-		model.addAttribute("board",board);		
+	public void getboardview(Model model,  HttpServletRequest req) {
+		int num =  (int)model.getAttribute("num");
+		boardDTO board = br.getboardview(num, req);
+		br.updatehit(num);
+		model.addAttribute("board",board);	
 	}
 
 	@Override	//게시글수정
 	public void updateboard(boardDTO board, HttpServletRequest req) {
-		System.out.println("서비스");
-		
+		boardDTO fileboard = br.getboardview(board.getNum(), req);
+		board.setFiles(fileboard.getFiles());
+		br.updateboard(board, req);
 	}
 
 	@Override	//게시글번호가져오기
-	public boardDTO getByNum(int num) {
-		boardDTO board = br.getByNum(num);		
+	public boardDTO getByNum(int num,  HttpServletRequest req) {
+		boardDTO board = br.getboardview(num, req);
+		if(board.getBoard_type().equals("자랑해요")) {
+			board.setBoard_type("commu");
+		}
+		if(board.getTagvalue().equals("고양이")) {
+			board.setAnimal_type("cat");
+		}
+		if(board.getTagvalue().equals("강아지")) {
+			board.setAnimal_type("dog");
+		}
 		return board;
 	}
 
 	@Override	//게시글 삭제
-	public void deleteboard(String num) {
+	public void deleteboard(String num) {		
 		br.deleteboard(num);
 		
 	}
