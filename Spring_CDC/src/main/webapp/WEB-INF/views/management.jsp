@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>회원관리</title>
 <link rel="stylesheet" href="<c:url value="/resources/css/management.css"/>">
+<script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <script >
     function updatemember(num){            
         location.href="./mgnview/"+num;
@@ -31,7 +32,7 @@
             <div class="mypagebox">
                 <ul class="my_left">
                     <li class="my_left_li1">
-                        <h2><a href="<c:url value="/mypage"/>">Admin page</a></h2>
+                        <h2><a href="<c:url value="/mypage"/>">관리자 페이지</a></h2>
                     </li>
                     <li class="my_left_li2">
                         <a href="<c:url value="/mypage/barrier"/>">
@@ -90,22 +91,16 @@
                             <td>이메일</td>
                             <td>닉네임</td>
                             <td>연락처</td>
-                            <td>우편번호</td>
-                            <td>주소</td>
-                            <td>상세주소</td>
                             <td>등급</td>
                             <td>수정</td>
                             <td>삭제</td>
                         </tr>
                         <c:forEach items="${memberlist }" var="member">
-                        <tr>
+                        <tr class="content">
                             <td id="num">${member.num }</td>
                             <td id="email">${member.email }</td>
                             <td id="name">${member.name }</td>
                             <td id="phone">${member.phone1 } - ${member.phone2 } - ${member.phone3 }</td>
-                            <td id="post">${member.post }</td>
-                            <td id="addr1">${member.addr1 }</td>
-                            <td id="addr2">${member.addr2 }</td>
                             <td id="level">${member.level }</td>
                             <td><button id="update" onclick="updatemember(${member.num})">수정</button></td>
                             <td><button id="delete" onclick="deletemember(${member.num})">삭제</button></td>

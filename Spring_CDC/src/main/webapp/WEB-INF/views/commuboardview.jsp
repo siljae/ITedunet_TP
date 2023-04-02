@@ -59,9 +59,9 @@
 	<jsp:include page="./header.jsp"/>
         <div class="view_head">
 		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/${pageNum}"/>">우리아이자랑</a></h1>
-		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">묻고답하기</a></h1>
-		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해용</a></h1>
+		<h1><a href="<c:url value="/board/commu/${pageNum}"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">자랑해요</a></h1>
+		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">Q&A</a></h1>
+		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해요</a></h1>
         </div>
         <div class="container">
             <div class="view_tag">
@@ -89,14 +89,16 @@
                         </button>
                         <p class="postbox_date">${board.regist_day }</p>
                     </div>
-                    <c:if test="${board.files != null && !empty board.files}">
-                    	<c:forEach items="${board.files }" var="file">
-	                    <div class="postbox_img">
-	                        <img src="<c:url value="/resources/img/board/${file.filename }"/>">
-	                    </div>
-	                    </c:forEach>
-                    </c:if>
                     <p class="postbox_text">${board.content }</p>
+                    <c:if test="${board.files != null && !empty board.files}">
+                    <div class="postbox_imgbox">
+                        <c:forEach items="${board.files }" var="file">
+                        <div class="postbox_img">
+                            <img src="<c:url value="/resources/img/board/${file.filename }"/>">
+                        </div>
+                        </c:forEach>
+                    </div>
+                    </c:if>
                     <c:choose>
                     <c:when test="${name != null }">
 	                    <div>
@@ -130,22 +132,9 @@
                             <div class="re_date">2022/02/07 11:12</div>
                             <div class="re_btn">
                                 <button><i class="far fa-plus-square"></i></button>
-                                <button><i class="far fa-window-close"></i></button>
-                            </div>
-                            <div class="hr"></div>
-                        </li>
-                        <li>
-                            <div class="re_user_id">
-                                <div>찌무맘</div>
-                                <div class="rechat">
-                                    <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
-                                </div>
-                            </div>
-                            <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
-                            <div class="re_date">2022/02/07 11:12</div>
-                            <div class="re_btn">
-                                <button><i class="far fa-plus-square"></i></button>
-                                <button><i class="far fa-window-close"></i></button>
+                                <c:if test="${name == board.name || level == 2}">
+                                	<button><i class="far fa-window-close"></i></button>
+                                </c:if>
                             </div>
                             <div class="hr"></div>
                         </li>

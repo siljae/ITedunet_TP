@@ -32,7 +32,7 @@
 	<jsp:include page="./header.jsp"/>
         <div class="view_head">
 			<h1><a href="<c:url value="/notice"/>">공지사항</a></h1>
-			<h1><a href="<c:url value="/notice/event"/>">이벤트</a></h1>
+			<h1><a href="<c:url value="/notice/event"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">이벤트</a></h1>
         </div>
         <div class="container">
             <div class="view_tag">

@@ -93,12 +93,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 		// 생성된 pk의 값을 num으로 가져오기
 		board.setNum(keyHolder.getKey().intValue());
-		// DB에 파일업로드 하는 메소드, 업데이트에서도 사용하기 때문에 메소드로 따로 만들어 분리했다
-		fileupload(board, req);
-	}
-	
-	//DB에 파일업로드하기
-	public void fileupload(boardDTO board, HttpServletRequest req) {
+		//파일업로드하고 DB에 파일이름 저장
 		List<MultipartFile> filelist = board.getFileimages();
 		String path = req.getServletContext().getRealPath("/resources/img/board/");		
 		String filesql = "insert into boardfile(board_type, cb_num, filename) values(?,?,?)";
@@ -118,8 +113,9 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	                throw new RuntimeException("게시판 이미지 업로드가 실패하였습니다", e);
 	            }
 	        }
-			template.update(filesql,board.getBoard_type(), board.getNum(), saveName);			
+			template.update(filesql,board.getBoard_type(), board.getNum(), saveName);
 		}
+		
 	}
 
 	@Override	//커뮤니티게시판 게시글 가져오기
@@ -134,6 +130,44 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 			List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
 			board.setFiles(files);
 		}		
+		return boardlist;
+	}
+	
+	@Override //게시판 정렬 기능
+	public List<boardDTO> getsortboardlist(pageDTO page, String sort){
+		int start = page.getCri().getpagestart();
+		String sql;
+		List<boardDTO> boardlist = new ArrayList<boardDTO>();
+		if(sort.equals("viewed")) {
+			sql = "select*from commuboard order by cb_hit desc limit "+start+","+page.getCri().getAmount();
+			boardlist = template.query(sql, new BoardMapper());
+			for(boardDTO board : boardlist) {
+				board.setCalregist(caltime(board.getRegist_day()));
+				String filesql = "select * from boardfile where board_type=? and cb_num=?";
+				List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+				board.setFiles(files);
+			}
+		}
+		else if(sort.equals("popular")) {
+			sql = "select*from commuboard order by cb_recom desc limit "+start+","+page.getCri().getAmount();
+			boardlist = template.query(sql, new BoardMapper());
+			for(boardDTO board : boardlist) {
+				board.setCalregist(caltime(board.getRegist_day()));
+				String filesql = "select * from boardfile where board_type=? and cb_num=?";
+				List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+				board.setFiles(files);
+			}
+		}
+		else if(sort.equals("newest")) {
+			sql = "select*from commuboard order by cb_num desc limit "+start+","+page.getCri().getAmount();;
+			boardlist = template.query(sql, new BoardMapper());
+			for(boardDTO board : boardlist) {
+				board.setCalregist(caltime(board.getRegist_day()));
+				String filesql = "select * from boardfile where board_type=? and cb_num=?";
+				List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+				board.setFiles(files);
+			}
+		}
 		return boardlist;
 	}
 	
@@ -176,16 +210,20 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	public boardDTO getboardview(int num, HttpServletRequest req) {
 		String sql = "select * from commuboard where cb_num=?";
 		boardDTO board = template.queryForObject(sql, new BoardMapper(), num);
+		
 		String filesql = "select * from boardfile where board_type=? and cb_num=?";
 		List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+		
 		board.setFiles(files);
+		
 		String[] filenames = new String[files.size()];
 		for(int i = 0;i < files.size();i++) {			
 			fileDTO file = files.get(i);
 			filenames[i] = file.getFilename();
-			System.out.println("filenames["+i+"] = "+file.getFilename());
 		}
+		
 		board.setFilenames(filenames);
+		
 		return board;
 	}
 	
@@ -217,28 +255,32 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		String sql = "update commuboard set cb_board_type=?, cb_tagsrc=?, cb_tagvalue=? , cb_title=?, cb_content=?, cb_regist_day=?, cb_hit=?, cb_recom=? where cb_num=?";
 		template.update(sql, board.getBoard_type(), board.getTagsrc(), board.getTagvalue(), board.getTitle(), board.getContent(), regist_day, board.getHit(), board.getRecom(), board.getNum());
 		
-		//boardfile테이블에서 해당게시글의 번호랑 일치하는 업로드된 파일이름들 가져와서 변수에 담음 
-		String filesql = "select*from boardfile where board_type=? and cb_num=?";
-		List<fileDTO> dbfiles = template.query(filesql, new FileMapper(),board.getBoard_type(), board.getNum());
-		
-		//파일업로드 수정
-		List<fileDTO> updatefiles =  new ArrayList<fileDTO>();
-		//수정 파일 DB에 추가
-		
 		//파일이 없으면 boardfile테이블에서 삭제
 		if (board.getFileimages().size() == 0 && board.getFilenames() == null) {		    
 		    String deletesql = "delete from boardfile where board_type=? and cb_num=?";
 		    template.update(deletesql, board.getBoard_type(), board.getNum());
 		}
 		else {
+			String path = req.getServletContext().getRealPath("/resources/img/board/");
+			for(MultipartFile mf : board.getFileimages()) {
+				String saveName = mf.getOriginalFilename();
+				File saveFile = new File(path, saveName);
+				if(mf != null && !mf.isEmpty()) {
+					try {
+						mf.transferTo(saveFile);
+					}
+					catch(Exception e) {
+						throw new RuntimeException("게시판 이미지 수정 업로드에 실패했습니다",e);
+					}
+				}
+			}
 			String deletesql = "delete from boardfile where board_type=? and cb_num=?";
 			template.update(deletesql, board.getBoard_type(), board.getNum());
 			
 			String insertsql = "insert into boardfile(board_type, cb_num, filename) values(?,?,?)";
 			for(String filename : board.getFilenames()) {
 				template.update(insertsql, board.getBoard_type(), board.getNum(), filename);
-			}	
-			fileupload(board, req);
+			}
 		}
 	}
 	
@@ -251,7 +293,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	@Override	//추천 기능
-	public void recom(String num, String recom) {
+	public void recom(int num, String recom) {
 		if(recom.equals("true")) {
 			int cnt = 1;
 			String sql = "update commuboard set cb_recom=cb_recom+? where cb_num=?";
@@ -266,7 +308,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	@Override	//인기글 가져오기
-	public List<boardDTO> recomboard() {
+	public List<boardDTO> getrecomboard() {
 		String sql = "select*from commuboard where cb_recom >= 10 limit 3";
 		List<boardDTO> recomlist = template.query(sql, new BoardMapper());
 		return recomlist;

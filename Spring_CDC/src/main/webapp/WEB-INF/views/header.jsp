@@ -143,7 +143,7 @@ nav {
 				</div>
 				<ul class="nav_ul">
 					<li class="nav_commu">
-						<a href="<c:url value="/board/${pageNum }"/>">커뮤니티</a>
+						<a href="<c:url value="/board/1"/>">커뮤니티</a>
 						<div class="circle"></div>
 					</li>
 					<li class="nav_notice">

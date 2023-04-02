@@ -23,7 +23,7 @@
     font-size: 16px;
     list-style: none;
 }
-.com_name a{
+.view_head a{
     padding: 8px 0;
     color:#868688;
 }
@@ -103,10 +103,22 @@
     border-radius: 5px;
 
 }
+.postbox_text
+{
+    margin: 30px auto;
+    white-space: pre-line;
+}
+.postbox_imgbox{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 .postbox_img
 {
-    /* width: 700px; */
-    overflow: hidden;    
+    width: 18%;
+    overflow: hidden;
+    border-radius: 5%;
     margin-bottom: 30px;
 }
 .postbox_img img
@@ -115,10 +127,6 @@
     height: 100%;
     object-fit: scale-down;
     border-radius: 20px;
-}
-.postbox_text
-{
-    white-space: pre-line;
 }
 .recom
 {

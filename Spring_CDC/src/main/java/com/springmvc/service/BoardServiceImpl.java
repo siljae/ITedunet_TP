@@ -30,24 +30,22 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override	//게시판목록기능
 	public void getboardlist(Model model,criteria cri) {
-		int total = br.getallcount();		
-		int pageNum =1;
-		if(model.getAttribute("pageNum") != null)
-			pageNum = Integer.parseInt((String)model.getAttribute("pageNum"));
-		cri.setPagenum(pageNum);
+		int total = br.getallcount();
 		pageDTO page = new pageDTO(cri, total);
 		List<boardDTO> boardlist = br.getboardlist(page);
+		List<boardDTO> bestrecomlist = br.getrecomboard();
 		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("bestrecomlist",bestrecomlist);
 		model.addAttribute("page",page);
 	}
 	
-	@Override //게시판 목록	//이제 안씀
-	public void boardlist(Model model,HttpServletRequest req, criteria cri) {		
+	@Override //게시판 정렬(최신순(기본), 인기순, 조회순)
+	public void getsortboardlist(Model model, criteria cri, String sort) {
 		int total = br.getallcount();
-		int pagenum = (int) model.getAttribute("pageNum");
-		cri.setPagenum(pagenum);
 		pageDTO page = new pageDTO(cri, total);
-		model.addAttribute("page",page);		
+		List<boardDTO> boardlist = br.getsortboardlist(page, sort);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
 	}
 
 	@Override //선택된 게시글 상세 페이지 가져오기
@@ -97,16 +95,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override	//추천 기능
-	public void recom(Model model, String pageNum, String num, String recom) {
+	public void recom(Model model, int pageNum, int num, String recom, HttpServletRequest req) {
 		br.recom(num, recom);
+		boardDTO board = br.getboardview(num, req);
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("board",board);
 		
 	}
 
 	@Override	//인기글 가져오기
 	public void recomboard(Model model) {
-		List<boardDTO> recomlist = br.recomboard();
+		List<boardDTO> recomlist = br.getrecomboard();
 		model.addAttribute("recomlist",recomlist);		
 	}
 

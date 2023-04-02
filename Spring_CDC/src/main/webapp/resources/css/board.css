@@ -290,6 +290,9 @@
 	display:flex;
 	justify-content:space-between;
 }
+.content_2:first-child{
+    width: 1000px;
+}
 .colist{
     padding-right: 27px;
 }

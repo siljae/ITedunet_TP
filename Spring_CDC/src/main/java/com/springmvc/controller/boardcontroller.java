@@ -13,12 +13,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
 import com.springmvc.domain.criteria;
-import com.springmvc.domain.fileDTO;
 import com.springmvc.service.BoardService;
 
 @Controller
@@ -30,24 +28,21 @@ public class boardcontroller {
 
 	@RequestMapping("/") //전체 게시판
 	public String board(Model model,HttpServletRequest req, criteria cri) {
-		/*
-		 * br.boardlist(model,req,cri); br.recomboard(model);
-		 */
+		br.getboardlist(model, cri);
+		return "board/";
+	}
+	
+	@GetMapping("/{num}")	//페이징된 전체 게시판
+	public String boardnum(@PathVariable("num")int num, Model model,HttpServletRequest req, criteria cri) {
+		cri.setPagenum(num);
 		br.getboardlist(model, cri);
 		return "board";
 	}
 	
-	@GetMapping("/{pageNum}")	//페이징된 전체 게시판
-	public String boardnum(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req, criteria cri) {
-		req.setAttribute("pageNum", pageNum);
+	@GetMapping("/commu/{num}") //커뮤니티 게시판 
+	public String commuboard(@PathVariable("num")int num,Model model, criteria cri) {
+		cri.setPagenum(num);
 		br.getboardlist(model, cri);
-		return "board";
-	}
-	
-	@GetMapping("/commu/{pageNum}") //커뮤니티 게시판 
-	public String commuboard(@PathVariable("pageNum") String pageNum, Model model,HttpServletRequest req, criteria cri) {
-		req.setAttribute("pageNum", pageNum);
-		br.boardlist(model,req,cri);
 		return "commuboard";
 	}
 	
@@ -66,17 +61,13 @@ public class boardcontroller {
 		mav.addObject("updateboard",board);				
 		mav.addObject("num",num);
 		mav.addObject("pageNum",pageNum);
-		mav.setViewName("updateboard");
-		for(String fn : board.getFilenames()) {
-			System.out.println();
-		}
-		
+		mav.setViewName("updateboard");		
 		return mav;
 	}
 	
 	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
 	public String updateboard(@PathVariable("num") String num,@PathVariable("pageNum") String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
-		br.updateboard(board, req);		
+		br.updateboard(board, req);
 		return "redirect:/board/"+pageNum;
 	}
 	
@@ -87,17 +78,23 @@ public class boardcontroller {
 	}
 	
 	@GetMapping("/commu/view/{pageNum}/{num}/{recom}")	//추천기능
-	public String viewrecom(@PathVariable("pageNum") String pageNum,@PathVariable("num") String num, @PathVariable("recom")String recom,Model model) {
-		br.recom(model, pageNum, num, recom);
+	public String viewrecom(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num, @PathVariable("recom")String recom,Model model, HttpServletRequest req) {
+		br.recom(model, pageNum, num, recom, req);
 		return "commuboardview";
 	}
 	
-	@GetMapping("/commu/{pageNum}/{sort}")	//정렬 기능
-	public String viewed(@PathVariable("pageNum")String pageNum, @PathVariable("sort")String sort, Model model,HttpServletRequest req, criteria cri) {
-		req.setAttribute("pageNum", pageNum);
-		req.setAttribute("sort", sort);
+	@GetMapping("/commu/{sort}/1")	//정렬 기능
+	public String viewed(@PathVariable("sort")String sort, Model model, criteria cri) {
+		model.addAttribute("sort", sort);
+		br.getsortboardlist(model, cri, sort);
+		return "commuboard";
+	}
+	
+	@GetMapping("/commu/{sort}/{num}")	//정렬된 게시판 페이징처리
+	public String urlsort(@PathVariable("sort")String sort, @PathVariable("num")int num, Model model, criteria cri) {
+		cri.setPagenum(num);
 		model.addAttribute("sort",sort);
-		br.boardlist(model, req, cri);
+		br.getsortboardlist(model, cri, sort);
 		return "commuboard";
 	}
 	
@@ -148,5 +145,7 @@ public class boardcontroller {
 		br.search(model, search, cri);
 		return "board";
 	}
+	
+
 	
 }

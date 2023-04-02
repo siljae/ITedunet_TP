@@ -1,10 +1,10 @@
 package com.springmvc.domain;
 
 public class criteria {
-	private int pagenum;
-	private int amount;
+	private int pagenum;	//현재 페이지
+	private int amount;		//페이지에 표시할 게시글 갯수
 	
-	public int getpagestart() {
+	public int getpagestart() {	//DB에서 가져올 게시글의 처음 시작인덱스
 		return (this.pagenum-1)*this.amount;
 	}
 	

@@ -12,15 +12,18 @@ public interface BoardService {
 	public void writeboard(boardDTO board,HttpServletRequest req);
 	//게시판목록가져오기 기능
 	public void getboardlist(Model model,criteria cri);	
-	public void boardlist(Model model,HttpServletRequest req, criteria cri);
+	//게시판 정렬 기능
+	public void getsortboardlist(Model model, criteria cri, String sort);
 	//게시글 가져오기
 	public void getboardview(Model model,  HttpServletRequest req);
 	//게시글 수정하기
-	public void updateboard(boardDTO board,HttpServletRequest req);
+	public void updateboard(boardDTO board,HttpServletRequest req);	
 	public boardDTO getByNum(int num,  HttpServletRequest req);
 	public void deleteboard(String num);
 	public void search(Model model, String content, criteria cri);
-	public void recom(Model model, String pageNum, String num, String recom);
+	//추천 기능
+	public void recom(Model model, int pageNum, int num, String recom, HttpServletRequest req);
+	//인기글 가져오기
 	public void recomboard(Model model);
 	
 	
