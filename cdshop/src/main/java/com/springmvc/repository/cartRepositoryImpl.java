@@ -55,10 +55,8 @@ public class cartRepositoryImpl implements cartRepository {
    }
    
    public void setUpdateQnt(String productId, int quantity) {
-	   String selectsql = "select * from cart where p_id=?";
-	   cartDTO cart = template.queryForObject(selectsql, new cartRowMapper(), productId);
-	   String updatesql = "update cart set ca_qnt=?";
-	   template.update(updatesql, quantity);
+	   String updatesql = "update cart set ca_qnt=? where p_id=?";
+	   template.update(updatesql, quantity, productId);
 	   
    }
    

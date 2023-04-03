@@ -80,7 +80,7 @@
                             <span class="listname">My Page</span>
                         </div>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/cart"/>"><span class="text">장바구니</span></a>
+                            <a class="cate" href="<c:url value="/mypage/cart"/>"><span class="text">장바구니</span></a>
                         </li>
                         <li class="catelist">
                             <a class="cate" href="<c:url value="/mypage/order"/>"><span class="text">주문목록</span></a>

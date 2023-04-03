@@ -50,7 +50,18 @@
     	else return;
     }
     
+    /* window.onload = function(){
+        const qnt = document.getElementById('qnt');
+        const add = document.getElementById('addcart')
+        add.addEventListener('click', function(){
+            const data = qnt.value;
+            alert("상품이 장바구니에 추가되었습니다!")
+            window.location.href = "/cart/add?productId=${product.productId}&qnt="+data;
+        });
+        }; */
+        
     
+   
 </script>
 </head>
 <body>
@@ -126,14 +137,14 @@
                                             <p> 금액 : ${item.price}</p>
                                             <div class="quanbox">                                                
                                                <p> 수량 : </p>
-                                               <form:form modelAttribute="updateQnt" name="qntform" method="post">
+                                               <form name="qntform" method="post" action="/cart/update">
                                                 <div class="quan_inbox">
-                                                    	<form:input path="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
-                                                    	<input type="hidden" value="${item.productId}" class="uplodeid">
+                                                    	<input name="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
+                                                    	<input type="hidden" value="${item.productId}" name="ProductId" class="uplodeid">
                                                     	
                                                 </div>
-                                                <button type="submit" class="updatebnt">변경</button>
-                                                </form:form>
+                                                <button type="submit" class="updatebnt" >변경</button>
+                                                </form>
                                                 <div class="allprice">
                                                 	합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
                                                 </div>
@@ -156,7 +167,8 @@
                             </div>
                             <i class="fas fa-equals"></i>
                             <div>
-                                총 주문 금액 <div id="totalPrice"></div>원
+                                총 주문 금액 <div id="totalPriceDisplay"></div>원
+                                <input type="hidden" id="totalPrice" value="[total price]">
                             </div>
                             <div class="orderbnt_bnt">
                             	<button type="button" class="orderbnt">주문하기</button>
@@ -172,6 +184,7 @@
     let sumPriceElems = document.getElementsByClassName('sumprice');
     let orderPriceElem = document.getElementById('orderPrice');
     let totalPriceElem = document.getElementById('totalPrice');
+    let totalPriceDisplayElem = document.getElementById('totalPriceDisplay');
     function updateOrderPrice() {
       let sum = 0;
       for (let i = 0; i < checkboxes.length; i++) {
@@ -181,11 +194,11 @@
       }
       let del = 2500;
       orderPriceElem.innerText = sum;
-      totalPriceElem.innerHTML = sum + del;
-      if(sum == 0)
-       {
-         totalPriceElem.innerHTML = 0;
-       }
+      totalPriceElem.value = sum + del;
+      if(sum == 0) {
+        totalPriceElem.value = 0;
+      }
+      totalPriceDisplayElem.textContent = totalPriceElem.value;
     }
     function selectall(elem) {
       for (let i = 0; i < checkboxes.length; i++) {
@@ -202,6 +215,8 @@
       });
     }
     updateOrderPrice();
+    document.body.appendChild(totalPriceElem);
+
     
     </script>
     <script>

@@ -29,7 +29,7 @@ import com.springmvc.service.productService;
 public class cartController {
    @Autowired
    private cartService cs;
-
+   
    
    @RequestMapping
    public String requestCart(@ModelAttribute cartDTO cart, HttpSession session) {
@@ -61,7 +61,10 @@ public class cartController {
    }
    
    @PostMapping("/update")
-   public String submitupdateQntForm(@ModelAttribute("updateQnt") cartDTO cart, @RequestParam("productId") String ProductId, @RequestParam("qnt") int quantity) {
+   public String submitupdateQntForm(cartDTO cart, @RequestParam("ProductId") String ProductId, @RequestParam("quantity") int quantity, HttpSession session) {
+	   System.out.println("cartcontroller-update들어왔니?");
+	   System.out.println("cartcontroller-update-productId : " + ProductId );
+	   System.out.println("조형민바보 : " + quantity);
 	   cs.setUpdateQnt(ProductId, quantity);
 	   return "redirect:/cart/list";
    }

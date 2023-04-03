@@ -98,11 +98,14 @@
                                             <p>상품금액 : 10,000원</p>
                                             <div class="quanbox">                                                
                                                 수량 :
+                                                <form name="qntform" method="post">
                                                 <div class="quan_inbox">
-                                                    <button onclick="fncalcount('p',this)" class="it_quan_p">+</button>
-                                                    <input type="text"  value="1" class="it_quan" required>
-                                                    <button onclick="fncalcount('m',this)" class="it_quan_m">-</button>
+                                                    	<input path="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
+                                                    	<input type="hidden" value="${item.productId}" class="uplodeid">
+                                                    	
                                                 </div>
+                                                <button type="submit" class="updatebnt">변경</button>
+                                                </form>
                                             </div>                                            
                                             <button onclick="product_delete()" class="quandel">삭제</button>    
                                         </div>                                                                            

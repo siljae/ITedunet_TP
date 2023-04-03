@@ -14,6 +14,7 @@ public class orderDTO {
 	private String tfilename;
 	private int price;
 	private int totalprice;
+	
 	public int getNum() {
 		return num;
 	}
