@@ -45,16 +45,66 @@
                 selectAll.checked = false;
             }
         }
-    	
+        
     	function chkemail(){
-    		var v = document.getElementById('email').value;
-    		window.open("chkemail?email="+v,'_blank','width=500,height=300,top=200,left=200');
+    		var v = document.getElementById('maskemail').value;
+            if(v){
+                window.open("chkemail?email="+v,'_blank','width=500,height=300,top=200,left=200');
+            }
+            else{
+                alert("이메일을 입력해주세요.");
+            }
     	}
-    	function chkname(){
-    		var v = document.getElementById('name').value;
-    		window.open("chkname?name="+v,'_blank','width=500,height=300,top=200,left=200');
+
+        function emaildecide(){
+            document.getElementById('maskemail').disabled =true;
+            document.getElementById('emailchk').value = "이메일 변경";
+            document.getElementById('emailchk').setAttribute("onclick","emailchange()");
+            onjoin();
+            document.getElementById('email').value = documnet.getElementById('maskemail').value;
+        }
+
+        function emailchange(){
+            document.getElementById('maskemail').disabled =false;
+            document.getElementById('maskemail').value="";
+            document.getElementById('emailchk').value = "중복 확인";
+            document.getElementById('emailchk').setAttribute("onclick","chkemail()");
+        }
+
+    	function chkname(){            
+    		var v = document.getElementById('maskname').value;
+            if(v){
+                window.open("chkname?name="+v,'_blank','width=500,height=300,top=200,left=200');
+            }
+            else{
+                alert("닉네임을 입력해주세요.");
+            }    		
     	}
-    	
+
+        function namedecide(){
+            document.getElementById('maskname').disabled =true;
+            document.getElementById('namechk').value = "닉네임 변경";
+            document.getElementById('namechk').setAttribute("onclick","namechange()");
+            onjoin();
+            document.getElementById('name').value = documnet.getElementById('maskname').value;
+        }
+
+        function namechange(){
+            document.getElementById('maskname').disabled =false;
+            document.getElementById('maskname').value="";
+            document.getElementById('namechk').value = "중복 확인";
+            document.getElementById('namechk').setAttribute("onclick","chkname()");
+        }
+        
+        function onjoin(){
+            if (document.getElementById('maskemail').disabled && document.getElementById('maskname').disabled) {
+                document.getElementById('join').disabled = false;
+            }
+            else{
+                document.getElementById('join').disabled = true;
+            }
+        }
+        
     	function chkForm(){
     		const pw = document.getElementById('pw').value;
     		const pw2 = document.getElementById('pw2').value;
@@ -87,29 +137,33 @@
                 <div class="input_box">
                     <p>
                         이메일
-                        <form:input type="email" path="email" id="email" class="email" required="required"/>
-                        <input type="button" onclick="chkemail()" class="email_check" value="중복확인">
+                        <input type="email" id="maskemail" class="email" required="required">
+                        <form:input type="hidden" path="email" id="email" class="email" required="required"/>                        
+                        <input type="button" onclick="chkemail()" id="emailchk" class="email_check" value="중복 확인">
                     </p>
                     <br>
                     <p>
                         비밀번호
-                        <form:input type="password" id="pw" path="pw" class="pw" required="required" placeholder="ex)비밀번호양식"/>
+                        <form:input type="password" id="pw" path="pw" class="pw" required="required" placeholder="ex)비밀번호양식"
+                        pattern="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$" title="비밀번호는 영문자+숫자+특수문자 조합으로 6~20자리 사용해야 합니다."/>
                     </p>
                     <br>
                     <p>
                         비밀번호확인
-                        <input type="password" id="pw2" class="pw2" required="required">
+                        <input type="password" id="pw2" class="pw2" required="required"
+                        pattern="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$" title="비밀번호는 영문자+숫자+특수문자 조합으로 6~20자리 사용해야 합니다."/>
                     </p>
                     <br>
                     <p>
                         닉네임
-                        <form:input type="text" path="name" id="name" class="name"  required="required"/>                    
-                        <input type="button" onclick="chkname()" class="name_check" value="중복확인">
+                        <input type="text" id="maskname" class="name" required="required">
+                        <form:input type="hidden" path="name" id="name" class="name"  required="required"/>                    
+                        <input type="button" onclick="chkname()" id="namechk" class="name_check" value="중복 확인">
                     </p>
                     <br>
                     <p>
                         전화번호
-                        <form:input type="text" id="num1" path="phone1" class="num1" value="010" size="1" readonly="readonly"/>
+                        <form:input type="text" id="num1" path="phone1" class="num1" value="010" size="1" readonly="true"/>
                         <span>-</span>
                         <form:input type="text" id="num2" path="phone2" class="num2" maxlength="4" pattern="[0-9]{4}" size="4" title="'1234와 같은 4자리 숫자'" required="required"/>                        
                         <span>-</span>
@@ -118,11 +172,11 @@
                     <br>
                     <p>
                         주소
-                        <form:input type="text" id="postcode" path="post" class="addr1" readonly="readonly"/>
+                        <form:input type="text" id="postcode" path="post" class="addr1" readonly="true"/>
                         <input type="button" onclick="execDaumPostcode()" class="postbox" name="post" value="우편번호">
                     </p>
                     <p>
-                        <form:input type="text" id="address" path="addr1" class="addr2" size ="30" readonly="readonly"/>
+                        <form:input type="text" id="address" path="addr1" class="addr2" size ="30" readonly="true"/>
                     </p>
                     <p>
                         <form:input type="text" id="detailadress" path="addr2" class="addr3" size ="30"  placeholder="상세주소"/>
@@ -142,24 +196,23 @@
                         <label for="a_agree" class="s_pointer"><a href="#">이용약관 동의<span class="a_as">[필수]</span></a></label>
                         <input type="checkbox"  id="a_agree" name="agree" class="a_agree_input s_pointer" onclick="checkselectAll()">                        
                     </div>
-                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly>나중에 이용약관 넣을 것
+                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">나중에 이용약관 넣을 것
                     </textarea>
                     <br>
                     <div class="b_agree_box">
                         <label for="b_agree" class="s_pointer"><a href="#">개인정보 수집 및 이용 동의<span class="b_as">[필수]</span></a></label>
                         <input type="checkbox"  id="b_agree" name="agree" class="b_agree_input s_pointer" onclick="checkselectAll()" >
                     </div>
-                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly>나중에 개인정보 수집 및 이용 동의 넣을 것
+                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">나중에 개인정보 수집 및 이용 동의 넣을 것
                     </textarea>
                     <br>
                     <div class="sign_submit">
                     	<a href="<c:url value="/login"/>">돌아가기</a>
-                        <input type="submit" value="가입하기">
+                        <input type="submit" value="가입하기" id="join" disabled="true">
                     </div>
                 </div>
             </form:form>
         </div>
     </section>
-    
 </body>
 </html>

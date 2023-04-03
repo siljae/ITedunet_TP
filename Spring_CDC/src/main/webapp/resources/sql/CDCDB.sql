@@ -193,7 +193,7 @@ create table noticeboard(
     primary key(nb_num),
     foreign key(m_name) references member(m_name)
 );
-
+drop table noticeboard;
 create table eventboard(
    eb_num int not null auto_increment,
     m_name varchar(6) not null,
@@ -307,7 +307,15 @@ INNER JOIN (
 ) t ON (f.c_num = t.c_num OR f.q_num = t.c_num)
     AND f.boardtype = t.boardtype;
     
-select cb_num, null as qb_num, m_name, cb_board_type as boardtype, cb_tagsrc as tagsrc, cb_tagvalue as tagvalue, cb_title as title, cb_content as content, cb_regist_day as regist_day, cb_hit as hit, cb_recom as recom from commuboard
+select cb_num, null as qb_num, m_name, cb_board_type as boardtype, cb_tagsrc as tagsrc, cb_tagvalue as tagvalue, cb_title as title, cb_content as content, cb_regist_day as regist_day, cb_hit as hit, cb_recom as recom from commuboard 
 union all
 select null as cb_num, qb_num, m_name, qb_board_type as boardtype, qb_tagsrc as tagsrc, qb_tagvalue as tagvalue, qb_title as title, qb_content as content, qb_regist_day as regist_day, qb_hit as hit, qb_recom as recom from qnaboard
-order by regist_day desc limit 0,10
+order by regist_day desc limit 0,10;
+
+select cb_num, null as qb_num, m_name, cb_board_type as boardtype, cb_tagsrc as tagsrc, cb_tagvalue as tagvalue, cb_title as title, cb_content as content, cb_regist_day as regist_day, cb_hit as hit, cb_recom as recom from commuboard
+where cb_title like '%우리%' or cb_content like '%우리%' 
+union all
+select null as cb_num, qb_num, m_name, qb_board_type as boardtype, qb_tagsrc as tagsrc, qb_tagvalue as tagvalue, qb_title as title, qb_content as content, qb_regist_day as regist_day, qb_hit as hit, qb_recom as recom from qnaboard
+where qb_title like '%우리%' or qb_content like '%우리%' 
+order by regist_day desc limit 0,10;
+

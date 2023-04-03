@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.domain.memberDTO;
 import com.springmvc.service.MemberService;
@@ -34,10 +35,9 @@ public class logincontoller {
 	}
 	
 	@PostMapping("/loginchk")	//로그인기능
-	public ModelAndView loginchk(@ModelAttribute("member")memberDTO member,HttpSession session) {
-		ModelAndView mav = new ModelAndView();
-		mr.chklogin(member.getEmail(), member.getPw(), session,mav);		
-		return mav;
+	public String loginchk(@ModelAttribute("member")memberDTO member, HttpSession session, RedirectAttributes ra) {
+		String view = mr.chklogin(member.getEmail(), member.getPw(), session, ra);		
+		return view;
 	}
 	
 	@GetMapping("/logout")	//로그아웃 기능
@@ -53,7 +53,7 @@ public class logincontoller {
 	
 	@PostMapping("/signup") //회원가입 기능
 	public String submitsignup(@ModelAttribute("member") memberDTO member, Model model) throws Exception {
-		mr.join(member, model);
+		mr.join(member, model);		
 		return "login";
 	}	
 

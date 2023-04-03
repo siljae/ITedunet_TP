@@ -49,7 +49,7 @@
 	    	}	
 	    	span.innerText = re; // span 내용 업데이트
 		})
-}
+    }
 </script>
     
     
@@ -58,10 +58,10 @@
 <body>
 	<jsp:include page="./header.jsp"/>
         <div class="view_head">
-		<h1><a href="<c:url value="/board/${pageNum }"/>">전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/${pageNum}"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">자랑해요</a></h1>
-		<h1><a href="<c:url value="/board/qna/${pageNum }"/>">Q&A</a></h1>
-		<h1><a href="<c:url value="/board/recom/${pageNum }"/>">추천해요</a></h1>
+            <h1><a href="<c:url value="/board/1"/>" >전체</a></h1>
+            <h1><a href="<c:url value="/board/commu/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">자랑해요</a></h1>
+            <h1><a href="<c:url value="/board/qna/1"/>">Q&A</a></h1>
+            <h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
         </div>
         <div class="container">
             <div class="view_tag">

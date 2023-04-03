@@ -23,12 +23,14 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardRepositoty br;
 
+	//글쓰기
 	@Override //글쓰기
 	public void writeboard(boardDTO board,HttpServletRequest req) {		
 		br.writeboard(board,req);
 	}
 
-	@Override	//게시판목록기능
+	//전체게시판목록기능
+	@Override
 	public void getallboardlist(Model model,criteria cri) {
 		int total = br.getallcount();
 		pageDTO page = new pageDTO(cri, total);
@@ -39,33 +41,96 @@ public class BoardServiceImpl implements BoardService {
 		model.addAttribute("page",page);
 	}
 	
-	@Override //게시판 정렬(최신순(기본), 인기순, 조회순)
-	public void getsortboardlist(Model model, criteria cri, String sort) {
-		int total = br.getallcount();
+	//자랑해요 게시판 전체 게시글 가져오기
+	@Override
+	public void getcommuboardlist(Model model, criteria cri) {
+		int total = br.getcommucount();
 		pageDTO page = new pageDTO(cri, total);
-		List<boardDTO> boardlist = br.getsortboardlist(page, sort);
+		List<boardDTO> boardlist = br.getcommuboardlist(page);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);
 	}
-
-	@Override //선택된 게시글 상세 페이지 가져오기
-	public void getboardview(Model model,  HttpServletRequest req) {
+	
+	//Q&A 게시판 전체 게시글 가져오기
+	@Override
+	public void getqnaboardlist(Model model, criteria cri) {
+		int total = br.getqnacount();
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getqnaboardlist(page);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page); 
+	}
+	
+	//추천해요 게시판 전체 게시글 가져오기
+	@Override
+	public void getarecomboardlist(Model model,criteria cri) {
+		int total = br.getrecomcount();
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getrecomboardlist(page);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
+	 //자랑해요 게시판 정렬(최신순(기본), 인기순, 조회순)
+	@Override
+	public void getsortcommuboardlist(Model model, criteria cri, String sort) {
+		int total = br.getcommucount();
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getsortcommuboardlist(page, sort);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
+	//Q&A 게시판 정렬(최신순(기본), 인기순, 조회순)
+	@Override
+	public void getsortqnaboardlist(Model model, criteria cri, String sort) {
+		int total = br.getqnacount();
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getsortqnaboardlist(page, sort);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
+	 //자랑해요 게시글 상세 페이지 가져오기
+	@Override
+	public void getcommuboardview(Model model,  HttpServletRequest req) {
+		System.out.println("자랑해요상세");
 		int num =  (int)model.getAttribute("num");
-		boardDTO board = br.getboardview(num, req);
-		br.updatehit(num);
+		boardDTO board = br.getcommuboardview(num, req);
+		br.commuviewhit(num);
 		model.addAttribute("board",board);	
 	}
-
-	@Override	//게시글수정
-	public void updateboard(boardDTO board, HttpServletRequest req) {
-		boardDTO fileboard = br.getboardview(board.getNum(), req);
+	
+	//Q&A 게시글 상세 페이지 가져오기
+	@Override
+	public void getqnaboardview(Model model, HttpServletRequest req) {
+		System.out.println("QnA 상세");
+		int num =  (int)model.getAttribute("num");
+		boardDTO board = br.getqnaboardview(num, req);
+		br.qnaviewhit(num);
+		model.addAttribute("board",board);
+	}
+	
+	//자랑해요 게시글수정
+	@Override
+	public void updatecommuboard(boardDTO board, HttpServletRequest req) {
+		boardDTO fileboard = br.getcommuboardview(board.getNum(), req);
+		board.setFiles(fileboard.getFiles());
+		br.updateboard(board, req);
+	}
+	
+	//Q&A 게시글 수정
+	@Override
+	public void updateqnaboard(boardDTO board, HttpServletRequest req) {
+		boardDTO fileboard = br.getqnaboardview(board.getNum(), req);
 		board.setFiles(fileboard.getFiles());
 		br.updateboard(board, req);
 	}
 
-	@Override	//게시글번호가져오기
-	public boardDTO getByNum(int num,  HttpServletRequest req) {
-		boardDTO board = br.getboardview(num, req);
+	//게시글번호로 추천해요 게시글 가져오기
+	@Override
+	public boardDTO getcommuboardByNum(int num,  HttpServletRequest req) {
+		boardDTO board = br.getcommuboardview(num, req);
 		if(board.getBoard_type().equals("자랑해요")) {
 			board.setBoard_type("commu");
 		}
@@ -77,38 +142,112 @@ public class BoardServiceImpl implements BoardService {
 		}
 		return board;
 	}
+	
+	//게시글번호로 Q&A 게시글 가져오기
+	public boardDTO getqnaboardByNum(int num, HttpServletRequest req) {
+		boardDTO board = br.getqnaboardview(num, req);
+		if(board.getBoard_type().equals("Q&A")) {
+			board.setBoard_type("qna");
+		}
+		if(board.getTagvalue().equals("고양이")) {
+			board.setAnimal_type("cat");
+		}
+		if(board.getTagvalue().equals("강아지")) {
+			board.setAnimal_type("dog");
+		}
+		return board;
+	}
 
-	@Override	//게시글 삭제
-	public void deleteboard(String num) {		
-		br.deleteboard(num);
-		
+	//자랑해요 게시글 삭제
+	@Override
+	public void deletecommuboard(int num) {		
+		br.deletecommuboard(num);		
 	}
 	
-	@Override	//게시글 검색
+	//Q&A 게시글 삭제
+	@Override
+	public void deleteqnaboard(int num) {
+		br.deleteqnaboard(num);
+	}
+	
+	//전체 게시글 검색
+	@Override
 	public void search(Model model, String content, criteria cri) {
-		int total = br.getcount(content);
+		int total = br.getallsearchcount(content);
 		pageDTO page = new pageDTO(cri, total);
-		List<boardDTO> boardlist = br.search(content, page);
+		List<boardDTO> boardlist = br.getallsearch(content, page);
+		model.addAttribute("search",content);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
+	//자랑해요 게시글 검색
+	@Override
+	public void commusearch(Model model, String content, criteria cri) {
+		int total = br.getcommusearchcount(content);
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getcommusearch(content, page);
+		System.out.println("이전페이지: "+page.isPrev());
+		System.out.println("다음페이지: "+page.isNext());
+		model.addAttribute("search",content);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
+	//Q&A 게시글 검색
+	@Override
+	public void qnasearch(Model model, String content, criteria cri) {
+		int total = br.getqnasearchcount(content);
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getqnasearch(content, page);
 		model.addAttribute("search",content);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);
 	}
 
-	@Override	//추천 기능
-	public void recom(Model model, int pageNum, int num, String recom, HttpServletRequest req) {
-		br.recom(num, recom);
-		boardDTO board = br.getboardview(num, req);
+	//추천해요 검색 기능
+	@Override
+	public void recomsearch(Model model, String content, criteria cri) {
+		System.out.println("추천해요서비스");
+		int total = br.getrecomcount();
+		pageDTO page = new pageDTO(cri, total);
+		List<boardDTO> boardlist = br.getrecomsearch(content, page);
+		model.addAttribute("search",content);
+		model.addAttribute("boardlist",boardlist);
+		model.addAttribute("page",page);
+	}
+	
+	//추천해요 게시글 가져오기
+	@Override
+	public void recomboard(Model model) {
+		List<boardDTO> recomlist = br.getrecomboard();
+		model.addAttribute("recomlist",recomlist);		
+	}
+	
+	//자랑해요 추천 기능
+	@Override
+	public void commurecom(Model model, int pageNum, int num, String recom, HttpServletRequest req) {
+		br.commurecom(num, recom);
+		boardDTO board = br.getcommuboardview(num, req);
+		model.addAttribute("num",num);
+		model.addAttribute("pageNum",pageNum);
+		model.addAttribute("board",board);
+		
+	}
+	
+	//Q&A 추천 기능
+	@Override
+	public void qnarecom(Model model, int pageNum, int num, String recom, HttpServletRequest req) {
+		br.qnarecom(num, recom);
+		boardDTO board = br.getqnaboardview(num, req);
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
 		model.addAttribute("board",board);
 		
 	}
 
-	@Override	//인기글 가져오기
-	public void recomboard(Model model) {
-		List<boardDTO> recomlist = br.getrecomboard();
-		model.addAttribute("recomlist",recomlist);		
-	}
+	
+	
 
 	/*
 	 * @Override //만들었으나 아직 활용을 안함 public JSONArray sortboard(Model model,

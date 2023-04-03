@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.domain.memberDTO;
 import com.springmvc.repository.MemberRepository;
@@ -26,17 +27,17 @@ public class MemberServiceImpl implements MemberService{
 	}
 	
 	@Override	//로그인 기능
-	public void chklogin(String email, String pw,HttpSession session,ModelAndView mav) {
+	public String chklogin(String email, String pw, HttpSession session, RedirectAttributes ra) {
 		memberDTO member = mr.chkmember(email, pw);
 		if(member.getName() != null) {
 			session.setAttribute("name", member.getName());
 			session.setAttribute("level", member.getLevel());
-			mav.addObject("msg",1);
-			mav.setViewName("index");
+			ra.addFlashAttribute("msg",1);
+			return "redirect:/home";
 		}
 		else {
-			mav.addObject("msg", -1);
-			mav.setViewName("login");
+			ra.addFlashAttribute("msg",-1);
+			return "redirect:/login";
 		}		
 	}
 

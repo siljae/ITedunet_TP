@@ -12,29 +12,57 @@ public interface BoardRepositoty {
 	//전체 게시글 가져오기 기능
 	public List<boardDTO> getallboardlist(pageDTO page);
 	//자랑해요게시글 가져오기 기능
-	public List<boardDTO> getboardlist(pageDTO page);
+	public List<boardDTO> getcommuboardlist(pageDTO page);
 	//Q&A게시글 가져오기 기능
 	public List<boardDTO> getqnaboardlist(pageDTO page);
-	//게시글 정렬 기능
-	public List<boardDTO> getsortboardlist(pageDTO page, String sort);
+	//추천해요 게시글 가져오기 기능
+	public List<boardDTO> getrecomboardlist(pageDTO page);
+	//자랑해요 게시글 정렬 기능
+	public List<boardDTO> getsortcommuboardlist(pageDTO page, String sort);
+	//Q&A 게시글 정렬 기능
+	public List<boardDTO> getsortqnaboardlist(pageDTO page, String sort);
 	//게시글 작성시간 비교하는 기능
 	public String caltime(String time);
-	//게시글 상세페이지 가져오기 기능
-	public boardDTO getboardview(int num, HttpServletRequest req);
-	//게시글 조회수 증가 기능
-	public void updatehit(int num);
-	//게시글 삭제
-	public void deleteboard(String num);
+	//자랑해요 게시글 상세페이지 가져오기 기능
+	public boardDTO getcommuboardview(int num, HttpServletRequest req);
+	//Q&A 게시글 상세페이지 가져오기 기능
+	public boardDTO getqnaboardview(int num, HttpServletRequest req);
+	//자랑해요 게시글 조회수 증가 기능
+	public void commuviewhit(int num);
+	//Q&A 게시글 조회수 증가
+	public void qnaviewhit(int num);
+	//자랑해요 게시글 삭제
+	public void deletecommuboard(int num);
+	//Q&A 게시글 삭제 
+	public void deleteqnaboard(int num);
 	//게시글 수정
 	public void updateboard(boardDTO board, HttpServletRequest req);
-	//게시글 검색
-	public List<boardDTO> search(String content,pageDTO page);
-	//게시글 추천
-	public void recom(int num, String recom);
+	//전체게시글 검색
+	public List<boardDTO> getallsearch(String content, pageDTO page);
+	//자랑해요 게시글 검색
+	public List<boardDTO> getcommusearch(String content, pageDTO page);
+	//Q&A 게시글 검색
+	public List<boardDTO> getqnasearch(String content, pageDTO page);
+	//추천해요 게시글 검색
+	public List<boardDTO> getrecomsearch(String content, pageDTO page);
+	//자랑해요 게시글 추천
+	public void commurecom(int num, String recom);
+	//Q&A 게시글 추천
+	public void qnarecom(int num, String recom);
 	//인기글(추천수 10개이상) 3개 가져오기
 	public List<boardDTO> getrecomboard();
 	//전체 게시글 개수
 	public int getallcount();
-	//검색한 게시글 개수
-	public int getcount(String content);
+	//자랑해요 게시글 개수
+	public int getcommucount();
+	//Q&A 게시글 개수
+	public int getqnacount();
+	//추천해요 게시글 개수
+	public int getrecomcount();
+	//검색한 전체 게시글 개수
+	public int getallsearchcount(String content);
+	//검색한 자랑해요 게시글 개수
+	public int getcommusearchcount(String content);
+	//검색한 Q&A 게시글 개수
+	public int getqnasearchcount(String content);
 }

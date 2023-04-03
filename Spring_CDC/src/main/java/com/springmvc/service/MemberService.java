@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.springmvc.domain.memberDTO;
 
@@ -11,7 +12,7 @@ public interface MemberService {
 	//회원가입기능
 	public void join(memberDTO dto, Model model);
 	//로그인기능	
-	public void chklogin(String email, String pw,HttpSession session,ModelAndView mav);
+	public String chklogin(String email, String pw, HttpSession session, RedirectAttributes ra);
 	//로그아웃기능
 	public void logout(HttpSession session);
 	//회원정보수정 기능

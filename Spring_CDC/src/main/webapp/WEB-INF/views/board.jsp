@@ -22,7 +22,7 @@
 	<div class="com_name">
 		<h1><a href="<c:url value="/board/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">전체</a></h1>
 		<h1><a href="<c:url value="/board/commu/1"/>">자랑해요</a></h1>
-		<h1><a href="<c:url value="/board/qna"/>">Q&A</a></h1>
+		<h1><a href="<c:url value="/board/qna/1"/>">Q&A</a></h1>
 		<h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
     </div>
     <div class="container">
@@ -105,8 +105,16 @@
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
-		                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>	                                
+	                                	<c:choose>
+	                                	<c:when test="${board.board_type == '자랑해요' }">
+			                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
+			                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>
+		                                </c:when>
+		                                <c:otherwise>
+		                                	<a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
+			                                <a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>
+		                                </c:otherwise>
+		                                </c:choose>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
@@ -119,11 +127,23 @@
 	                        </div>
                         	<c:if test="${board.files != null && !empty board.files}">
 		                        <div class="colbox">
-		                        	<a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
-		                        		<c:forEach items="${board.files }" var="file">
-										<img class="listimg" src="<c:url value="/resources/img/board/${file.filename }"/>">
-										</c:forEach>
-									</a>
+		                        	<c:choose>
+		                        	<c:when test="${board.board_type == '자랑해요'}">
+		                        		<a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
+			                        		<c:forEach items="${board.files }" var="file">
+											<img class="listimg" src="<c:url value="/resources/img/board/${file.filename }"/>">
+											</c:forEach>
+										</a>
+		                        	</c:when>
+		                        	<c:otherwise>
+		                        		<a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
+			                        		<c:forEach items="${board.files }" var="file">
+											<img class="listimg" src="<c:url value="/resources/img/board/${file.filename }"/>">
+											</c:forEach>
+										</a>
+		                        	</c:otherwise>
+		                        	</c:choose>
+		                        	
 	                        	</div>	
                         	</c:if>                     
                         </div>                        
