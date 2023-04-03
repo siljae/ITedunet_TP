@@ -17,6 +17,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.sql.DataSource;
@@ -40,6 +42,7 @@ import com.springmvc.domain.boardDTO;
 import com.springmvc.domain.criteria;
 import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
+import com.springmvc.mapper.AllBoardMapper;
 import com.springmvc.mapper.BoardMapper;
 import com.springmvc.mapper.FileMapper;
 
@@ -60,7 +63,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 				board.getFileimages().remove(i);
 			}
 		}
-		board.setBoard_type("자랑해요");
+		
+		//게시글의 반려동물 태그 설정
 		if(board.getAnimal_type() != null && board.getAnimal_type().equals("cat")) {
 			board.setTagsrc("catface.png");
 			board.setTagvalue("고양이");
@@ -74,8 +78,17 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String regist_day = sdf.format(new Date());
 		
-		// commuboard에 새로운 레코드 삽입
-		String sql = "insert into commuboard(cb_board_type, cb_tagsrc, cb_tagvalue, m_name, cb_title, cb_content, cb_regist_day, cb_hit, cb_recom) values(?,?,?,?,?,?,?,?,?)";
+		String sql;
+		//게시판 태그 설정
+		if(board.getBoard_type().equals("commu")) {
+			board.setBoard_type("자랑해요");
+			sql = "insert into commuboard(cb_board_type, cb_tagsrc, cb_tagvalue, m_name, cb_title, cb_content, cb_regist_day, cb_hit, cb_recom) values(?,?,?,?,?,?,?,?,?)";
+		}
+		else {
+			board.setBoard_type("Q&A");
+			sql = "insert into qnaboard(qb_board_type, qb_tagsrc, qb_tagvalue, m_name, qb_title, qb_content, qb_regist_day, qb_hit, qb_recom) values(?,?,?,?,?,?,?,?,?)";
+		}
+		System.out.println("sql: "+sql);
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		template.update(connection -> {
 		    PreparedStatement ps = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -95,8 +108,16 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		board.setNum(keyHolder.getKey().intValue());
 		//파일업로드하고 DB에 파일이름 저장
 		List<MultipartFile> filelist = board.getFileimages();
-		String path = req.getServletContext().getRealPath("/resources/img/board/");		
-		String filesql = "insert into boardfile(board_type, cb_num, filename) values(?,?,?)";
+		String path = req.getServletContext().getRealPath("/resources/img/board/");
+		String filesql;
+		
+		if(board.getBoard_type().equals("자랑해요")) {
+			filesql = "insert into boardfile(board_type, cb_num, filename) values(?,?,?)";
+		}
+		else {
+			filesql = "insert into boardfile(board_type, qb_num, filename) values(?,?,?)";
+		}
+		System.out.println("filesql: "+filesql);
 		for(MultipartFile mf : filelist) {
 			//이미지 이름 가져오기			
 			String saveName = mf.getOriginalFilename();
@@ -117,8 +138,40 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		}
 		
 	}
+	
+	@Override	//자랑해요, Q&A 게시판 게시글 가져오기
+	public List<boardDTO> getallboardlist(pageDTO page){
+		int start = page.getCri().getpagestart();
+		String sql = "select cb_num, null as qb_num, m_name, cb_board_type as boardtype, cb_tagsrc as tagsrc, cb_tagvalue as tagvalue, cb_title as title, cb_content as content, cb_regist_day as regist_day, cb_hit as hit, cb_recom as recom from commuboard "
+		           + "union all "
+		           + "select null as cb_num, qb_num, m_name, qb_board_type as boardtype, qb_tagsrc as tagsrc, qb_tagvalue as tagvalue, qb_title as title, qb_content as content, qb_regist_day as regist_day, qb_hit as hit, qb_recom as recom from qnaboard "
+		           + "order by regist_day desc limit "+start+","+page.getCri().getAmount();
 
-	@Override	//커뮤니티게시판 게시글 가져오기
+		List<boardDTO> allboardlist = template.query(sql, new AllBoardMapper());
+		System.out.println(sql);
+		System.out.println(allboardlist.size());
+		for(boardDTO board : allboardlist) {
+			board.setCalregist(caltime(board.getRegist_day()));
+			if(board.getCbnum() != 0) {
+				board.setNum(board.getCbnum());
+				String filesql = "select * from boardfile where board_type=? and cb_num=?";
+				List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getCbnum());
+				board.setFiles(files);
+				System.out.println("자랑해요");
+			}
+			else {
+				board.setNum(board.getQbnum());
+				String filesql = "select * from boardfile where board_type=? and qb_num=?";
+				List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getQbnum());
+				board.setFiles(files);
+				System.out.println("Q&A");
+				
+			}
+		}
+		return allboardlist;
+	}
+
+	@Override	//자랑해요 게시글 가져오기
 	public List<boardDTO> getboardlist(pageDTO page) {
 		int start = page.getCri().getpagestart();
 		String sql = "select * from commuboard order by cb_num desc limit "+start+","+page.getCri().getAmount();
@@ -127,6 +180,21 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		for(boardDTO board : boardlist) {
 			board.setCalregist(caltime(board.getRegist_day()));
 			String filesql = "select * from boardfile where board_type=? and cb_num=?";
+			List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+			board.setFiles(files);
+		}		
+		return boardlist;
+	}
+	
+	@Override	//Q&A 게시글 가져오기
+	public List<boardDTO> getqnaboardlist(pageDTO page){
+		int start = page.getCri().getpagestart();
+		String sql = "select * from qnaboard order by qb_num desc limit "+start+","+page.getCri().getAmount();
+		List<boardDTO> boardlist =  template.query(sql, new BoardMapper());
+		
+		for(boardDTO board : boardlist) {
+			board.setCalregist(caltime(board.getRegist_day()));
+			String filesql = "select * from boardfile where board_type=? and qb_num=?";
 			List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
 			board.setFiles(files);
 		}		

@@ -59,7 +59,7 @@
 	                                <div class="reply">
 	                                    <span class="re1">
 	                                        답변 
-	                                        3
+	                                        1
 	                                    </span>
 	                                    <span class="day">${recomboard.calregist }</span>
 	                                </div>
@@ -111,7 +111,7 @@
 	                            </div>
 	                       	    <div class="coreply">
 		                            <div class="core1">
-		                                답변 : 0
+		                                답변 : 1
 		                            </div>
 		                            <div class="renickname">${board.name }</div>
 		                            <div class="retime">작성시간 : ${board.calregist }</div>

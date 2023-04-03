@@ -8,10 +8,10 @@ import com.springmvc.domain.boardDTO;
 import com.springmvc.domain.criteria;
 
 public interface BoardService {	
-	//게시글 등록하기
+	//글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req);
-	//게시판목록가져오기 기능
-	public void getboardlist(Model model,criteria cri);	
+	//전체 게시글 가져오기 기능
+	public void getallboardlist(Model model,criteria cri);	
 	//게시판 정렬 기능
 	public void getsortboardlist(Model model, criteria cri, String sort);
 	//게시글 가져오기

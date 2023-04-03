@@ -106,7 +106,7 @@
 	                            </div>
 	                       	    <div class="coreply">
 		                            <div class="core1">
-		                                답변 : 
+		                                답변 : 1
 		                            </div>
 		                            <div class="renickname">${board.name }</div>
 			                            <div class="retime">작성시간 : ${board.calregist}</div>

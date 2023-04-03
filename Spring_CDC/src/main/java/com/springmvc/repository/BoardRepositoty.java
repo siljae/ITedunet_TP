@@ -9,8 +9,12 @@ public interface BoardRepositoty {
 	
 	//글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req);
-	//게시글 가져오기 기능
+	//전체 게시글 가져오기 기능
+	public List<boardDTO> getallboardlist(pageDTO page);
+	//자랑해요게시글 가져오기 기능
 	public List<boardDTO> getboardlist(pageDTO page);
+	//Q&A게시글 가져오기 기능
+	public List<boardDTO> getqnaboardlist(pageDTO page);
 	//게시글 정렬 기능
 	public List<boardDTO> getsortboardlist(pageDTO page, String sort);
 	//게시글 작성시간 비교하는 기능

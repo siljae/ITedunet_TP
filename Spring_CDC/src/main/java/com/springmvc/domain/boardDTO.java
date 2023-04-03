@@ -1,5 +1,6 @@
 package com.springmvc.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -7,6 +8,8 @@ import org.springframework.web.multipart.MultipartFile;
 public class boardDTO {
 	
 	private int num;
+	private int cbnum;
+	private int qbnum;
 	private String name;
 	private String board_type;
 	private String animal_type;
@@ -22,22 +25,36 @@ public class boardDTO {
 	private String calregist;
 	private int recom;
 	private List<fileDTO> files;
-
+	
+	
+	
+	
 	@Override
 	public String toString() {
-		return "boardDTO [num=" + num + ", name=" + name + ", board_type=" + board_type + ", animal_type=" + animal_type
-				+ ", title=" + title + ", content=" + content + ", regist_day=" + regist_day + ", hit=" + hit
-				+ ", fileimage=" + fileimages + ", filename=" + filename + "]";
+	return "boardDTO [num=" + num + ", cbnum=" + cbnum + ", qbnum=" + qbnum + ", name=" + name + ", board_type="
+	+ board_type + ", animal_type=" + animal_type + ", title=" + title + ", content=" + content
+	+ ", regist_day=" + regist_day + ", hit=" + hit + ", fileimages=" + fileimages + ", filenames="
+	+ Arrays.toString(filenames) + ", filename=" + filename + ", tagsrc=" + tagsrc + ", tagvalue=" + tagvalue
+	+ ", calregist=" + calregist + ", recom=" + recom + ", files=" + files + "]";
 	}
-	
-	
-	
-
 	public int getNum() {
 		return num;
 	}
 	public void setNum(int num) {
 		this.num = num;
+	}
+	
+	public int getCbnum() {
+		return cbnum;
+	}
+	public void setCbnum(int cbnum) {
+		this.cbnum = cbnum;
+	}
+	public int getQbnum() {
+		return qbnum;
+	}
+	public void setQbnum(int qbnum) {
+		this.qbnum = qbnum;
 	}
 	public String getName() {
 		return name;

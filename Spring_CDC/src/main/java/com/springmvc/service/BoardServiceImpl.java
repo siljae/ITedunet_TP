@@ -29,10 +29,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override	//게시판목록기능
-	public void getboardlist(Model model,criteria cri) {
+	public void getallboardlist(Model model,criteria cri) {
 		int total = br.getallcount();
 		pageDTO page = new pageDTO(cri, total);
-		List<boardDTO> boardlist = br.getboardlist(page);
+		List<boardDTO> boardlist = br.getallboardlist(page);
 		List<boardDTO> bestrecomlist = br.getrecomboard();
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("bestrecomlist",bestrecomlist);

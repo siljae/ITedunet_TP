@@ -119,7 +119,7 @@
                     </c:choose>                
                 </div>
                 <div class="replybox">
-                    <h3>댓글목록</h3>
+                    <h2>댓글</h2>
                     <ul>
                         <li>
                             <div class="re_user_id">
@@ -131,9 +131,9 @@
                             <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
                             <div class="re_date">2022/02/07 11:12</div>
                             <div class="re_btn">
-                                <button><i class="far fa-plus-square"></i></button>
+                                <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
                                 <c:if test="${name == board.name || level == 2}">
-                                	<button><i class="far fa-window-close"></i></button>
+                                	<button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
                                 </c:if>
                             </div>
                             <div class="hr"></div>

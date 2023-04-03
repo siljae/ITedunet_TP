@@ -170,7 +170,8 @@ create table qnaboard(
    qb_num int not null auto_increment,
     m_name varchar(6) not null,
     qb_board_type varchar(6) not null,
-    qb_animal_type varchar(10) not null,
+    qb_tagsrc varchar(12) not null,
+    qb_tagvalue varchar(3) not null,
     qb_title varchar(100) not null,
     qb_content text not null,
     qb_regist_day varchar(30) not null,
@@ -179,7 +180,8 @@ create table qnaboard(
     primary key(qb_num),
     foreign key(m_name) references member(m_name)
 );
-
+drop table qnaboard;
+select*from qnaboard;
 create table noticeboard(
    nb_num int not null auto_increment,
     m_name varchar(6) not null,
@@ -209,7 +211,8 @@ create table hosreviewboard(
    hvb_num int not null auto_increment,
     m_name varchar(6) not null,
     hvb_board_type varchar(6) not null,
-    hvb_animal_type varchar(10) not null,
+    hvb_tagsrc varchar(12) not null,
+    hvb_tagvalue varchar(3) not null,
     hvb_title varchar(100) not null,
     hvb_content text not null,
     hvb_regist_day varchar(30) not null,
@@ -218,8 +221,9 @@ create table hosreviewboard(
     primary key(hvb_num),
     foreign key(m_name) references member(m_name)
 );
+drop table hosreviewboard;
 
-CREATE TABLE board_file (
+CREATE TABLE boardfile (
   bf_num INT NOT NULL AUTO_INCREMENT,
   board_type VARCHAR(50) NOT NULL,
   cb_num INT DEFAULT NULL,
@@ -235,8 +239,75 @@ CREATE TABLE board_file (
   FOREIGN KEY (eb_num) REFERENCES eventboard(eb_num) on delete cascade,
   FOREIGN KEY (hvb_num) REFERENCES hosreviewboard(hvb_num) on delete cascade
 );
-drop table board_file;
-select*from board_file;
-alter table board_file change column file_name filename varchar(255) not null;
+drop table boardfile;
+select*from boardfile;
+alter table boardfile change column file_name filename varchar(255) not null;
 
-insert into board_file(board_type, cb_num, file_name) values('자랑해요',302,'naver.jpg');
+insert into boardfile(board_type, cb_num, file_name) values('자랑해요',302,'naver.jpg');
+
+create table tc
+(
+	c_num int not null auto_increment primary key,
+    m_name varchar(20) not null,
+    c_bt varchar(10) not null,
+    c_title varchar(100) not null
+);
+create table tq
+(
+	q_num int not null auto_increment primary key,
+    m_name varchar(20) not null,
+    q_bt varchar(10) not null,
+    q_title varchar(100) not null
+);
+insert into tc(m_name, c_bt, c_title) values('abc','자랑해요','자랑테스트1');
+insert into tc(m_name, c_bt, c_title) values('abc','자랑해요','자랑테스트2');
+insert into tc(m_name, c_bt, c_title) values('abc','자랑해요','자랑테스트3');
+insert into tq(m_name, q_bt, q_title) values('abc','Q&A','Q&A테스트1');
+insert into tq(m_name, q_bt, q_title) values('abc','Q&A','Q&A테스트2');
+insert into tq(m_name, q_bt, q_title) values('abc','Q&A','Q&A테스트3');
+
+SELECT c_num, m_name, c_bt, c_title FROM tc
+UNION ALL
+SELECT q_num, m_name, q_bt, q_title FROM tq;
+
+SELECT c_num AS id, m_name, c_bt AS boardtype, c_title AS title FROM tc
+UNION ALL
+SELECT q_num AS id, m_name, q_bt AS boardtype, q_title AS title FROM tq;
+
+SELECT c_num AS 'c_num', NULL AS q_num, m_name, c_bt AS boardtype, c_title AS title FROM tc
+UNION ALL
+SELECT NULL AS c_num, q_num AS 'c_num or q_num', m_name, q_bt AS boardtype, q_title AS title FROM tq;
+
+select cb_num, null as qb_num, m_name, cb_board_type as boardtype, cb_tagsrc as tagsrc, cb_tagvalue as tagvalue, cb_title as title, cb_content as content, cb_regist_day as regist_day, cb_hit as hit, cb_recom as recom from commuboard
+union all
+select null as cb_num, qb_num, m_name, qb_board_type as boardtype, qb_tagsrc as tagsrc, qb_tagvalue as tagvalue, qb_title as title, qb_content as content, qb_regist_day as regist_day, qb_hit as hit, qb_recom as recom from qnaboard
+order by regist_day desc limit 10;
+
+ select * from boardfile where board_type=? and cb_num=?;
+
+create table file(
+	f_num int not null auto_increment primary key,
+    c_num int null,
+    q_num int null,
+    boardtype varchar(5) not null,
+    filename varchar(100) not null,
+    foreign key(c_num) references tc(c_num),
+    foreign key(q_num) references tq(q_num)
+);
+
+insert into file(c_num, boardtype, filename) values(1,'자랑해요','catface.png');
+insert into file(q_num, boardtype, filename) values(3,'Q&A','catface.png');
+
+SELECT f.*
+FROM file f
+INNER JOIN (
+    SELECT c_num, c_bt as boardtype, c_title FROM tc
+    UNION ALL
+    SELECT q_num, q_bt as boardtype, q_title FROM tq
+) t ON (f.c_num = t.c_num OR f.q_num = t.c_num)
+    AND f.boardtype = t.boardtype;
+    
+select cb_num, null as qb_num, m_name, cb_board_type as boardtype, cb_tagsrc as tagsrc, cb_tagvalue as tagvalue, cb_title as title, cb_content as content, cb_regist_day as regist_day, cb_hit as hit, cb_recom as recom from commuboard
+union all
+select null as cb_num, qb_num, m_name, qb_board_type as boardtype, qb_tagsrc as tagsrc, qb_tagvalue as tagvalue, qb_title as title, qb_content as content, qb_regist_day as regist_day, qb_hit as hit, qb_recom as recom from qnaboard
+order by regist_day desc limit 0,10

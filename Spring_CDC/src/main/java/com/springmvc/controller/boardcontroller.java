@@ -1,8 +1,6 @@
 package com.springmvc.controller;
 
 
-import java.util.Arrays;
-
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,21 +26,21 @@ public class boardcontroller {
 
 	@RequestMapping("/") //전체 게시판
 	public String board(Model model,HttpServletRequest req, criteria cri) {
-		br.getboardlist(model, cri);
+		br.getallboardlist(model, cri);
 		return "board/";
 	}
 	
 	@GetMapping("/{num}")	//페이징된 전체 게시판
 	public String boardnum(@PathVariable("num")int num, Model model,HttpServletRequest req, criteria cri) {
 		cri.setPagenum(num);
-		br.getboardlist(model, cri);
+		br.getallboardlist(model, cri);
 		return "board";
 	}
 	
 	@GetMapping("/commu/{num}") //커뮤니티 게시판 
 	public String commuboard(@PathVariable("num")int num,Model model, criteria cri) {
 		cri.setPagenum(num);
-		br.getboardlist(model, cri);
+		br.getallboardlist(model, cri);
 		return "commuboard";
 	}
 	
@@ -102,6 +100,7 @@ public class boardcontroller {
 	
 	@GetMapping("/qna") //묻고답하기 게시판
 	public String qnaboard() {
+		
 		return "qnaboard";
 	}
 	

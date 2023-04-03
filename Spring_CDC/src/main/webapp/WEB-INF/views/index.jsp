@@ -174,7 +174,7 @@
 	                <img src="<c:url value="/resources/img/index/slide02.jpg"/>">
 	            </div>
 	            <div class="slide_banner fade">
-	                <img src="<c:url value="/resources/img/index/slide03.jpg"/>">
+	                <img src="<c:url value="/resources/img/index/slide03_1.jpg"/>">
 	            </div>
 	
 	            <a class="prev" onclick="prevbannerSlide()">&#10094;</a>
