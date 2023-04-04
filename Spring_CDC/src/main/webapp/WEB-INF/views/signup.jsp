@@ -49,7 +49,7 @@
     	function chkemail(){
     		var v = document.getElementById('maskemail').value;
             if(v){
-                window.open("chkemail?email="+v,'_blank','width=500,height=300,top=200,left=200');
+                window.open("chkemail?email="+v,'_blank','width=500,height=300,top=230,left=1050');
             }
             else{
                 alert("이메일을 입력해주세요.");
@@ -57,11 +57,12 @@
     	}
 
         function emaildecide(){
+        	document.getElementById('email').value = documnet.getElementById('maskemail').value;
             document.getElementById('maskemail').disabled =true;
             document.getElementById('emailchk').value = "이메일 변경";
             document.getElementById('emailchk').setAttribute("onclick","emailchange()");
             onjoin();
-            document.getElementById('email').value = documnet.getElementById('maskemail').value;
+            
         }
 
         function emailchange(){
@@ -74,7 +75,7 @@
     	function chkname(){            
     		var v = document.getElementById('maskname').value;
             if(v){
-                window.open("chkname?name="+v,'_blank','width=500,height=300,top=200,left=200');
+                window.open("chkname?name="+v,'_blank','width=500,height=300,top=230,left=1050');
             }
             else{
                 alert("닉네임을 입력해주세요.");
@@ -82,11 +83,11 @@
     	}
 
         function namedecide(){
+        	document.getElementById('name').value = documnet.getElementById('maskname').value;
             document.getElementById('maskname').disabled =true;
             document.getElementById('namechk').value = "닉네임 변경";
             document.getElementById('namechk').setAttribute("onclick","namechange()");
-            onjoin();
-            document.getElementById('name').value = documnet.getElementById('maskname').value;
+            onjoin();            
         }
 
         function namechange(){
@@ -196,14 +197,34 @@
                         <label for="a_agree" class="s_pointer"><a href="#">이용약관 동의<span class="a_as">[필수]</span></a></label>
                         <input type="checkbox"  id="a_agree" name="agree" class="a_agree_input s_pointer" onclick="checkselectAll()">                        
                     </div>
-                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">나중에 이용약관 넣을 것
+                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">
+제 1장 총칙
+제 1 조 (목적)
+본 약관은 (주)인벤(이하 "회사"라 합니다)이 제공하는 인터넷 서비스(이하 "서비스"라 합니다)의 이용과 관련하여 회사와 회원의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다.
+
+제 2 조 (용어의 정의)
+본 약관에서 사용하는 주요한 용어의 정의는 다음과 같습니다.
+
+①회원 : 회사와 서비스 이용 계약을 체결하고 회원 아이디(ID)를 부여 받은 자를 말합니다.
+②아이디 : 회원의 식별과 회원의 서비스 이용을 위하여 회원이 선정하고 회사가 승인하는 문자나 숫자 혹은 그 조합을 말합니다(이하"ID"라 합니다).
+③비밀번호 : 회원이 부여 받은 ID와 일치된 회원임을 확인하고, 회원 자신의 비밀을 보호하기 위하여 회원이 정한 문자와 숫자의 조합을 말합니다.
+④닉네임 : 서비스 이용을 위하여 회원이 선정하고 회사가 승인한 문자나 숫자 혹은 그 조합으로 서비스 이용 시 회원을 구분하고 지칭하고 나타내는 명칭을 말합니다.
+⑤이용제한 : 회사가 약관에 의거하여 회원의 서비스 이용을 제한하는 것을 말하며, 일정 기간 서비스 이용 중지, 영구적인 서비스 이용 중지, 서비스 중 일부에 대한 이용 중지를 포함합니다.
+⑥포인트 : 각 회원에게 부여되는 점수로 서비스 내에서의 활동 정도 및 서비스의 이용에 따라 증감되는 수치를 말합니다.
+제 3 조 (약관의 효력 및 변경)
                     </textarea>
                     <br>
                     <div class="b_agree_box">
                         <label for="b_agree" class="s_pointer"><a href="#">개인정보 수집 및 이용 동의<span class="b_as">[필수]</span></a></label>
                         <input type="checkbox"  id="b_agree" name="agree" class="b_agree_input s_pointer" onclick="checkselectAll()" >
                     </div>
-                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">나중에 개인정보 수집 및 이용 동의 넣을 것
+                    <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">
+1. 개인정보 수집에 대한 동의
+회사는 이용자로부터 개인정보 수집에 대한 동의를 받고 있습니다. 회사는 회원 가입 절차에서 개인정보 처리방침과 이용 약관에 대한 동의 절차를 마련하고 있으며, 이용자가 동의를 선택하여 클릭하면 개인정보 수집에 대해 동의한 것으로 간주합니다.
+
+2. 개인정보의 수집 및 이용
+① 이용자가 게시물 작성, 이벤트 참여, 사이트 기능 이용 등의 서비스를 이용하기 위하여 회원가입을 신청할 경우, 회사는 서비스 이용을 위해 필요한 최소한의 개인정보를 수집합니다.
+② 개인정보 수집 및 이용에 대한 자세한 정보는 아래와 같습니다.
                     </textarea>
                     <br>
                     <div class="sign_submit">
