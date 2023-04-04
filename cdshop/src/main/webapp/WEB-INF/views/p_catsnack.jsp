@@ -78,7 +78,7 @@
                             <a class="cate" href="<c:url value="/mypage/cart"/>"><span class="text">장바구니</span></a>
                         </li>
                         <li class="catelist">
-                            <a class="cate" href="<c:url value="/mypage/order"/>"><span class="text">주문목록</span></a>
+                            <a class="cate" href="<c:url value="/order/list"/>"><span class="text">주문목록</span></a>
                         </li>
                     </ul>
                 </div>

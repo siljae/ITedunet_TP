@@ -1,5 +1,6 @@
 package com.springmvc.domain;
 
+import java.util.List;
 
 public class cartDTO {
    
@@ -9,6 +10,8 @@ public class cartDTO {
    private int price;
    private int quantity;
    private String tfilename;
+   private List<cartitemDTO> cartitem;
+   
    public int getCartId() {
       return cartId;
    }
@@ -45,7 +48,13 @@ public class cartDTO {
    public void setTfilename(String tfilename) {
       this.tfilename = tfilename;
    }
-
+	public List<cartitemDTO> getCartitem() {
+		return cartitem;
+	}
+	public void setCartitem(List<cartitemDTO> cartitem) {
+		this.cartitem = cartitem;
+	}
+   
    
       
    

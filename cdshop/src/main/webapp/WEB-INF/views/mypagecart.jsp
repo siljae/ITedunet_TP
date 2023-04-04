@@ -33,21 +33,21 @@
     }
     //장바구니 전체 삭제 (name 찾아서 일칠하는거 삭제)
     function chkForm(){
-    	let name = "${name}";
-    	const ischk = document.getElementById('allproduct').checked;
-    	if(ischk == true){
-    		return location.href="./alldelete?name="+name;
-    	}
-    	else {
-    		alert("전체체크를 해주세요")
-    			return false;
-    	}
+       let name = "${name}";
+       const ischk = document.getElementById('allproduct').checked;
+       if(ischk == true){
+          return location.href="./alldelete?name="+name;
+       }
+       else {
+          alert("전체체크를 해주세요")
+             return false;
+       }
     }
     
     // 장바구니 개별삭제
     function deleteConfirm(id){
-    	if(confirm("삭제합니다 !") == true) location.href="./delete?id="+id;
-    	else return;
+       if(confirm("삭제합니다 !") == true) location.href="./delete?id="+id;
+       else return;
     }
     
     /* window.onload = function(){
@@ -85,7 +85,7 @@
                         </a>
                     </li>
                     <li class="my_left_li3">
-                        <a href="<c:url value="/mypage/order"/>">
+                        <a href="<c:url value="/order/list"/>">
                             <label for="msb2">
                                 <span>주문목록</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -120,7 +120,7 @@
                        </div>
                     </div>
                     <c:forEach items="${cartlist}" var="item">
-                    	<div>
+                       <div>
                             <div class="product_list">                    
                                     <div class="product_img">
                                         <img src="./img/cart/${item.tfilename}" alt="product">
@@ -139,14 +139,13 @@
                                                <p> 수량 : </p>
                                                <form name="qntform" method="post" action="/cart/update">
                                                 <div class="quan_inbox">
-                                                    	<input name="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
-                                                    	<input type="hidden" value="${item.productId}" name="ProductId" class="uplodeid">
-                                                    	
+                                                       <input name="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
+                                                       <input type="hidden" value="${item.productId}" name="ProductId" class="uplodeid">
                                                 </div>
                                                 <button type="submit" class="updatebnt" >변경</button>
                                                 </form>
                                                 <div class="allprice">
-                                                	합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
+                                                   합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
                                                 </div>
                                             </div>                                           
                                             <div class="quandel"><a href="<c:url value = "javascript:deleteConfirm('${item.productId}')"/>">삭제</a></div>    
@@ -171,8 +170,8 @@
                                 <input type="hidden" id="totalPrice" value="[total price]">
                             </div>
                             <div class="orderbnt_bnt">
-                            	<button type="button" class="orderbnt">주문하기</button>
-                        	</div>
+                               <button type="button" class="orderbnt">주문하기</button>
+                           </div>
                         </div>
                     </div>
                 </div>
@@ -216,28 +215,39 @@
     }
     updateOrderPrice();
     document.body.appendChild(totalPriceElem);
-
     
     </script>
     <script>
-    	document.querySelector('.orderbnt').addEventListener('click', () => {
-        const chkbox = document.getElementsByName('chk');
-        let selectedItems = [];
+    document.querySelector('.orderbnt').addEventListener('click', function() {
+         // 선택된 체크박스의 productId와 totalPrice 값을 담을 배열
+         var selectedIds = [];
+         var totalPrice = 0;
+         
+         // 체크된 상품들의 productId와 totalPrice 값을 배열에 담는다.
+         document.querySelectorAll('.product_desc_t input[type="checkbox"]:checked').forEach(function(checkbox) {
+           var productId = checkbox.parentElement.querySelector('h3').textContent;
+           var price = parseFloat(checkbox.parentElement.querySelector('.price').value);
+           var quantity = parseInt(checkbox.parentElement.querySelector('.totalcount_input').value);
+           var totalprice = price * quantity;
+           
+           selectedIds.push(productId);
+           totalPrice += totalprice;
+         });
+         
+         // 선택된 상품이 없을 경우 alert 메시지 출력
+         if(selectedIds.length === 0) {
+           alert('선택된 상품이 없습니다.');
+           return;
+         }
+         
+         // 선택된 상품들의 productId와 totalPrice 값을 쿼리스트링으로 전달하여 페이지 이동
+         var url = '/order/add?list='+selectedIds;
+         /* url += '?productId=' + encodeURIComponent(selectedIds.join(',')); */
+         url += '&totalPrice=' + encodeURIComponent(totalPrice);
+         
+         location.href = url;
+       });
 
-        for (let i = 0; i < chkbox.length; i++) {
-            if (chkbox[i].checked) {
-            let productId = chkbox[i].value;
-            let quantity = parseInt(document.getElementsByClassName(`it_quan`).value);
-            selectedItems.push({ productId, quantity });
-            }
-        }
-
-        if (selectedItems.length > 0) {
-            const xhr = new XMLHttpRequest();
-            xhr.open("POST", window.location.href = "/mypage/order");
-            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-            xhr.send(JSON.stringify(selectedItems));
-        }
     </script>
 </body>
 </html>

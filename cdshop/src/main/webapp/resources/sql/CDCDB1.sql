@@ -3,7 +3,7 @@ create database cdcdb default character set utf8 collate utf8_general_ci;
 use cdcdb;
 create table member
 (
-	m_num int not null auto_increment,
+    m_num int not null auto_increment,
     m_email varchar(50) not null,
     m_name varchar(6) not null ,
     m_pw varchar(20) not null,
@@ -24,7 +24,7 @@ insert into member values(null, "seoh@naver.com", "서현", "1234", "010-3012-52
 create table product
 (
     p_num int not null auto_increment,
-	p_id varchar(10) not null,
+    p_id varchar(10) not null,
     p_name varchar(30) not null,
     p_category varchar(10) not null,
     p_titlement varchar(30) not null,
@@ -63,28 +63,34 @@ select * from product;
 
 create table buy
 (
-	b_num int not null auto_increment,
+    b_num int not null auto_increment,
+    o_num varchar(20) not null,
     p_id varchar(10) not null,
     m_name varchar(6) not null,
     b_qnt int not null,
-    b_date timestamp default now(),
-    b_total_price int not null,
+    b_date varchar(20) not null,
+    b_orderprice int not null,
     p_tfilename varchar(100) not null,
+    p_price int not null,
     primary key(b_num),
-    foreign key(p_id) references product(p_id),
     foreign key(m_name) references member(m_name)
 );
+
 drop table buy;
+select * from buy;
+select b_date from buy where m_name="서현" group by b_date;
+select o_num from buy where m_name="서현" group by o_num;
+
+
 create table cart
 (
-	ca_id int not null auto_increment,
+    ca_id int not null auto_increment,
     m_name varchar(6) not null,
     p_id varchar(10) not null ,
     p_unitprice int not null,
     ca_qnt int not null,
     p_tfilename varchar(100) not null,
     primary key(ca_id),
-    unique key(ca_qnt),
     unique key(p_id),
     foreign key(m_name) references member(m_name)
 );
@@ -94,7 +100,7 @@ drop table cart;
 
 create table commuboard
 (
-	cb_num int not null auto_increment,
+   cb_num int not null auto_increment,
     m_name varchar(6) not null,
     cb_board_type varchar(6) not null,
     cb_animal_type varchar(10) not null,
@@ -109,7 +115,7 @@ create table commuboard
 
 create table recom
 (
-	recom_num int auto_increment,
+   recom_num int auto_increment,
     m_name varchar(6) not null,
     cb_num int not null,
     recom_chk int default 0,
@@ -123,7 +129,7 @@ drop table recom;
 
 create table reply
 (
-	r_num int not null auto_increment,
+   r_num int not null auto_increment,
     m_name varchar(6) not null,
     r_content text not null,
     r_date date not null,
@@ -133,7 +139,7 @@ create table reply
 
 create table chat
 (
-	c_num int not null auto_increment,
+   c_num int not null auto_increment,
     m_name varchar(6) not null,
     c_content text not null,
     c_date date not null,

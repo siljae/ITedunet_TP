@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="my_left_li3">
-                        <a href="<c:url value="/mypage/order"/>">
+                        <a href="<c:url value="/order/list"/>">
                             <label for="msb2">
                                 <span>주문목록</span>
                                 <i class="fas fa-chevron-right"></i>
