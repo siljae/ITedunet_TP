@@ -193,6 +193,7 @@ create table noticeboard(
     primary key(nb_num),
     foreign key(m_name) references member(m_name)
 );
+select*from noticeboard;
 drop table noticeboard;
 create table eventboard(
    eb_num int not null auto_increment,
@@ -206,7 +207,9 @@ create table eventboard(
     primary key(eb_num),
     foreign key(m_name) references member(m_name)
 );
-
+insert into noticeboard(m_name, nb_board_type, nb_title, nb_content, nb_regist_day, nb_hit) values('admin','공지사항','첫번째','내용','2023/04/04 10:10:10',0);
+select*from noticeboard;
+select*from eventboard;
 create table hosreviewboard(
    hvb_num int not null auto_increment,
     m_name varchar(6) not null,

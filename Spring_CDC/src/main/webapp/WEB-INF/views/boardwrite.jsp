@@ -61,6 +61,36 @@
                 }
             }
         }
+
+        function chkboardtype() {
+          const boardType = document.getElementById("board_type").value;
+          const animalType = document.getElementById("conoption");
+          
+          if (boardType === "notice" || boardType === "event") {
+            animalType.disabled = true; // 비활성화
+          } else {
+            animalType.disabled = false; // 활성화
+          }
+        }
+	    
+	    function chkForm(){
+           
+            let btype = document.getElementById('board_type').value;
+            let atype = document.getElementById('conoption').value;
+            if(btype == "none"){
+                alert("게시판을 선택해주세요!");
+                return false;
+            }
+            if(btype == "notice" || btype == "event"){
+                return true;
+            }
+            if(atype == "none"){
+                alert("반려동물을 선택해주세요!");
+                return false;
+            }
+            return true;
+        }
+
     </script>
 </head>
 <body>
@@ -74,7 +104,7 @@
                     </div>
                     <hr class="hrline">
                     <div id="write_area">
-                        <form:form modelAttribute="board" enctype="multipart/form-data" action="./boardwrite" method="post" onsubmit="return chkForm()">
+                        <form:form modelAttribute="board" enctype="multipart/form-data" action="${pageContext.request.contextPath}/boardwrite" method="post" onsubmit="return chkForm()">
                         	<input type="hidden" name="name" value="${name }"/>
                         	<div class="selectbox">
                         		<form:select path="board_type" class="board_type" id="board_type" onchange="chkboardtype()">
@@ -83,15 +113,16 @@
                         			<form:option value="qna">Q&A</form:option>
                         			<c:if test="${level == 2 }">
                         				<form:option value="notice">공지사항</form:option>
-                        			</c:if>
-                        			<form:option value="event">이벤트</form:option>
+                                        <form:option value="event">이벤트</form:option>
+                        			</c:if>                        			
                         			<form:option value="hosreview">후기에요</form:option>
                         		</form:select>
                         		<form:select path="animal_type" id="conoption">
                                     <option id="opdefult" value="none">반려동물을 선택해주세요</option>                             
                                     <form:option value="cat">[고양이]</form:option>
                                     <form:option value="dog">[강아지]</form:option>
-                                </form:select>                                
+                                </form:select>
+                                <input type="hidden" name="animal_type" disabled="true">
                         	</div>
                             <div id="in_title">
                                 <p class="titletxt">제목</p>                                

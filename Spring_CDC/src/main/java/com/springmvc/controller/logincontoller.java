@@ -22,7 +22,7 @@ import com.springmvc.service.MemberService;
 @RequestMapping("/login")
 public class logincontoller {
 	@Autowired
-	private MemberService mr;
+	private MemberService ms;
 	
 	@RequestMapping //로그인 메인페이지
 	public String login(@ModelAttribute("member") memberDTO member){
@@ -36,13 +36,13 @@ public class logincontoller {
 	
 	@PostMapping("/loginchk")	//로그인기능
 	public String loginchk(@ModelAttribute("member")memberDTO member, HttpSession session, RedirectAttributes ra) {
-		String view = mr.chklogin(member.getEmail(), member.getPw(), session, ra);		
+		String view = ms.chklogin(member.getEmail(), member.getPw(), session, ra);		
 		return view;
 	}
 	
 	@GetMapping("/logout")	//로그아웃 기능
 	public String logout(HttpSession session) {
-		mr.logout(session);
+		ms.logout(session);
 		return "redirect:/home";
 	}
 	
@@ -53,7 +53,7 @@ public class logincontoller {
 	
 	@PostMapping("/signup") //회원가입 기능
 	public String submitsignup(@ModelAttribute("member") memberDTO member, Model model) throws Exception {
-		mr.join(member, model);		
+		ms.join(member, model);		
 		return "login";
 	}	
 
@@ -67,7 +67,7 @@ public class logincontoller {
 	@PostMapping("/chkemail") //이메일 중복체크하고 와서 값 넘겨주기
 	public String chkemail2(HttpServletRequest req, Model model) {
 		model.addAttribute("email", req.getParameter("email"));
-		mr.chkemail(model);
+		ms.chkemail(model);
 		return "check_email";
 	}
 	
@@ -80,7 +80,7 @@ public class logincontoller {
 	@PostMapping("/chkname") //닉네임 중복체크하고 와서 값 넘겨주기
 	public String chkname2(HttpServletRequest req, Model model) {
 		model.addAttribute("name",req.getParameter("name"));
-		mr.chkname(model);
+		ms.chkname(model);
 		return "check_name";
 	}
 	

@@ -12,13 +12,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.springmvc.domain.boardDTO;
 import com.springmvc.service.BoardService;
+import com.springmvc.service.HosService;
+import com.springmvc.service.NoticeService;
 
 @Controller
 @RequestMapping("/")
  public class homecontroller {
 	
 	@Autowired
-	BoardService br;
+	BoardService bs;
+	
+	@Autowired
+	NoticeService ns;
+	
+	@Autowired
+	HosService hs;
 
 	@RequestMapping
 	public String index() {
@@ -35,8 +43,14 @@ import com.springmvc.service.BoardService;
 	
 	@PostMapping("/boardwrite")	//게시글 등록
 	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {
-		br.writeboard(board,req);
-		
-		return "redirect:/index";
+		if(board.getBoard_type().equals("commu") || board.getBoard_type().equals("qna")) {
+			bs.writeboard(board,req);
+		}
+		else if(board.getBoard_type().equals("notice") || board.getBoard_type().equals("event")) {
+			ns.writeboard(board, req);
+		}
+		else {
+		}
+		return "redirect:/home";
 	}
 }

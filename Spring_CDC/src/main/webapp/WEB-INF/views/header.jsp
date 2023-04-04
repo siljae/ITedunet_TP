@@ -147,7 +147,7 @@ nav {
 						<div class="circle"></div>
 					</li>
 					<li class="nav_notice">
-						<a href="<c:url value="/notice"/>">캣독마당</a>
+						<a href="<c:url value="/notice/1"/>">캣독마당</a>
 						<div class="circle"></div>
 					</li>
 					<li class="nav_hospital">
@@ -191,7 +191,7 @@ nav {
 									<li><a href="<c:url value="/hospital/reviews"/>">우리동네병원 관리</a></li>
 									<li><a href="<c:url value="/mypage/mgnmember"/>">회원 관리</a></li>
 									<li><a href="#">SHOP 관리</a></li>
-									<li><a href="<c:url value="/board/boardwrite"/>">글쓰기</a></li>
+									<li><a href="<c:url value="/boardwrite"/>">글쓰기</a></li>
 									<li><a href="<c:url value="/login/logout"/>">로그아웃</a></li>
 								</ul>
 							</div>

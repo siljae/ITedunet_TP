@@ -188,19 +188,19 @@
             <h1>바로가기</h1>
             <ul class="linkbox">
                 <li class="linkimgbox">
-                    <a href="#">
+                    <a href="<c:url value="/board/commu/1"/>">
                         <img class="linkimg" src="<c:url value="/resources/img/index/commuicon.png"/>" alt="커뮤니티">
                         <span class="linkspan">우리아이자랑</span>
                     </a>
                 </li>
                 <li class="linkimgbox">
-                    <a href="#">
+                    <a href="<c:url value="/notice/1"/>">
                         <img class="linkimg" src="<c:url value="/resources/img/index/noticeicon.png"/>" alt="공지사항">
                         <span class="linkspan">공지사항</span>
                     </a>
                 </li>
                 <li class="linkimgbox">
-                    <a href="#">
+                    <a href="<c:url value="/hospital"/>">
                         <img class="linkimg" src="<c:url value="/resources/img/index/hosicon.png"/>" alt="병원">
                         <span class="linkspan">우리동네병원</span>
                     </a>
@@ -227,7 +227,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/1.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -238,7 +238,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/2.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -249,7 +249,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/3.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -260,7 +260,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/4.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -283,7 +283,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/21.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -294,7 +294,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/22.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -305,7 +305,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/23.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -316,7 +316,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/24.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -339,7 +339,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/31.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -350,18 +350,18 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/32.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
                         <h3>댕댕이</h3>
-                        <a href="#">우리 애 땅콩 뗀 날</a>
+                        <a href="#">우리 애는 물어요</a>
                     </div>
                 </li>
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/33.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -372,7 +372,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/testimg.png"/>">
+                            <img src="<c:url value="/resources/img/index/34.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">

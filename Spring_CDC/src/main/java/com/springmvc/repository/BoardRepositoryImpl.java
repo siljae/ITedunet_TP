@@ -139,7 +139,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		
 	}
 	
-	//자랑해요, Q&A 게시판 게시글 가져오기
+	//자랑해요, Q&A 전체 게시글 가져오기
 	@Override
 	public List<boardDTO> getallboardlist(pageDTO page){
 		int start = page.getCri().getpagestart();
@@ -168,7 +168,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return allboardlist;
 	}
 
-	//자랑해요 게시글 가져오기
+	//자랑해요 전체 게시글 가져오기
 	@Override
 	public List<boardDTO> getcommuboardlist(pageDTO page) {
 		int start = page.getCri().getpagestart();
@@ -184,7 +184,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return boardlist;
 	}
 	
-	//Q&A 게시글 가져오기
+	//Q&A 전체 게시글 가져오기
 	@Override
 	public List<boardDTO> getqnaboardlist(pageDTO page){
 		int start = page.getCri().getpagestart();
@@ -310,7 +310,6 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	}
 	
 	//게시글 접속시간-작성시간 비교하는 기능
-	@Override
 	public String caltime(String time) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		String x="";
@@ -467,7 +466,7 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 				}
 			}
 			String insertsql;
-			if(board.getBoard_type().equals("commu")) {
+			if(board.getBoard_type().equals("자랑해요")) {
 				String deletesql = "delete from boardfile where board_type=? and cb_num=?";
 				template.update(deletesql, board.getBoard_type(), board.getNum());
 				
@@ -518,19 +517,33 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	
 	//자랑해요 게시글 제목이나 내용으로 검색하기
 	@Override
-	public List<boardDTO> getcommusearch(String content,pageDTO page) {
+	public List<boardDTO> getcommusearch(String content, pageDTO page) {
 		int start = page.getCri().getpagestart();
 		String sql = "select*from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%' order by cb_num desc limit "+start+","+page.getCri().getAmount();
 		List<boardDTO> boardlist = template.query(sql, new BoardMapper());
+		
+		for(boardDTO board : boardlist) {
+			board.setCalregist(caltime(board.getRegist_day()));
+			String filesql = "select * from boardfile where board_type=? and cb_num=?";
+			List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+			board.setFiles(files);
+		}
 		return boardlist;		
 	}
 	
 	//Q&A 게시글 제목이나 내용으로 검색하기
 	@Override
-	public List<boardDTO> getqnasearch(String content,pageDTO page) {
+	public List<boardDTO> getqnasearch(String content, pageDTO page) {
 		int start = page.getCri().getpagestart();
 		String sql = "select*from qnaboard where qb_title like '%"+content+"%' or qb_content like '%"+content+"%' order by qb_num desc limit "+start+","+page.getCri().getAmount();
 		List<boardDTO> boardlist = template.query(sql, new BoardMapper());
+		
+		for(boardDTO board : boardlist) {
+			board.setCalregist(caltime(board.getRegist_day()));
+			String filesql = "select * from boardfile where board_type=? and qb_num=?";
+			List<fileDTO> files = template.query(filesql, new FileMapper(), board.getBoard_type(), board.getNum());
+			board.setFiles(files);
+		}
 		return boardlist;		
 	}
 	
@@ -643,10 +656,8 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 	public int getallsearchcount(String content) {
 		String sql = "select count(*) from commuboard where cb_title like '%"+content+"%' or cb_content like '%"+content+"%'";
         int total_recond = template.queryForObject(sql, Integer.class);
-        System.out.println("전체게시글(자랑해요게시판만): "+total_recond);
         sql = "select count(*) from qnaboard where qb_title like '%"+content+"%' or qb_content like '%"+content+"%'";
         total_recond += template.queryForObject(sql, Integer.class);
-        System.out.println("전체게시글(자랑해요+Q&A): "+total_recond);
         return total_recond;
 	}
 	

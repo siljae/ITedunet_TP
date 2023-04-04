@@ -57,103 +57,102 @@
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
-        <div class="view_head">
-            <h1><a href="<c:url value="/board/1"/>" >전체</a></h1>
-            <h1><a href="<c:url value="/board/commu/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">자랑해요</a></h1>
-            <h1><a href="<c:url value="/board/qna/1"/>">Q&A</a></h1>
-            <h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
+    <div class="view_head">
+        <h1><a href="<c:url value="/board/1"/>" >전체</a></h1>
+        <h1><a href="<c:url value="/board/commu/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">자랑해요</a></h1>
+        <h1><a href="<c:url value="/board/qna/1"/>">Q&A</a></h1>
+        <h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
+    </div>
+    <div class="container">
+        <div class="view_tag">
+            <img src="<c:url value="/resources/img/board/${board.tagsrc }"/>">
+            <div>${board.tagvalue }</div>
         </div>
-        <div class="container">
-            <div class="view_tag">
-            	<img src="<c:url value="/resources/img/board/${board.tagsrc }"/>">
-                <div>${board.tagvalue }</div>
-            </div>
-            <div>
-                <div class="write_head">
-                    <h2>${board.title }</h2>                  
-                    <c:if test="${board.name == name || level == 2 }">                                       
-                    <div>
-                        <button class="btn" onclick="write_update()">수정</button>
-                        <button class="btn" onclick="write_delete()">삭제</button>
-                    </div>
-                    </c:if>
+        <div>
+            <div class="write_head">
+                <h2>${board.title }</h2>                  
+                <c:if test="${board.name == name || level == 2 }">                                       
+                <div>
+                    <button class="btn" onclick="write_update()">수정</button>
+                    <button class="btn" onclick="write_delete()">삭제</button>
                 </div>
-                <hr>
-                <div class="write_postbox">
-                    <div class="postbox_user">
-                        <button onclick="chat_show()">
-                            ${board.name }                        
-                            <div id="chat" class="chat">
+                </c:if>
+            </div>
+            <hr>
+            <div class="write_postbox">
+                <div class="postbox_user">
+                    <button onclick="chat_show()">
+                        ${board.name }                        
+                        <div id="chat" class="chat">
+                            <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
+                        </div>
+                    </button>
+                    <p class="postbox_date">${board.regist_day }</p>
+                </div>
+                <p class="postbox_text">${board.content }</p>
+                <c:if test="${board.files != null && !empty board.files}">
+                <div class="postbox_imgbox">
+                    <c:forEach items="${board.files }" var="file">
+                    <div class="postbox_img">
+                        <img src="<c:url value="/resources/img/board/${file.filename }"/>">
+                    </div>
+                    </c:forEach>
+                </div>
+                </c:if>
+                <c:choose>
+                <c:when test="${name != null }">
+                    <div>
+                        <button class="recom" id="recom"  onclick="recom()">
+                            <i class="far fa-thumbs-up"></i>
+                            <span>${board.recom }</span>
+                        </button>
+                    </div>
+                </c:when>
+                <c:otherwise>
+                    <div>
+                        <button class="recom" id="recom">
+                            <i class="far fa-thumbs-up"></i>
+                            <span>${board.recom }</span>
+                        </button>
+                    </div>
+                </c:otherwise>
+                </c:choose>                
+            </div>
+            <div class="replybox">
+                <h2>댓글</h2>
+                <ul>
+                    <li>
+                        <div class="re_user_id">
+                            <div>찌무맘</div>
+                            <div class="rechat">
                                 <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
                             </div>
-                        </button>
-                        <p class="postbox_date">${board.regist_day }</p>
-                    </div>
-                    <p class="postbox_text">${board.content }</p>
-                    <c:if test="${board.files != null && !empty board.files}">
-                    <div class="postbox_imgbox">
-                        <c:forEach items="${board.files }" var="file">
-                        <div class="postbox_img">
-                            <img src="<c:url value="/resources/img/board/${file.filename }"/>">
                         </div>
-                        </c:forEach>
-                    </div>
-                    </c:if>
-                    <c:choose>
-                    <c:when test="${name != null }">
-	                    <div>
-	                        <button class="recom" id="recom"  onclick="recom()">
-	                            <i class="far fa-thumbs-up"></i>
-	                            <span>${board.recom }</span>
-	                        </button>
-	                    </div>
-                   	</c:when>
-                   	<c:otherwise>
-	                    <div>
-	                        <button class="recom" id="recom">
-	                            <i class="far fa-thumbs-up"></i>
-	                            <span>${board.recom }</span>
-	                        </button>
-	                    </div>
-                    </c:otherwise>
-                    </c:choose>                
-                </div>
-                <div class="replybox">
-                    <h2>댓글</h2>
-                    <ul>
-                        <li>
-                            <div class="re_user_id">
-                                <div>찌무맘</div>
-                                <div class="rechat">
-                                    <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
-                                </div>
+                        <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
+                        <div class="re_date">2022/02/07 11:12</div>
+                        <div class="re_btn">
+                            <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
+                            <c:if test="${name == board.name || level == 2}">
+                                <button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
+                            </c:if>
+                        </div>
+                        <div class="hr"></div>
+                    </li>
+                </ul>
+                <div>
+                    <form action="#" method="post">
+                        <!-- 아래 input에 유저아이디를 담아야됨 -->
+                        <input type="hidden" name="user_id">
+                        <div class="reply_input_box">
+                            <textarea >댓글내용</textarea>
+                            <div class="inputbox">
+                                <input type="submit" value="등록">
                             </div>
-                            <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
-                            <div class="re_date">2022/02/07 11:12</div>
-                            <div class="re_btn">
-                                <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
-                                <c:if test="${name == board.name || level == 2}">
-                                	<button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
-                                </c:if>
-                            </div>
-                            <div class="hr"></div>
-                        </li>
-                    </ul>
-                    <div>
-                        <form action="#" method="post">
-                            <!-- 아래 input에 유저아이디를 담아야됨 -->
-                            <input type="hidden" name="user_id">
-                            <div class="reply_input_box">
-                                <textarea >댓글내용</textarea>
-                                <div class="inputbox">
-                                    <input type="submit" value="등록">
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
+    </div>
 </body>
 </html>

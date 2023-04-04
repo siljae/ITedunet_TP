@@ -1,5 +1,8 @@
 package com.springmvc.domain;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class criteria {
 	private int pagenum;	//현재 페이지
 	private int amount;		//페이지에 표시할 게시글 갯수

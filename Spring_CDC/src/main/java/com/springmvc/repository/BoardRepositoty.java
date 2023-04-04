@@ -21,8 +21,6 @@ public interface BoardRepositoty {
 	public List<boardDTO> getsortcommuboardlist(pageDTO page, String sort);
 	//Q&A 게시글 정렬 기능
 	public List<boardDTO> getsortqnaboardlist(pageDTO page, String sort);
-	//게시글 작성시간 비교하는 기능
-	public String caltime(String time);
 	//자랑해요 게시글 상세페이지 가져오기 기능
 	public boardDTO getcommuboardview(int num, HttpServletRequest req);
 	//Q&A 게시글 상세페이지 가져오기 기능

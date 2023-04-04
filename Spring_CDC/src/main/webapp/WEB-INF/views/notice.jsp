@@ -14,14 +14,14 @@
 <body>
 	<jsp:include page="./header.jsp"/>
 	<div class="com_name">
-		<h1><a href="<c:url value="/notice"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">공지사항</a></h1>
-		<h1><a href="<c:url value="/notice/event"/>">이벤트</a></h1>
+		<h1><a href="<c:url value="/notice/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">공지사항</a></h1>
+		<h1><a href="<c:url value="/notice/event/1"/>">이벤트</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                	<form action="<c:url value="/board/search"/>"  method="post" style="width:70%">
+                	<form action="<c:url value="/notice/search"/>"  method="post" style="width:70%">
 	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
 	                    <button class="button" type="submit" >
 	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
@@ -33,9 +33,14 @@
         <hr class="borderline">
         <div class="loungebox">
             <div class="filterbox">
-                <div class="writebox">
-                    <a href="./commuwrite.action" class="write">글쓰기</a>
+                <div class="filterbt">
+                    <h1>공지사항</h1>
                 </div>
+                <c:if test="${name != null && level == 2 }">
+                <div class="writebox">                	
+                   	<a href="<c:url value="/boardwrite"/>" class="write">글쓰기</a>                    
+                </div>
+                </c:if>
             </div>
             <div class="loungelist">
                 <div class="conlist">
@@ -44,70 +49,117 @@
                     	<div class="content_2">
                     		<div>
 		                        <div class="colist">
+		                        	<div class="colup">
+		                                <div class="colbt">
+		                                    <div class="cattext1">공지사항</div>
+		                                </div>
+		                            	<div class="colhit">조회수 : ${board.hit }</div>
+	                                </div>
 	                                <div>
-		                                <a href="./view?num=${board.num }&pageNum=" class="coltitle">${board.title }</a>
-		                                <a href="./view?num=${board.num }&pageNum=" class="coltext">${board.content }</a>	                                
+                                        <a href="<c:url value="/notice/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
+                                        <a href="<c:url value="/notice/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>                             
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
+		                            <div class="core1">
+		                                답변 : 1
+		                            </div>
 		                            <div class="renickname">${board.name }</div>
-		                            <div class="retime">조회수 : ${regist_day }</div>
+		                            <div class="retime">작성시간 : ${board.calregist }</div>
 		                        </div>
 	                        </div>
-                        	<c:if test="${board.filename != null }">
+                        	<c:if test="${board.files != null && !empty board.files}">
 		                        <div class="colbox">
-		                        	<a href="./view?num=${board.num }&pageNum=" class="imgbox">
-										<img class="listimg" src="<c:url value="/resources/img/${board.filename }"/>">
-									</a>
+                                    <a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
+                                        <img class="listimg" src="<c:url value='/resources/img/notice/${board.files[0].filename }'/>">
+                                    </a>
 	                        	</div>	
                         	</c:if>                     
                         </div>                        
                         <hr class="listgard">
                     </div>
 					</c:forEach>
-                    <div class="content">
-                    	<div class="content_2">
-                    		<div>
-		                        <div class="colist">
-	                                <div>
-		                                <a href="./notice/view?num=${board.num }&pageNum=" class="coltitle">SHOP 설날 배송 택배사 공지${board.title }</a>
-		                                <a href="./notice/view?num=${board.num }&pageNum=" class="coltext">해피 뉴 이어 !${board.content }</a>	                                
-		                            </div>
-	                            </div>
-	                       	    <div class="coreply">
-		                            <div class="renickname">${board.name }관리자</div>
-		                            <div class="retime">30일전 ${regist_day }</div>
-		                        </div>
-	                        </div>  
-                        </div>                        
-                        <hr class="listgard">
-                    </div>
                 </div>
             </div>
         </div>
+        <c:choose>
+            <c:when test="${search != null }"> <!-- 검색 페이징 -->
+            <ul class="pagebutton">
+                <c:if test="${page.prev }">
+                    <li>
+                        <a href="<c:url value="/notice/search/${search }/1"/>">‹‹</a>
+                    </li>
+                </c:if>
+                <c:if test="${page.cri.pagenum != 1 }">        	
+                    <li class="leftbt">
+                        <a href="<c:url value="/notice/search/${search }/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
+                    </li>
+                </c:if>
+                <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
+                    <li class="active">
+                        <a href="<c:url value="/notice/search/${search }/${i}" />" aria-label="Go to page number 1">
+                            <c:choose>
+                                <c:when test="${page.cri.pagenum==i }">
+                                    <font class="undefined"><b>${i }</b></font>
+                                </c:when>                	
+                                <c:otherwise>
+                                    <font><b>${i }</b></font>
+                                </c:otherwise>
+                            </c:choose>
+                        </a>
+                    </li>
+                </c:forEach>
+                <c:if test="${page.cri.pagenum < page.realend }">
+                    <li>
+                        <a href="/board/commu/${search }/${page.cri.pagenum+1 }" aria-label="Go to after number ">›</a>
+                    </li>
+                </c:if>            
+                <c:if test="${page.next }">
+                    <li>
+                        <a href="<c:url value="/notice/search/${search }/${page.realend }" />">››</a>
+                    </li>
+                </c:if>
+            </ul>
+            </c:when>
+        <c:otherwise>
         <ul class="pagebutton">
-            <li class="leftbt">
-                <a href="#" aria-label="Go to befor page">‹</a>
-            </li>
-            <li class="active">
-                <a class="undefined" href="#" aria-label="Go to page number 1">1</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 2">2</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 3">3</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 4">4</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to page number 5">5</a>
-            </li>
-            <li class>
-                <a href="#" aria-label="Go to after number ">›</a>
-            </li>
+        	<c:if test="${page.prev }">
+            	<li>
+            		<a href="<c:url value="notice/1"/>">‹‹</a>
+            	</li>
+            </c:if>
+        	<c:if test="${page.cri.pagenum != 1 }">        	
+	            <li class="leftbt">
+	                <a href="<c:url value="notice/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
+	            </li>
+            </c:if>
+            <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
+	            <li class="active">
+	            	<a href="<c:url value="/notice/${i}" />" aria-label="Go to page number 1">
+	            		<c:choose>
+		            		<c:when test="${page.cri.pagenum==i }">
+		                		<font class="undefined"><b>${i }</b></font>
+		                	</c:when>                	
+		                	<c:otherwise>
+		                		<font><b>${i }</b></font>
+		                	</c:otherwise>
+	                	</c:choose>
+                	</a>
+	            </li>
+            </c:forEach>
+            <c:if test="${page.cri.pagenum < page.realend }">
+	            <li>
+	                <a href="<c:url value="/notice/${page.cri.pagenum+1 }" />" aria-label="Go to after number ">›</a>
+	            </li>
+            </c:if>            
+            <c:if test="${page.next }">
+            	<li>
+            		<a href="<c:url value="/notice/${page.realend }" />">››</a>
+            	</li>
+            </c:if>
         </ul>
+        </c:otherwise>
+        </c:choose>
     </div>
 	<jsp:include page="footer.jsp"/>
 </body>

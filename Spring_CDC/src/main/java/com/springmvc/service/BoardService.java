@@ -12,9 +12,9 @@ public interface BoardService {
 	public void writeboard(boardDTO board,HttpServletRequest req);
 	//전체 게시글 가져오기 기능
 	public void getallboardlist(Model model,criteria cri);
-	//자랑해요 게시판 전체 게시글 가져오기 기능
+	//자랑해요 전체 게시글 가져오기 기능
 	public void getcommuboardlist(Model model, criteria cri);
-	//Q&A 게시판 전체 게시글 가져오기 기능
+	//Q&A 전체 게시글 가져오기 기능
 	public void getqnaboardlist(Model model, criteria cri);
 	//자랑해요 게시판 정렬 기능
 	public void getsortcommuboardlist(Model model, criteria cri, String sort);

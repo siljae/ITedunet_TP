@@ -20,33 +20,33 @@ import com.springmvc.service.MemberService;
 public class mypagecontroller {
 	
 	@Autowired
-	MemberService mr;
+	MemberService ms;
 
 	@RequestMapping //마이페이지 이동
 	public String mypage(@ModelAttribute("member")memberDTO member, Model model,HttpSession session) {
 		member.setName((String) session.getAttribute("name"));
-		mr.getmemberByname(member, model);
+		ms.getmemberByname(member, model);
 		return "mypagebarrier";
 	}
 	
 	@PostMapping("/mypage")	//개인정보 수정
 	public String updatemypge(@ModelAttribute("member")memberDTO member) {
-		mr.updatemember(member);
+		ms.updatemember(member);
 		return "redirect:/mypage";
 	}
 	
 	@GetMapping("/barrier") //마이페이지의 개인정보수정
 	public String veri(@ModelAttribute("member")memberDTO member, Model model,HttpSession session) {
 		member.setName((String) session.getAttribute("name"));
-		mr.getmemberByname(member, model);
+		ms.getmemberByname(member, model);
 		return "mypagebarrier";
 	}
 	
 	@PostMapping("/barrier")	//개인정보수정 전 한번 더 비밀번호를 입력받아 사용자가 맞는지 확인하는 기능
 	public String chkuser(@ModelAttribute("member")memberDTO member, @RequestParam("chkpw") String chkpw, Model model,HttpSession session) {
 		member.setName((String)session.getAttribute("name"));
-		mr.getmemberByname(member, model);
-		String page = mr.chkuser(member,model,chkpw);
+		ms.getmemberByname(member, model);
+		String page = ms.chkuser(member,model,chkpw);
 		return page;
 	}
 	
@@ -74,7 +74,7 @@ public class mypagecontroller {
 	
 	@GetMapping("/mgnmember")	//회원관리 페이지
 	public String management(Model model) {
-		mr.getallmember(model);		
+		ms.getallmember(model);		
 		//관리자일 때만 올 수 있는 페이지
 		//모든 회원의 정보를 볼 수 있고 특정 회원의 정보를 클릭하면 해당 회원의 정보를 수정하는 페이지로 이동하여 해당 회원의 정보를 수정할 수 있고
 		//삭제도 가능
@@ -84,19 +84,19 @@ public class mypagecontroller {
 	
 	@GetMapping("/mgnview/{num}")	//회원상세보기
 	public String managementview(@ModelAttribute("member") memberDTO member, @PathVariable("num") int num, Model model) {
-		mr.getmemberBynum(num, model);
+		ms.getmemberBynum(num, model);
 		return "managementdetail2";
 	}
 	
 	@PostMapping("/mgnview/{num}")	//회원정보수정
 	public String updatemanagementview(@ModelAttribute("member") memberDTO member, @PathVariable("num") int num, Model model) {
-		mr.updatemember(member);
+		ms.updatemember(member);
 		return "redirect:/mypage/mgnmember";
 	}
 	
 	@GetMapping("/mgndelete/{num}")	//회원 삭제
 	public String deletemanagement(@PathVariable("num")int num) {
-		mr.deletemember(num);
+		ms.deletemember(num);
 		return "redirect:/mypage/mgnmember";
 	}
 	

@@ -40,7 +40,7 @@
                 </div>
                 <c:if test="${name != null }">
                 <div class="writebox">                	
-                   	<a href="<c:url value="/board/boardwrite"/>" class="write">글쓰기</a>                    
+                   	<a href="<c:url value="/boardwrite"/>" class="write">글쓰기</a>                    
                 </div>
                 </c:if>
             </div>

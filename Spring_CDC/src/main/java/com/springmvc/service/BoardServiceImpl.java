@@ -94,7 +94,6 @@ public class BoardServiceImpl implements BoardService {
 	 //자랑해요 게시글 상세 페이지 가져오기
 	@Override
 	public void getcommuboardview(Model model,  HttpServletRequest req) {
-		System.out.println("자랑해요상세");
 		int num =  (int)model.getAttribute("num");
 		boardDTO board = br.getcommuboardview(num, req);
 		br.commuviewhit(num);
@@ -104,7 +103,6 @@ public class BoardServiceImpl implements BoardService {
 	//Q&A 게시글 상세 페이지 가져오기
 	@Override
 	public void getqnaboardview(Model model, HttpServletRequest req) {
-		System.out.println("QnA 상세");
 		int num =  (int)model.getAttribute("num");
 		boardDTO board = br.getqnaboardview(num, req);
 		br.qnaviewhit(num);
@@ -187,8 +185,9 @@ public class BoardServiceImpl implements BoardService {
 		int total = br.getcommusearchcount(content);
 		pageDTO page = new pageDTO(cri, total);
 		List<boardDTO> boardlist = br.getcommusearch(content, page);
-		System.out.println("이전페이지: "+page.isPrev());
-		System.out.println("다음페이지: "+page.isNext());
+		for(boardDTO board : boardlist) {
+			System.out.println("서비스_자랑해요_검색보드: "+board.toString());
+		}
 		model.addAttribute("search",content);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);
@@ -208,10 +207,10 @@ public class BoardServiceImpl implements BoardService {
 	//추천해요 검색 기능
 	@Override
 	public void recomsearch(Model model, String content, criteria cri) {
-		System.out.println("추천해요서비스");
 		int total = br.getrecomcount();
 		pageDTO page = new pageDTO(cri, total);
 		List<boardDTO> boardlist = br.getrecomsearch(content, page);
+		
 		model.addAttribute("search",content);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);

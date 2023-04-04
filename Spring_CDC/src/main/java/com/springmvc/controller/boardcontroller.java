@@ -22,40 +22,45 @@ import com.springmvc.service.BoardService;
 public class boardcontroller {
 	
 	@Autowired
-	BoardService br;
+	BoardService bs;
 
-	@RequestMapping("/") //전체 게시판
+	 //전체 게시판 이동
+	@RequestMapping("/")
 	public String board(Model model,HttpServletRequest req, criteria cri) {
-		br.getallboardlist(model, cri);
+		bs.getallboardlist(model, cri);
 		return "board/";
 	}
 	
-	@GetMapping("/{num}")	//페이징된 전체 게시판
+	//페이징된 전체 게시판 이동
+	@GetMapping("/{num}")
 	public String boardnum(@PathVariable("num")int num, Model model,HttpServletRequest req, criteria cri) {
 		cri.setPagenum(num);
-		br.getallboardlist(model, cri);
+		bs.getallboardlist(model, cri);
 		return "board";
 	}
 	
-	@GetMapping("/commu/{num}") //커뮤니티 게시판 
+	 //커뮤니티 게시판 이동
+	@GetMapping("/commu/{num}")
 	public String commuboard(@PathVariable("num")int num,Model model, criteria cri) {
 		cri.setPagenum(num);
-		br.getcommuboardlist(model, cri);
+		bs.getcommuboardlist(model, cri);
 		return "commuboard";
 	}
 	
-	@GetMapping("/commu/view/{pageNum}/{num}") //자랑해요 게시글 상세 페이지
+	//자랑해요 게시글 상세 페이지
+	@GetMapping("/commu/view/{pageNum}/{num}")
 	public String commuview(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num, Model model, HttpServletRequest req) {
 		model.addAttribute("num",num);
 		model.addAttribute("pageNum",pageNum);
-		br.getcommuboardview(model, req);
+		bs.getcommuboardview(model, req);
 		return "commuboardview";
 	}
 	
-	@GetMapping("/commu/view/{pageNum}/updateboard/{num}") //자랑해요 게시글 수정 페이지
+	//자랑해요 게시글 수정 페이지
+	@GetMapping("/commu/view/{pageNum}/updateboard/{num}") 
 	public ModelAndView updatecommuboardview(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		board = br.getcommuboardByNum(num , req);
+		board = bs.getcommuboardByNum(num , req);
 		mav.addObject("updateboard",board);				
 		mav.addObject("num",num);
 		mav.addObject("pageNum",pageNum);
@@ -63,10 +68,11 @@ public class boardcontroller {
 		return mav;
 	}
 	
-	@GetMapping("/qna/view/{pageNum}/updateboard/{num}") //Q&A 게시글 수정 페이지
+	//Q&A 게시글 수정 페이지
+	@GetMapping("/qna/view/{pageNum}/updateboard/{num}") 
 	public ModelAndView updateqnaboardview(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
 		ModelAndView mav = new ModelAndView();
-		board = br.getqnaboardByNum(num , req);
+		board = bs.getqnaboardByNum(num , req);
 		mav.addObject("updateboard",board);				
 		mav.addObject("num",num);
 		mav.addObject("pageNum",pageNum);
@@ -74,160 +80,166 @@ public class boardcontroller {
 		return mav;
 	}
 	
-	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
+	//게시글 수정 기능
+	@PostMapping("/commu/view/{pageNum}/updateboard/{num}") 
 	public String updatecommuboard(@PathVariable("num") String num,@PathVariable("pageNum") String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
-		br.updatecommuboard(board, req);
+		bs.updatecommuboard(board, req);
 		return "redirect:/board/"+pageNum;
 	}
 	
-	@PostMapping("/qna/view/{pageNum}/updateboard/{num}") //게시글 수정 기능
+	//게시글 수정 기능
+	@PostMapping("/qna/view/{pageNum}/updateboard/{num}") 
 	public String updateqnaboard(@PathVariable("num") String num,@PathVariable("pageNum") String pageNum,@ModelAttribute("updateboard") boardDTO board,Model model,HttpServletRequest req) {
-		br.updateqnaboard(board, req);
+		bs.updateqnaboard(board, req);
 		return "redirect:/board/"+pageNum;
 	}
 	
-	@GetMapping("/commu/view/{pageNum}/deleteboard/{num}")	//자랑해요 게시글 삭제
+	//자랑해요 게시글 삭제
+	@GetMapping("/commu/view/{pageNum}/deleteboard/{num}")	
 	public String deletecommuboard(@PathVariable("num") int num,@PathVariable("pageNum") String pageNum) {
-		br.deletecommuboard(num);
+		bs.deletecommuboard(num);
 		return "redirect:/board/"+pageNum;
 	}
 	
-	@GetMapping("/qna/view/{pageNum}/deleteboard/{num}")	//Q&A 게시글 삭제
+	//Q&A 게시글 삭제
+	@GetMapping("/qna/view/{pageNum}/deleteboard/{num}")	
 	public String deleteqnaboard(@PathVariable("num") int num,@PathVariable("pageNum") String pageNum) {
-		br.deleteqnaboard(num);
+		bs.deleteqnaboard(num);
 		return "redirect:/board/"+pageNum;
 	}
 	
-	@GetMapping("/commu/view/{pageNum}/{num}/{recom}")	//자랑해요 추천기능
+	//자랑해요 추천기능
+	@GetMapping("/commu/view/{pageNum}/{num}/{recom}")	
 	public String commurecom(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num, @PathVariable("recom")String recom,Model model, HttpServletRequest req) {
-		br.commurecom(model, pageNum, num, recom, req);
+		bs.commurecom(model, pageNum, num, recom, req);
 		return "commuboardview";
 	}
 	
-	@GetMapping("/qna/view/{pageNum}/{num}/{recom}")	//Q&A 추천기능
+	//Q&A 추천기능
+	@GetMapping("/qna/view/{pageNum}/{num}/{recom}")	
 	public String qnarecom(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num, @PathVariable("recom")String recom,Model model, HttpServletRequest req) {
-		br.qnarecom(model, pageNum, num, recom, req);
+		bs.qnarecom(model, pageNum, num, recom, req);
 		return "qnaboardview";
 	}
 	
-	@GetMapping("/commu/{sort}/1")	//자랑해요 게시판 정렬 기능
+	//자랑해요 게시판 정렬 기능
+	@GetMapping("/commu/{sort}/1")	
 	public String commusort(@PathVariable("sort")String sort, Model model, criteria cri) {
 		model.addAttribute("sort", sort);
-		br.getsortcommuboardlist(model, cri, sort);
+		bs.getsortcommuboardlist(model, cri, sort);
 		return "commuboard";
 	}
 	
-	@GetMapping("/commu/{sort}/{num}")	//정렬된 자랑해요 게시판 페이징처리
+	//정렬된 자랑해요 게시판 페이징처리
+	@GetMapping("/commu/{sort}/{num}")	
 	public String commusortpage(@PathVariable("sort")String sort, @PathVariable("num")int num, Model model, criteria cri) {
 		cri.setPagenum(num);
 		model.addAttribute("sort",sort);
-		br.getsortcommuboardlist(model, cri, sort);
+		bs.getsortcommuboardlist(model, cri, sort);
 		return "commuboard";
 	}
 	
-	
-	
-	@GetMapping("/qna/{num}") //Q&A 게시판
+	//Q&A 게시판
+	@GetMapping("/qna/{num}") 
 	public String qnaboard(@PathVariable("num")int num, Model model, criteria cri) {
 		cri.setPagenum(num);
-		br.getqnaboardlist(model, cri);
+		bs.getqnaboardlist(model, cri);
 		return "qnaboard";
 	}
 	
-	@GetMapping("/qna/view/{pageNum}/{num}")	//Q&A 게시글 상세 페이지
+	//Q&A 게시글 상세 페이지
+	@GetMapping("/qna/view/{pageNum}/{num}")	
 	public String qnaview(@PathVariable("pageNum") int pageNum,@PathVariable("num") int num,Model model, HttpServletRequest req) {
 		model.addAttribute("num",num);
-		br.getqnaboardview(model, req);
+		bs.getqnaboardview(model, req);
 		return "qnaboardview";
 	}
 	
-	@GetMapping("/boardwrite")	//게시글 작성 페이지
-	public String boardwrite(@ModelAttribute("board") boardDTO board,Model model) {
-		return "boardwrite";
-	}
-	
-	@PostMapping("/boardwrite")	//게시글 등록
-	public String wrtie(@ModelAttribute("board") boardDTO board,Model model,HttpServletRequest req) {
-		br.writeboard(board,req);
-		
-		return "redirect:/board/1";
-	}
-	
-	@PostMapping("/search") //전체게시글 제목 or 내용 검색
+	//전체게시글 제목 or 내용 검색
+	@PostMapping("/search") 
 	public String serach(Model model, HttpServletRequest req, criteria cri) {
 		String content = req.getParameter("content");
-		br.search(model, content, cri);
+		bs.search(model, content, cri);
 		return "board";
 	}
 	
-	@PostMapping("/commu/search")	//자랑해요 게시글 제목 or 내용 검색
+	//자랑해요 게시글 제목 or 내용 검색
+	@PostMapping("/commu/search")	
 	public String commusearch(Model model, HttpServletRequest req, criteria cri) {
 		String content = req.getParameter("content");
-		br.commusearch(model, content, cri);
+		bs.commusearch(model, content, cri);
 		return "commuboard";
 	}
 	
-	@PostMapping("/qna/search")		//Q&A 게시글 제목 or 내용 검색
+	//Q&A 게시글 제목 or 내용 검색
+	@PostMapping("/qna/search")		
 	public String qnasearch(Model model, HttpServletRequest req, criteria cri) {
 		String content = req.getParameter("content");
-		br.qnasearch(model, content, cri);
+		bs.qnasearch(model, content, cri);
 		return "qnaboard";
 	}
 	
-	@GetMapping("/{search}/{pageNum}")	//전체게시판 검색 페이징처리
+	//전체게시판 검색 페이징처리
+	@GetMapping("/{search}/{pageNum}")	
 	public String boardsearch(@PathVariable("search") String search, @PathVariable("pageNum") int pageNum,Model model, criteria cri) {
 		cri.setPagenum(pageNum);
-		br.search(model, search, cri);
+		bs.search(model, search, cri);
 		return "board";
 	}
 	
-	@GetMapping("/commu/search/{search}/{pageNum}")	//자랑해요 게시판 검색 페이징처리
+	//자랑해요 게시판 검색 페이징처리
+	@GetMapping("/commu/search/{search}/{pageNum}")	
 	public String commusearchpage(@PathVariable("search") String search, @PathVariable("pageNum") int pageNum,Model model, criteria cri) {
 		cri.setPagenum(pageNum);
-		br.commusearch(model, search, cri);
+		bs.commusearch(model, search, cri);
 		return "commuboard";
 	}
 	
-	@GetMapping("/qna/search/{search}/{pageNum}")	//Q&A 게시판 검색 페이징처리
+	//Q&A 게시판 검색 페이징처리
+	@GetMapping("/qna/search/{search}/{pageNum}")	
 	public String qnasearchpage(@PathVariable("search") String search, @PathVariable("pageNum") int pageNum,Model model, criteria cri) {
 		cri.setPagenum(pageNum);
-		br.qnasearch(model, search, cri);
+		bs.qnasearch(model, search, cri);
 		return "qnaboard";
 	}
 	
-	@GetMapping("/qna/{sort}/1")	//Q&A 정렬 기능
+	//Q&A 정렬 기능
+	@GetMapping("/qna/{sort}/1")	
 	public String qnasort(@PathVariable("sort")String sort, Model model, criteria cri) {
 		model.addAttribute("sort",sort);
-		br.getsortqnaboardlist(model, cri, sort);
+		bs.getsortqnaboardlist(model, cri, sort);
 		return "qnaboard";		
 	}
 	
-	@GetMapping("/qna/{sort}/{num}")	//정렬된 Q&A 게시판 페이징 처리
+	//정렬된 Q&A 게시판 페이징 처리
+	@GetMapping("/qna/{sort}/{num}")	
 	public String qnasortpage(@PathVariable("sort")String sort, @PathVariable("num")int num, Model model, criteria cri) {
 		cri.setPagenum(num);
 		model.addAttribute("sort",sort);
-		br.getsortqnaboardlist(model, cri, sort);
+		bs.getsortqnaboardlist(model, cri, sort);
 		return "qnaboard";
 	}
 	
-	@GetMapping("/recom") //추천해요 게시판
+	//추천해요 게시판
+	@GetMapping("/recom") 
 	public String recomboard(Model model, criteria cri) {
-		br.getarecomboardlist(model, cri);
+		bs.getarecomboardlist(model, cri);
 		return "recomboard";
 	}
 	
-	@PostMapping("/recom/search")	//추천해요 검색 기능
+	//추천해요 검색 기능
+	@PostMapping("/recom/search")	
 	public String recomsearch(Model model, HttpServletRequest req, criteria cri) {
-		System.out.println("추천컨트롤");
 		String content = req.getParameter("content");
-		br.recomsearch(model, content, cri);
+		bs.recomsearch(model, content, cri);
 		return "recomboard";
 	}
 	
-	@GetMapping("/recom/search/{search}/{num}")	//추천해요 게시판 검색 페이징처리
+	//추천해요 게시판 검색 페이징처리
+	@GetMapping("/recom/search/{search}/{num}")	
 	public String recomsearchpage(@PathVariable("search") String search, @PathVariable("pageNum") int pageNum,Model model, criteria cri) {
 		cri.setPagenum(pageNum);
-		br.recomsearch(model, search, cri);
+		bs.recomsearch(model, search, cri);
 		return "recomboard";
 	}
 }
