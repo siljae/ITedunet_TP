@@ -1,5 +1,10 @@
 package com.springmvc.controller;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +19,10 @@ public class hospitalcontroller {
 	}
 	
 	@GetMapping("/reviews")
-	public String hospitalreviews() {
+	public String hospitalreviews(HttpSession session, HttpServletResponse res) throws IOException {
+		if(session.getAttribute("name") == null) {
+			res.sendRedirect("/login");
+		}
 		return "hospitalreviews";
 	}
 	

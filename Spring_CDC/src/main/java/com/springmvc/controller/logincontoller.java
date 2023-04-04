@@ -24,7 +24,7 @@ public class logincontoller {
 	@Autowired
 	private MemberService ms;
 	
-	@RequestMapping //로그인 메인페이지
+	@GetMapping //로그인 메인페이지
 	public String login(@ModelAttribute("member") memberDTO member){
 		return "login";
 	}

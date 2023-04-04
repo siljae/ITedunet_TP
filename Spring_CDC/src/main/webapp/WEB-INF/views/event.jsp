@@ -14,7 +14,7 @@
 <body>
 	<jsp:include page="./header.jsp"/>
 	<div class="com_name">
-		<h1><a href="<c:url value="/notice/1"/>">공지사항</a></h1>
+		<h1><a href="<c:url value="/notice/1"/>">캣독마당</a></h1>
 		<h1><a href="<c:url value="/board/event/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">이벤트</a></h1>
     </div>
     <div class="container">
