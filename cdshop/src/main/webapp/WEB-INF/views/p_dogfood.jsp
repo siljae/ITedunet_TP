@@ -102,23 +102,28 @@
                 <div class="filterbox">
                     <div class="filterbt">
                         <div class="radiobox">
-                            <input class="radiobt" type="radio" id="최신순" name="question" value="최신순" checked>
-                            <label for="최신순">최신순</label>
+                            <input class="radiobt" type="radio" id="최신순" name="question" value="new" checked>
+                            <label for="new">최신순</label>
+                        </div>
+                    </div>
+                      <div class="filterbt">
+                        <div class="radiobox">
+                            <input class="radiobt" type="radio" id="조회순" name="question" value="hot" checked>
+                            <label for="hot">인기순</label>
                         </div>
                     </div>
                     <div class="filterbt">
                         <div class="radiobox">
-                            <input class="radiobt" type="radio" id="인기순" name="question" value="인기순" checked>
-                            <label for="인기순">인기순</label>
+                            <input class="radiobt" type="radio" id="인기순" name="question" value="hprice" checked>
+                            <label for="hprice">높은가격순</label>
                         </div>
                     </div>
                     <div class="filterbt">
                         <div class="radiobox">
-                            <input class="radiobt" type="radio" id="조회순" name="question" value="조회순" checked>
-                            <label for="조회순">조회순</label>
+                            <input class="radiobt" type="radio" id="조회순" name="question" value="rprice" checked>
+                            <label for="rprice">낮은가격순</label>
                         </div>
                     </div>
-    
                 </div>
                 <div class="alllistbox">
                 <c:forEach items="${productlist}" var="product">
@@ -166,5 +171,6 @@
             </ul>
         </div>
     </div>
+    <jsp:include page="footer.jsp"/>
 </body>
 </html>

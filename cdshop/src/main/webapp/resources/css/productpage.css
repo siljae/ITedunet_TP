@@ -2,7 +2,7 @@
 
 .bbubbu{
 	padding-top:100px;
-    background-color: #fec6ca;
+    background-color: #f4eded;
     display:flex;
     justify-content: center;
     align-items: center;
@@ -32,9 +32,9 @@
     position: fixed;
     width: 10%;
     max-width: 15.625rem;
-    background: #FFC7C2;
+    background: #f4eded;
     border-radius: 10px;
-    height: 600px;
+    height: 550px;
     box-shadow: 0 5px 10px 0 gray;
     /*margin-top: 50px;*/
 }
@@ -67,6 +67,7 @@
 .catetitle{
     font-size: 20px;
     font-weight: bold;
+    color : #f65371;
 
 }
 .listnamebox{
@@ -76,6 +77,7 @@
     font-size: 17px;
     font-weight: bold;
     margin-top: 15px;
+    color: #f65371;
 }
 .catelist {
     margin-top: 2px;

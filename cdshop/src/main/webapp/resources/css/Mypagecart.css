@@ -23,7 +23,7 @@ body
 .cart_head
 {
     margin-bottom: 10px;
-    background-color: #fec6ca;
+    background-color: #f4eded;
     padding-top: 100px;
     padding-bottom: 20px;
 }
@@ -47,7 +47,7 @@ body
     height: 500px;
     margin-top: 10px;
     margin-left: 10px;
-    background-color:  #fec6ca;
+    background-color:  #f4eded;
     border: 1px solid gray;
 }
 .my_left li
@@ -239,19 +239,17 @@ button {
 .orderbnt{
     justify-content: end;
     border: none;
-    background-color: #f0d264;
+    background-color: #fec6ca;
     padding: 8px 18px;  
     font-size: 14px;
     border-radius: 10px;
     color: black;
-    box-shadow:0px 4px 0px #D1B757;
     cursor: pointer;
 }
 .orderbnt:hover{
-    background: #D1B757;
+    background: #ff8fa4;
 }
 .orderbtn:active {
     top: 4px;
-    box-shadow: 0 0 #ff4c4b; 
-    background-color: #D6BB59;
+    background-color: #ff8fa4;
   }

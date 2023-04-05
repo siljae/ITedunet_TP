@@ -10,15 +10,86 @@
 <html>
 <head>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/shopslide.css" />">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta charset="utf-8">
 <title>shopmain</title>
-<style>
-	
-</style>
+<script type="text/javascript"> //슬라이드 자바스크립트
+        
+        //SHOP 슬라이드
+        $(document).ready(function () {
+            $(".slide_shop").not(".active").hide(); //화면 로딩 후 첫번째 div를 제외한 나머지 숨김            
+            setInterval(nextshopSlide, 10000); //10초(10000)마다 다음 슬라이드로 넘어감
+        });
+        
+        //이전 슬라이드
+        function prevshopSlide() {
+            $(".slide_shop").hide(); //모든 div 숨김
+            let allSlide = $(".slide_shop"); //모든 div 객체를 변수에 저장
+            let currentIndex = 0; //현재 나타난 슬라이드의 인덱스 변수
+            
+            //반복문으로 현재 active클래스를 가진 div를 찾아 index 저장
+            $(".slide_shop").each(function(index,item){ 
+                if($(this).hasClass("active")) {
+                    currentIndex = index;
+                }
+                
+            });
+            
+            //새롭게 나타낼 div의 index
+            let newIndex = 0;
+            
+            if(currentIndex <= 0) {
+                //현재 슬라이드의 index가 0인 경우 마지막 슬라이드로 보냄(무한반복)
+                newIndex = allSlide.length-1;
+            } else {
+                //현재 슬라이드의 index에서 한 칸 만큼 뒤로 간 index 지정
+                newIndex = currentIndex-1;
+            }
+        
+            //모든 div에서 active 클래스 제거
+            $(".slide_shop").removeClass("active");
+            
+            //새롭게 지정한 index번째 슬라이드에 active 클래스 부여 후 show()
+            $(".slide_shop").eq(newIndex).addClass("active");
+            $(".slide_shop").eq(newIndex).show();
+        
+        }
+        
+        //다음 슬라이드
+        function nextshopSlide() {
+            $(".slide_shop").hide();
+            let allSlide = $(".slide_shop");
+            let currentIndex = 0;
+            
+            $(".slide_shop").each(function(index,item){
+                if($(this).hasClass("active")) {
+                    currentIndex = index;
+                }
+                
+            });
+            
+            let newIndex = 0;
+            
+            if(currentIndex >= allSlide.length-1) {
+                //현재 슬라이드 index가 마지막 순서면 0번째로 보냄(무한반복)
+                newIndex = 0;
+            } else {
+                //현재 슬라이드의 index에서 한 칸 만큼 앞으로 간 index 지정
+                newIndex = currentIndex+1;
+            }
+        
+            $(".slide_shop").removeClass("active");
+            $(".slide_shop").eq(newIndex).addClass("active");
+            $(".slide_shop").eq(newIndex).show();
+        }
+</script>
 </head>
 <body>
-	<jsp:include page="header.jsp"/>
-	<div class="container1">
+   <jsp:include page="header.jsp"/>
+   <div class="container1">
         <div class="bbubbu" id="a">
             <div class="cos_nav">
                 <ul>
@@ -29,7 +100,7 @@
             </div>
         </div>
     </div>
-   	 <div class="lounge">
+       <div class="lounge">
         <div class="midbox">
             <div class="sidecate">
                 <div class="sidehea">
@@ -103,50 +174,46 @@
         </div>
         <div class="shoplistmid">
             <div class="shoplounge">
-                <section>
-                    <div class="container">
-                        <div class="slide_banner">
-                            <input type="radio" id="slide01" name="slide" checked>
-                            <input type="radio" id="slide02" name="slide">
-                            <input type="radio" id="slide03" name="slide">
-                            <div class="slide_control">
-                                <label for="slide01">1</label>
-                                <label for="slide02">2</label>
-                                <label for="slide03">3</label>
-                            </div>
-            
-                            <div class="slide_content">
-                                <div class="slide_cont">
-                                    <a href="#"><img src="./img/index/holong1.jpg" alt="slide01"></a>
-                                    <a href="#"><img src="./img/index/holong2.jpg" alt="slide02"></a>
-                                    <a href="#"><img src="./img/index/holong3.jpg" alt="slide03"></a>
-                                </div>
-                            </div>
-                        </div>
+                <section id="slideshop">
+                   <div class="container">
+                       <div class="slidebox">
+                           <div class="slide_shop fade active">
+                               <img src="<c:url value="/resources/img/slide01.jpg"/>">
+                           </div>
+                           <div class="slide_shop fade">
+                               <img src="<c:url value="/resources/img/slide02.jpg"/>">
+                           </div>
+                           <div class="slide_shop fade">
+                               <img src="<c:url value="/resources/img/slide03.jpg"/>">
+                           </div>
+               
+                           <a class="prev" onclick="prevshopSlide()">&#10094;</a>
+                           <a class="next" onclick="nextshopSlide()">&#10095;</a>
+                       </div>
                     </div>
                 </section>
                 <div class="alllistbox">
-             	<c:forEach items ="${productlist}" var="product">
+                <c:forEach items ="${productlist}" var="product">
                     <div class="listbox">
                         <a class="prodetail" href="#"></a>
                         <div class="productbox">
-	                        <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
-	                            <span class="proimg"><img src="/resources/img/${product.tfilename }" alt=""></span>
-	                            <span class="procompany">${product.manufacturer }</span>
-	                            <div class="proname">${product.name}</div>
-	                            <hr class="prohr">
-	                            <div class="proprice">${product.unitprice}원</div>
-	                            <input type="hidden" class="donnkow" value="">
-	                        </a>
-	                        <div class="cartbt"><a href="<c:url value="/mypage/cart"/>">장바구니</a></div>
+                           <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
+                               <span class="proimg"><img src="/resources/img/${product.tfilename }" alt=""></span>
+                               <span class="procompany">${product.manufacturer }</span>
+                               <div class="proname">${product.name}</div>
+                               <hr class="prohr">
+                               <div class="proprice">${product.unitprice}원</div>
+                               <input type="hidden" class="donnkow" value="">
+                           </a>
+                           <div class="cartbt"><a href="<c:url value="/mypage/cart"/>">장바구니</a></div>
                         </div>
                     </div>
-	              </c:forEach>
+                 </c:forEach>
                 </div>
             </div>
 
         </div>
     </div>
-   
+   	<jsp:include page="footer.jsp"/>
 </body>
 </html>

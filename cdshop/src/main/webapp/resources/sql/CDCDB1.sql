@@ -58,6 +58,22 @@ p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CL001", "고양�
 insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
 p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CT001", "고양이 낚시대", "cattoy", "이거는 고양이 장난감이양", "이거 비슷하게하면 돼", "벨버드", 10000, 100, "cattoydetail.jpg", "cattoy.jpg");
 
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF003", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF004", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF005", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF006", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF007", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF008", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF009", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+
+
 drop table product;
 select * from product;
 

@@ -123,7 +123,7 @@
                        <div>
                             <div class="product_list">                    
                                     <div class="product_img">
-                                        <img src="./img/cart/${item.tfilename}" alt="product">
+                                        <img src="/resources/img/${item.tfilename }" alt="">
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_t">
