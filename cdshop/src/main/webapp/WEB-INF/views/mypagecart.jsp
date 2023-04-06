@@ -178,6 +178,7 @@
             </div>
     </section>
     <script>
+    //체크박스 클릭시 클릭된 상품 합계 내주는 js
     let checkboxes = document.getElementsByName('chk');
     let allchkbox = document.getElementById('allproduct');
     let sumPriceElems = document.getElementsByClassName('sumprice');

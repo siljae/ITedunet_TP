@@ -27,39 +27,12 @@
 }
 .midbox{
     width: 100%;
+    
+    
 }
 .seabox{
     padding: 16px 0 16px;
     width: 100%;
-}
-
-/* 서브메뉴박스 */
-.com_name{
-    display: flex;    
-    justify-content: center;
-    align-items: center;
-    background-color: #f4eded;
-    border-top: 1px solid #e4e4e6;
-    border-bottom: 1px solid #e4e4e6;
-    margin-top: 100px;
-    margin-bottom: 10px;
-    padding: 11px 0;
-}
-.com_name h1{    
-    margin: 0 30px;
-    font-weight: 700;
-    font-size: 16px;
-    list-style: none;
-}
-.com_name a{
-    padding: 8px 0;
-    color:#868688;
-}
-.com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover, .com_name :nth-child(3) a:hover, .com_name :nth-child(4) a:hover{
-    padding: 8px 0;
-    color:#090909;
-    border-bottom: 4px solid #fcd11e;
-    transition: 300ms;
 }
 .search{
     width: 100%;
@@ -70,8 +43,26 @@
     position: relative;
 
 }
+.com_name{
+    display: flex;    
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    padding-top: 100px;
+    padding-bottom: 10px;
+    background-color: #fec6ca;
+}
+.com_name h1{
+    margin-right: 20px;
+}
+.com_name :nth-child(1) a{
+    border-bottom: 2px solid red;
+}
+.com_name :nth-child(1) a:hover, .com_name :nth-child(2) a:hover, .com_name :nth-child(3) a:hover, .com_name :nth-child(4) a:hover{
+    border-bottom: 2px solid red;
+}
 .com_search{
-    width: 100%;
+    width: 80%;
     height: 40px;
     border-radius: 20px;
     padding: 5px 40px;
@@ -79,7 +70,7 @@
     background-repeat: no-repeat;
     background-size: 25px;
     background-position: 10px;
-    border: 2px solid #fcd11e;
+    border: 1px solid gray;
 }
 .button {
     border : none;
@@ -90,7 +81,7 @@
     height: 30px;
     position: absolute;
     top: 13.5px;
-    right: 16%;
+    right: 130px;
     cursor: pointer;
 }
 .textbox{
@@ -282,6 +273,7 @@
 
 }
 .conlist{
+    width: 100%;
     margin-top: 30px;
 }
 .content{
@@ -291,19 +283,11 @@
 	display:flex;
 	justify-content:space-between;
 }
-.content_2:first-child{
-    width: 1000px;
-}
 .colist{
     padding-right: 27px;
 }
 .colup{
     display: flex;
-}
-.colut{
-	margin-right: 10px;
-    font-weight: 700;
-    font-size: 22px;
 }
 .colbt{
     padding: 0 15px;
@@ -434,10 +418,12 @@ ul.pagebutton li a{
     border: none;
 }
 
-.undefined{
+.active{
     background-color: #ffeb994d;
     border-radius: 50%;
     border: 2px solid #fcd11e;
+}
+.active a{
     color: black;
-    padding:0px 5px;
+    border: none;
 }

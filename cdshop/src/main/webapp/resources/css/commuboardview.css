@@ -1,10 +1,9 @@
 @charset "UTF-8";
-/* 초기화 */
 
 .container
 {
-    width: 40%;
-    margin: 0 auto;
+    max-width: 1024px;
+    margin: 40px auto 0 auto ;
 }
 /* 상단 메뉴바 */
 .view_head
@@ -12,34 +11,47 @@
     display: flex;    
     justify-content: center;
     align-items: center;
+    background-color: #f4eded;
+    border-top: 1px solid #e4e4e6;
+    border-bottom: 1px solid #e4e4e6;
+    margin-top: 100px;
     margin-bottom: 10px;
-    padding-top: 100px;
-    padding-bottom: 10px;
-    background-color: #fec6ca;
+    padding: 11px 0;
 }
 .view_head h1{
-    margin-right: 20px;
+    margin: 0 30px;
+    font-weight: 700;
+    font-size: 16px;
+    list-style: none;
 }
-.view_head :nth-child(2) a{
-    border-bottom: 2px solid red;
+.view_head a{
+    padding: 8px 0;
+    color:#868688;
 }
 .view_head :nth-child(1) a:hover, .view_head :nth-child(2) a:hover, .view_head :nth-child(3) a:hover, .view_head :nth-child(4) a:hover{
-    border-bottom: 2px solid red;
+    padding: 8px 0;
+    color:#090909;
+    border-bottom: 2px solid #fcd11e;
+    transition: 300ms;
 }
 
 /* 뷰 페이지 시작 */
 .view_tag
 {
-    display: flex;
-    justify-content: start;
-    align-items: center;
-    width: 80px;    
-    background-color: #ffe8a3;
-    border-radius: 10px;
-    font-size: 12px;
-    padding: 5px 20px;
-    margin-top: 40px;
-    margin-bottom: 20px;    
+   height: 30px;
+    display: inline-flex;
+    align-items: center;    
+    background: #fde791;
+    border-radius: 22px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 11px;
+    line-height: 14px;
+    padding: 0 15px;
+    margin-bottom: 18px;
+}
+.view_tag img{
+    width: 15px;
 }
 
 /* 제목 */
@@ -69,17 +81,19 @@
 }
 .postbox_user
 {
-    margin-top: 10px;
-    margin-bottom: 50px;
     display: flex;
     justify-content: space-between;
+    margin-top: 10px;
+    margin-bottom: 50px;    
 }
 .postbox_user button
 {
     border: none;
-    background-color: transparent;
+    background-color: #f6f6f9;
     cursor: pointer;
     position: relative;
+    padding: 4px 15px;
+    border-radius: 5px;
 }
 .chat
 {
@@ -92,22 +106,32 @@
     border-radius: 5px;
 
 }
+.postbox_text
+{
+    margin: 30px auto;
+    white-space: pre-line;
+}
+.postbox_imgbox{
+    display: flex;
+    align-items: center;
+}
 .postbox_img
 {
-    /* width: 700px; */
-    overflow: hidden;    
-    margin-bottom: 30px;
+    display: flex;
+    overflow: hidden;
+    border: 1px solid #000;
+    border-radius: 10%;
+    margin-right: 30px;
+    cursor: zoom-in;
 }
 .postbox_img img
 {
+    min-width: 180px;
+    max-width: 180px;
     width: 100%;
-    height: 100%;
-    object-fit: scale-down;
-    border-radius: 20px;
-}
-.postbox_text
-{
-    white-space: pre-line;
+    height: auto;
+    aspect-ratio: 4/2.6;
+    object-fit: cover;
 }
 .recom
 {
@@ -141,13 +165,14 @@
     margin-left: 10px;
     height: 400px;
 }
-.replybox h3
+.replybox h2
 {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .replybox ul
 {
     margin-left: 10px;
+    margin-bottom: 20px;
 }
 .replybox li
 {
@@ -177,7 +202,7 @@
 }
 .re_content
 {
-    width: 400px;    
+    width: 700px;    
     white-space: pre-line;
     margin-right: 10px;
 }
@@ -188,8 +213,9 @@
 }
 .re_btn
 {
-    width: 30px;
+    width: 90px;
     display: flex;
+    justify-content: center;
     align-items: start;
 }
 .re_btn button

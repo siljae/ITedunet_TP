@@ -1,23 +1,33 @@
 package com.springmvc.domain;
 
-import java.sql.Date;
-import java.sql.Timestamp;
+import java.util.List;
+
+import com.springmvc.repository.orderprodutDTO;
 
 public class orderDTO {
    
    private int num;
-   //뷰로 전달받을 값 
    private String onum;
    private String productId;
    private String name;
    private int quantity;
-   //DB에서 꺼내올 값
    private int price;
    private String orderdate;
    private int sumprice;
    private String tfilename;
    private int totalprice;
+   private List<orderprodutDTO> orderproduct;
    
+   @Override
+   public String toString() {
+	   return "orderDTO [num=" + num + ", onum=" + onum + ", productId=" + productId + ", name=" 
+			   + name + ". quantity=" + quantity + ", price=" + price + ", orderdate=" 
+			   + orderdate + ", sumprice=" + sumprice + ", tfilename="  + tfilename + ", totalprice=" 
+			   + totalprice + ", orderproduct=" + orderproduct + "]"; 
+   }
+   
+
+
    public int getNum() {
       return num;
    }
@@ -79,7 +89,10 @@ public class orderDTO {
    public void setPrice(int price) {
 	this.price = price;
    }
-   
-   
-   
+   public List<orderprodutDTO> getOrderproduct() {
+	   return orderproduct;
+   }
+   public void setOrderproduct(List<orderprodutDTO> orderproduct) {
+	   this.orderproduct = orderproduct;
+   }
 }

@@ -1,4 +1,4 @@
-@charset "UTF-8";
+/* 초기화 */
 *
 {
     margin: 0;
@@ -14,18 +14,16 @@ body
 }
 .container
 {
-    margin: 0 auto;
-    margin-top: 100px;
-    width: 100%;
-    margin: 0 auto;
     max-width: 1024px;
+    width: 100%;
     text-align: center;
+    margin: 100px auto;
 }
 
 /* 로그인 페이지 시작 */
 .login_logo
 {
-    margin: 25px auto;
+    margin: 25px auto 50px auto;
     width:200px;
     height: 100px;
 }

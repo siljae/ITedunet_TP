@@ -1,5 +1,4 @@
 @charset "UTF-8";
-/* 초기화 */
 
 .container
 {
@@ -20,10 +19,10 @@
 .view_head h1{
     margin-right: 20px;
 }
-.view_head :nth-child(2) a{
+.view_head :nth-child(1) a{
     border-bottom: 2px solid red;
 }
-.view_head :nth-child(1) a:hover, .view_head :nth-child(2) a:hover, .view_head :nth-child(3) a:hover, .view_head :nth-child(4) a:hover{
+.view_head :nth-child(1) a:hover, .view_head :nth-child(2) a:hover{
     border-bottom: 2px solid red;
 }
 

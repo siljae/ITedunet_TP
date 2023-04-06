@@ -85,6 +85,15 @@
             $(".slide_shop").eq(newIndex).addClass("active");
             $(".slide_shop").eq(newIndex).show();
         }
+       
+        window.onload = function(){
+            const add = document.getElementById('cartbt')
+            add.addEventListener('click', function(){
+                const data = qnt.value;
+                alert("상품이 장바구니에 추가되었습니다!")
+                window.location.href = "/cart/add?productId=${product.productId}"+data;
+            });
+            };
 </script>
 </head>
 <body>

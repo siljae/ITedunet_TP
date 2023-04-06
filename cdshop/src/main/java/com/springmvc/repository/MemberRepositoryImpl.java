@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.memberDTO;
+import com.springmvc.mapper.MemberMapper;
 
 @Repository
 public class MemberRepositoryImpl implements MemberRepository {

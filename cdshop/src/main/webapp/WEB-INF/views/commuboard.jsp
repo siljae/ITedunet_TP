@@ -24,13 +24,13 @@
 	</script>
 	<script>
 		function newest(){
-			location.href='<c:url value="/board/qna/newest/1"/>';
+			location.href='<c:url value="/board/commu/newest/1"/>';
 		}
 		function popular(){
-			location.href='<c:url value="/board/qna/popular/1"/>';
+			location.href='<c:url value="/board/commu/popular/1"/>';
 		}
 		function viewed(){
-			location.href='<c:url value="/board/qna/viewed/1"/>';
+			location.href='<c:url value="/board/commu/viewed/1"/>';
 		}
 	</script>
 	
@@ -39,15 +39,15 @@
 	<jsp:include page="./header.jsp"/>
     <div class ="com_name">
 		<h1><a href="<c:url value="/board/1"/>" >전체</a></h1>
-		<h1><a href="<c:url value="/board/commu/1"/>">자랑해요</a></h1>
-		<h1><a href="<c:url value="/board/qna"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">Q&A</a></h1>
+		<h1><a href="<c:url value="/board/commu/1"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">자랑해요</a></h1>
+		<h1><a href="<c:url value="/board/qna/1"/>">Q&A</a></h1>
 		<h1><a href="<c:url value="/board/recom"/>">추천해요</a></h1>
     </div>
     <div class="container">
         <div class="midbox">
             <div class="seabox">
                 <div class="search">
-                    <form action="<c:url value="/board/qna/search"/>"  method="post" style="width:70%">
+                    <form action="<c:url value="/board/commu/search"/>"  method="post" style="width:70%">
 	                    <input type="text" name="content" placeholder="찾으시는 글이 있으신가요?" maxlength="130" class="com_search" enterkeyhint="search" value="">
 	                    <button class="button" type="submit" >
 	                        <img src="<c:url value="/resources/img/seabut.png"/>" alt="search">
@@ -100,13 +100,13 @@
 		                            	<div class="colhit">조회수 : ${board.hit }</div>
 	                                </div>
 	                                <div>
-		                                <a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
-		                                <a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>	                                
+		                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltitle">${board.title }</a>
+		                                <a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="coltext">${board.content }</a>	                                
 		                            </div>
 	                            </div>
 	                       	    <div class="coreply">
 		                            <div class="core1">
-		                                답변 : 
+		                                답변 : 1
 		                            </div>
 		                            <div class="renickname">${board.name }</div>
 			                            <div class="retime">작성시간 : ${board.calregist}</div>
@@ -114,7 +114,7 @@
 	                        </div>
                         	<c:if test="${board.files != null && !empty board.files}">
 		                        <div class="colbox">
-		                        	<a href="<c:url value="/board/qna/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
+		                        	<a href="<c:url value="/board/commu/view/${page.cri.pagenum }/${board.num }"/>" class="imgbox">
 		                        		<c:forEach items="${board.files }" var="file">
 										<img class="listimg" src="<c:url value="/resources/img/board/${file.filename }"/>">
 										</c:forEach>
@@ -134,17 +134,17 @@
         <ul class="pagebutton">
         	<c:if test="${page.prev }">
             	<li>
-            		<a href="<c:url value="/board/qna/search/${search }/1"/>">‹‹</a>
+            		<a href="<c:url value="/board/commu/search/${search }/1"/>">‹‹</a>
             	</li>
             </c:if>
         	<c:if test="${page.cri.pagenum != 1 }">        	
 	            <li class="leftbt">
-	                <a href="<c:url value="/board/qna/search/${search }/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
+	                <a href="<c:url value="/board/commu/search/${search }/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
 	            </li>
             </c:if>
             <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
 	            <li class="active">
-	            	<a href="<c:url value="/board/qna/search/${search }/${i}" />" aria-label="Go to page number 1">
+	            	<a href="<c:url value="/board/commu/search/${search }/${i}" />" aria-label="Go to page number 1">
 	            		<c:choose>
 		            		<c:when test="${page.cri.pagenum==i }">
 		                		<font class="undefined"><b>${i }</b></font>
@@ -158,12 +158,12 @@
             </c:forEach>
             <c:if test="${page.cri.pagenum < page.realend }">
 	            <li>
-	                <a href="<c:url value="/board/qna/search/${search }/${page.cri.pagenum+1 }" />" aria-label="Go to after number ">›</a>
+	                <a href="/board/commu/${search }/${page.cri.pagenum+1 }" aria-label="Go to after number ">›</a>
 	            </li>
             </c:if>            
             <c:if test="${page.next }">
             	<li>
-            		<a href="<c:url value="/board/qna/search/${search }/${page.realend }" />">››</a>
+            		<a href="<c:url value="/board/commu/search/${search }/${page.realend }" />">››</a>
             	</li>
             </c:if>
         </ul>
@@ -172,17 +172,17 @@
         <ul class="pagebutton">
         	<c:if test="${page.prev }">
             	<li>
-            		<a href="<c:url value="/board/qna/${sort }/1"/>">‹‹</a>
+            		<a href="<c:url value="/board/commu/${sort }/1"/>">‹‹</a>
             	</li>
             </c:if>
         	<c:if test="${page.cri.pagenum != 1 }">        	
 	            <li class="leftbt">
-	                <a href="<c:url value="/board/qna/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
+	                <a href="<c:url value="/board/commu/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
 	            </li>
             </c:if>
             <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
 	            <li class="active">
-	            	<a href="<c:url value="/board/qna/${sort }/${i}" />" aria-label="Go to page number 1">
+	            	<a href="<c:url value="/board/commu/${sort }/${i}" />" aria-label="Go to page number 1">
 	            		<c:choose>
 		            		<c:when test="${page.cri.pagenum==i }">
 		                		<font class="undefined"><b>${i }</b></font>
@@ -196,12 +196,12 @@
             </c:forEach>
             <c:if test="${page.cri.pagenum < page.realend }">
 	            <li>
-	                <a href="<c:url value="/board/qna/${sort }/${page.cri.pagenum+1 }" />" aria-label="Go to after number ">›</a>
+	                <a href="<c:url value="/board/commu/${sort }/${page.cri.pagenum+1 }" />" aria-label="Go to after number ">›</a>
 	            </li>
             </c:if>            
             <c:if test="${page.next }">
             	<li>
-            		<a href="<c:url value="/board/qna/${sort }/${page.realend }" />">››</a>
+            		<a href="<c:url value="/board/commu/${sort }/${page.realend }" />">››</a>
             	</li>
             </c:if>
         </ul>
@@ -210,17 +210,17 @@
         <ul class="pagebutton">
         	<c:if test="${page.prev }">
             	<li>
-            		<a href="<c:url value="/board/qna/1"/>">‹‹</a>
+            		<a href="<c:url value="/board/commu/1"/>">‹‹</a>
             	</li>
             </c:if>
         	<c:if test="${page.cri.pagenum != 1 }">        	
 	            <li class="leftbt">
-	                <a href="<c:url value="/board/qna/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
+	                <a href="<c:url value="/board/commu/${page.cri.pagenum-1 }" />" aria-label="Go to befor page">‹</a>
 	            </li>
             </c:if>
             <c:forEach var="i" begin="${page.startpage }" end="${page.endpage }">
 	            <li class="active">
-	            	<a href="<c:url value="/board/qna/${i}" />" aria-label="Go to page number 1">
+	            	<a href="<c:url value="/board/commu/${i}" />" aria-label="Go to page number 1">
 	            		<c:choose>
 		            		<c:when test="${page.cri.pagenum==i }">
 		                		<font class="undefined"><b>${i }</b></font>
@@ -234,12 +234,12 @@
             </c:forEach>
             <c:if test="${page.cri.pagenum < page.realend }">
 	            <li>
-	                <a href="<c:url value="/board/qna/${page.cri.pagenum+1 }" />" aria-label="Go to after number ">›</a>
+	                <a href="<c:url value="/board/commu/${page.cri.pagenum+1 }" />" aria-label="Go to after number ">›</a>
 	            </li>
             </c:if>            
             <c:if test="${page.next }">
             	<li>
-            		<a href="<c:url value="/board/qna/${page.realend }" />">››</a>
+            		<a href="<c:url value="/board/commu/${page.realend }" />">››</a>
             	</li>
             </c:if>
         </ul>

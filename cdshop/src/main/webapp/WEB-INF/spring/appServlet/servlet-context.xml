@@ -27,10 +27,11 @@
 	<context:component-scan base-package="com.springmvc.*" />
 	<resources mapping="/resources/**" location="/resources/" />
 	
-	<beans:bean id="multipartResolver"
-        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <beans:property name="maxUploadSize" value="10240000" />  
-    </beans:bean>
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10000000"/>
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+		<beans:property name="uploadTempDir" value="uploadDirResource"/>
+	</beans:bean>
     
     <beans:bean id="uploadDirResource" class="org.springframework.core.io.FileSystemResource">
 		<beans:constructor-arg value="D:\upload"/>
@@ -47,8 +48,6 @@
 		<beans:property name="dataSource" ref="dataSource"/>
 	</beans:bean>
 
-	
-	<context:component-scan base-package="com.springmvc.*" />
 	
 	
 	
