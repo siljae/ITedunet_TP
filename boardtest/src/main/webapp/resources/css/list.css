@@ -1,0 +1,36 @@
+/* 게시판 테이블 스타일링 */
+table
+{
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.head
+{
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+}
+td
+{
+  padding: 10px;
+  border: 1px solid #ddd;
+}
+td a
+{
+    color: black;
+}
+
+/* 제목 셀 스타일링 */
+td:first-child
+{
+  width: 80%;
+}
+
+/* 작성시간 셀 스타일링 */
+td:last-child
+{
+  width: 20%;
+  text-align: center;
+}

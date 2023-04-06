@@ -4,8 +4,13 @@ import java.io.Serializable;
 
 public class memberDTO implements Serializable{
 	
+	
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	private static final long serialVersionUID = 1L;
 	
+	private int num;
 	private String email;
 	private String name;
 	private String pw;
@@ -15,8 +20,14 @@ public class memberDTO implements Serializable{
 	private String post;
 	private String addr1;
 	private String addr2;
+	private int level;
 	
-	
+	public int getNum() {
+		return num;
+	}
+	public void setNum(int num) {
+		this.num = num;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -70,6 +81,12 @@ public class memberDTO implements Serializable{
 	}
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
+	}
+	public int getLevel() {
+		return level;
+	}
+	public void setLevel(int level) {
+		this.level = level;
 	}
 	
 	

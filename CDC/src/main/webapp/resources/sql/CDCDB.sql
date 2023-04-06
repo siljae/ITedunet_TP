@@ -1,5 +1,5 @@
 drop database if exists cdcdb;
-create database cdcdb;
+create database cdcdb default character set utf8 collate utf8_general_ci;
 use cdcdb;
 create table member
 (
@@ -14,9 +14,10 @@ create table member
     m_level int default 1,
     primary key(m_num),
     unique key(m_name)
-)default charset=utf8;
+);
 drop table member;
 select*from member;
+delete from member where m_name='aaa';
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
 create table admin
 (
@@ -40,26 +41,111 @@ create table product
     p_untisinstock long not null,
     p_filename varchar(100) not null,
     primary key(p_num)
-)default charset=utf8;
+);
 
 create table commuboard
 (
    cb_num int not null auto_increment,
     m_name varchar(6) not null,
+    cb_board_type varchar(6) not null,
     cb_animal_type varchar(10) not null,
     cb_title varchar(100) not null,
     cb_content text not null,
     cb_regist_day varchar(30) not null,
     cb_filename varchar(100),
-    cb_hit int not null,
-    cb_reply int,
+    cb_hit int not null default 0,
+    cb_recom int not null default 0,
     primary key(cb_num),
     foreign key(m_name) references member(m_name)
-)default charset=utf8;
+);
+desc commuboard;
 drop table commuboard;
 select*from commuboard;
-insert into commuboard(m_name, cb_title, cb_content, cb_regist_day, cb_filename, cb_hit) values ('aaa','테스트입니다','이거는 테스트내용입니다','2023-02-20',null,'0');
+-- 테스트용 게시글 8개
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다1', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다2', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다3', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다4', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다5', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다6', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다7', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다8', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다9', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다10', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다11', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다12', 'test', '2023/03/14 12:12:12');
+insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다13', 'test', '2023/03/14 12:12:12');
+
+update commuboard set cb_recom= cb_recom+1 where cb_title= '33333';
+
+delete from commuboard where m_name='abc';
+select*from commuboard order by cb_num desc;
+select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
+select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc limit 0,10;
+select*from commuboard where cb_title like '%19%' or cb_content like '%19%' order by cb_num desc limit 10,10;
+select*from commuboard order by cb_hit desc;
+select*from commuboard where cb_recom >= 10 limit 5;
+
+
+select count(*) from commuboard where cb_animal_type='cat';
+select count(*) from commuboard where cb_title like '%스트%' or cb_content like '%스트%';
+
+
+update commuboard 
+	set cb_board_type='commu',
+    cb_animal_type='cat',
+    m_name='abc',
+    cb_title='애옹',
+    cb_content='431',
+    cb_regist_day='2023/03/10 14:26:10',
+    cb_filename='holong1.jpg',
+    cb_hit=1
+    where cb_num=1;
 alter table commuboard add cb_tag varchar(10) not null;
+alter table commuboard alter cb_filename set default null;
+alter table commuboard alter cb_filename drop default;
+alter table commuboard add cb_recom int not null default 0;
+
+SELECT table_schema "Database", ROUND(SUM(data_length+index_length)/1024/1024,1) "used_MB" FROM information_schema.TABLES GROUP BY 1;
+
+-- 더미데이터 생성을 위한 스토어드 프로시저
+delimiter $$
+drop procedure if exists insertloop;
+create procedure insertloop()
+begin
+	declare i int default 1;
+    while i <= 100 do
+		insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc','commu', 'cat', concat('테스트용입니다1',i), concat('test',i), '2023/03/14 12:12:12');
+		set i = i+1;
+	end while;
+end $$
+delimiter $$
+
+call insertloop;
+
+-- 아래 리콤은 추천테이블이다 해당 테이블에 대한 로직을 작성하려면 아직 이해도가 부족하기때문에 나중에 작성하다 해당 테이블과 관련된 모든 sql문은 현재 사용해서는 안된다
+create table recom
+(
+	recom_num int auto_increment,
+    m_name varchar(6) not null,
+    cb_num int not null,
+    recom_chk boolean default false,
+    primary key(recom_num),
+    foreign key (cb_num) references commuboard(cb_num),
+	foreign key (m_name) references member(m_name) 
+);
+
+insert into recom(m_name, cb_num, recom_chk) values('admin',38,true);
+update commuboard as cb
+	set cb.cb_recom = 
+		(
+			select count(*)
+			from recom as r
+			where r.cb_num = cb.cb_num and r.recom_chk =true
+		);
+
+select*from recom;
+drop table recom;
 create table reply
 (
    r_num int not null auto_increment,

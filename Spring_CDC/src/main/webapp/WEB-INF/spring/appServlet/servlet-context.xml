@@ -44,8 +44,4 @@
 
 	
 	<context:component-scan base-package="com.springmvc.*" />
-	
-	
-	
-	
 </beans:beans>

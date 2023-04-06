@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,17 @@
 <title>마이페이지 검증</title>
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/MyPageveri.css"/>">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script>
+	$(document).ready(function(){
+		let msg = ${msg}
+		if(msg==null){			
+		}
+		else if(msg==-1){
+			alert("비밀번호가 일치하지 않습니다! 다시 입력해주세요.")
+		}
+	});
+</script>
 </head>
 <body>
 	<jsp:include page="./header.jsp"/>
@@ -56,17 +68,19 @@
                 </ul>
                 <div class="my_right">
                     <h2>개인정보 수정</h2>
-                    <p>(회원)님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 입력해주시기 바랍니다.</p>
-                    <form action="#" method="post">
+                    <p>${name }님의 정보를 안전하게 보호하기 위해 비밀번호를 다시 한 번 입력해주시기 바랍니다.</p>
+                    <c:url var="url" value="/mypage/barrier"/>
+                    <form:form modelAttribute="member" action="${url }" method="post">
+                    	<form:input type="hidden" path="pw"/>
                         <table class="my_table">
                             <tr>
                                 <td class="td_left">이메일</td>
-                                <td class="td_right">catmom22@naver.com</td>
+                                <td class="td_right">${member.email }</td>
                             </tr>
                             <tr>
                                 <td class="td_left">비밀번호</td>
                                 <td class="td_right">
-                                    <input type="password" name="pw" size="10" required="required" class="my_pw">
+                                    <input type="password" name="chkpw" size="10" required="required" class="my_pw"/>
                                 </td>
                             </tr>
                         </table>
@@ -74,7 +88,7 @@
                         <div class="my_inputbox">
                             <input type="submit" value="확인" class="submit">
                         </div>
-                    </form>
+                    </form:form>
                 </div>
             </div>
         </div>

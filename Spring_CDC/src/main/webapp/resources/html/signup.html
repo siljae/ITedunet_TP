@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="signup.css">
-    <script>
+    <link rel="stylesheet" href="../css/signup.css">
+    
+    <script>        
         function selectAll(selectAll){
             const checkboxes = document.getElementsByName('agree');
             checkboxes.forEach((checkbox) =>{checkbox.checked = selectAll.checked;} )
@@ -27,6 +28,25 @@
                 selectAll.checked = false;
             }
         }
+
+        function chkForm(){
+    		const pw = document.getElementById('pw').value;
+    		const pw2 = document.getElementById('pw2').value;
+    		if(pw == pw2){
+    			const ischk = document.getElementById('allagree').checked; 
+    			if(ischk == true){
+    				return true;
+    			}
+    			else{
+                    alert("약관에 동의해주세요!")
+    				return false;
+                }
+    		}
+    		else{
+                alert("비밀번호가 일치하지 않습니다!");
+    			return false;
+    		}
+    	}
     </script>
     <title>회원가입</title>
 </head>
@@ -37,7 +57,7 @@
                 <h1>회원가입</h1>
                 <div class="hr1"></div>
             </div>
-            <form action="#">
+            <form action="#" onsubmit="return chkForm()">
                 <div class="input_box">
                     <p>
                         이메일
@@ -47,12 +67,12 @@
                     <br>
                     <p>
                         비밀번호
-                        <input type="password" name="pw" class="pw" required placeholder="ex)비밀번호양식">
+                        <input type="password" id="pw" name="pw" class="pw" required placeholder="ex)비밀번호양식">
                     </p>
                     <br>
                     <p>
                         비밀번호확인
-                        <input type="password" class="pw2" required>
+                        <input type="password" id="pw2" class="pw2" required>
                     </p>
                     <br>
                     <p>
