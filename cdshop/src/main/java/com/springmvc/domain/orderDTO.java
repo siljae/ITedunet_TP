@@ -22,8 +22,7 @@ public class orderDTO {
    public String toString() {
 	   return "orderDTO [num=" + num + ", onum=" + onum + ", productId=" + productId + ", name=" 
 			   + name + ". quantity=" + quantity + ", price=" + price + ", orderdate=" 
-			   + orderdate + ", sumprice=" + sumprice + ", tfilename="  + tfilename + ", totalprice=" 
-			   + totalprice + ", orderproduct=" + orderproduct + "]"; 
+			   + orderdate + ", sumprice=" + sumprice + ", tfilename="  + tfilename + ", totalprice=" + totalprice + ", orderproduct=" + orderproduct + "]"; 
    }
    
 
