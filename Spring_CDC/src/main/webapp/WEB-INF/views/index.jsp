@@ -206,7 +206,7 @@
                     </a>
                 </li>
                 <li class="linkimgbox">
-                    <a href="#">
+                    <a href="<c:url value="/shopmain/all"/>">
                         <img class="linkimg" src="<c:url value="/resources/img/index/shopicon.png"/>" alt="마켓">
                         <span class="linkspan">SHOP</span>
                     </a>

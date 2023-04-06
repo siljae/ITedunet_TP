@@ -26,9 +26,6 @@ public class boardDTO {
 	private int recom;
 	private List<fileDTO> files;
 	
-	
-	
-	
 	@Override
 	public String toString() {
 	return "boardDTO [num=" + num + ", cbnum=" + cbnum + ", qbnum=" + qbnum + ", name=" + name + ", board_type="
@@ -37,6 +34,7 @@ public class boardDTO {
 	+ Arrays.toString(filenames) + ", filename=" + filename + ", tagsrc=" + tagsrc + ", tagvalue=" + tagvalue
 	+ ", calregist=" + calregist + ", recom=" + recom + ", files=" + files + "]";
 	}
+	
 	public int getNum() {
 		return num;
 	}

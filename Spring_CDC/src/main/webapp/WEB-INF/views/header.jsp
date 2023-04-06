@@ -155,7 +155,7 @@ nav {
 						<div class="circle"></div>
 					</li>
 					<li class="nav_shop">
-						<a href="#">SHOP</a>
+						<a href="<c:url value="/shopmain/all"/>">SHOP</a>
 						<div class="circle"></div>
 					</li>
 				</ul>

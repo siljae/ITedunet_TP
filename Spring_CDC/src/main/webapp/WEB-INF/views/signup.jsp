@@ -57,7 +57,7 @@
     	}
 
         function emaildecide(){
-        	document.getElementById('email').value = documnet.getElementById('maskemail').value;
+        	document.getElementById('email').value = document.getElementById('maskemail').value;
             document.getElementById('maskemail').disabled =true;
             document.getElementById('emailchk').value = "이메일 변경";
             document.getElementById('emailchk').setAttribute("onclick","emailchange()");
@@ -83,7 +83,7 @@
     	}
 
         function namedecide(){
-        	document.getElementById('name').value = documnet.getElementById('maskname').value;
+        	document.getElementById('name').value = document.getElementById('maskname').value;
             document.getElementById('maskname').disabled =true;
             document.getElementById('namechk').value = "닉네임 변경";
             document.getElementById('namechk').setAttribute("onclick","namechange()");

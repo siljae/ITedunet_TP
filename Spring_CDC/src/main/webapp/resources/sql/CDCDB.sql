@@ -31,17 +31,101 @@ create table admin
 
 create table product
 (
-   p_num int not null auto_increment,
+    p_num int not null auto_increment,
+    p_id varchar(10) not null,
     p_name varchar(30) not null,
     p_category varchar(10) not null,
-    P_titlement varchar(30) not null,
-    p_simpledescription varchar(50) not null,
+    p_titlement varchar(30) not null,
+    p_simpledescription varchar(100) not null,
     p_manufacturer varchar(10) not null,
     p_unitprice int not null,
-    p_untisinstock long not null,
-    p_filename varchar(100) not null,
-    primary key(p_num)
+    p_unitsinstock long not null,
+    p_dfilename varchar(100) not null,
+    p_tfilename varchar(100) not null,
+    p_hit int not null default 1,
+    primary key(p_num),
+    unique key(p_id)
 );
+
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF001", "오리젠 오리지널 독", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF002", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DS001", "퓨어튜나스틱", "dogsnack", "이거는 개 간식이당", "이거 비슷하게하면 돼", "퍼스텝", 10000, 100, "stickdetail.jpg", "puretunastick.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DL001", "강아지 쿠션", "dogsup", "이거는 개쿠션이당", "이거 비슷하게하면 돼", "하이드앤울프", 30000, 100, "dogcushiondetail.jpg", "dogcushion.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DT001", "강아지 장난감", "dogtoy", "이건 강아지 장난감", "이거 비슷하게하면 돼", "바잇미", 20000, 100, "dogtoydetaile.jpg", "dogtoy.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CF001", "오리젠 캣엔키튼", "catfood", "이거는 냥사료양", "이거 비슷하게하면 돼", "오리젠", 40000, 100, "origen1.jpg", "origen_catkitten.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CS001", "고양이 트릿", "catsnack", "이거는 냥 간식이당", "이거 비슷하게하면 돼", "퍼스텝", 19000, 100, "catsnackdetail.jpg", "catsnack.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CL001", "고양이 스크래쳐", "catsup", "이거는 냥이 스크래쳐", "이거 비슷하게하면 돼", "퍼스텝", 36000, 100, "catlivingdetail.jpg", "catliving.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("CT001", "고양이 낚시대", "cattoy", "이거는 고양이 장난감이양", "이거 비슷하게하면 돼", "벨버드", 10000, 100, "cattoydetail.jpg", "cattoy.jpg");
+
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF003", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF004", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF005", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF006", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF007", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF008", "나우", "dogfood", "이거는 개사료양", "이거 비슷하게하면 돼", "나우", 27000, 100, "nowdetail.jpg", "now.jpg");
+insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, 
+p_unitprice, p_unitsinstock, p_dfilename, p_tfilename) values("DF009", "오리젠 오리지널 독", "dogfood", "강아지들이 좋아하는 맛", "✔ 완벽한 영양소 밸런스 <br>✔ 뛰어난 기호성<br>✔ 착한가격<br>✔ 착한 원재료 사용<br>", "오리젠", 38000, 100, "orijendog1.png", "origendog.jpeg");
+
+
+drop table product;
+select * from product;
+
+create table buy
+(
+    b_num int not null auto_increment,
+    o_num varchar(20) not null,
+    p_id varchar(10) not null,
+    m_name varchar(6) not null,
+    b_qnt int not null,
+    b_date varchar(20) not null,
+    b_orderprice int not null,
+    p_tfilename varchar(100) not null,
+    p_price int not null,
+    primary key(b_num),
+    foreign key(m_name) references member(m_name)
+);
+
+drop table buy;
+select * from buy;
+select b_date from buy where m_name="서현" group by b_date;
+select o_num from buy where m_name="서현" group by o_num;
+
+create table buyproduct(
+	bp_num int not null auto_increment primary key,
+    o_num varchar(20) not null,
+    m_name varchar(6) not null    
+);
+
+create table cart
+(
+    ca_id int not null auto_increment,
+    m_name varchar(6) not null,
+    p_id varchar(10) not null ,
+    p_unitprice int not null,
+    ca_qnt int not null,
+    p_tfilename varchar(100) not null,
+    primary key(ca_id),
+    unique key(p_id),
+    foreign key(m_name) references member(m_name)
+);
+
+select * from cart;
+drop table cart;
 
 create table commuboard
 (

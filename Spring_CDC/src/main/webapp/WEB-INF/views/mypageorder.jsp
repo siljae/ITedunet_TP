@@ -19,11 +19,10 @@
             show.style.display = 'none';
         }
     }
-
 </script>
 </head>
 <body>
-	<jsp:include page="./header.jsp"/>
+   <jsp:include page="./header.jsp"/>
     <section>
         <div class="cart_head">
             <h1>장바구니</h1>
@@ -68,41 +67,38 @@
                     </li>
                 </ul>
                 <div class="my_right">
+                <c:forEach items="${orderlist}" var="order">
                     <div>
                         <div class="my_r_top">
-                            <h2>주문번호 : </h2>
-                            <p>상품명 @1234 외 n개</p>
-                            <p>주문일자 : </p>
-                            <p>총 주문금액 : </p>
-                            <button onclick="list_open()">상세정보</button>
-                        </div>
-                        <div class="hr"></div>
-                        <ul id="list">
+                            <h2>주문번호 : ${order.onum}</h2>
+                            <p>주문일자 : ${order.orderdate}</p>
+                            <p>총 주문금액 : ${order.sumprice}</p>
+                            <!-- <button onclick="list_open()">상세정보</button> -->
+                       <!--  <div class="hr"></div> -->
                             <h2>주문 상세 정보</h2>
-                            <li>
                                 <div class="product_list">                            
                                     <div class="product_img">
-                                        <img src="./img/cart/product2.png" alt="product">
+                                        <img src="/resources/img/${order.tfilename }" alt="">
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_t">
-                                            <h3>상품명 : @1234</h3>
+                                            <h3>상품명 : ${order.productId}</h3>
                                         </div>
                                         <div class="product_desc_b">
-                                            <p>상품금액 : 10,000원</p>
+                                            <p>상품 가격: ${order.price}</p>
                                             <div class="quanbox">                                                
-                                                수량 :
+                                                수량
                                                 <div class="quan_inbox">
-                                                    <input type="text"  value="1" class="it_quan" readonly>
+                                                    <input type="text"  value="${order.quantity}" class="it_quan" readonly>
                                                 </div>
                                             </div>                                            
                                         </div>                                                                            
                                     </div>
                                 </div>
-                            </li>
                             <div class="hr"></div>
-                        </ul>
+                        </div>
                     </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

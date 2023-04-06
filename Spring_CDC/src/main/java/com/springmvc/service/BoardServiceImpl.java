@@ -174,6 +174,9 @@ public class BoardServiceImpl implements BoardService {
 		int total = br.getallsearchcount(content);
 		pageDTO page = new pageDTO(cri, total);
 		List<boardDTO> boardlist = br.getallsearch(content, page);
+		for(boardDTO board : boardlist) {
+			System.out.println(board.toString());
+		}
 		model.addAttribute("search",content);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);

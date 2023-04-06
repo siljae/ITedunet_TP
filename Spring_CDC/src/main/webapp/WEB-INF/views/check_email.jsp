@@ -55,11 +55,16 @@
             }
             if(msg == 2){
                 alert("해당 이메일을 사용할 수 있습니다!");
+                //아래 이메일 인풋박스의 밸류 값을 변수 이메일에 담음
                 let email = document.getElementById('email').value;
-                window.close();
+                //나를 호출한 부모페이지의 마스크이메일인 인풋박스를 부모이메일 변수에 담음
                 let parentemail = window.opener.document.getElementById('maskemail');
+                //부모이메일변수의 밸류 = 이메일의 밸류
                 parentemail.value = email.toString();
+                //나를 호출한 부모페이지의 함수 emaildecide() 를 실행하게 함
                 window.opener.emaildecide();
+                //나를 닫음
+                window.close();
             }
         }    
         function popup_close(){
