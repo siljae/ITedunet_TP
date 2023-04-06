@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6078f18f8b414a692ce66b5db8cca51&libraries=services,clusterer,drawing"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        // 전역변수 선언
+        let currentLat;
+        let currentLng;
+
+        // 사용자의 현재 위치를 가져오는 함수
+        function getCurrentPosition(callback) {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    // 전역변수에 좌표값 할당
+                    currentLat = position.coords.latitude;
+                    currentLng = position.coords.longitude;
+                    callback(currentLat, currentLng);
+                },
+                function(error) {
+                    console.error(error);
+                    alert("현재 위치를 가져올 수 없습니다.");
+                }
+                );
+            } else {
+                alert("Geolocation이 지원되지 않는 브라우저입니다.");
+            }
+        }
+
+        // 현재 위치를 이용하여 주소를 검색하는 함수
+        function searchAddressByCoords(lat, lng) {
+            let geocoder = new kakao.maps.services.Geocoder();
+
+            geocoder.coord2Address(lng, lat, function (result, status) {
+                if (status === kakao.maps.services.Status.OK) {
+                    let a = document.getElementById('map');
+                    a.innerHTML = result[0].address.address_name;
+                } else {
+                    console.error('주소 검색 실패: ' + status);
+                }
+            });
+        }
+
+        let mapContainer = document.getElementById('map'),
+        mapOption = {
+            center : new kakao.maps.LatLng
+        }
+
+    </script>
+</body>
+
+</html>
