@@ -14,13 +14,19 @@
         #list{
             width: 300px;
             height: 600px;
-            overflow: hidden;
+            overflow: scroll;
+            overflow-x: hidden;
             border: 1px solid;
-            margin-right: 20px;
+            margin-left: 5px;
         }
         .hosdetail{
             border-bottom:1px solid lightgray;
             padding: 0px 10px;
+            cursor: pointer;
+        }
+        .hosdetail:hover, .hosdetail:hover .phone{
+            color: coral;
+            transition: 400ms;
         }
         .hosdetail span{
             color: green;
@@ -29,13 +35,12 @@
 </head>
 <body>
     <div class="container" style="width:60%;margin: 0 auto;">
-        <div id="list"></div>
         <div id="map" style="width: 80%;height:600px;"></div>
+        <div id="list"></div>
     </div>
     <script>
         let map;
-        let lat, lng;        
-
+        let lat, lng;
         //현재 접속한 브라우저의 위도, 경도 받아오기
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(function(position){
@@ -80,31 +85,37 @@
             if(status == kakao.maps.services.Status.OK){
                 let listbox = document.getElementById('list')
                 for(let i=0; i<result.length; i++){
-                    createMarker(result[i]);
+                    
                     let hosdata = result[i];
                     let hosNode = document.createElement('div');
                     hosNode.classList.add('hosdetail');
                     hosNode.innerHTML = 
                     `<p><b>`+hosdata.place_name+`</b></p>
                     <p><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>`+hosdata.road_address_name+`</p>
-                    <p><i class="fas fa-phone-alt" style="margin-right: 5px;"></i><span>`+hosdata.phone+`</span></p>`;
+                    <p><i class="fas fa-phone-alt" style="margin-right: 5px;"></i><span class="phone">`+hosdata.phone+`</span></p>`;
                     listbox.appendChild(hosNode);
+
+                    createMarker(result[i], hosNode);
+                    
                 }
             }
         };
+
+        //동물병원 div 클릭시 해당 동물병원 마커가 지도 중심으로 오게하면서 마커 정보 띄우기
+        function moveMarkerToCenter(place) {         
+            
+        }
         
         //동물병원 검색하기
         function hospitalSearch(lat, lng){
             ps.keywordSearch('동물병원', callback, {
                 location : new kakao.maps.LatLng(lat, lng),
-                radius : 1000,
-                size : 5,
-                page : 5
+                radius : 1000
             });
         }
 
         //검색된 동물병원들 지도에 마커로 표시하기
-        function createMarker(place){
+        function createMarker(place, hosNode){
             let marker = new kakao.maps.Marker({
                 position : new kakao.maps.LatLng(place.y, place.x)
             });
@@ -131,12 +142,17 @@
                     infowindow.open(map, marker);
                     isOpen = true;
                 }
-                
             });
-
+            
             // 드래그가 시작될 때 정보창 닫기
             kakao.maps.event.addListener(map, 'dragstart', function() {
                 infowindow.close();
+            });
+
+            hosNode.addEventListener('click', function() {
+                let position = new kakao.maps.LatLng(place.y, place.x);
+                map.setCenter(position); // 해당 위치를 지도 중심으로 설정하기
+                infowindow.open(map, marker)
             });
         }
     </script>
