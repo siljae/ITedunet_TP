@@ -55,7 +55,6 @@
                         newFileList.items.add(files[j]);
                     }
                     document.getElementById('file').files = newFileList.files;
-                    console.log("이리왔나?");
                     printfile();
                     return;
                 }
