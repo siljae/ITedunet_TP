@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
 import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
@@ -248,7 +249,11 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-	
+	//댓글 등록
+	@Override
+	public void writecomment(commentDTO comment) {
+		br.writecomment(comment);
+	}
 	
 
 	/*

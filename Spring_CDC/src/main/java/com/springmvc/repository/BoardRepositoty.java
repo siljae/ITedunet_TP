@@ -3,6 +3,7 @@ package com.springmvc.repository;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.pageDTO;
 
 public interface BoardRepositoty {
@@ -63,4 +64,6 @@ public interface BoardRepositoty {
 	public int getcommusearchcount(String content);
 	//검색한 Q&A 게시글 개수
 	public int getqnasearchcount(String content);
+	//댓글 등록
+	public void writecomment(commentDTO comment);
 }

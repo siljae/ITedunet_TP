@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	let value = false;
 	let re = 0;
@@ -121,7 +122,7 @@
             <div class="replybox">
                 <h2>댓글</h2>
                 <ul>
-                    <li>
+                    <li id="comment">
                         <div class="re_user_id">
                             <div>찌무맘</div>
                             <div class="rechat">
@@ -140,13 +141,15 @@
                     </li>
                 </ul>
                 <div>
-                    <form action="#" method="post">
+                    <form id="commentForm" method="post">
                         <!-- 아래 input에 유저아이디를 담아야됨 -->
-                        <input type="hidden" name="user_id">
+                        <input type="hidden" name="name" value="${name}">
+                        <input type="hidden" id="cb_num" name="bnum" value="${board.num}">
+                        <input type="hidden" name="board_type" value="${board.board_type}">
                         <div class="reply_input_box">
-                            <textarea >댓글내용</textarea>
+                            <textarea id="comment" name="comment" >댓글내용</textarea>
                             <div class="inputbox">
-                                <input type="submit" value="등록">
+                                <input type="button" onclick="in_comment('${board_num}')" value="등록">
                             </div>
                         </div>
                     </form>
@@ -154,5 +157,20 @@
             </div>
         </div>
     </div>
+    <script>
+        function in_comment(bnum){
+            $.ajax({
+                type:'post',
+                url:"<c:url value='/board/addcomment'/>",
+                data:$("#commentForm").serialize(),
+                success:function(data){
+                    alert("보내기 성공!");
+                },
+                error:function(request,status,error){
+                    alert("에러발생"+request+"\n"+status+"\n"+error);
+                }
+            })
+        }
+    </script>
 </body>
 </html>

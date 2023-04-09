@@ -11,9 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
 import com.springmvc.service.BoardService;
 
@@ -241,5 +244,13 @@ public class boardcontroller {
 		cri.setPagenum(pageNum);
 		bs.recomsearch(model, search, cri);
 		return "recomboard";
+	}
+	
+	@PostMapping("/addcomment")
+	@ResponseBody
+	public String addcomment(@ModelAttribute("commentDTO")commentDTO comment) {
+		System.out.println(comment.toString());
+		bs.writecomment(comment);
+		return "success";
 	}
 }

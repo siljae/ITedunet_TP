@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
 
 public interface BoardService {	
@@ -52,6 +53,8 @@ public interface BoardService {
 	public void qnarecom(Model model, int pageNum, int num, String recom, HttpServletRequest req);
 	//인기글 가져오기
 	public void recomboard(Model model);
+	//댓글 등록
+	public void writecomment(commentDTO comment);
 	
 	
 	/* public JSONArray sortboard(Model model,HttpServletRequest req); */

@@ -39,6 +39,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 import com.springmvc.database.DBConnection;
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
 import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
@@ -677,5 +678,16 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return total_recond;
 	}
 	
+	//댓글 등록
+	@Override
+	public void writecomment(commentDTO comment) {
+		if(comment.getBoard_type().equals("자랑해요")) {
+			String sql = "insert into cb_comments(m_name, cb_num, c_comment) values(?,?,?)";
+			template.update(sql, comment.getName(), comment.getBnum(), comment.getComment());
+		}
+	}
 	
+	public List<commentDTO> getcommentlist(boardDTO board){
+		String sql = "select*from cb_comments where cb_num=? order by c_order";
+	}
 }
