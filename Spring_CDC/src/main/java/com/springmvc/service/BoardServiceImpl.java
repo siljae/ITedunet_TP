@@ -1,6 +1,8 @@
 package com.springmvc.service;
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -253,6 +255,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void writecomment(commentDTO comment) {
 		br.writecomment(comment);
+	}
+	
+	//게시글의 댓글목록 가져오기
+	@Override
+	public List<commentDTO> getcommentlist(commentDTO comment) {
+		return br.getcommentlist(comment);
 	}
 	
 

@@ -162,7 +162,7 @@
 .replybox
 {
     margin-left: 10px;
-    height: 400px;
+    height: 100%;
 }
 .replybox h2
 {
@@ -178,7 +178,7 @@
     display: flex;
     width: 100%;    
     font-size: 14px;
-    border-bottom: 1px solid;
+    border-bottom: 1px solid lightgray;
     padding-bottom: 10px;
     margin-bottom: 10px;
 }
@@ -207,14 +207,14 @@
 }
 .re_date
 {
-    width: 130px;
+    width: 140px;
     margin-right: 10px;
 }
 .re_btn
 {
     width: 90px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: start;
 }
 .re_btn button

@@ -1,7 +1,10 @@
 package com.springmvc.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
@@ -55,6 +58,8 @@ public interface BoardService {
 	public void recomboard(Model model);
 	//댓글 등록
 	public void writecomment(commentDTO comment);
+	//게시글의 댓글 가져오기
+	public List<commentDTO> getcommentlist(commentDTO comment);
 	
 	
 	/* public JSONArray sortboard(Model model,HttpServletRequest req); */

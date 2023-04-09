@@ -66,4 +66,6 @@ public interface BoardRepositoty {
 	public int getqnasearchcount(String content);
 	//댓글 등록
 	public void writecomment(commentDTO comment);
+	//게시글의 댓글목록 가져오기
+	public List<commentDTO> getcommentlist(commentDTO comment);
 }

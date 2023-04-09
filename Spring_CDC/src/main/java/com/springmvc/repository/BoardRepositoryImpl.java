@@ -45,6 +45,7 @@ import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
 import com.springmvc.mapper.AllBoardMapper;
 import com.springmvc.mapper.BoardMapper;
+import com.springmvc.mapper.CommentMapper;
 import com.springmvc.mapper.FileMapper;
 
 @Repository
@@ -687,7 +688,10 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		}
 	}
 	
-	public List<commentDTO> getcommentlist(boardDTO board){
+	//게시글의 댓글목록 가져오기
+	@Override
+	public List<commentDTO> getcommentlist(commentDTO comment){
 		String sql = "select*from cb_comments where cb_num=? order by c_order";
+		return template.query(sql, new CommentMapper(), comment.getBnum());
 	}
 }

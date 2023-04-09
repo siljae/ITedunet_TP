@@ -7,6 +7,7 @@ public class commentDTO {
 	private int bnum;			//댓글을 단 게시글 번호
 	private String comment;		//댓글 내용
 	private String regist;		//댓글 작성시간
+	private int parent_num;		//댓글의 부모번호
 	private int depth;			//댓글 깊이
 	private int order;			//댓글 순서
 	
@@ -49,6 +50,13 @@ public class commentDTO {
 	}
 	public void setRegist(String regist) {
 		this.regist = regist;
+	}
+	
+	public int getParent_num() {
+		return parent_num;
+	}
+	public void setParent_num(int parent_num) {
+		this.parent_num = parent_num;
 	}
 	public int getDepth() {
 		return depth;
