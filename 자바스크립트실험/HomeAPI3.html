@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let map;
+        let lat, lng;        
+
+        //현재 접속한 브라우저의 위도, 경도 받아오기
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(function(position){
+                //현재 접속한 브라우저의 위도
+                lat = position.coords.latitude;
+                //현재 접속한 브라우저의 경도
+                lng = position.coords.longitude;
+            })
+        }
+        let url = `https://naveropenapi.apigw.ntruss.com/map-place/v1/search?query=동물병원&coordinate=${lng},${lat}&radius=5000&sort=distance`;
+
+        fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-NCP-APIGW-API-KEY-ID': 'y4eqwdh098',
+            'X-NCP-APIGW-API-KEY': 'c94O1tvURoa1A9Zrc0ZOsOlZQf5sLfmFUP3yrIAD'
+        }
+        })
+        .then(response => response.json())
+        .then(data => {
+        data.places.forEach(place => {
+            console.log('이름:', place.name);
+            console.log('주소:', place.address);
+            console.log('도로명 주소:', place.roadAddress);
+            console.log('전화번호:', place.phone);
+            console.log('경도:', place.x);
+            console.log('위도:', place.y);
+            console.log('---');
+        });
+        })
+        .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

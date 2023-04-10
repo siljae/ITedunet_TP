@@ -1,9 +1,13 @@
 package com.springmvc.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,9 +15,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
 import com.springmvc.service.BoardService;
 
@@ -241,5 +248,21 @@ public class boardcontroller {
 		cri.setPagenum(pageNum);
 		bs.recomsearch(model, search, cri);
 		return "recomboard";
+	}
+	
+	//댓글 달기
+	@PostMapping("/addcomment")
+	@ResponseBody
+	public String addcomment(@ModelAttribute("commentDTO")commentDTO comment) {
+		System.out.println(comment.toString());
+		bs.writecomment(comment);
+		return "success";
+	}
+	
+	//게시글의 댓글목록 가져오기
+	@GetMapping("/getcommentlist")
+	@ResponseBody
+	public List<commentDTO> getcommentlist(@ModelAttribute("commentDTO")commentDTO comment) {
+		return bs.getcommentlist(comment);
 	}
 }

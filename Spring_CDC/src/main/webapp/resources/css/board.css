@@ -440,3 +440,33 @@ ul.pagebutton li a{
     color: black;
     padding:0px 5px;
 }
+
+/* 지도API */
+.hosmap{
+	width:60%;
+	display:flex;
+	margin:0 auto;
+}
+ #list{
+     width: 300px;
+     height: 600px;
+     overflow: scroll;
+     overflow-x: hidden;
+     border: 1px solid;
+     margin-left: 5px;
+ }
+ .hosdetail{
+     border-bottom:1px solid lightgray;
+     padding: 10px;
+     cursor: pointer;
+ }
+ .hosdetail > p{
+ 	padding:5px;
+ }
+ .hosdetail:hover b,.hosdetail:hover p, .hosdetail:hover .phone{
+     color: coral;
+     transition: 400ms;
+ }
+ .hosdetail span{
+     color: green;
+ }

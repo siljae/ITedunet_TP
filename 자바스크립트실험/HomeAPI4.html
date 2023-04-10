@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=y4eqwdh098&submodules=geocoder"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    // HTML
+    <div id="map" style="width:100%;height:500px;"></div>
+    <script>
+        // JavaScript
+        const clientId = 'y4eqwdh098'; // 본인의 클라이언트 아이디로 대체해주세요.
+        const clientSecret = 'c94O1tvURoa1A9Zrc0ZOsOlZQf5sLfmFUP3yrIAD'; // 본인의 클라이언트 시크릿으로 대체해주세요.
+
+        // 현재 위치 가져오기
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude; // 위도
+            const lng = position.coords.longitude; // 경도
+
+            // 지도 생성
+            const mapOptions = {
+            center: new naver.maps.LatLng(lat, lng),
+            zoom: 13
+            };
+            const map = new naver.maps.Map('map', mapOptions);
+
+            // 장소 검색
+            const keyword = '동물병원';
+            const searchOptions = {
+                location: new naver.maps.LatLng(lat, lng),
+                radius: 5000,
+                sort: naver.maps.SortBy.DISTANCE // 여기 수정
+            };
+            const searchService = new naver.maps.Service({
+                clientId: clientId,
+                clientSecret: clientSecret
+            });
+            searchService.keywordSearch(keyword, searchOptions, (status, response) => {
+            if (status === naver.maps.Service.Status.ERROR) {
+                console.error('장소 검색 에러:', response);
+                return;
+            }
+            if (response.length === 0) {
+                console.log('검색 결과가 없습니다.');
+                return;
+            }
+
+            // 검색 결과를 마커로 표시
+            const bounds = new naver.maps.LatLngBounds();
+            response.forEach(place => {
+                const marker = new naver.maps.Marker({
+                    position: new naver.maps.LatLng(place.y, place.x),
+                    map: map
+                });
+                bounds.extend(marker.getPosition());
+            });
+            map.fitBounds(bounds);
+                });
+                }, error => {
+                console.error('현재 위치 가져오기 에러:', error);
+                });
+        } 
+        else {
+            console.log('현재 위치를 가져올 수 없습니다.');
+        }
+    </script>
+</body>
+
+</html>

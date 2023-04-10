@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/commuboardview.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	let value = false;
 	let re = 0;
@@ -119,34 +120,24 @@
                 </c:choose>                
             </div>
             <div class="replybox">
-                <h2>댓글</h2>
-                <ul>
-                    <li>
-                        <div class="re_user_id">
-                            <div>찌무맘</div>
-                            <div class="rechat">
-                                <a onclick="window.open('<c:url value="/mypage/chatting" />','_blank','width=500,height=500,top=200,left=200')">1:1 채팅하기</a>
-                            </div>
-                        </div>
-                        <div class="re_content">고양이가 너무 귀엽네요~~에구궁 ㅎ</div>
-                        <div class="re_date">2022/02/07 11:12</div>
-                        <div class="re_btn">
-                            <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
-                            <c:if test="${name == board.name || level == 2}">
-                                <button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
-                            </c:if>
-                        </div>
-                        <div class="hr"></div>
-                    </li>
+                <h2>댓글 <span id="cnt"></span></h2>
+                <ul id="comments">
                 </ul>
                 <div>
-                    <form action="#" method="post">
+                    <form id="commentForm" method="post">
                         <!-- 아래 input에 유저아이디를 담아야됨 -->
-                        <input type="hidden" name="user_id">
+                        <input type="hidden" name="name" value="${name}">
+                        <input type="hidden" id="cb_num" name="bnum" value="${board.num}">
+                        <input type="hidden" name="board_type" value="${board.board_type}">
                         <div class="reply_input_box">
-                            <textarea >댓글내용</textarea>
+                            <textarea id="comment" name="comment" placeholder="댓글 내용을 입력해주세요"></textarea>
                             <div class="inputbox">
-                                <input type="submit" value="등록">
+                                <c:if test="${name != null}">
+                                    <input type="button" onclick="in_comment('${board_num}')" value="등록">
+                                </c:if>
+                                <c:if test="${name == null}">
+                                    <input type="button" value="등록">
+                                </c:if>
                             </div>
                         </div>
                     </form>
@@ -154,5 +145,64 @@
             </div>
         </div>
     </div>
+    <script>
+        function in_comment(bnum){
+            $.ajax({
+                type:'POST',
+                url:"<c:url value='/board/addcomment'/>",
+                data:$("#commentForm").serialize(),
+                success:function(data){
+                    getcommentlist();
+                },
+                error:function(request,status,error){
+                    alert("에러발생"+request+"\n"+status+"\n"+error);
+                }
+            })
+        }
+        //초기 페이지 로딩시 댓글목록 불러오기
+        $(function(){
+            getcommentlist();
+        });
+
+        function getcommentlist(){
+            $.ajax({
+                type:'GET',
+                url:"<c:url value='/board/getcommentlist'/>",
+                data: { "bnum": "<c:out value='${board.num}' />" },
+                dataType:"json",
+                success : function(data){
+                    console.log("성공");
+                    console.log(data);
+                    let comments = document.getElementById('comments');
+                    comments.textContent="";
+                    let cnt = document.getElementById('cnt');
+                    cnt.innerHTML = data.length;
+
+                    if(data.length > 0){
+                        for(let i=0;i<data.length;i++){
+                            let commentNode = document.createElement('li');
+                            commentNode.innerHTML =
+                               `<div class="re_user_id">
+                                    <div>`+data[i].name+`</div>
+                                </div>
+                                <div class="re_content">`+data[i].comment+`</div>
+                                <div class="re_date">`+data[i].regist+`</div>
+                                <div class="re_btn">
+                                    <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
+                                    <c:if test="${name == board.name || level == 2}">
+                                        <button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
+                                    </c:if>
+                                </div>`;
+                            comments.appendChild(commentNode);
+                        }
+                    }
+                },
+                error:function(request,status,error){
+                    alert("댓글목록 불러오기 실패!");
+                }
+            })
+        }
+    </script>
+   	<jsp:include page="footer.jsp"/>
 </body>
 </html>

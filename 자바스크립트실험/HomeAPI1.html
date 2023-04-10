@@ -1,27 +1,43 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/board.css"/>">
-<!-- services와 clusterer, drawing 라이브러리 불러오기 -->
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6078f18f8b414a692ce66b5db8cca51&libraries=services,clusterer,drawing"></script>
-<script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
-<title>우리동네동물병원</title>
-
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=b6078f18f8b414a692ce66b5db8cca51&libraries=services,clusterer,drawing"></script>
+    <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+        }
+        #list{
+            width: 300px;
+            height: 600px;
+            overflow: scroll;
+            overflow-x: hidden;
+            border: 1px solid;
+            margin-left: 5px;
+        }
+        .hosdetail{
+            border-bottom:1px solid lightgray;
+            padding: 0px 10px;
+            cursor: pointer;
+        }
+        .hosdetail:hover, .hosdetail:hover .phone{
+            color: coral;
+            transition: 400ms;
+        }
+        .hosdetail span{
+            color: green;
+        }
+    </style>
 </head>
 <body>
-	<jsp:include page="./header.jsp"/>
-    <div class ="com_name">
-		<h1><a href="<c:url value="/hospital"/>" style="color: #090909; border-bottom: 4px solid #fcd11e;">우리동네동물병원</a></h1>
-		<h1><a href="<c:url value="/hospital/reviews"/>">후기에요</a></h1>
-    </div>
-    <div class="hosmap">
-        <div id="mapimg" style="width: 80%;height:600px;"></div>
+    <div class="container" style="width:60%;margin: 0 auto;">
+        <div id="map" style="width: 80%;height:600px;"></div>
         <div id="list"></div>
-	</div>
+    </div>
     <script>
         let map;
         let lat, lng;
@@ -42,7 +58,7 @@
 
         //위도, 경도를 이용해 현재 위치 지도로 만들기
         function createMap(lat, lng){
-            let mapContainer = document.getElementById('mapimg'),
+            let mapContainer = document.getElementById('map'),
             mapOption = {
                 center : new kakao.maps.LatLng(lat, lng),
                 level : 4            
@@ -108,10 +124,10 @@
             // 마커를 클릭하여 나오는 div
             let infowindow = new kakao.maps.InfoWindow({
                 content: //'' 말고 ``쓰면 여러줄 가능
-                    `<div style="margin-bottom:20px;padding:0px 5px 10px 5px;">
-                        <p style="padding:5px 0px;"><b>`+place.place_name+`</b></p>
-                        <p style="padding:5px 0px;"><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>`+place.road_address_name+`</p>
-                        <p style="padding:5px 0px;"><i class="fas fa-phone-alt" style="margin-right: 5px;"></i><span class="phone" style="color:green">`+place.phone+`</span></p>
+                    `<div style="padding:0px 5px 10px 5px;">
+                        <p><b>`+place.place_name+`</b></p>
+                        <p><i class="fas fa-map-marker-alt" style="margin-right: 5px;"></i>`+place.road_address_name+`</p>
+                        <p><i class="fas fa-phone-alt" style="margin-right: 5px;"></i><span class="phone" style="color:green">`+place.phone+`</span></p>
                     </div>`
             });
 
@@ -140,6 +156,5 @@
             });
         }
     </script>
-	<jsp:include page="./footer.jsp"/>
 </body>
 </html>

@@ -39,11 +39,13 @@ import org.springframework.web.multipart.commons.CommonsMultipartFile;
 import com.mysql.cj.protocol.x.SyncFlushDeflaterOutputStream;
 import com.springmvc.database.DBConnection;
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
 import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
 import com.springmvc.mapper.AllBoardMapper;
 import com.springmvc.mapper.BoardMapper;
+import com.springmvc.mapper.CommentMapper;
 import com.springmvc.mapper.FileMapper;
 
 @Repository
@@ -677,5 +679,19 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		return total_recond;
 	}
 	
+	//댓글 등록
+	@Override
+	public void writecomment(commentDTO comment) {
+		if(comment.getBoard_type().equals("자랑해요")) {
+			String sql = "insert into cb_comments(m_name, cb_num, c_comment) values(?,?,?)";
+			template.update(sql, comment.getName(), comment.getBnum(), comment.getComment());
+		}
+	}
 	
+	//게시글의 댓글목록 가져오기
+	@Override
+	public List<commentDTO> getcommentlist(commentDTO comment){
+		String sql = "select*from cb_comments where cb_num=? order by c_order";
+		return template.query(sql, new CommentMapper(), comment.getBnum());
+	}
 }
