@@ -46,6 +46,7 @@
             }
         }
         
+        //이메일 중복확인 팝업창
     	function chkemail(){
     		var v = document.getElementById('maskemail').value;
             if(v){
@@ -56,6 +57,7 @@
             }
     	}
 
+        //이메일 중복확인 팝업창이 닫히면 실행되는 기능
         function emaildecide(){
         	document.getElementById('email').value = document.getElementById('maskemail').value;
             document.getElementById('maskemail').disabled =true;
@@ -65,6 +67,7 @@
             
         }
 
+        //이메일 중복확인 버튼 바꾸기
         function emailchange(){
             document.getElementById('maskemail').disabled =false;
             document.getElementById('maskemail').value="";
@@ -72,6 +75,8 @@
             document.getElementById('emailchk').setAttribute("onclick","chkemail()");
         }
 
+
+        //닉네임 중복확인 팝업창
     	function chkname(){            
     		var v = document.getElementById('maskname').value;
             if(v){
@@ -82,6 +87,7 @@
             }    		
     	}
 
+        //닉네임 중복확인 팝업창이 닫히면 실행되는 기능
         function namedecide(){
         	document.getElementById('name').value = document.getElementById('maskname').value;
             document.getElementById('maskname').disabled =true;
@@ -90,6 +96,7 @@
             onjoin();            
         }
 
+        //닉네임 중복확인 버튼 바꾸기
         function namechange(){
             document.getElementById('maskname').disabled =false;
             document.getElementById('maskname').value="";
@@ -97,6 +104,7 @@
             document.getElementById('namechk').setAttribute("onclick","chkname()");
         }
         
+        //두 개의 중복확인 절차가 완료되면 가입하기 버튼 활성화
         function onjoin(){
             if (document.getElementById('maskemail').disabled && document.getElementById('maskname').disabled) {
                 document.getElementById('join').disabled = false;
@@ -106,6 +114,7 @@
             }
         }
         
+        //회원가입하기 전 비밀번호 비교, 이용약관 동의 했는지 확인
     	function chkForm(){
     		const pw = document.getElementById('pw').value;
     		const pw2 = document.getElementById('pw2').value;
@@ -144,6 +153,13 @@
                     </p>
                     <br>
                     <p>
+                        닉네임
+                        <input type="text" id="maskname" class="name" required="required">
+                        <form:input type="hidden" path="name" id="name" class="name"  required="required"/>                    
+                        <input type="button" onclick="chkname()" id="namechk" class="name_check" value="중복 확인">
+                    </p>
+                    <br>
+                    <p>
                         비밀번호
                         <form:input type="password" id="pw" path="pw" class="pw" required="required" placeholder="ex)비밀번호양식"
                         pattern="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$" title="비밀번호는 영문자+숫자+특수문자 조합으로 6~20자리 사용해야 합니다."/>
@@ -153,13 +169,6 @@
                         비밀번호확인
                         <input type="password" id="pw2" class="pw2" required="required"
                         pattern="^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{6,20}$" title="비밀번호는 영문자+숫자+특수문자 조합으로 6~20자리 사용해야 합니다."/>
-                    </p>
-                    <br>
-                    <p>
-                        닉네임
-                        <input type="text" id="maskname" class="name" required="required">
-                        <form:input type="hidden" path="name" id="name" class="name"  required="required"/>                    
-                        <input type="button" onclick="chkname()" id="namechk" class="name_check" value="중복 확인">
                     </p>
                     <br>
                     <p>
@@ -200,7 +209,7 @@
                     <textarea name="agreebox" class="agreebox"  cols="58" rows="5" readonly="true">
 제 1장 총칙
 제 1 조 (목적)
-본 약관은 (주)인벤(이하 "회사"라 합니다)이 제공하는 인터넷 서비스(이하 "서비스"라 합니다)의 이용과 관련하여 회사와 회원의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다.
+본 약관은 CDC(이하 "회사"라 합니다)이 제공하는 인터넷 서비스(이하 "서비스"라 합니다)의 이용과 관련하여 회사와 회원의 권리, 의무 및 기타 필요한 사항을 규정함을 목적으로 합니다.
 
 제 2 조 (용어의 정의)
 본 약관에서 사용하는 주요한 용어의 정의는 다음과 같습니다.

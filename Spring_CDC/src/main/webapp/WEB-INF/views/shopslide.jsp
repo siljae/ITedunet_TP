@@ -91,9 +91,9 @@
    <jsp:include page="header.jsp"/>
    <div class="container1">
         <div class="bbubbu" id="a">
-            <div class="cos_nav">
+            <div class="cos_nav" >
                 <ul>
-                    <li class = "com_name">
+                    <li class = "com_name" style="color: #090909; padding:12px 0px; border-bottom: 4px solid #fcd11e;">
                         SHOP
                     </li>
                 </ul>

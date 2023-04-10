@@ -21,6 +21,7 @@ public class memberDTO implements Serializable{
 	private String addr1;
 	private String addr2;
 	private int level;
+	private int rownum;
 	
 	public int getNum() {
 		return num;
@@ -87,6 +88,12 @@ public class memberDTO implements Serializable{
 	}
 	public void setLevel(int level) {
 		this.level = level;
+	}
+	public int getRownum() {
+		return rownum;
+	}
+	public void setRownum(int rownum) {
+		this.rownum = rownum;
 	}
 	
 	

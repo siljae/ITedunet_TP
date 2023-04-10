@@ -40,7 +40,7 @@
 	<jsp:include page="./header.jsp"/>
  	<section> 		
         <div class="cart_head">
-            <h1>마이페이지</h1>
+            <h1 style="color: #090909; padding:12px 0px; border-bottom: 4px solid #fcd11e;">마이페이지</h1>
         </div>
         <div class="container">
             <div class="mypagebox">

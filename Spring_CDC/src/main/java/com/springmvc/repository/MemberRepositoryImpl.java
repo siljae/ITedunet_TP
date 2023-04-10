@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.memberDTO;
+import com.springmvc.mapper.AllMemberMapper;
 import com.springmvc.mapper.MemberMapper;
 
 @Repository
@@ -29,22 +30,13 @@ public class MemberRepositoryImpl implements MemberRepository {
 		template.update(sql, member.getEmail(), member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2());
 	}	
 	
-	@Override	//전체 회원을 DB에서 다 가져옴
-	public void getmemberlist() {		
-		String sql = "select*from member where m_email=?";
-		memberDTO member = template.queryForObject(sql, new MemberMapper());
-		
-	}
-	
 	@Override	//회원정보 일치하는지 확인하는 기능
 	public memberDTO chkmember(String email, String pw) {
 		memberDTO memberinfo = new memberDTO();
 		String sql = "select*from member where m_email=?";
-		listOfmember = template.query(sql, new MemberMapper(), email);
-		for(memberDTO member : listOfmember) {
-			if(member.getPw().equals(pw)) {
-				memberinfo = member;					
-			}
+		memberDTO member = template.queryForObject(sql, new MemberMapper(), email);
+		if(member.getPw().equals(pw)) {
+			memberinfo = member;					
 		}
 		return memberinfo;
 	}
@@ -53,11 +45,9 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public memberDTO getmemberByname(String name) {
 		memberDTO memberinfo = new memberDTO();		
 		String sql = "select*from member where m_name=?";
-		listOfmember = template.query(sql, new MemberMapper(), name);
-		for(memberDTO member : listOfmember) {
-			if(member.getName().equals(name)) {
-				memberinfo = member;					
-			}
+		memberDTO member = template.queryForObject(sql, new MemberMapper(), name);
+		if(member.getName().equals(name)) {
+			memberinfo = member;					
 		}
 		return memberinfo; 
 	}
@@ -65,15 +55,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 	@Override	//회원정보 수정
 	public void updatemember(memberDTO member) {
 		String sql = "select*from member where m_name=?";
-		listOfmember = template.query(sql, new MemberMapper(), member.getName());
-		
-		for(memberDTO mb : listOfmember) {
-			if(mb.getEmail().equals(member.getEmail())) {
-				if(mb.getLevel() != member.getLevel()) {
-					String phone = member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3();
-					sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post=?, m_addr1=?, m_addr2=?, m_level=? where m_email=?";
-					template.update(sql, member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2(), member.getLevel(), member.getEmail());
-				}
+		memberDTO mb = template.queryForObject(sql, new MemberMapper(), member.getName());
+		if(mb.getEmail().equals(member.getEmail())) {
+			if(mb.getLevel() != member.getLevel()) {
+				String phone = member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3();
+				sql = "update member set m_name=?, m_pw=?, m_phone=?, m_post=?, m_addr1=?, m_addr2=?, m_level=? where m_email=?";
+				template.update(sql, member.getName(), member.getPw(), phone, member.getPost(), member.getAddr1(), member.getAddr2(), member.getLevel(), member.getEmail());
 			}
 		}
 		String phone = member.getPhone1()+"-"+member.getPhone2()+"-"+member.getPhone3();
@@ -83,19 +70,17 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	@Override	//전체 멤버 받아오는 기능
 	public List<memberDTO> getallmemberlist() {
-		String sql = "select*from member";
-		List<memberDTO> memberlist = template.query(sql, new MemberMapper());
+		String sql = "set @row_num=0; select (@row_num:=@row_num+1) as row_num, member.*from member";
+		List<memberDTO> memberlist = template.query(sql, new AllMemberMapper());
 		return memberlist;
 	}
 	@Override	//num이 일치하는 멤버정보가져오는 기능
 	public memberDTO getmemberBynum(int num) {
 		memberDTO memberinfo = new memberDTO();
 		String sql = "select*from member where m_num=?";
-		listOfmember = template.query(sql, new MemberMapper(), num);
-		for(memberDTO member : listOfmember) {
-			if(member.getNum() == num) {
-				memberinfo = member;					
-			}
+		memberDTO member = template.queryForObject(sql, new MemberMapper(), num);
+		if(member.getNum() == num) {
+			memberinfo = member;					
 		}
 		return memberinfo;
 	}
@@ -104,12 +89,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public int chkemail(String email) {
 		int x=2;
 		String sql ="select*from member where m_email=?";
-		listOfmember = template.query(sql, new MemberMapper(), email);
-		for(memberDTO member : listOfmember) {
-			if(member.getEmail().equals(email)) {
-				x=1;
-				return x;
-			}
+		memberDTO member = template.queryForObject(sql, new MemberMapper(), email);
+		if(member.getEmail().equals(email)) {
+			x=1;
+			return x;
 		}
 		return x;
 	}
@@ -118,12 +101,10 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public int chkname(String name) {
 		int x=2;
 		String sql ="select*from member where m_name=?";
-		listOfmember = template.query(sql, new MemberMapper(), name);
-		for(memberDTO member : listOfmember) {
-			if(member.getName().equals(name)) {
-				x=1;
-				return x;
-			}
+		memberDTO member = template.queryForObject(sql, new MemberMapper(), name);
+		if(member.getName().equals(name)) {
+			x=1;
+			return x;
 		}
 		return x;
 		

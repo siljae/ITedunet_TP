@@ -17,6 +17,8 @@ create table member
 );
 drop table member;
 select*from member;
+set @row_num =0;
+select (@row_num:=@row_num+1) as row_num, member.* from member; 
 delete from member where m_name='aaa';
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
 create table admin
@@ -248,6 +250,7 @@ select*from cb_comments;
 select*from cb_comments where cb_num=14 order by c_order;
 INSERT INTO cb_comments (m_name, cb_num, c_comment, c_order)
 VALUES ('abc',14,'등록해요', (SELECT COALESCE(MAX(c_order), 0) + 1 FROM cb_comments WHERE cb_num = 14));
+
 -- 댓글과 대댓글 테이블 따로 하려고 했는데 하나의 테이블로도 할 수 있을꺼 같아서 아래 테이블을 폐기
 create table reply(
 	r_num int not null auto_increment primary key,

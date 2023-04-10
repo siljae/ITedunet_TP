@@ -133,7 +133,7 @@
                             <textarea id="comment" name="comment" placeholder="댓글 내용을 입력해주세요"></textarea>
                             <div class="inputbox">
                                 <c:if test="${name != null}">
-                                    <input type="button" onclick="in_comment('${board_num}')" value="등록">
+                                    <input type="button" onclick="in_comment()" value="등록">
                                 </c:if>
                                 <c:if test="${name == null}">
                                     <input type="button" value="등록">
@@ -146,14 +146,22 @@
         </div>
     </div>
     <script>
-        function in_comment(bnum){
+        function in_comment(){
+
+            //jquery 있어야됨
             $.ajax({
+
+                //데이터 보내기
                 type:'POST',
                 url:"<c:url value='/board/addcomment'/>",
                 data:$("#commentForm").serialize(),
+
+                //보내기에 성공하면 할 행동
                 success:function(data){
                     getcommentlist();
                 },
+
+                //보내기 실패하면 할 행동
                 error:function(request,status,error){
                     alert("에러발생"+request+"\n"+status+"\n"+error);
                 }
@@ -173,8 +181,10 @@
                 success : function(data){
                     console.log("성공");
                     console.log(data);
+                    //ul 셀렉트
                     let comments = document.getElementById('comments');
                     comments.textContent="";
+                    document.getElementById('comment').value="";
                     let cnt = document.getElementById('cnt');
                     cnt.innerHTML = data.length;
 

@@ -9,7 +9,7 @@
 <title>마이페이지 검증</title>
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="<c:url value="/resources/css/MyPageveri.css"/>">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function(){
 		let msg = ${msg}
@@ -25,7 +25,7 @@
 	<jsp:include page="./header.jsp"/>
     <section>
         <div class="cart_head">
-            <h1>마이페이지</h1>
+            <h1 style="color: #090909; padding:12px 0px; border-bottom: 4px solid #fcd11e;">마이페이지</h1>
         </div>
         <div class="container">
             <div class="mypagebox">

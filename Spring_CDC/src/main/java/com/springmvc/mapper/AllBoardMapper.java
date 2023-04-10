@@ -21,8 +21,9 @@ public class AllBoardMapper implements RowMapper<boardDTO> {
 		board.setTitle(rs.getString(7));
 		board.setContent(rs.getString(8));
 		board.setRegist_day(rs.getString(9));
-		board.setHit(rs.getInt(10));
-		board.setRecom(rs.getInt(11));
+		board.setRecom(rs.getInt(10));
+		board.setHit(rs.getInt(11));
+		
 		return board;
 	}
 	
