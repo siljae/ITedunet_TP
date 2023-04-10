@@ -173,14 +173,13 @@
         });
 
         function getcommentlist(){
+            let level = ${level}
             $.ajax({
                 type:'GET',
                 url:"<c:url value='/board/getcommentlist'/>",
                 data: { "bnum": "<c:out value='${board.num}' />" },
                 dataType:"json",
                 success : function(data){
-                    console.log("성공");
-                    console.log(data);
                     //ul 셀렉트
                     let comments = document.getElementById('comments');
                     comments.textContent="";
@@ -190,20 +189,21 @@
 
                     if(data.length > 0){
                         for(let i=0;i<data.length;i++){
+                        	let chkname = data[i].name;
                             let commentNode = document.createElement('li');
                             commentNode.innerHTML =
-                               `<div class="re_user_id">
-                                    <div>`+data[i].name+`</div>
-                                </div>
-                                <div class="re_content">`+data[i].comment+`</div>
-                                <div class="re_date">`+data[i].regist+`</div>
-                                <div class="re_btn">
-                                    <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
-                                    <c:if test="${name == board.name || level == 2}">
-                                        <button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
-                                    </c:if>
-                                </div>`;
-                            comments.appendChild(commentNode);
+                                `<div class="re_user_id">
+                                     <div>`+data[i].name+`</div>
+                                 </div>
+                                 <div class="re_content">`+data[i].comment+`</div>
+                                 <div class="re_date">`+data[i].regist+`</div>
+                                 <div class="re_btn">
+                                     <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
+                                     <c:if test="${name != chkname || level == 2}">
+                                         <button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
+                                     </c:if>
+                                 </div>`;
+                             comments.appendChild(commentNode);
                         }
                     }
                 },
