@@ -10,9 +10,10 @@
 <html>
 <head>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/shopslide.css" />">
+<!-- google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta charset="utf-8">
 <title>shopmain</title>
@@ -113,7 +114,7 @@
         <div class="midbox">
             <div class="sidecate">
                 <div class="sidehea">
-                    <span class="catetitle">CATEGORY</span>
+                    <a href="<c:url value="/shopmain/all"/>"><span class="catetitle">CATEGORY</span></a>
                 </div>
                 <hr class="sidehr">
                 <div class="listnamebox">

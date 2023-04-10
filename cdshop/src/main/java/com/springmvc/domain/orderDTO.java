@@ -9,6 +9,7 @@ public class orderDTO {
    private int num;
    private String onum;
    private String productId;
+   private String productname;
    private String name;
    private int quantity;
    private int price;
@@ -20,7 +21,7 @@ public class orderDTO {
    
    @Override
    public String toString() {
-	   return "orderDTO [num=" + num + ", onum=" + onum + ", productId=" + productId + ", name=" 
+	   return "orderDTO [num=" + num + ", onum=" + onum + ", productId=" + productId + ", productname=" + productname + ", name=" 
 			   + name + ". quantity=" + quantity + ", price=" + price + ", orderdate=" 
 			   + orderdate + ", sumprice=" + sumprice + ", tfilename="  + tfilename + ", totalprice=" + totalprice + ", orderproduct=" + orderproduct + "]"; 
    }
@@ -45,6 +46,12 @@ public class orderDTO {
    }
    public void setProductId(String productId) {
       this.productId = productId;
+   }
+   public String getProductname() {
+	   return productname;
+   }
+   public void setProductname(String produtname) {
+	   this.productname = produtname;
    }
    public String getName() {
       return name;

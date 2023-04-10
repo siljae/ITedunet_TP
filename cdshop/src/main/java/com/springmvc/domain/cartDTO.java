@@ -6,6 +6,7 @@ public class cartDTO {
    private int cartId;
    private String name;
    private String productId;
+   private String productname;
    private int price;
    private int quantity;
    private String tfilename;
@@ -28,9 +29,16 @@ public class cartDTO {
    public void setProductId(String productId) {
       this.productId = productId;
    }
-   public int getPrice() {
-      return price;
+   
+   public String getProductname() {
+	return productname;
    }
+	public void setProductname(String productname) {
+		this.productname = productname;
+	}
+	public int getPrice() {
+	      return price;
+	}
    public void setPrice(int price) {
       this.price = price;
    }

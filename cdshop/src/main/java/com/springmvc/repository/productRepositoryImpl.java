@@ -107,6 +107,18 @@ public class productRepositoryImpl implements productRepository {
 		return productById;
 	}
 	
+//	public productDTO getproductByid(String productId) {
+//		productDTO productinfo = new productDTO();
+//		String sql = "select * from product where p_id=?";
+//		productlist = template.query(sql, new productRowMapper(), productId);
+//		for(productDTO product : productlist) {
+//			if(product.getProductId() == productId) {
+//				productinfo = product;
+//			}
+//		}
+//		return productinfo;
+//	}
+//	
 	//상품등록하기
 	public void setNewProduct(productDTO product) {
 		String SQL = "insert into product (p_id, p_name, p_category, p_titlement, p_simpledescription, p_manufacturer, p_unitprice, p_unitsinstock, p_dfilename, p_tfilename, p_hit)" + "values(?,?,?,?,?,?,?,?,?,?,?)";
@@ -114,16 +126,6 @@ public class productRepositoryImpl implements productRepository {
 		System.out.println("들어갔니?" + SQL);
 	}
 
-
-
-//	@Override
-//	public List<productDTO> getProductListByCategory(String category) {
-//		List<productDTO> productByCategory = new ArrayList<productDTO>();
-//	
-//		String SQL = "select*from product where p_category like '%" + category + "%'";
-//		productByCategory = template.query(SQL, new productRowMapper());
-//		return productByCategory;
-//	}
 	
 	// 상품 수정
 	public void setUpdateProduct(productDTO product) {
@@ -141,41 +143,5 @@ public class productRepositoryImpl implements productRepository {
 		this.template.update(SQL, productId);
 	}
 	
-//	public List<productDTO> selectAllProducts(){
-//		
-//		List<productDTO> list = new ArrayList<productDTO>();
-//		Connection conn = null;
-//		PreparedStatement pstmt = null;
-//		ResultSet rs = null;
-//		String sql;
-//		try {
-//			conn = com.springmvc.database.DBConnection.getConnection();
-//			sql = "select * from product order by p_num desc";
-//			pstmt = conn.prepareStatement(sql);
-//			rs=pstmt.executeQuery();
-//			while (rs.next()) {
-//				productDTO dto = new productDTO();
-//				dto.setNum(rs.getInt("p_num"));
-//				dto.setManufacturer(rs.getString("p_manufacturer"));
-//				dto.setName(rs.getString("p_name"));
-//				dto.setUnitprice(rs.getInt("p_unitprice"));
-//				list.add(dto);
-//			}
-//		}catch (Exception e) {
-//			System.out.println("최근상품 먼저 출력하기 실패!" + e);
-//		}finally {
-//			try {
-//				if(rs != null)
-//					rs.close();
-//				if(pstmt != null)
-//					rs.close();
-//				if(conn != null)
-//					rs.close();
-//			} catch (Exception e2) {
-//				System.out.println("최근상품 close 실패 !" + e2);
-//			}
-//		}
-//		System.out.println("최근상품 정렬 프로세스 실패");
-//		return list;
-//	}
+
 }

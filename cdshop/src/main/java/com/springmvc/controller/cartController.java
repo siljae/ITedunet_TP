@@ -30,7 +30,7 @@ public class cartController {
    @Autowired
    private cartService cs;
    
-   
+   // session에서 name 값 가져와서 add로 넘김
    @RequestMapping
    public String requestCart(@ModelAttribute cartDTO cart, HttpSession session) {
       System.out.println("cartcontroller-requestCart 들어왔니?");
@@ -40,6 +40,7 @@ public class cartController {
       return "redirect:/cart/add";
    }
    
+   // 장바구니 상품 추가 : 상세페이지에서 수량, 상품아이디 가져와서 서비스로 넘기기
    @GetMapping("/add")
    public String NewCart(@RequestParam("productId") String productId,@RequestParam("qnt") int quantity, HttpSession session) {
       String name = (String) session.getAttribute("name");
@@ -48,6 +49,7 @@ public class cartController {
       return "redirect:/cart/list";
    }
    
+   // 장바구니 목록 : 멤버 이름 같은거 찾아서 가져와 모델에 담아서 뷰페이지 보냄
    @RequestMapping("/list")
    public ModelAndView cartlist(HttpSession session, Model model) {
       String name = (String) session.getAttribute("name");
@@ -60,22 +62,24 @@ public class cartController {
       
    }
    
+   // 장바구니에서 수량 변경 : 상품 이름이랑 변경할 수량 가지고 db가서 set
    @PostMapping("/update")
-   public String submitupdateQntForm(cartDTO cart, @RequestParam("ProductId") String ProductId, @RequestParam("quantity") int quantity, HttpSession session) {
+   public String submitupdateQntForm(cartDTO cart, @RequestParam("pname") String Productname, @RequestParam("quantity") int quantity, HttpSession session) {
 	   System.out.println("cartcontroller-update들어왔니?");
-	   System.out.println("cartcontroller-update-productId : " + ProductId );
+	   System.out.println("cartcontroller-update-productname : " + Productname );
 	   System.out.println("조형민바보 : " + quantity);
-	   cs.setUpdateQnt(ProductId, quantity);
+	   cs.setUpdateQnt(Productname, quantity);
 	   return "redirect:/cart/list";
    }
    
-   
+   // 상품 개별 삭제 : db에 같은 이름 찾아서 지움
    @RequestMapping(value="/delete")
-   public String getDeleteCartForm(Model model, @RequestParam("id") String productId) {
-	   cs.setDeleteCart(productId);
+   public String getDeleteCartForm(Model model, @RequestParam("name") String productname) {
+	   cs.setDeleteCart(productname);
 	   return "redirect:/cart/list";
    }
    
+   // 상품 전체 삭제
    @RequestMapping(value="/alldelete")
    public String getAllDeleteCartForm(Model model, @RequestParam("name") String name) {
 	   cs.setAllDeleteCart(name);

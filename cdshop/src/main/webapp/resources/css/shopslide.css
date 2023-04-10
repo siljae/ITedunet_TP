@@ -1,7 +1,16 @@
 @charset "UTF-8";
+*
+{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    text-decoration: none;
+    box-sizing: border-box;
+    color: black;
+}
 .body
 {
-	font-family: 'Noto Sans KR', sans-serif;	
+	font-family: 'Noto Sans KR';
 }
 .bbubbu{
    padding-top:100px;
@@ -10,10 +19,16 @@
    justify-content: center;
    align-items: center;
    font-weight: bold;
-   height:150px;
+   height:160px;
    width:100%;
    
 }
+.com_name{
+   color : #f65371;
+   font-weight: 900;
+   font-size: 20px;
+}
+   
 /* 이벤트 배너 (슬라이드) */    
 #slideshop .slidebox {
     position: relative;
@@ -81,10 +96,7 @@
    justify-content: center;
    align-item: center;
 }
-.com_name{
-   font-size: 16px;
-   
-}
+
 
 .lounge{
 

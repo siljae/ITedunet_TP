@@ -17,21 +17,24 @@ public class orderRepositoryImpl implements orderRepository {
 
    private JdbcTemplate template;
    private List<orderDTO> orderlist = new ArrayList<orderDTO>();
+   private List<orderDTO> orderprolist = new ArrayList<orderDTO>();
    
    @Autowired
    public void setJdbctemplate(DataSource dataSource) {
       this.template = new JdbcTemplate(dataSource);
    }
    
-   public void setNewOrder(String productId, String name, int totalPrice, orderDTO order, String onum) {
-      String selectsql = "select * from cart where p_id=?";
-      cartDTO cart = template.queryForObject(selectsql, new cartRowMapper(), productId);
-      String insertsql = "insert into buy (o_num, p_id, m_name, b_qnt, b_date, b_orderprice, p_tfilename, p_price) values(?,?,?,?,?,?,?,?) ";
-      template.update(insertsql, order.getOnum(), productId, name, cart.getQuantity(), order.getOrderdate(), totalPrice, cart.getTfilename(), cart.getPrice());
+   //주문목록 추가
+   public void setNewOrder(String productname, String name, int totalPrice, orderDTO order, String onum) {
+      String selectsql = "select * from cart where p_name=?";
+      cartDTO cart = template.queryForObject(selectsql, new cartRowMapper(), productname);
+      String insertsql = "insert into buy (o_num, p_id, p_name, m_name, b_qnt, b_date, b_orderprice, p_tfilename, p_price) values(?,?,?,?,?,?,?,?,?) ";
+      template.update(insertsql, order.getOnum(), cart.getProductId() ,productname, name, cart.getQuantity(), order.getOrderdate(), totalPrice, cart.getTfilename(), cart.getPrice());
       String deletesql = "delete from cart where p_id=? and m_name=?";
-      template.update(deletesql, productId, name);
+      template.update(deletesql, productname, name);
    }
    
+   //주문목록 전체 리스트
    public List<orderDTO> getAllOrderList(String name){
       String SQL = "select * from buy where m_name=?";
       List<orderDTO> listOforder = template.query(SQL, new orderRowMapper(), name);
@@ -39,6 +42,7 @@ public class orderRepositoryImpl implements orderRepository {
       return listOforder;
    }
    
+   //member name과 일치하는 목록 가져옴
    public orderDTO getMemberByNmae(String name) {
          orderDTO MemberByName = null;
          for(int i = 0; i<orderlist.size(); i++) {
@@ -50,4 +54,13 @@ public class orderRepositoryImpl implements orderRepository {
          }
          return MemberByName;
       }
+   
+   // 주문목록 상세보기
+   public List<orderDTO> getOrderprolist(String onum){
+	   System.out.println("orderrepository orderprolist 들어와땨");
+	   String sql = "select * from buy where o_num=?";
+	   List<orderDTO> orderprolist = template.query(sql, new orderRowMapper(), onum);
+	   this.orderprolist = orderprolist;
+	   return orderprolist;
+   }
 }

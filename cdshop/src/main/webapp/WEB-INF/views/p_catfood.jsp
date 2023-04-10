@@ -30,7 +30,7 @@
         <div class="midbox">
             <div class="sidecate">
                 <div class="sidehea">
-                    <span class="catetitle">CATEGORY</span>
+                    <a href="<c:url value="/shopmain/all"/>"><span class="catetitle">CATEGORY</span></a>
                 </div>
                 <hr class="sidehr">
                 <div class="listnamebox">

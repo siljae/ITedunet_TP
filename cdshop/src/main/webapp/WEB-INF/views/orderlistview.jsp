@@ -67,22 +67,19 @@
                     </li>
                 </ul>
                 <div class="my_right">
-                <c:forEach items="${orderlist}" var="order">
+                    <div>
                         <div class="my_r_top">
-                            <h2>주문번호 : ${order.onum}</h2>
-                            <p>주문일자 : ${order.orderdate}</p>
-                            <p>총 주문금액 : ${order.sumprice} 원</p>
                             <!-- <button onclick="list_open()">상세정보</button> -->
                        <!--  <div class="hr"></div> -->
                             <h2>주문 상세 정보</h2>
-                            <div class="orderprolist"><a href="<c:url value="/order/orderprolist?onum=${order.onum }"/>">상세보기</a></div>
-                                <%-- <div class="product_list">                            
+                                <c:forEach items="${orderprolist}" var="order">
+                                <div class="product_list">                            
                                     <div class="product_img">
                                         <img src="/resources/img/${order.tfilename }" alt="">
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_t">
-                                            <h3>상품명 : ${order.productId}</h3>
+                                            <a href="<c:url value="/shopmain/productview?id=${order.productId}"/>"><h3>상품명 : ${order.productname}</h3></a>
                                         </div>
                                         <div class="product_desc_b">
                                             <p>상품 가격: ${order.price}</p>
@@ -93,10 +90,11 @@
                                             </div>                                            
                                         </div>                                                                            
                                     </div>
-                                </div> --%>
+                                </div>
                             <div class="hr"></div>
+                            </c:forEach>
                         </div>
-                    </c:forEach>
+                    </div>
                 </div>
             </div>
         </div>

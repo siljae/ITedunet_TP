@@ -80,8 +80,9 @@ select * from product;
 create table buy
 (
     b_num int not null auto_increment,
-    o_num varchar(20) not null,
+    o_num varchar(40) not null,
     p_id varchar(10) not null,
+    p_name varchar(20) not null,
     m_name varchar(6) not null,
     b_qnt int not null,
     b_date varchar(20) not null,
@@ -91,12 +92,14 @@ create table buy
     primary key(b_num),
     foreign key(m_name) references member(m_name)
 );
+drop table buy;
 
 select * from buy;
+select * from buy where m_name='서현' group by o_num;
 create table buyproduct
 (
-	bp_num int not null auto_increment,
-    o_num varchar(20) not null,
+   bp_num int not null auto_increment,
+    o_num varchar(40) not null,
 	m_name varchar(6) not null,
     p_id varchar(10) not null,
     p_price int not null,
@@ -118,6 +121,7 @@ create table cart
     ca_id int not null auto_increment,
     m_name varchar(6) not null,
     p_id varchar(10) not null ,
+    p_name varchar(30) not null,
     p_unitprice int not null,
     ca_qnt int not null,
     p_tfilename varchar(100) not null,
@@ -322,14 +326,14 @@ insert into boardfile(board_type, cb_num, file_name) values('자랑해요',302,'
 
 create table tc
 (
-	c_num int not null auto_increment primary key,
+   c_num int not null auto_increment primary key,
     m_name varchar(20) not null,
     c_bt varchar(10) not null,
     c_title varchar(100) not null
 );
 create table tq
 (
-	q_num int not null auto_increment primary key,
+   q_num int not null auto_increment primary key,
     m_name varchar(20) not null,
     q_bt varchar(10) not null,
     q_title varchar(100) not null
@@ -361,7 +365,7 @@ order by regist_day desc limit 10;
  select * from boardfile where board_type=? and cb_num=?;
 
 create table file(
-	f_num int not null auto_increment primary key,
+   f_num int not null auto_increment primary key,
     c_num int null,
     q_num int null,
     boardtype varchar(5) not null,

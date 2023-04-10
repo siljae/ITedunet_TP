@@ -7,6 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <link rel="stylesheet" href="<c:url value="/resources/css/Mypagecart.css"/>">
+<!-- google font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <title>마이페이지 - 장바구니</title>
 <script>
@@ -46,7 +50,7 @@
     
     // 장바구니 개별삭제
     function deleteConfirm(id){
-       if(confirm("삭제합니다 !") == true) location.href="./delete?id="+id;
+       if(confirm("삭제합니다 !") == true) location.href="./delete?name="+name;
        else return;
     }
     
@@ -112,11 +116,14 @@
                 <div class="my_right">
                     <div class ="mr2">
                        <div class="allchkbox">
-                           <label for="allproduct">전체선택</label>
-                           <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
-                           <div class="quandel quandel2">
-                                 <a href="<c:url value = "javascript:chkForm()"/>">전체삭제</a>
-                           </div> 
+                       	   <div class="quandel2">
+                                <a href="<c:url value = "javascript:chkForm()"/>">전체삭제</a>
+                           </div>
+                           
+                           <div class="allproductbox">
+	                           <label for="allproduct">전체선택</label>
+	                           <input type="checkbox" id="allproduct" name="allchk" onclick="selectall(this)">
+                           </div>
                        </div>
                     </div>
                     <c:forEach items="${cartlist}" var="item">
@@ -127,7 +134,7 @@
                                     </div>
                                     <div class="product_desc">
                                         <div class="product_desc_t">
-                                            <h3>${item.productId}</h3>
+                                            <h3>${item.productname}</h3>
                                             <input type="checkbox" id="allchk" name="chk" onclick="chkselectall()">
                                             <input type="hidden" class="price" value="${item.price}">
                                             <input type="hidden" class="totalprice_input" value="${item.price * item.quantity}">
@@ -137,18 +144,20 @@
                                             <p> 금액 : ${item.price}</p>
                                             <div class="quanbox">                                                
                                                <p> 수량 : </p>
-                                               <form name="qntform" method="post" action="/cart/update">
-                                                <div class="quan_inbox">
-                                                       <input name="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
-                                                       <input type="hidden" value="${item.productId}" name="ProductId" class="uplodeid">
+                                               <div class="qnt_box">
+	                                               <form name="qntform" method="post" action="/cart/update" class="qntform">
+		                                                <div class="quan_inbox">
+		                                                       <input name="quantity" type="number"  value="${item.quantity}" class="it_quan"/>
+		                                                       <input type="hidden" value="${item.productname}" name="Productname" class="uplodeid">
+		                                                </div>
+		                                                <button type="submit" class="updatebnt" >변경</button>
+	                                                </form>
                                                 </div>
-                                                <button type="submit" class="updatebnt" >변경</button>
-                                                </form>
                                                 <div class="allprice">
-                                                   합계:<p class="sumprice"> ${item.price * item.quantity}</p> 원
+                                                   <span>합계:</span><p class="sumprice"> ${item.price * item.quantity}</p> 원
                                                 </div>
                                             </div>                                           
-                                            <div class="quandel"><a href="<c:url value = "javascript:deleteConfirm('${item.productId}')"/>">삭제</a></div>    
+                                            <div class="quandel"><a href="<c:url value = "javascript:deleteConfirm('${item.productname}')"/>">삭제</a></div>    
                                         </div>
                                     </div>
                                 </div>
@@ -157,22 +166,22 @@
                       </c:forEach>
                           
                         <div class="product_sum" >
-                            <div>
-                                총 상품가격 <div id="orderPrice"></div>원
+                            <div class="opricebox">
+                                <span>총 상품가격</span><div id="orderPrice"></div><span>원</span>
                             </div> 
-                            <i class="far fa-plus-square"></i>
-                            <div>
-                                총 배송비 <div id="delPrice">2500</div>원
+                            <i class="fas fa-plus"></i>
+                            <div class="delbox">
+                                <span>총 배송비</span><div id="delPrice">2500</div><span>원</span>
                             </div>
                             <i class="fas fa-equals"></i>
-                            <div>
-                                총 주문 금액 <div id="totalPriceDisplay"></div>원
+                            <div class="tpricebox">
+                                <span>총 주문 금액</span><div id="totalPriceDisplay"></div><span>원</span>
                                 <input type="hidden" id="totalPrice" value="[total price]">
                             </div>
-                            <div class="orderbnt_bnt">
+                        </div>
+                        <div class="orderbnt_bnt">
                                <button type="button" class="orderbnt">주문하기</button>
                            </div>
-                        </div>
                     </div>
                 </div>
             </div>

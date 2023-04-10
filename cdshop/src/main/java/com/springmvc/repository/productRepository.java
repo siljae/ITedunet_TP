@@ -7,12 +7,16 @@ import java.util.Set;
 import com.springmvc.domain.productDTO;
 
 public interface productRepository {
-	List<productDTO> getAllProductList();
-//	List<productDTO> getProductListByCategory(String category);
+	//전체상품리스트
+	List<productDTO> getAllProductList(); 
+	//상품id와 일치하는 상품 찾아오기
 	productDTO getProductById(String productId);
-//	Set<productDTO> getProductListByFilter(Map<String, List<String>> filter);
+	// 상품등록
 	public void setNewProduct(productDTO product);
-//	public List<productDTO> selectAllProducts();
+	//상품수정
 	void setUpdateProduct(productDTO product);
+	//상품삭제
 	void setDeleteProduct(String productId);
+	
+	/* public productDTO getproductByid(String productId); */
 }

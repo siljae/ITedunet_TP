@@ -1,13 +1,17 @@
 @charset "UTF-8";
-
+body
+{
+    background-color: #fffef1;
+    font-family: 'Noto Sans KR';
+}
 .bbubbu{
 	padding-top:100px;
-	background-color: #fec6ca;
+	background-color: #f4eded;
 	display:flex;
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	height:150px;
+	height:160px;
 	width:100%;
 	
 }
@@ -17,9 +21,11 @@
 	align-item: center;
 }
 .com_name{
-	font-size: 16px;
-	
+   color : #f65371;
+   font-weight: 900;
+   font-size: 20px;
 }
+
 .lounge{
 
     margin: 0 auto;
@@ -33,7 +39,7 @@
     position: fixed;
     width: 10%;
     max-width: 15.625rem;
-    background: #FFC7C2;
+    background: #f4eded;
     border-radius: 10px;
     height: 600px;
     box-shadow: 0 5px 10px 0 gray;
@@ -67,7 +73,7 @@
 .catetitle{
     font-size: 20px;
     font-weight: bold;
-
+	color: #f65371;
 }
 .listnamebox{
     margin-bottom: 5px;
@@ -76,6 +82,7 @@
     font-size: 17px;
     font-weight: bold;
     margin-top: 15px;
+    color: #f65371;
 }
 .catelist {
     margin-top: 2px;
