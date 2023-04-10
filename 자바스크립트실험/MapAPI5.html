@@ -16,7 +16,7 @@
     var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
         mapOption = { 
             center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-            level: 14 // 지도의 확대 레벨 
+            level: 10 // 지도의 확대 레벨 
         }; 
     
     var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
@@ -37,7 +37,8 @@
                 message = '<div style="padding:5px;">여기에 계신가요?!</div>'; // 인포윈도우에 표시될 내용입니다
             // 키워드로 장소를 검색합니다
             ps.keywordSearch('동물병원', placesSearchCB,{
-                location : new kakao.maps.LatLng(lat, lon)
+                location : new kakao.maps.LatLng(lat, lon),
+                lelvel : 3
             }); 
             // 마커와 인포윈도우를 표시합니다
             displayMarker(locPosition, message);            
