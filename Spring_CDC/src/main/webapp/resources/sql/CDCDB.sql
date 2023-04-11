@@ -250,6 +250,7 @@ select*from cb_comments;
 select*from cb_comments where cb_num=14 order by c_order;
 INSERT INTO cb_comments (m_name, cb_num, c_comment, c_order)
 VALUES ('abc',14,'등록해요', (SELECT COALESCE(MAX(c_order), 0) + 1 FROM cb_comments WHERE cb_num = 14));
+delete from cb_comments where c_num=1 and cb_num=109;
 
 -- 댓글과 대댓글 테이블 따로 하려고 했는데 하나의 테이블로도 할 수 있을꺼 같아서 아래 테이블을 폐기
 create table reply(
