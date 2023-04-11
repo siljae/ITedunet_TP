@@ -1,14 +1,10 @@
 package com.springmvc.service;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
@@ -16,7 +12,6 @@ import org.springframework.ui.Model;
 import com.springmvc.domain.boardDTO;
 import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
-import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
 import com.springmvc.repository.BoardRepositoty;
 
@@ -261,6 +256,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<commentDTO> getcommentlist(commentDTO comment) {
 		return br.getcommentlist(comment);
+	}
+	
+	//댓글 삭제
+	@Override
+	public void deletecomment(commentDTO comment) {
+		br.deletecomment(comment);
 	}
 	
 

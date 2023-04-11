@@ -13,7 +13,7 @@ public class commentDTO {
 	
 	@Override
 	public String toString() {
-		return "commentDTO [num="+num+", board_type"+board_type+", name="+name+", bnum="+bnum+", content="+comment+", regist="+regist+", depth="+depth+", order="+order+" ]";
+		return "commentDTO [num="+num+", board_type="+board_type+", name="+name+", bnum="+bnum+", content="+comment+", regist="+regist+", depth="+depth+", order="+order+" ]";
 	}
 	public int getNum() {
 		return num;

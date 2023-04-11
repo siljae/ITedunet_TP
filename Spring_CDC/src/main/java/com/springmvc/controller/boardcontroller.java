@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -251,7 +252,7 @@ public class boardcontroller {
 	@PostMapping("/addcomment")
 	@ResponseBody
 	public String addcomment(@ModelAttribute("commentDTO")commentDTO comment) {
-		System.out.println(comment.toString());
+		System.out.println("등록"+comment.toString());
 		bs.writecomment(comment);
 		return "success";
 	}
@@ -260,6 +261,16 @@ public class boardcontroller {
 	@GetMapping("/getcommentlist")
 	@ResponseBody
 	public List<commentDTO> getcommentlist(@ModelAttribute("commentDTO")commentDTO comment) {
+		System.out.println("댓글목록");
 		return bs.getcommentlist(comment);
+	}
+	
+	//댓글 삭제
+	@PostMapping("/deletecomment")
+	@ResponseBody
+	public String deletecomment(@ModelAttribute("commentDTO")commentDTO comment) {
+		System.out.println("삭제"+comment.toString());	
+		bs.deletecomment(comment);
+		return "success";
 	}
 }

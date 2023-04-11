@@ -68,4 +68,6 @@ public interface BoardRepositoty {
 	public void writecomment(commentDTO comment);
 	//게시글의 댓글목록 가져오기
 	public List<commentDTO> getcommentlist(commentDTO comment);
+	//댓글 삭제
+	public void deletecomment(commentDTO comment);
 }

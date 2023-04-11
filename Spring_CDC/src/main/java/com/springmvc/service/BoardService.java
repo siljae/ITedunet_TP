@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONArray;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
@@ -60,6 +59,8 @@ public interface BoardService {
 	public void writecomment(commentDTO comment);
 	//게시글의 댓글 가져오기
 	public List<commentDTO> getcommentlist(commentDTO comment);
+	//댓글 삭제
+	public void deletecomment(commentDTO comment);
 	
 	
 	/* public JSONArray sortboard(Model model,HttpServletRequest req); */

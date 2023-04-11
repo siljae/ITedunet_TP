@@ -173,37 +173,69 @@
         });
 
         function getcommentlist(){
-            let level = ${level}
             $.ajax({
                 type:'GET',
                 url:"<c:url value='/board/getcommentlist'/>",
                 data: { "bnum": "<c:out value='${board.num}' />" },
                 dataType:"json",
                 success : function(data){
-                    //ul 셀렉트
-                    let comments = document.getElementById('comments');
-                    comments.textContent="";
-                    document.getElementById('comment').value="";
-                    let cnt = document.getElementById('cnt');
-                    cnt.innerHTML = data.length;
-
+					//ul 셀렉트
+					let comments = document.getElementById('comments');
+					comments.textContent="";
+					document.getElementById('comment').value="";
+					let cnt = document.getElementById('cnt');
+					cnt.innerHTML = data.length;
+					let username = '${name}';
+					let level = '${level}';
                     if(data.length > 0){
                         for(let i=0;i<data.length;i++){
-                        	let chkname = data[i].name;
+                           let chkname = data[i].name;
                             let commentNode = document.createElement('li');
-                            commentNode.innerHTML =
-                                `<div class="re_user_id">
-                                     <div>`+data[i].name+`</div>
-                                 </div>
-                                 <div class="re_content">`+data[i].comment+`</div>
-                                 <div class="re_date">`+data[i].regist+`</div>
-                                 <div class="re_btn">
-                                     <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
-                                     <c:if test="${name != chkname || level == 2}">
-                                         <button><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
-                                     </c:if>
-                                 </div>`;
-                             comments.appendChild(commentNode);
+                            if (username === null || username === undefined) {
+                               commentNode.innerHTML =
+                                   `<div class="re_user_id">
+                                        <input type="hidden" name="num" value="`+data[i].num+`"/>
+                                        <input type="hidden" name="bnum" value="`+data[i].bnum+`"/>
+                                        <div>`+data[i].name+`</div>
+                                    </div>
+                                    <div class="re_content">`+data[i].comment+`</div>
+                                    <div class="re_date">`+data[i].regist+`</div>
+                                    <div class="re_btn">
+                                        <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
+                                    </div>`;
+                                comments.appendChild(commentNode);
+                            }
+                            if(username != chkname){
+                               commentNode.innerHTML =
+                                   `<div class="re_user_id">
+                                        <input type="hidden" name="num" value="`+data[i].num+`"/>
+                                        <input type="hidden" name="bnum" value="`+data[i].bnum+`"/>
+                                        <div>`+data[i].name+`</div>
+                                    </div>
+                                    <div class="re_content">`+data[i].comment+`</div>
+                                    <div class="re_date">`+data[i].regist+`</div>
+                                    <div class="re_btn">
+                                        <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
+                                    </div>`;
+                                comments.appendChild(commentNode);
+                            }
+                            if(username == chkname || level == 2){
+                               commentNode.innerHTML =
+                                   `<form id="commentForm2" method="POST">
+                                        <div class="re_user_id">
+                                            <input type="hidden" name="num" value="`+data[i].num+`"/>
+                                            <input type="hidden" name="bnum" value="`+data[i].bnum+`"/>
+                                            <div>`+data[i].name+`</div>
+                                        </div>
+                                        <div class="re_content">`+data[i].comment+`</div>
+                                        <div class="re_date">`+data[i].regist+`</div>
+                                        <div class="re_btn">
+                                            <button><img src="<c:url value='/resources/img/board/comment-pen.png'/>"></button>
+                                            <button type="button" onclick="deletecomment()"><img src="<c:url value='/resources/img/board/comment-xmark.png'/>" ></button>
+                                        </div>
+                                    </form>`;
+                                comments.appendChild(commentNode);
+                            }
                         }
                     }
                 },
@@ -212,6 +244,29 @@
                 }
             })
         }
+
+            function deletecomment(){
+                    let delcm = confirm("정말로 댓글을 삭제하시겠습니까?")
+                    if(delcm){
+                        $.ajax({
+                            type:'POST',
+                            url:"<c:url value='/board/deletecomment'/>",
+                            data:$("#commentForm2").serialize(),
+                            //보내기에 성공하면 할 행동                        
+                            success : function(data){
+                                getcommentlist();
+                            },
+                            //보내기 실패하면 할 행동
+                            error:function(request,status,error){
+                                alert("에러발생"+request+"\n"+status+"\n"+error);
+                            }
+                        })
+                    }
+                    else{
+                        return false;
+                    }
+                    
+            }
     </script>
    	<jsp:include page="footer.jsp"/>
 </body>

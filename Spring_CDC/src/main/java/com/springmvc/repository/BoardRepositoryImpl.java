@@ -673,4 +673,11 @@ public class BoardRepositoryImpl implements BoardRepositoty {
 		String sql = "select*from cb_comments where cb_num=? order by c_order";
 		return template.query(sql, new CommentMapper(), comment.getBnum());
 	}
+	
+	//댓글 삭제
+	@Override
+	public void deletecomment(commentDTO comment) {
+		String sql = "delete from cb_comments where c_num=? and cb_num=?";
+		template.update(sql, comment.getNum(), comment.getBnum());
+	}
 }
