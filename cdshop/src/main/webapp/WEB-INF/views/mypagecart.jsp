@@ -48,21 +48,13 @@
        }
     }
     
+    
     // 장바구니 개별삭제
     function deleteConfirm(id){
        if(confirm("삭제합니다 !") == true) location.href="./delete?name="+name;
        else return;
     }
-    
-    /* window.onload = function(){
-        const qnt = document.getElementById('qnt');
-        const add = document.getElementById('addcart')
-        add.addEventListener('click', function(){
-            const data = qnt.value;
-            alert("상품이 장바구니에 추가되었습니다!")
-            window.location.href = "/cart/add?productId=${product.productId}&qnt="+data;
-        });
-        }; */
+   
         
     
    
@@ -228,6 +220,8 @@
     
     </script>
     <script>
+    // 선택된 상품을 상품 name과 totalprice 가지고 주문목록으로 이동하는 js
+    
     document.querySelector('.orderbnt').addEventListener('click', function() {
          // 선택된 체크박스의 productId와 totalPrice 값을 담을 배열
          var selectedIds = [];
