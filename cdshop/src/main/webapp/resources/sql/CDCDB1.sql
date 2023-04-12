@@ -148,7 +148,10 @@ create table commuboard
     primary key(cb_num),
     foreign key(m_name) references member(m_name)
 );
-
+desc commuboard;
+drop table commuboard;
+select*from commuboard;
+-- 테스트용 게시글 8개
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다1', 'test', '2023/03/14 12:12:12');
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다2', 'test', '2023/03/14 12:12:12');
 insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_content, cb_regist_day) values('abc', 'commu', 'cat', '테스트용입니다3', 'test', '2023/03/14 12:12:12');
@@ -166,6 +169,17 @@ insert into commuboard(m_name, cb_board_type, cb_animal_type, cb_title, cb_conte
 update commuboard set cb_recom= cb_recom+1 where cb_title= '33333';
 
 delete from commuboard where m_name='abc';
+select*from commuboard order by cb_num desc;
+select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc;
+select*from commuboard where cb_title like '%스트%' or cb_content like '%es%' order by cb_num desc limit 0,10;
+select*from commuboard where cb_title like '%19%' or cb_content like '%19%' order by cb_num desc limit 10,10;
+select*from commuboard order by cb_hit desc;
+select*from commuboard where cb_recom >= 10 limit 5;
+
+
+select count(*) from commuboard where cb_animal_type='cat';
+select count(*) from commuboard where cb_title like '%스트%' or cb_content like '%스트%';
+
 
 update commuboard 
    set cb_board_type='commu',
@@ -222,15 +236,38 @@ update commuboard as cb
 
 select*from recom;
 drop table recom;
-create table reply
+create table cb_comments
 (
-   r_num int not null auto_increment,
+   c_num int not null auto_increment,
     m_name varchar(6) not null,
-    r_content text not null,
-    r_date date not null,
-    primary key(r_num),
-    foreign key(m_name) references member (m_name)
+    cb_num int not null,
+    c_comment text not null,
+    c_date timestamp not null default current_timestamp,
+    c_parent_num int default null,
+    c_depth int not null default 0,
+    c_order int not null default 1,
+    primary key(c_num),
+    foreign key(m_name) references member (m_name),
+    foreign key(cb_num) references commuboard (cb_num)
 );
+select*from cb_comments;
+select*from cb_comments where cb_num=14 order by c_order;
+INSERT INTO cb_comments (m_name, cb_num, c_comment, c_order)
+VALUES ('abc',14,'등록해요', (SELECT COALESCE(MAX(c_order), 0) + 1 FROM cb_comments WHERE cb_num = 14));
+delete from cb_comments where c_num=1 and cb_num=109;
+
+-- 댓글과 대댓글 테이블 따로 하려고 했는데 하나의 테이블로도 할 수 있을꺼 같아서 아래 테이블을 폐기
+create table reply(
+	r_num int not null auto_increment primary key,
+    r_content text not null,
+    m_name varchar(6) not null,
+    c_num int not null,
+    r_date timestamp not null default current_timestamp,
+    foreign key(m_name) references member(m_name),
+    foreign key(c_num) references comment(c_num)
+);
+drop table cb_comments;
+drop table reply;
 
 create table chat
 (
@@ -326,14 +363,14 @@ insert into boardfile(board_type, cb_num, file_name) values('자랑해요',302,'
 
 create table tc
 (
-   c_num int not null auto_increment primary key,
+	c_num int not null auto_increment primary key,
     m_name varchar(20) not null,
     c_bt varchar(10) not null,
     c_title varchar(100) not null
 );
 create table tq
 (
-   q_num int not null auto_increment primary key,
+	q_num int not null auto_increment primary key,
     m_name varchar(20) not null,
     q_bt varchar(10) not null,
     q_title varchar(100) not null
@@ -365,7 +402,7 @@ order by regist_day desc limit 10;
  select * from boardfile where board_type=? and cb_num=?;
 
 create table file(
-   f_num int not null auto_increment primary key,
+	f_num int not null auto_increment primary key,
     c_num int null,
     q_num int null,
     boardtype varchar(5) not null,

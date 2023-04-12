@@ -5,23 +5,21 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.criteria;
-import com.springmvc.domain.fileDTO;
 import com.springmvc.domain.pageDTO;
-import com.springmvc.repository.BoardRepository;
+import com.springmvc.repository.BoardRepositoty;
 
 @Service
 public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
-	private BoardRepository br;
+	private BoardRepositoty br;
 
 	//글쓰기
 	@Override //글쓰기
@@ -174,6 +172,9 @@ public class BoardServiceImpl implements BoardService {
 		int total = br.getallsearchcount(content);
 		pageDTO page = new pageDTO(cri, total);
 		List<boardDTO> boardlist = br.getallsearch(content, page);
+		for(boardDTO board : boardlist) {
+			System.out.println(board.toString());
+		}
 		model.addAttribute("search",content);
 		model.addAttribute("boardlist",boardlist);
 		model.addAttribute("page",page);
@@ -245,7 +246,23 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	//댓글 등록
+	@Override
+	public void writecomment(commentDTO comment) {
+		br.writecomment(comment);
+	}
 	
+	//게시글의 댓글목록 가져오기
+	@Override
+	public List<commentDTO> getcommentlist(commentDTO comment) {
+		return br.getcommentlist(comment);
+	}
+	
+	//댓글 삭제
+	@Override
+	public void deletecomment(commentDTO comment) {
+		br.deletecomment(comment);
+	}
 	
 
 	/*

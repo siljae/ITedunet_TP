@@ -3,9 +3,10 @@ package com.springmvc.repository;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import com.springmvc.domain.boardDTO;
+import com.springmvc.domain.commentDTO;
 import com.springmvc.domain.pageDTO;
 
-public interface BoardRepository {
+public interface BoardRepositoty {
 	
 	//글쓰기 기능
 	public void writeboard(boardDTO board,HttpServletRequest req);
@@ -63,4 +64,10 @@ public interface BoardRepository {
 	public int getcommusearchcount(String content);
 	//검색한 Q&A 게시글 개수
 	public int getqnasearchcount(String content);
+	//댓글 등록
+	public void writecomment(commentDTO comment);
+	//게시글의 댓글목록 가져오기
+	public List<commentDTO> getcommentlist(commentDTO comment);
+	//댓글 삭제
+	public void deletecomment(commentDTO comment);
 }
