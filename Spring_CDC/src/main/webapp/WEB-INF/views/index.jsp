@@ -227,45 +227,45 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/1.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/notice_ex1.JPG"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>관리자</h3>
+                        <a href="#">이제 반료동물도 새벽배송 시대!</a>
                     </div>
                 </li>
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/2.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/notice_ex2.JPG"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>관리자</h3>
+                        <a href="#">이제 반려동물 물품도 렌탈하세요!</a>
                     </div>
                 </li>
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/3.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/notice_ex3.JPG"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>관리자</h3>
+                        <a href="#">동물등록 자진신고 및 집중단속 기간 운영 안내</a>
                     </div>
                 </li>
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/4.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/notice_ex4.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>관리자</h3>
+                        <a href="#">창원시 2023년 펫빌리지 개장!</a>
                     </div>
                 </li>
             </ul>
@@ -283,7 +283,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/21.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/19.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -294,7 +294,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/22.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/recom_ex2.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -305,7 +305,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/23.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/recom_ex3.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -316,12 +316,12 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/24.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/recom_ex4.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>유비쪼</h3>
+                        <a href="#">우링 애들 너무 사랑스럽죠</a>
                     </div>
                 </li>
             </ul>
@@ -339,7 +339,7 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/31.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/holong1.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
@@ -350,34 +350,34 @@
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/32.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/hos_ex2.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
                         <h3>댕댕이</h3>
-                        <a href="#">우리 애는 물어요</a>
+                        <a href="#">새벽에 너무 감사했습니다 ㅠ</a>
                     </div>
                 </li>
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/33.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/hos_ex3.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>치즈냥</h3>
+                        <a href="#">의사 선생님이 친절해요</a>
                     </div>
                 </li>
                 <li>
                     <div class="img_box">
                         <a href="#">
-                            <img src="<c:url value="/resources/img/index/34.jpg"/>">
+                            <img src="<c:url value="/resources/img/index/hos_ex4.jpg"/>">
                         </a>
                     </div>
                     <div class="txt">
-                        <h3>작성자</h3>
-                        <a href="#">이건 공지사항 글입니다</a>
+                        <h3>내부자</h3>
+                        <a href="#">병원갈 때 챙겨야 하는거!!!</a>
                     </div>
                 </li>
             </ul>

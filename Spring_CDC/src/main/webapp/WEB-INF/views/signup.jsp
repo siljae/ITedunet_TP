@@ -139,6 +139,9 @@
 <body>
     <section>		
         <div class="container">
+            <div class="login_logo">
+                <a href="<c:url value="/home"/>"><img src="<c:url value="/resources/img/logo3.png"/>" alt="Logo"></a>
+            </div>
             <div class="header">
                 <h1>회원가입</h1>
                 <div class="hr1"></div>
