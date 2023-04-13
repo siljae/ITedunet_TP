@@ -70,8 +70,8 @@ public class MemberRepositoryImpl implements MemberRepository {
 
 	@Override	//전체 멤버 받아오는 기능
 	public List<memberDTO> getallmemberlist() {
-		String sql = "set @row_num=0; select (@row_num:=@row_num+1) as row_num, member.*from member";
-		List<memberDTO> memberlist = template.query(sql, new AllMemberMapper());
+		String sql = "select*from member";
+		List<memberDTO> memberlist = template.query(sql, new MemberMapper());
 		return memberlist;
 	}
 	@Override	//num이 일치하는 멤버정보가져오는 기능

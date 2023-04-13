@@ -97,7 +97,7 @@
                         </tr>
                         <c:forEach items="${memberlist }" var="member">
                         <tr class="content">
-                            <td id="num">${member.rownum }</td>
+                            <td id="num">${member.num }</td>
                             <td id="email">${member.email }</td>
                             <td id="name">${member.name }</td>
                             <td id="phone">${member.phone1 } - ${member.phone2 } - ${member.phone3 }</td>

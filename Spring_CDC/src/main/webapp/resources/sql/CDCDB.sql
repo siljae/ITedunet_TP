@@ -19,6 +19,8 @@ drop table member;
 select*from member;
 set @row_num =0;
 select (@row_num:=@row_num+1) as row_num, member.* from member; 
+
+
 delete from member where m_name='aaa';
 -- 만들려고 했는데 member 테이블에서 관리자를 주고 m_level로 회원과 관리자를 분리하기로 하자
 create table admin
@@ -144,6 +146,24 @@ create table commuboard
     primary key(cb_num),
     foreign key(m_name) references member(m_name)
 );
+
+SELECT *, @row_num := @row_num + 1 as row_num
+FROM commuboard, (SELECT @row_num := 0) as R
+ORDER BY cb_num DESC;
+
+SELECT *, @row_num := @row_num + 1 as row_num
+FROM (SELECT * FROM commuboard ORDER BY cb_num) AS B, (SELECT @row_num := 0) as R
+ORDER BY B.cb_num;
+
+SELECT *, (SELECT COUNT(*) FROM commuboard WHERE cb_num >= T.cb_num) as row_num
+FROM (
+  SELECT * FROM commuboard ORDER BY cb_num DESC LIMIT 10 OFFSET 0
+) AS T
+ORDER BY cb_num desc;
+
+set @row_num=0; select (@row_num:=@row_num+1) as row_num, member.*from member;
+
+SELECT * FROM commuboard ORDER BY cb_num desc LIMIT 10 OFFSET 0;
 desc commuboard;
 drop table commuboard;
 select*from commuboard;
