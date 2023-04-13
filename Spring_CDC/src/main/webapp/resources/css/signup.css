@@ -19,6 +19,12 @@ body
     margin: 0 auto;
     margin-top: 100px;
 }
+.login_logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
 
 /* 회원가입 박스 */
 .hr1

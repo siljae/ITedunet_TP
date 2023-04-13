@@ -89,10 +89,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public int chkemail(String email) {
 		int x=2;
 		String sql ="select*from member where m_email=?";
-		memberDTO member = template.queryForObject(sql, new MemberMapper(), email);
-		if(member.getEmail().equals(email)) {
-			x=1;
-			return x;
+		listOfmember = template.query(sql, new MemberMapper(), email);
+		for(memberDTO member : listOfmember) {
+			if(member.getEmail().equals(email)) {
+				x=1;
+				return x;
+			}
 		}
 		return x;
 	}
@@ -101,10 +103,12 @@ public class MemberRepositoryImpl implements MemberRepository {
 	public int chkname(String name) {
 		int x=2;
 		String sql ="select*from member where m_name=?";
-		memberDTO member = template.queryForObject(sql, new MemberMapper(), name);
-		if(member.getName().equals(name)) {
-			x=1;
-			return x;
+		listOfmember = template.query(sql, new MemberMapper(), name);
+		for(memberDTO member : listOfmember) {
+			if(member.getName().equals(name)) {
+				x=1;
+				return x;
+			}
 		}
 		return x;
 		
