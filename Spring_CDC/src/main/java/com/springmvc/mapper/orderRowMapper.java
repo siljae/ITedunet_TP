@@ -14,12 +14,13 @@ public class orderRowMapper implements RowMapper<orderDTO>{
       order.setNum(rs.getInt(1));
       order.setOnum(rs.getString(2));
       order.setProductId(rs.getString(3));
-      order.setName(rs.getString(4));
-      order.setQuantity(rs.getInt(5));
-      order.setOrderdate(rs.getString(6));
-      order.setSumprice(rs.getInt(7));
-      order.setTfilename(rs.getString(8));
-      order.setPrice(rs.getInt(9));
+      order.setProductname(rs.getString(4));
+      order.setName(rs.getString(5));
+      order.setQuantity(rs.getInt(6));
+      order.setOrderdate(rs.getString(7));
+      order.setSumprice(rs.getInt(8));
+      order.setTfilename(rs.getString(9));
+      order.setPrice(rs.getInt(10));
       
       return order;
    }

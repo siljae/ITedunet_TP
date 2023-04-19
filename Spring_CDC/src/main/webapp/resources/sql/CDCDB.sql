@@ -120,6 +120,7 @@ create table cart
     ca_id int not null auto_increment,
     m_name varchar(6) not null,
     p_id varchar(10) not null ,
+    p_name varchar(30) not null,
     p_unitprice int not null,
     ca_qnt int not null,
     p_tfilename varchar(100) not null,
