@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link rel="stylesheet" href="<c:url value="/resources/css/MyPageorder.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/Mypageorder.css"/>">
 <script src="https://kit.fontawesome.com/014e61e9c4.js" crossorigin="anonymous"></script>
 <title>마이페이지 주문목록</title>
 <script>
@@ -25,7 +25,7 @@
    <jsp:include page="./header.jsp"/>
     <section>
         <div class="cart_head">
-            <h1>장바구니</h1>
+            <h1>주문목록</h1>
         </div>
         <div class="container">
             <div class="mypagebox">
@@ -42,7 +42,7 @@
                         </a>
                     </li>
                     <li class="my_left_li3">
-                        <a href="<c:url value="/mypage/order"/>">
+                        <a href="<c:url value="/order/list"/>">
                             <label for="msb2">
                                 <span>주문목록</span>
                                 <i class="fas fa-chevron-right"></i>
@@ -68,15 +68,15 @@
                 </ul>
                 <div class="my_right">
                 <c:forEach items="${orderlist}" var="order">
-                    <div>
                         <div class="my_r_top">
                             <h2>주문번호 : ${order.onum}</h2>
                             <p>주문일자 : ${order.orderdate}</p>
-                            <p>총 주문금액 : ${order.sumprice}</p>
+                            <p>총 주문금액 : ${order.sumprice} 원</p>
                             <!-- <button onclick="list_open()">상세정보</button> -->
                        <!--  <div class="hr"></div> -->
                             <h2>주문 상세 정보</h2>
-                                <div class="product_list">                            
+                            <div class="orderprolist"><a href="<c:url value="/order/orderprolist?onum=${order.onum }"/>">상세보기</a></div>
+                                <%-- <div class="product_list">                            
                                     <div class="product_img">
                                         <img src="/resources/img/${order.tfilename }" alt="">
                                     </div>
@@ -86,22 +86,21 @@
                                         </div>
                                         <div class="product_desc_b">
                                             <p>상품 가격: ${order.price}</p>
-                                            <div class="quanbox">                                                
-                                                수량
+                                            <div class="quanbox">
                                                 <div class="quan_inbox">
-                                                    <input type="text"  value="${order.quantity}" class="it_quan" readonly>
+                                                    수량<input type="text"  value="${order.quantity}" class="it_quan" readonly> 개
                                                 </div>
                                             </div>                                            
                                         </div>                                                                            
                                     </div>
-                                </div>
+                                </div> --%>
                             <div class="hr"></div>
                         </div>
-                    </div>
                     </c:forEach>
                 </div>
             </div>
         </div>
     </section>
+
 </body>
 </html>
