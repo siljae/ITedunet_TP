@@ -27,13 +27,10 @@
     top: 0;
     
 
-
 }
 .nav_logo{
     margin-left: 20px;
-    width: 230px;
-    height: 130px;
-
+    width: 110px;
 }
 .nav_logo img{
     width: 100%;
@@ -70,7 +67,6 @@
     width: 100%;
     
     
-/*검색창 시작*/
 }
 .seabox{
     padding: 16px 0 16px;
@@ -83,6 +79,7 @@
     justify-content: center;
     align-items: center;
     position: relative;
+
 }
 .com_search{
     width: 80%;
@@ -94,6 +91,8 @@
     background-size: 25px;
     background-position: 10px;
     border: 1px solid gray;
+
+
 }
 .button {
     border : none;
@@ -124,15 +123,16 @@
     padding: 4px;
     overflow-x: auto;
     display: flex;
+
     /*grid-template-columns: repeat(3,1fr);
     grid-gap: 18px;
     gap: 18px;*/
 }
 .list1{
     position: relative;
-    max-width: 250px;
-    min-width: 180px;
-    margin: 10px 15.5px 10px 15.5px;
+    max-width: 280px;
+    min-width: 280px;
+    margin: 10px 45.5px 10px 45.5px;
     border-radius: 18px;
     padding: 16px 20px;
     background: #fff8e2;
@@ -152,6 +152,8 @@
     font-weight: 700;
     line-height: 16px;
     box-shadow: 0 2px 4px lightgray;
+
+
 }
 .labelname img{
     width: 25px;
@@ -161,6 +163,7 @@
 }
 .dog{
     margin-left: 3px;
+
 }
 .cattext{
     margin-left: 3px;
@@ -175,15 +178,8 @@
 }
 
 .listtext{
-<<<<<<< Updated upstream
-    margin: 15px 0;
-    height: 48px;
-=======
-    /* margin: 15px 0;
-    height: 48px; */
     margin: 10px 0;
     height: 38px;
->>>>>>> Stashed changes
     text-overflow: ellipsis;
     word-break: break-word;
     font-weight: 400;
@@ -264,42 +260,21 @@
 .radiobt:checked {
     border: 4px solid #fcd11e;
 }
-
 .radiobt:hover {
     background-color: #FFFEF0;
     cursor: pointer;
 }
 .loungelist{
-    width: 80%;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
+    justify-content: space-between;
+
 }
 .conlist{
     margin-top: 30px;
-    
 }
 .content{
-    padding: 25px 25px;
-    border-bottom: 5px solid #eee ;
-    box-shadow: 0px 10px 65px 0px #dae0e8;
-    border-radius: 35px;
-    margin-bottom: 45px;
-
-}
-.listbox{
-    display: flex;
-    margin-top: 15px;
-}
-.listimg{
-
-    width: 150px;
-    height: 150px;
-    border-radius: 30px;
-    background: none;
-    box-shadow: 0 10px 10px 0 lightgray;
-    margin-right: 15px;
+    padding: 9px 0;
 }
 .colist{
     padding-right: 27px;
@@ -327,9 +302,8 @@
     margin-top: 18px;
     font-size: 16px;
     line-height: 19px;
-    margin-bottom: 15px;
 }
-.coltitle a:hover{
+.coltitle:hover{
     cursor: pointer;
     color: #fcd11e;
 }
@@ -346,9 +320,9 @@
     line-height: 160%;
     word-break: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
-    width: 70%;
+
 }
 .coltext:hover{
     cursor: pointer;
@@ -376,7 +350,7 @@
     width: 100%;
     margin: 30px 0;
     height: 1.5px;
-    background-color: none;
+    background-color: #bfbfc1;
     border: 0;
 }
 .pagebutton{
@@ -414,4 +388,3 @@ ul.pagebutton li a{
     color: black;
     border: none;
 }
-
