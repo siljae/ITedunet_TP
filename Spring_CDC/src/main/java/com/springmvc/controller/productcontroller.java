@@ -5,7 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import org.apache.ibatis.reflection.SystemMetaObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,7 +34,8 @@ public class productcontroller {
 	public ModelAndView productlist(Model model) {
 		ModelAndView modelandview = new ModelAndView();
 		List<productDTO> list = ps.getAllProductList();
-		for(productDTO product : list) {
+		for(productDTO dto : list) {
+			System.out.println(dto.getProductId());
 		}
 		modelandview.addObject("productlist", list);
 		modelandview.setViewName("shopslide");
@@ -101,7 +101,7 @@ public class productcontroller {
 		
 		ps.setNewProduct(product);
 		System.out.println("product" + product);
-		return "redirect:/shopmain/all";
+		return "redirect:/shopmain/all"; // 전체 상품페이지말고 등록한 상품의 페이지 띄우도록 바꾸기
 	}
 	
 	// 상품수정페이지
@@ -160,6 +160,13 @@ public class productcontroller {
 	public String getDeleteProductForm(Model model, @RequestParam("id") String productId) {
 		ps.setDeleteProduct(productId);
 		return "redirect:/shopmain/all";
+	}
+	
+	// shop 관리 상품 삭제
+	@GetMapping("/mgndelete")
+	public String getMgnDelete(Model model, @RequestParam("id") String productId) {
+		ps.setDeleteProduct(productId);
+		return "redirect:/mypage/mgnshop";
 	}
 	
 	//카테고리별 매핑 한거(전체list 페이지마다 가져와서 c:if로 해당카테고리만 추출해서 씀
@@ -265,4 +272,5 @@ public class productcontroller {
 		modelandview.setViewName("p_cattoy");
 		return modelandview;
 	}
+	
 }
