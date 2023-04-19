@@ -116,7 +116,12 @@ public class mypagecontroller {
 	}
 	
 	@GetMapping("/mgnshop")	//shop관리
-	public String managementshop() {
-		return "";
+	public ModelAndView managementshop(Model model) {
+		ModelAndView mav = new ModelAndView();
+		List<productDTO> productlist = ps.getAllProductList();
+		System.out.println("shop관리 list: " + productlist);
+		mav.addObject("productlist", productlist);
+		mav.setViewName("managementshop");
+		return mav;
 	}
 }
