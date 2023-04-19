@@ -1,5 +1,9 @@
 @charset "UTF-8";
-
+body
+{
+    background-color: #fffef1;
+    font-family: 'Noto Sans KR';
+}
 .bbubbu{
 	padding-top:100px;
 	background-color: #f4eded;
@@ -7,7 +11,7 @@
 	justify-content: center;
 	align-items: center;
 	font-weight: bold;
-	height:150px;
+	height:160px;
 	width:100%;
 	
 }
@@ -17,9 +21,11 @@
 	align-item: center;
 }
 .com_name{
-	font-size: 16px;
-	
+   color : #f65371;
+   font-weight: 900;
+   font-size: 20px;
 }
+
 .lounge{
 
     margin: 0 auto;
@@ -252,4 +258,3 @@ ul.pagebutton li a{
     color: black;
     border: none;
 }
-
