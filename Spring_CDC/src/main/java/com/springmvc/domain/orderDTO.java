@@ -2,8 +2,6 @@ package com.springmvc.domain;
 
 import java.util.List;
 
-import com.springmvc.repository.orderprodutDTO;
-
 public class orderDTO {
    
    private int num;

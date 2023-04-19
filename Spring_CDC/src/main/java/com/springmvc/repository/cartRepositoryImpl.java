@@ -14,6 +14,8 @@ import org.springframework.stereotype.Repository;
 
 import com.springmvc.domain.cartDTO;
 import com.springmvc.domain.productDTO;
+import com.springmvc.mapper.cartRowMapper;
+import com.springmvc.mapper.productRowMapper;
 
 @Repository
 public class cartRepositoryImpl implements cartRepository {

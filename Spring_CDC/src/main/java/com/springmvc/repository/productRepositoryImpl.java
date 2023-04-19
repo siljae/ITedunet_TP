@@ -17,6 +17,7 @@ import org.springframework.stereotype.Repository;
 import com.springmvc.database.DBConnection;
 import com.springmvc.domain.productDTO;
 import com.springmvc.exception.productIdException;
+import com.springmvc.mapper.productRowMapper;
 @Repository
 public class productRepositoryImpl implements productRepository {
 	
