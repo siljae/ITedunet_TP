@@ -10,9 +10,10 @@
 <html>
 <head>
 <link rel = "stylesheet" href="<c:url value = "/resources/css/shopslide.css" />">
+<!-- google font -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gamja+Flower&family=Noto+Sans+KR&display=swap" rel="stylesheet">
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <meta charset="utf-8">
 <title>shopmain</title>
@@ -85,15 +86,24 @@
             $(".slide_shop").eq(newIndex).addClass("active");
             $(".slide_shop").eq(newIndex).show();
         }
+       
+        window.onload = function(){
+            const add = document.getElementById('cartbt')
+            add.addEventListener('click', function(){
+                const data = qnt.value;
+                alert("상품이 장바구니에 추가되었습니다!")
+                window.location.href = "/cart/add?productId=${product.productId}"+data;
+            });
+            };
 </script>
 </head>
 <body>
    <jsp:include page="header.jsp"/>
    <div class="container1">
         <div class="bbubbu" id="a">
-            <div class="cos_nav" >
+            <div class="cos_nav">
                 <ul>
-                    <li class = "com_name" style="color: #090909; padding:12px 0px; border-bottom: 4px solid #fcd11e;">
+                    <li class = "com_name">
                         SHOP
                     </li>
                 </ul>
@@ -104,7 +114,7 @@
         <div class="midbox">
             <div class="sidecate">
                 <div class="sidehea">
-                    <span class="catetitle">CATEGORY</span>
+                    <a href="<c:url value="/shopmain/all"/>"><span class="catetitle">CATEGORY</span></a>
                 </div>
                 <hr class="sidehr">
                 <div class="listnamebox">
@@ -197,17 +207,15 @@
                     <div class="listbox">
                         <a class="prodetail" href="#"></a>
                         <div class="productbox">
-	                        <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
-	                            <span class="proimg">
-	                            		<img src="<c:url value="/resources/img/${product.tfilename }" />" alt="">
-	                            	</span>
-	                            <span class="procompany">${product.manufacturer }</span>
-	                            <div class="proname">${product.name}</div>
-	                            <hr class="prohr">
-	                            <div class="proprice">${product.unitprice}원</div>
-	                            <input type="hidden" class="donnkow" value="">
-	                        </a>
-                        	<div class="cartbt"><a href="<c:url value="/mypage/cart"/>">장바구니</a></div>
+                           <a class="prodetail2" href="<c:url value="/shopmain/productview?id=${product.productId }"/>">
+                               <span class="proimg"><img src="/resources/img/${product.tfilename }" alt=""></span>
+                               <span class="procompany">${product.manufacturer }</span>
+                               <div class="proname">${product.name}</div>
+                               <hr class="prohr">
+                               <div class="proprice">${product.unitprice}원</div>
+                               <input type="hidden" class="donnkow" value="">
+                           </a>
+                           <div class="cartbt"><a href="<c:url value="/mypage/cart"/>">장바구니</a></div>
                         </div>
                     </div>
                  </c:forEach>
