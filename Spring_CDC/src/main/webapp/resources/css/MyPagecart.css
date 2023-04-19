@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* 초기화 */
 *
 {
@@ -7,6 +8,11 @@
     text-decoration: none;
     box-sizing: border-box;
     color: black;
+
+}
+body
+{
+    font-family: 'Noto Sans KR';
 }
 .container
 {
@@ -25,6 +31,8 @@
 .cart_head h1
 {
     text-align: center;
+    font-size: 20px;
+    color: #f85d9b;
 }
 
 /* 마이페이지 메뉴박스 */
@@ -125,7 +133,7 @@
     margin: 20px 0;
     display: flex;
     justify-content: end;
-    margin-right: 131px;
+    margin-right: 70px;
 }
 .allchkbox label
 {
@@ -136,9 +144,9 @@
     margin-right: 8px;
 }
 .product_list
-{   
+{
     display: flex;
-    width: 639px;
+    width: 700px;
 }
 .product_img
 {
@@ -167,17 +175,31 @@
 .product_desc_b
 {
     display: flex;
-    justify-content: space-between;
+    /* justify-content: space-between; */
+}
+
+.product_desc_b {
+    align-items: center;
 }
 .quanbox
 {
     display: flex;
     justify-content: center;
 }
+.qntform{
+    display:flex
+}
+
+.quanbox {
+    margin-left: 50px;
+}
+
+.quanbox {
+    align-items: center;
+}
 .quan_inbox
 {
     margin-left: 5px;
-    border: 1px solid;
     padding: 0 10px;
 }
 
@@ -191,17 +213,31 @@
 
 .quandel
 {
-    margin-left: 10px;
+    margin-left: 70px;
     margin-right: 10px;
-    border: none;
     border-radius: 5px;
-    background-color: red;
-    color: #fff;
-    padding: 5px 10px;
+    background-color: white;
+    padding: 5px 10px 5px 10px;
+    font-size: 10px;
 }
+
+.quandel a{
+    color: red;
+    font-weight: bold;
+
+}
+
+
 .quandel2
 {
 	display: inline-block;
+    margin-right: 10px;
+}
+
+.quandel2 a{
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
 }
 .hr
 {
@@ -215,10 +251,33 @@
     justify-content: space-around;
     margin-top: 40px;
     margin-bottom: 20px;
+    align-items: center;
+    width:90%;
+    
+}
+.updatebnt{
+    font-family: Arial;
+    color: #000000;
+    font-size: 10px;
+    background: #ffffff;
+    text-decoration: none;
+    padding: 5px 8px 5px 8px;
+    border: 2px solid #bacdd9;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.updatebnt:hover{
+    background: #97a4ff;
+    text-decoration: none;
 }
 .allprice
 {
 	margin-left : 15px;
+    display: inline-flex;
+    
+}
+.allprice span{
+    margin-right: 5px;
 }
 
 button {
@@ -228,23 +287,52 @@ button {
 }
 
 .orderbnt_bnt{
-    display: block;
-    
+    display: flex;
+    justify-content: end;
+    width: 90%;
 }
 .orderbnt{
-    justify-content: end;
-    border: none;
-    background-color: #fec6ca;
-    padding: 8px 18px;  
-    font-size: 14px;
-    border-radius: 10px;
-    color: black;
-    cursor: pointer;
+    position: relative;
+    padding: 8px 10px;
+    border-radius: 50px;
+    font-family: "paybooc-Light", sans-serif;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.25s;
+    border: 3px solid #f199bc;
+    background-color:white;
+    color: #1c1c1c;
 }
 .orderbnt:hover{
-    background: #ff8fa4;
+    letter-spacing: 2px;
+    transform: scale(1.2);
+    cursor: pointer;
+    background-color: #f199bc;
+    color: #ffffff;
 }
 .orderbtn:active {
-    top: 4px;
-    background-color: #ff8fa4;
+   transform: scale(1.5);
   }
+.opricebox{
+    display: inline-flex;
+}
+.opricebox span{
+    margin: 0 5px;
+}
+
+.delbox{
+    display: inline-flex;
+}
+.delbox span{
+    margin: 0 3px;
+}
+
+.tpricebox{
+    display: inline-flex;
+}
+.tpricebox span{
+    margin: 0 5px;
+}
+i{
+    color: #ff8fa4;
+}
