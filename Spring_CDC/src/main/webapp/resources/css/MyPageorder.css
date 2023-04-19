@@ -1,3 +1,4 @@
+@charset "UTF-8";
 /* 초기화 */
 *
 {
@@ -7,6 +8,10 @@
     text-decoration: none;
     box-sizing: border-box;
     color: black;
+}
+body
+{
+    
 }
 .container
 {
