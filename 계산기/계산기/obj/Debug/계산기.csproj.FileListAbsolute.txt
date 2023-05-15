@@ -1,0 +1,11 @@
+C:\Users\HSB\source\repos\계산기\계산기\bin\Debug\계산기.exe.config
+C:\Users\HSB\source\repos\계산기\계산기\bin\Debug\계산기.exe
+C:\Users\HSB\source\repos\계산기\계산기\bin\Debug\계산기.pdb
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.csproj.AssemblyReference.cache
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.csproj.SuggestedBindingRedirects.cache
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.Form1.resources
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.Properties.Resources.resources
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.csproj.GenerateResource.cache
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.csproj.CoreCompileInputs.cache
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.exe
+C:\Users\HSB\source\repos\계산기\계산기\obj\Debug\계산기.pdb
