@@ -1,0 +1,11 @@
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\bin\Release\계산기.exe.config
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\bin\Release\계산기.exe
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\bin\Release\계산기.pdb
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.csproj.AssemblyReference.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.csproj.SuggestedBindingRedirects.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.Form1.resources
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.Properties.Resources.resources
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.csproj.GenerateResource.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.csproj.CoreCompileInputs.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.exe
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\계산기\계산기\obj\Release\계산기.pdb
