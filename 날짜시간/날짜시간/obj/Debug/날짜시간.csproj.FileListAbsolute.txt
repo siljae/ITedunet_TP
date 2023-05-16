@@ -1,0 +1,11 @@
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\bin\Debug\날짜시간.exe.config
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\bin\Debug\날짜시간.exe
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\bin\Debug\날짜시간.pdb
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.csproj.AssemblyReference.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.csproj.SuggestedBindingRedirects.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.Form1.resources
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.Properties.Resources.resources
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.csproj.GenerateResource.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.csproj.CoreCompileInputs.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.exe
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\날짜시간\날짜시간\obj\Debug\날짜시간.pdb
