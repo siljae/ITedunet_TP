@@ -17,11 +17,6 @@ namespace 계산기
             InitializeComponent();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
 
         //txtResult 초기화
         private void btnAC_Click(object sender, EventArgs e)
@@ -103,10 +98,7 @@ namespace 계산기
         {
             try
             {
-                /*DataTable의 Compute메서드는 지정된 식을 계산한다.
-                 * 두번째 인자는 필터조건이며 본 예제에서는 필요없다.
-                 * 원래 DataTable에서 Compute는 필터 조건에 맞는 행을 추출하여
-                 * 특정 컬럼을 집계 한다. SUM, AVG, MAX, MiN, COUNT 등*/
+                //DataTable 라이브러리 사용, Compute함수를 이용한 계산을 사용했다
                 DataTable dt = new DataTable();
                 var a = dt.Compute(txtResult.Text, "");
                 txtResult.Text = a.ToString();
@@ -116,5 +108,7 @@ namespace 계산기
                 MessageBox.Show(ex.Message);
             }
         }
+
+        
     }
 }

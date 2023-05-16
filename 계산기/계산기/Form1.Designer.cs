@@ -267,6 +267,7 @@
             this.txtResult.Font = new System.Drawing.Font("굴림", 20F);
             this.txtResult.Location = new System.Drawing.Point(14, 7);
             this.txtResult.Margin = new System.Windows.Forms.Padding(3, 100, 30, 0);
+            this.txtResult.MaxLength = 16;
             this.txtResult.Name = "txtResult";
             this.txtResult.Size = new System.Drawing.Size(336, 46);
             this.txtResult.TabIndex = 20;

@@ -1,0 +1,11 @@
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\bin\Debug\타이머.exe.config
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\bin\Debug\타이머.exe
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\bin\Debug\타이머.pdb
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.csproj.AssemblyReference.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.csproj.SuggestedBindingRedirects.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.Form1.resources
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.Properties.Resources.resources
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.csproj.GenerateResource.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.csproj.CoreCompileInputs.cache
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.exe
+C:\Users\HSB\Desktop\LYS\work\ITedunet_TP\타이머\타이머\obj\Debug\타이머.pdb
