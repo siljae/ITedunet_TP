@@ -1,0 +1,22 @@
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.AssemblyReference.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.SuggestedBindingRedirects.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드_6관문_타일_계산기.Form1.resources
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드_6관문_타일_계산기.Properties.Resources.resources
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.GenerateResource.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.CoreCompileInputs.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\bin\Debug\아브렐슈드 6관문 타일 계산기.exe.config
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\bin\Debug\아브렐슈드 6관문 타일 계산기.exe
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\bin\Debug\아브렐슈드 6관문 타일 계산기.pdb
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.exe
+C:\Users\영석\Documents\GitHub\ITedunet_TP\아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.pdb
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\bin\Debug\아브렐슈드 6관문 타일 계산기.exe.config
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\bin\Debug\아브렐슈드 6관문 타일 계산기.exe
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\bin\Debug\아브렐슈드 6관문 타일 계산기.pdb
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.AssemblyReference.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.SuggestedBindingRedirects.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드_6관문_타일_계산기.Form1.resources
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드_6관문_타일_계산기.Properties.Resources.resources
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.GenerateResource.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.csproj.CoreCompileInputs.cache
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.exe
+C:\Users\영석\Documents\GitHub\ITedunet_TP\c#_윈폼_아브렐슈드 6관문 타일 계산기\obj\Debug\아브렐슈드 6관문 타일 계산기.pdb
