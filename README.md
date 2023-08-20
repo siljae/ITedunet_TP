@@ -49,6 +49,12 @@
 
 ### 프로젝트 내용
 - 반려동물을 가진 회원들의 일상을 공유하고 쇼핑몰에서 반려동물 상품을 구매할 수 있는 커뮤니티 사이트를 구현하고자 함
+- 지도API 구현
+![Honeycam 2023-04-09 13-04-24](https://github.com/siljae/ITedunet_TP/assets/96092314/954e9bbb-1330-4d4c-ba58-eb014c38eb25)
+
+- 비동기 댓글 처리
+![Honeycam 2023-04-10 02-16-20](https://github.com/siljae/ITedunet_TP/assets/96092314/185a0e89-f9f7-4387-bb9b-d8466d9007f1)
+
 
 ### 프로젝트 개요
 - 반려동물과 함께하는 일상을 공유
